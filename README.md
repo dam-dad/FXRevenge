@@ -19,3 +19,4 @@ Colaboradores:
 * Roberto González Linares
 * Luis Adán Pérez Nazco
 * Adán Jiménez Sacramento
+* Perico de los Palotes
