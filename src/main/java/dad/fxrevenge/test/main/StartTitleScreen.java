@@ -1,6 +1,6 @@
-package fxrevenge.test.main;
+package dad.fxrevenge.test.main;
 
-import fxrevenge.screen.title.TitleScreen;
+import dad.fxrevenge.screen.title.TitleScreen;
 
 public class StartTitleScreen {
 

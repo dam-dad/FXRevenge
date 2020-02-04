@@ -1,4 +1,4 @@
-package fxrevenge.screen.dialog;
+package dad.fxrevenge.screen.dialog;
 
 import java.util.HashSet;
 

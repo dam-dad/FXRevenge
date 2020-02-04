@@ -1,6 +1,6 @@
-package fxrevenge.test.main;
+package dad.fxrevenge.test.main;
 
-import fxrevenge.screen.dialog.DialogScreen;
+import dad.fxrevenge.screen.dialog.DialogScreen;
 
 public class StartDialogScreen {
 

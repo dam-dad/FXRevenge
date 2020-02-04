@@ -1,4 +1,4 @@
-package fxrevenge.screen.dialog;
+package dad.fxrevenge.screen.dialog;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
