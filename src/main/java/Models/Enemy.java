@@ -10,8 +10,57 @@ public class Enemy extends Attributes{
 	Gear gearDrop;
 	Item itemdrop;
 	
-	public Enemy() {
+	public Enemy(Race raza,int nivel) {
+		this.race=raza;
+		switch(race) {
+		case Demon:
+			this.setExpDrop(35*nivel);
+			this.setMoneyDrop(2+nivel);
+			break;
+		case Jelly:
+			this.setExpDrop(5*nivel);
+			this.setMoneyDrop(0);
+			break;
+		case Orc:
+			this.setExpDrop(15*nivel);
+			this.setMoneyDrop(9+nivel);
+			break;
+		case Skeleton:
+			this.setExpDrop(25*nivel);
+			this.setMoneyDrop(1+nivel);
+		case Zombie:
+			this.setExpDrop(5*nivel);
+			this.setMoneyDrop(15+nivel);
+		default:
+			this.setExpDrop(150*nivel);
+			this.setMoneyDrop(40*nivel);
+			break;
+		}
+	}
+	
+	public int atacar() {
+
+		int danyo=this.getPhysDamage();
 		
+		if(!this.race.equals(Race.Boss)) {
+			return danyo;
+		}else {
+			return (int) (danyo*1.1);
+		}
+
+	}
+	
+	public void recibeDaño(int danyo,boolean fisico) {
+	
+		if(this.race.equals(Race.Boss))
+			danyo*=0.75;
+		
+		else {
+			if(fisico)
+				this.currentLife.set(this.getCurrentLife()-(danyo-this.getPhysDef()));
+			else
+				this.currentLife.set(this.getCurrentLife()-(danyo-this.getMagicDef()));
+		}
 	}
 	
 	public Race getRace() {
@@ -69,5 +118,7 @@ public class Enemy extends Attributes{
 	public final void setMoneyDrop(final int moneyDrop) {
 		this.moneyDropProperty().set(moneyDrop);
 	}
-	
+	public Enemy getEnemy() {
+		return this;
+	}
 }
