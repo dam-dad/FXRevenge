@@ -100,7 +100,7 @@ public class TitleScreen extends Application {
 
 	private static void loadGraphics() {
 
-		background = new Image(getResource("/img/title_screen/background.jpg"));
+		background = new Image(getResource("/image/title_screen/background.jpg"));
 
 	}
 

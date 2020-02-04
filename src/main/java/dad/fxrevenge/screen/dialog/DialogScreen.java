@@ -99,16 +99,16 @@ public class DialogScreen extends Application {
 
 	private static void loadGraphics() {
 		
-		background = new Image("/img/background.jpg");
+		background = new Image("/image/dialog_screen/background.jpg");
 
-		leftCharacter = new Image("img/all_might.png");
-		rightCharacter = new Image("img/all_might.png");
+		leftCharacter = new Image("/image/dialog_screen/all_might.png");
+		rightCharacter = new Image("/image/dialog_screen/all_might.png");
 
-		left = new Image(getResource("/img/left.png"));
-		leftGreen = new Image(getResource("/img/leftG.png"));
+		left = new Image(getResource("/image/dialog_screen/left.png"));
+		leftGreen = new Image(getResource("/image/dialog_screen/leftG.png"));
 
-		right = new Image(getResource("/img/right.png"));
-		rightGreen = new Image(getResource("/img/rightG.png"));
+		right = new Image(getResource("/image/dialog_screen/right.png"));
+		rightGreen = new Image(getResource("/image/dialog_screen/rightG.png"));
 
 	}
 
