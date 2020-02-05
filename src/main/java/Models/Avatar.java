@@ -1,11 +1,13 @@
-package Models;
+package models;
 
 import java.util.List;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -16,7 +18,7 @@ public class Avatar extends Attributes {
 	IntegerProperty currentExp = new SimpleIntegerProperty();
 	IntegerProperty totalLevelExp = new SimpleIntegerProperty();
 	IntegerProperty money = new SimpleIntegerProperty();
-	Image appearance;
+	ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
 	ClassType work;
 	ListProperty<Item> inventory = new SimpleListProperty<Item>();
 	ListProperty<Gear> equipped = new SimpleListProperty<Gear>(this, "equipped", FXCollections.observableArrayList());
@@ -39,7 +41,7 @@ public class Avatar extends Attributes {
 		this.setLevel(1);
 		this.setLuck(0);
 		this.setTotalLevelExp(150);
-		this.appearance = appearance;
+		this.setAppearance(appearance);
 		this.setCritChance(0);
 
 		if (work.equals(ClassType.Archmage)) {
@@ -190,14 +192,6 @@ public class Avatar extends Attributes {
 		this.totalLevelExpProperty().set(totalLevelExp);
 	}
 
-	public Image getAppearance() {
-		return appearance;
-	}
-
-	public void setAppearance(Image appearance) {
-		this.appearance = appearance;
-	}
-
 	public final IntegerProperty moneyProperty() {
 		return this.money;
 	}
@@ -273,4 +267,19 @@ public class Avatar extends Attributes {
 	public Avatar getAvatar() {
 		return this;
 	}
+
+	public final ObjectProperty<Image> appearanceProperty() {
+		return this.appearance;
+	}
+	
+
+	public final Image getAppearance() {
+		return this.appearanceProperty().get();
+	}
+	
+
+	public final void setAppearance(final Image appearance) {
+		this.appearanceProperty().set(appearance);
+	}
+	
 }
