@@ -1,7 +1,10 @@
-package Models;
+package models;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
 //constructor
 public class Enemy extends Attributes{
 	Race race;
@@ -9,6 +12,7 @@ public class Enemy extends Attributes{
 	IntegerProperty moneyDrop = new SimpleIntegerProperty();
 	Gear gearDrop;
 	Item itemdrop;
+	ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
 	
 	public Enemy(Race raza,int nivel) {
 		this.race=raza;
@@ -121,4 +125,19 @@ public class Enemy extends Attributes{
 	public Enemy getEnemy() {
 		return this;
 	}
+
+	public final ObjectProperty<Image> appearanceProperty() {
+		return this.appearance;
+	}
+	
+
+	public final Image getAppearance() {
+		return this.appearanceProperty().get();
+	}
+	
+
+	public final void setAppearance(final Image appearance) {
+		this.appearanceProperty().set(appearance);
+	}
+	
 }
