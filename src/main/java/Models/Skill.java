@@ -10,13 +10,12 @@ import javafx.beans.property.StringProperty;
 public class Skill {
 	StringProperty name = new SimpleStringProperty();
 	IntegerProperty cost = new SimpleIntegerProperty();
+	IntegerProperty unlockLevel = new SimpleIntegerProperty();
 	IntegerProperty Damage = new SimpleIntegerProperty();
 	BooleanProperty DamageType = new SimpleBooleanProperty();
-	IntegerProperty Defense = new SimpleIntegerProperty();
-	BooleanProperty DefenseType = new SimpleBooleanProperty();
 	IntegerProperty DamageMultiplier = new SimpleIntegerProperty();
 	IntegerProperty AddCritChance = new SimpleIntegerProperty();
-	ClassType forjob;
+//	ClassType forjob;
 	
 	public Skill () {
 		
@@ -63,36 +62,12 @@ public class Skill {
 		return this.DamageType;
 	}
 	
-	public final boolean isDamageType() {
+	public final boolean getDamageType() {
 		return this.DamageTypeProperty().get();
 	}
 	
 	public final void setDamageType(final boolean DamageType) {
 		this.DamageTypeProperty().set(DamageType);
-	}
-	
-	public final IntegerProperty DefenseProperty() {
-		return this.Defense;
-	}
-	
-	public final int getDefense() {
-		return this.DefenseProperty().get();
-	}
-	
-	public final void setDefense(final int Defense) {
-		this.DefenseProperty().set(Defense);
-	}
-	
-	public final BooleanProperty DefenseTypeProperty() {
-		return this.DefenseType;
-	}
-	
-	public final boolean isDefenseType() {
-		return this.DefenseTypeProperty().get();
-	}
-	
-	public final void setDefenseType(final boolean DefenseType) {
-		this.DefenseTypeProperty().set(DefenseType);
 	}
 	
 	public final IntegerProperty DamageMultiplierProperty() {
@@ -117,6 +92,12 @@ public class Skill {
 	
 	public final void setAddCritChance(final int AddCritChance) {
 		this.AddCritChanceProperty().set(AddCritChance);
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getName()+" ("+getCost()+")";
 	}
 	
 }

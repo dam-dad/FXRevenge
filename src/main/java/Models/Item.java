@@ -53,6 +53,9 @@ public class Item {
 		this.priceProperty().set(price);
 	}
 	
-	
+	@Override
+	public String toString() {
+		return getName()+" x"+getQuantity();
+	}
 	
 }
