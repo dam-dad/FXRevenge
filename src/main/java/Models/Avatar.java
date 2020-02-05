@@ -1,28 +1,87 @@
 package Models;
 
+import java.util.List;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 //constructor
 public class Avatar extends Attributes {
+
 	IntegerProperty currentExp = new SimpleIntegerProperty();
 	IntegerProperty totalLevelExp = new SimpleIntegerProperty();
 	IntegerProperty money = new SimpleIntegerProperty();
 	Image appearance;
 	ClassType work;
 	ListProperty<Item> inventory = new SimpleListProperty<Item>();
-	ListProperty<Gear> equipped = new SimpleListProperty<Gear>();
-	ListProperty<Skill> skills = new SimpleListProperty<Skill>();
-	ListProperty<Skill> learnedSkills = new SimpleListProperty<Skill>();
+	ListProperty<Gear> equipped = new SimpleListProperty<Gear>(this, "equipped", FXCollections.observableArrayList());
+	ListProperty<Skill> skills = new SimpleListProperty<Skill>(this, "skills", FXCollections.observableArrayList());
+	ListProperty<Skill> learnedSkills = new SimpleListProperty<Skill>(this, "learnedSkills",
+			FXCollections.observableArrayList());
 	IntegerProperty currentMana = new SimpleIntegerProperty();
 
 	public Avatar() {
 		// construir pj con stat base seteadas dependiendo de la clase
 
+	}
+
+	public Avatar(Image appearance, ClassType work, List<Skill> skills, String name) {
+
+		this.work = work;
+		this.setCurrentExp(0);
+		this.setMoney(0);
+		this.setName(name);
+		this.setLevel(1);
+		this.setLuck(0);
+		this.setTotalLevelExp(150);
+		this.appearance = appearance;
+		this.setCritChance(0);
+
+		if (work.equals(ClassType.Archmage)) {
+
+			this.setSkills(FXCollections.observableArrayList(skills));
+			this.setCurrentMana(30);
+
+			this.setHealth(20);
+			this.setPhysDamage(2);
+			this.setPhysDef(5);
+			this.setMana(20);
+			this.setMagicDamage(9);
+			this.setMagicDef(7);
+
+		} else if (work.equals(ClassType.Hunter)) {
+
+			this.setSkills(FXCollections.observableArrayList(skills));
+			this.setCurrentMana(23);
+
+			this.setHealth(25);
+			this.setPhysDamage(8);
+			this.setPhysDef(5);
+			this.setMana(15);
+			this.setMagicDamage(0);
+			this.setMagicDef(3);
+
+		} else if (work.equals(ClassType.Warlord)) {
+
+			this.setSkills(FXCollections.observableArrayList(skills));
+			this.setCurrentMana(15);
+
+			this.setHealth(30);
+			this.setPhysDamage(5);
+			this.setPhysDef(10);
+			this.setMana(10);
+			this.setMagicDamage(0);
+			this.setMagicDef(10);
+
+		}
+
+		this.setCurrentLife(this.getHealth());
+		
 	}
 
 	public int atacar() {
@@ -70,38 +129,40 @@ public class Avatar extends Attributes {
 
 	public void levelUp() {
 
-		this.setLevel(this.getLevel()+1);
+		this.setLevel(this.getLevel() + 1);
+		this.setTotalLevelExp((int)(getTotalLevelExp()*1.25));
 		this.setCurrentExp(0);
 
 		if (work.equals(ClassType.Archmage)) {
-			this.setPhysDamage(this.getPhysDamage()+1);
-			this.setPhysDef(this.getPhysDef()+(int)(Math.random()*2+1));
-			this.setMana(this.getMana()+20);
-			this.setMagicDamage(this.getMagicDamage()+(int)(Math.random()*6+4));
-			this.setMagicDef(this.getMagicDef()+(int)(int)(Math.random()*4+3));
-			this.setHealth(this.getHealth()+(int)(Math.random()*30+20));
+			this.setPhysDamage(this.getPhysDamage() + 1);
+			this.setPhysDef(this.getPhysDef() + (int) (Math.random() * 2 + 1));
+			this.setMana(this.getMana() + 20);
+			this.setMagicDamage(this.getMagicDamage() + (int) (Math.random() * 6 + 4));
+			this.setMagicDef(this.getMagicDef() + (int) (int) (Math.random() * 4 + 3));
+			this.setHealth(this.getHealth() + (int) (Math.random() * 30 + 20));
 		}
 		if (work.equals(ClassType.Hunter)) {
-			this.setPhysDamage(this.getPhysDamage()+(int)(Math.random()*6+4));
-			this.setPhysDef(this.getPhysDef()+(int)(Math.random()*3+2));
-			this.setMana(this.getMana()+15);
-			this.setMagicDef(this.getMagicDef()+(int)(int)(Math.random()*3+2));
-			this.setHealth(this.getHealth()+(int)(Math.random()*40+30));		
+			this.setPhysDamage(this.getPhysDamage() + (int) (Math.random() * 6 + 4));
+			this.setPhysDef(this.getPhysDef() + (int) (Math.random() * 3 + 2));
+			this.setMana(this.getMana() + 15);
+			this.setMagicDef(this.getMagicDef() + (int) (int) (Math.random() * 3 + 2));
+			this.setHealth(this.getHealth() + (int) (Math.random() * 40 + 30));
 		}
 		if (work.equals(ClassType.Warlord)) {
-			this.setPhysDamage(this.getPhysDamage()+(int)(Math.random()*4+2));
-			this.setPhysDef(this.getPhysDef()+(int)(Math.random()*6+4));
-			this.setMana(this.getMana()+10);
-			this.setMagicDef(this.getMagicDef()+(int)(Math.random()*6+4));
-			this.setHealth(this.getHealth()+(int)(Math.random()*60+40));
-			
+			this.setPhysDamage(this.getPhysDamage() + (int) (Math.random() * 4 + 2));
+			this.setPhysDef(this.getPhysDef() + (int) (Math.random() * 6 + 4));
+			this.setMana(this.getMana() + 10);
+			this.setMagicDef(this.getMagicDef() + (int) (Math.random() * 6 + 4));
+			this.setHealth(this.getHealth() + (int) (Math.random() * 60 + 40));
+
 		}
 	}
+
 	public boolean sumarexp(int exp) {
-		boolean lvlup = this.getCurrentExp()+exp>this.getTotalLevelExp();
+		boolean lvlup = this.getCurrentExp() + exp > this.getTotalLevelExp();
 		if (lvlup) {
 			this.levelUp();
-		} 
+		}
 		return lvlup;
 	}
 
