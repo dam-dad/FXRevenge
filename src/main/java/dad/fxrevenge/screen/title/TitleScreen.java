@@ -3,6 +3,7 @@ package dad.fxrevenge.screen.title;
 import java.util.HashSet;
 
 import dad.fxrevenge.screen.dialog.Dialog;
+import dad.fxrevenge.screen.dialog.DialogScreen;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
