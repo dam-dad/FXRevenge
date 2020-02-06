@@ -37,11 +37,23 @@ public class VDialog extends DialogScreen {
 		switch (dialogNumber) {
 
 		case 0:
-			CharacterTalking(player, "...");
+			CharacterTalking(v, "¡Hola querido alumno! He preparado 9.999.999 ejercicios para que practique.");
 			break;
 
 		case 1:
-			CharacterTalking(v, "...");
+			CharacterTalking(player, "(Sonríes escondiendo tu dolor)");
+			break;
+			
+		case 2:
+			CharacterTalking(v, "Venga, no ponga esa cara que son sencillitos.");
+			break;
+			
+		case 3:
+			CharacterTalking(player, "(Vuelves a sonrerir escondiendo aún más tu dolor)");
+			break;
+			
+		case 4:
+			CharacterTalking(v, "Ya está todo preparado, ¿está listo?");
 			break;
 			
 		default:
@@ -49,7 +61,5 @@ public class VDialog extends DialogScreen {
 			break;
 
 		}
-
 	}
-
 }

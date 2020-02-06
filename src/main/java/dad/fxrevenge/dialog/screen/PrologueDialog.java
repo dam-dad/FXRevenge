@@ -45,15 +45,15 @@ public class PrologueDialog extends DialogScreen {
 			break;
 			
 		case 2:
-			CharacterTalking(javaGoddess, "Este mundo es una manifestación de tus preocupaciones y temores");
+			CharacterTalking(javaGoddess, "Este mundo es una manifestación de tus preocupaciones y temores.");
 			break;
 			
 		case 3:
-			CharacterTalking(javaGoddess, "Corres un grave peligro, uno del que no podrás escapar cuando sea demasiado tarde");
+			CharacterTalking(javaGoddess, "Corres un grave peligro, uno del que no podrás escapar cuando sea demasiado tarde.");
 			break;
 
 		case 4:
-			CharacterTalking(javaGoddess, "Por eso estás aquí, para fortalecerte y ser capaz de cambiar tu destino");
+			CharacterTalking(javaGoddess, "Por eso estás aquí, para fortalecerte y ser capaz de cambiar tu destino.");
 			break;
 			
 		case 5:
@@ -61,11 +61,11 @@ public class PrologueDialog extends DialogScreen {
 			break;
 			
 		case 6:
-			CharacterTalking(javaGoddess, "La chancla de tu madre como no apruebes el curso");
+			CharacterTalking(javaGoddess, "La chancla de tu madre como no apruebes el curso.");
 			break;
 			
 		case 7:
-			CharacterTalking(nullCharacter, "...");
+			CharacterTalking(nullCharacter, "(La dios Java se ha esfumado...)");
 			break;
 			
 		case 8:

@@ -9,7 +9,7 @@ public class CharacterList {
 	private static Character unknownChar = new Character("???", null, false);
 	
 	// Avatar
-	private static Character player = new Character("Protagonista genérico (tú)", new Image("/image/dialog/character/player.png"), true);
+	private static Character player = new Character("Tú", new Image("/image/dialog/character/player.png"), true);
 	
 	// Aliados
 	private static Character javaGoddess = new Character("Diosa Java", new Image("/image/dialog/character/java_goddess.png"), false);
