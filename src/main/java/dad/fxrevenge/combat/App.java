@@ -1,4 +1,4 @@
-package dad.javafx.mvc;
+package dad.fxrevenge.combat;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;

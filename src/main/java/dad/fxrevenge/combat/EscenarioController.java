@@ -1,4 +1,4 @@
-package dad.javafx.mvc;
+package dad.fxrevenge.combat;
 
 import java.io.IOException;
 import java.net.URL;
