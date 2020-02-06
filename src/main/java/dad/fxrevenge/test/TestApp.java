@@ -42,28 +42,28 @@ public class TestApp extends Application {
 		graphicsContext = canvas.getGraphicsContext2D();
 		
 		// Inicializar la pantalla / escena a probar
-		titleScreen = new TitleScreen(primaryStage, canvas, graphicsContext);
-		titleScreen.start();
+		//titleScreen = new TitleScreen(primaryStage, canvas, graphicsContext);
+		//titleScreen.start();
 		
-		introDialog = new PrologueDialog(primaryStage, canvas, graphicsContext);
-		introDialog.start();
+		//introDialog = new PrologueDialog(primaryStage, canvas, graphicsContext);
+		//introDialog.start();
 		
-		mDialog = new MDialog(primaryStage, canvas, graphicsContext);
-		mDialog.start();
+		//mDialog = new MDialog(primaryStage, canvas, graphicsContext);
+		//mDialog.start();
 		
 		vDialog = new VDialog(primaryStage, canvas, graphicsContext);
 		vDialog.start();
 		
-		cDialog = new CDialog(primaryStage, canvas, graphicsContext);
-		cDialog.start();
+		//cDialog = new CDialog(primaryStage, canvas, graphicsContext);
+		//cDialog.start();
 		
-		fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
-		fxDialog.start();
+		//fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
+		//fxDialog.start();
 		
 		primaryStage.setTitle("FX Revenge");
 		
 		// Colocar aquí la escena a iniciar
-		primaryStage.setScene(mDialog.getScene());
+		primaryStage.setScene(vDialog.getScene());
 		
 		primaryStage.setResizable(false);
 		primaryStage.show();
