@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +47,7 @@ public class Avatar extends Attributes {
 		this.setTotalLevelExp(150);
 		this.setAppearance(appearance);
 		this.setCritChance(0);
+		this.setSkills(FXCollections.observableArrayList(skills));
 
 		Gear helm = new Gear("Casco de practicas");
 		helm.setPos(GearPosition.Helmet);
@@ -67,21 +68,14 @@ public class Avatar extends Attributes {
 
 		if (work.equals(ClassType.Archmage)) {
 
-			this.setSkills(FXCollections.observableArrayList(skills));
-			this.setCurrentMana(30);
-
 			this.setHealth(20);
 			this.setPhysDamage(2);
 			this.setPhysDef(5);
 			this.setMana(20);
 			this.setMagicDamage(9);
 			this.setMagicDef(7);
-			this.setCurrentLife(this.getCurrentLife());
 
 		} else if (work.equals(ClassType.Hunter)) {
-
-			this.setSkills(FXCollections.observableArrayList(skills));
-			this.setCurrentMana(23);
 
 			this.setHealth(25);
 			this.setPhysDamage(8);
@@ -91,9 +85,6 @@ public class Avatar extends Attributes {
 			this.setMagicDef(3);
 
 		} else if (work.equals(ClassType.Warlord)) {
-
-			this.setSkills(FXCollections.observableArrayList(skills));
-			this.setCurrentMana(15);
 
 			this.setHealth(30);
 			this.setPhysDamage(5);
@@ -105,6 +96,7 @@ public class Avatar extends Attributes {
 		}
 
 		this.setCurrentLife(this.getHealth());
+		this.setCurrentMana(this.getMana());
 
 	}
 
@@ -113,7 +105,7 @@ public class Avatar extends Attributes {
 		Boolean added = false;
 		for (int i = 0; i < this.getInventory().size(); i++) {
 			if (this.getInventory().get(i).getName().equals(item.getName())) {
-				this.getInventory().get(i).setQuantity(this.getInventory().get(i).getQuantity()+1);
+				this.getInventory().get(i).setQuantity(this.getInventory().get(i).getQuantity() + 1);
 				added = true;
 			}
 		}
@@ -121,8 +113,8 @@ public class Avatar extends Attributes {
 			this.getInventory().add(item);
 		}
 	}
-	
-	public void useItem (Item item) {
+
+	public void useItem(Item item) {
 		if (item.getEffect().equals(Effect.HealRestore)) {
 			this.setCurrentLife(this.getHealth());
 		} else {
@@ -142,11 +134,23 @@ public class Avatar extends Attributes {
 		return danyo;
 	}
 
-	public void recibeDaño(int danyo, boolean fisico) {
-		if (fisico)
-			this.setCurrentLife(this.getCurrentLife() - (danyo - this.getPhysDef()));
-		else
-			this.setCurrentLife(this.getCurrentLife() - (danyo - this.getMagicDef()));
+	public int recibeDaño(int danyo, boolean fisico) {
+		if (fisico) {
+			danyo = (int) ((danyo * (1 - (this.getPhysDef() / (100.0 + this.getPhysDef())))));
+
+		} else {
+			danyo = (int) ((danyo * (1 - (this.getMagicDef() / (100.0 + this.getMagicDef())))));
+		}
+
+		if (this.getCurrentLife() < Math.abs(danyo)) {
+			danyo = this.getCurrentLife();
+			this.setCurrentLife(0);
+		} else {
+			this.setCurrentLife(
+					(int) (this.getCurrentLife() - (danyo * (1 - (this.getPhysDef() / (100.0 + this.getPhysDef()))))));
+		}
+
+		return danyo;
 	}
 
 	public int atacar(Skill hability) {
@@ -167,7 +171,7 @@ public class Avatar extends Attributes {
 		}
 		// calculo critico
 		int proc = ((int) Math.random() * 100);
-		if (proc <= this.getCritChance()+hability.getAddCritChance()) {
+		if (proc <= this.getCritChance() + hability.getAddCritChance()) {
 			danyo *= 2;
 		}
 		return danyo;
@@ -214,32 +218,25 @@ public class Avatar extends Attributes {
 	}
 
 	// equipar items
-	public void equipar(Gear equipment, Gear current) {
-		try {
-			Popup popup = new Popup();
-			EventHandler<MouseEvent> evento;
-			evento = new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent e) {
-					Alert alert = new Alert(AlertType.CONFIRMATION);
-					alert.setTitle("Equipamiento");
-					alert.setHeaderText("¿Quieres sustituir tu " + current.getName() + " por el recien obtenido "
-							+ equipment.getName());
-					alert.setContentText(
-							"Equipado: " + current.toString() + "\n o \n" + equipment.toString() + "\n ¿Qué decides?");
-					Optional<ButtonType> result = alert.showAndWait();
-					if (result.get().equals(ButtonType.OK)) {
-						cambiaequipo(equipment, false);
-					} else {
-						cambiaequipo(equipment, true);
-					}
-				}
-			};
-			popup.setAutoHide(true);
-			// popup.show(owner);
-
-		} catch (NullPointerException e) {
-
+	public void equipar(Gear equipment) {
+		Gear current = new Gear("test");
+		for (int i = 0; i < this.getEquipped().size(); i++) {
+			if (this.getEquipped().get(i).getPos().equals(equipment.getPos())) {
+				current = this.getEquipped().get(i);
+			}
 		}
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Equipamiento");
+		alert.setHeaderText(
+				"¿Quieres sustituir tu " + current.getName() + " por el recien obtenido " + equipment.getName());
+		alert.setContentText("Equipado: " + current.toString() + "\n o \n" + equipment.toString() + "\n ¿Qué decides?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get().equals(ButtonType.OK)) {
+			cambiaequipo(equipment, false);
+		} else {
+			cambiaequipo(equipment, true);
+		}
+
 	}
 
 	private void cambiaequipo(Gear newequip, boolean vender) {

@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 public class Gear extends Attributes {
 	private GearPosition pos;

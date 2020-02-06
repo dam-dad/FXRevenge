@@ -1,10 +1,11 @@
-package dad.fxrevenge.combat;
+package dad.javafx.mvc;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import javafx.stage.Popup;
 import models.Avatar;
 import models.Enemy;
 import models.Item;
+import models.Race;
 import models.Skill;
 
 public class EscenarioController extends BorderPane implements Initializable {
@@ -84,15 +86,29 @@ public class EscenarioController extends BorderPane implements Initializable {
 	private ImageView enemyImage;
 
 	@FXML
-	private ListView<Object> objectList;
-
-	@FXML
 	void onAttackAction(ActionEvent event) {
 
 		int damage = pj.atacar();
-		enemy.recibeDaño(damage, true);
-		enemyAttack();
-		eventArea.setText(eventArea.getText()+"\nHas infligido "+damage+" puntos de daño al enemigo.");
+		boolean egoista = (Math.random() < 0.5) ? true : false;
+		
+		eventArea.setText("");
+		
+		if(egoista) {
+			eventArea.setText(eventArea.getText()+"\nHas infligido "+enemy.recibeDaño(damage, true)+" puntos de daño al enemigo.");
+			enemyAttack();
+		}else {			
+			enemyAttack();
+			eventArea.setText(eventArea.getText()+"\nHas infligido "+enemy.recibeDaño(damage, true)+" puntos de daño al enemigo.");
+		}
+//DROPEO DE ITEM Y GEAR		
+		if(enemy.getCurrentLife()==0) {
+			if (enemy.getRace().equals(Race.Boss)) {
+				pj.equipar(enemy.getGearDrop());
+			} else {
+				
+			}
+			
+		}
 		
 	}
 
@@ -117,8 +133,20 @@ public class EscenarioController extends BorderPane implements Initializable {
 	private void enemyAttack() {
 		
 		int damage = enemy.atacar();
-		pj.recibeDaño(damage, true);
-		eventArea.setText(enemy.getName()+" ataca con "+damage+" puntos de daño.");
+
+		eventArea.setText(eventArea.getText()+"\n"+enemy.getName()+" ataca con "+pj.recibeDaño(damage, true)+" puntos de daño.");
+		
+		if(pj.getCurrentLife()==0) {
+			
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Vaya vaya...");
+			alert.setHeaderText("Pues parece que");
+			alert.setContentText("Te has llevado el cholazo...");
+			alert.showAndWait();
+			
+			Platform.exit();
+		}
+		
 	}
 	
 	@FXML
@@ -179,7 +207,8 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == elijoButton) {
-					System.out.println("OK Skill");
+					//pj.atacar();
+					System.out.println(e.getSource().toString());
 				} else {
 					popup.show(view.getScene().getWindow());
 				}
@@ -195,6 +224,8 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 		if (!popup.isShowing())
 			popup.show(view.getScene().getWindow());
+		
+		
 	}
 
 	@FXML
@@ -208,19 +239,16 @@ public class EscenarioController extends BorderPane implements Initializable {
 		//bindeos jugador
 		playerLabel.textProperty().bind(pj.nameProperty());
 		playerImage.imageProperty().bind(pj.appearanceProperty());
-//		playerHealthLabel.textProperty(pj.currentLifeProperty());
-//		playerManaLabel.textProperty(pj.currentManaProperty());
-		playerLifeBar.progressProperty().bind(pj.currentLifeProperty().multiply(100.0).divide(pj.getHealth()));
-		playerManaBar.progressProperty().bind(pj.currentManaProperty().multiply(100.0).divide(pj.getMana()));
-		
+		playerHealthLabel.textProperty().bind(pj.currentLifeProperty().asString().concat("/").concat(pj.HealthProperty()));
+		playerManaLabel.textProperty().bind(pj.currentManaProperty().asString().concat("/").concat(pj.ManaProperty()));;
+		playerLifeBar.progressProperty().bind((pj.currentLifeProperty().multiply(1.0).divide(pj.getHealth())));
+		playerManaBar.progressProperty().bind(pj.currentManaProperty().multiply(1.0).divide(pj.getMana()));
+
 		//bindeos bicho
 		enemyLabel.textProperty().bind(enemy.nameProperty());
 		enemyImage.imageProperty().bind(enemy.appearanceProperty());
-		enemyLifeBar.progressProperty().bind(enemy.currentLifeProperty().multiply(100.0).divide(enemy.getHealth()));
+		enemyLifeBar.progressProperty().bind(enemy.currentLifeProperty().multiply(1.0).divide(enemy.getHealth()));
 
-		System.out.println(enemy.getCurrentLife());
-		System.out.println(enemy.getHealth());
-		System.out.println(enemy.getCurrentLife()*100.0/enemy.getHealth());
 	}
 
 	public EscenarioController(Avatar pj, Enemy enemy) throws IOException {

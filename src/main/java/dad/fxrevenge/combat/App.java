@@ -1,4 +1,4 @@
-package dad.fxrevenge.combat;
+package dad.javafx.mvc;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -38,7 +38,8 @@ public class App extends Application {
 		pj.setInventory(items);
 		pj.setSkills(skills);
 		
-		Enemy bichito = new Enemy(new Image(getClass().getResource("/images/chest.png").toString()), Race.Jelly, 1);
+		Enemy bichito = new Enemy(Race.Jelly, 1);
+		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
 		
 		controller = new EscenarioController(pj, bichito);
 		
