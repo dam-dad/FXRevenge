@@ -31,10 +31,10 @@ public class DialogScreen {
 		this.graphicsContext = graphicContext;
 	}
 
-	public void setGraphics(Image background, Image leftCharacter, Image rightCharacter) {
+	public void setGraphics(Image background, Character leftCharacter, Character rightCharacter) {
 		this.background = background;
-		this.leftCharacter = leftCharacter;
-		this.rightCharacter = rightCharacter;
+		this.leftCharacter = leftCharacter.getPortrait();
+		this.rightCharacter = rightCharacter.getPortrait();
 	}
 
 	public void start() {
@@ -95,15 +95,15 @@ public class DialogScreen {
 
 	}
 
-	protected void CharacterTalking(Image image, String characterName, String dialogText, Boolean isLeftCharacter) {
+	protected void CharacterTalking(Character character, String dialogText, Boolean isLeftCharacter) {
 
 		if (isLeftCharacter) {
-			graphicsContext.drawImage(image, scene.getWidth() / 6, scene.getHeight() / 7);
+			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 6, scene.getHeight() / 7);
 		} else {
-			graphicsContext.drawImage(image, scene.getWidth() / 2, scene.getHeight() / 7);
+			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 2, scene.getHeight() / 7);
 		}
 
-		dialog.showDialog(characterName, dialogText);
+		dialog.showDialog(character.getName(), dialogText);
 	}
 
 	public Scene getScene() {
