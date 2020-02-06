@@ -6,10 +6,12 @@ public class Character {
 	
 	private String name;
 	private Image portrait;
+	private Boolean isLeft;
 	
-	public Character(String name, Image portrait) {
+	public Character(String name, Image portrait, Boolean isLeft) {
 		this.name = name;
 		this.portrait = portrait;
+		this.isLeft = isLeft;
 	}
 	
 	public String getName() {
@@ -27,4 +29,13 @@ public class Character {
 	public void setPortrait(Image portrait) {
 		this.portrait = portrait;
 	}
+
+	public Boolean getIsLeft() {
+		return isLeft;
+	}
+
+	public void setIsLeft(Boolean isLeft) {
+		this.isLeft = isLeft;
+	}
+	
 }

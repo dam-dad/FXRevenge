@@ -10,8 +10,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class DialogScreen {
+	
+	private Stage stage;
 
 	private Group root = new Group();
 	private Scene scene = new Scene(root);
@@ -26,7 +29,8 @@ public class DialogScreen {
 	private Dialog dialog;
 	protected int dialogNumber = 0;
 
-	public DialogScreen(Canvas canvas, GraphicsContext graphicContext) {
+	public DialogScreen(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
+		this.stage = stage;
 		this.canvas = canvas;
 		this.graphicsContext = graphicContext;
 	}
@@ -95,9 +99,9 @@ public class DialogScreen {
 
 	}
 
-	protected void CharacterTalking(Character character, String dialogText, Boolean isLeftCharacter) {
+	protected void CharacterTalking(Character character, String dialogText) {
 
-		if (isLeftCharacter) {
+		if (character.getIsLeft()) {
 			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 6, scene.getHeight() / 7);
 		} else {
 			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 2, scene.getHeight() / 7);
