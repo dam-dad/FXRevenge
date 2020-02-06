@@ -5,6 +5,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.models.Enemy;
+import dad.fxrevenge.models.Item;
+import dad.fxrevenge.models.Race;
+import dad.fxrevenge.models.Skill;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,11 +28,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Popup;
-import models.Avatar;
-import models.Enemy;
-import models.Item;
-import models.Race;
-import models.Skill;
 
 public class EscenarioController extends BorderPane implements Initializable {
 

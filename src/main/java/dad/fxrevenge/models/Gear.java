@@ -1,4 +1,4 @@
-package models;
+package dad.fxrevenge.models;
 
 public class Gear extends Attributes {
 	private GearPosition pos;

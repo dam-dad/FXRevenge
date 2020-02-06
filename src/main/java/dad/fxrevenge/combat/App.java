@@ -1,17 +1,17 @@
 package dad.fxrevenge.combat;
 
+import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.models.ClassType;
+import dad.fxrevenge.models.Enemy;
+import dad.fxrevenge.models.Item;
+import dad.fxrevenge.models.Race;
+import dad.fxrevenge.models.Skill;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import models.Avatar;
-import models.ClassType;
-import models.Enemy;
-import models.Item;
-import models.Race;
-import models.Skill;
 
 public class App extends Application {
 
