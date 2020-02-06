@@ -1,4 +1,4 @@
-package dad.fxrevenge.test.main;
+package dad.fxrevenge.test;
 
 import dad.fxrevenge.screen.dialog.IntroDialogScreen;
 import dad.fxrevenge.screen.title.TitleScreen;
