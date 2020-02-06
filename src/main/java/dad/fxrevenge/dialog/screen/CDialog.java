@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class CDialog extends DialogScreen {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/c.jpg");
+	private Image dialogBackground = new Image("/image/dialog/background/c.png");
 	
 	// Personajes
 	private Character nullChar = new Character(null, null, false);
@@ -57,7 +57,7 @@ public class CDialog extends DialogScreen {
 			break;
 			
 		case 5:
-			CharacterTalking(player, "Me quiero morir... en fin, manos a la obra.");
+			CharacterTalking(player, "En fin, manos a la obra.");
 			break;
 			
 		default:

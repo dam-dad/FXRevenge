@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class MDialog extends DialogScreen {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/m.jpg");
+	private Image dialogBackground = new Image("/image/dialog/background/m.png");
 	
 	// Personajes
 	private Character nullChar = new Character(null, null, false);

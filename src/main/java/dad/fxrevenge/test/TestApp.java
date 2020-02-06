@@ -54,8 +54,8 @@ public class TestApp extends Application {
 		//vDialog = new VDialog(primaryStage, canvas, graphicsContext);
 		//vDialog.start();
 		
-		cDialog = new CDialog(primaryStage, canvas, graphicsContext);
-		cDialog.start();
+		//cDialog = new CDialog(primaryStage, canvas, graphicsContext);
+		//cDialog.start();
 		
 		fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
 		fxDialog.start();

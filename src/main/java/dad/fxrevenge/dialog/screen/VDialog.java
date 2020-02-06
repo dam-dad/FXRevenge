@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class VDialog extends DialogScreen {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/v.jpg");
+	private Image dialogBackground = new Image("/image/dialog/background/v.png");
 	
 	// Personajes
 	private Character nullChar = new Character(null, null, false);
