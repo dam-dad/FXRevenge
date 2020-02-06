@@ -6,18 +6,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Attributes {
-	StringProperty id = new SimpleStringProperty();
-	StringProperty name = new SimpleStringProperty();
-	IntegerProperty level = new SimpleIntegerProperty();
-	IntegerProperty Health = new SimpleIntegerProperty();
-	IntegerProperty Luck = new SimpleIntegerProperty();
-	IntegerProperty CritChance = new SimpleIntegerProperty();
-	IntegerProperty PhysDamage = new SimpleIntegerProperty();
-	IntegerProperty PhysDef = new SimpleIntegerProperty();
-	IntegerProperty Mana = new SimpleIntegerProperty();
-	IntegerProperty MagicDamage = new SimpleIntegerProperty();
-	IntegerProperty MagicDef = new SimpleIntegerProperty();
-	IntegerProperty currentLife = new SimpleIntegerProperty();
+	private StringProperty id = new SimpleStringProperty();
+	private StringProperty name = new SimpleStringProperty();
+	private IntegerProperty level = new SimpleIntegerProperty();
+	private IntegerProperty Health = new SimpleIntegerProperty();
+	private IntegerProperty Luck = new SimpleIntegerProperty();
+	private IntegerProperty CritChance = new SimpleIntegerProperty();
+	private IntegerProperty PhysDamage = new SimpleIntegerProperty();
+	private IntegerProperty PhysDef = new SimpleIntegerProperty();
+	private IntegerProperty Mana = new SimpleIntegerProperty();
+	private IntegerProperty MagicDamage = new SimpleIntegerProperty();
+	private IntegerProperty MagicDef = new SimpleIntegerProperty();
+	private IntegerProperty currentLife = new SimpleIntegerProperty();
 
 	public final StringProperty idProperty() {
 		return this.id;

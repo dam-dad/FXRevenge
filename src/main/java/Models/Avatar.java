@@ -1,6 +1,7 @@
-package models;
+package Models;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -10,31 +11,34 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
 
-//constructor
 public class Avatar extends Attributes {
 
-	IntegerProperty currentExp = new SimpleIntegerProperty();
-	IntegerProperty totalLevelExp = new SimpleIntegerProperty();
-	IntegerProperty money = new SimpleIntegerProperty();
-	ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
-	ClassType work;
-	ListProperty<Item> inventory = new SimpleListProperty<Item>();
-	ListProperty<Gear> equipped = new SimpleListProperty<Gear>(this, "equipped", FXCollections.observableArrayList());
-	ListProperty<Skill> skills = new SimpleListProperty<Skill>(this, "skills", FXCollections.observableArrayList());
-	ListProperty<Skill> learnedSkills = new SimpleListProperty<Skill>(this, "learnedSkills",
+	private IntegerProperty currentExp = new SimpleIntegerProperty();
+	private IntegerProperty totalLevelExp = new SimpleIntegerProperty();
+	private IntegerProperty money = new SimpleIntegerProperty();
+	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
+	private ClassType work;
+	private ListProperty<Item> inventory = new SimpleListProperty<Item>();
+	private ListProperty<Gear> equipped = new SimpleListProperty<Gear>(this, "equipped",
 			FXCollections.observableArrayList());
-	IntegerProperty currentMana = new SimpleIntegerProperty();
+	private ListProperty<Skill> skills = new SimpleListProperty<Skill>(this, "skills",
+			FXCollections.observableArrayList());
+	private ListProperty<Skill> learnedSkills = new SimpleListProperty<Skill>(this, "learnedSkills",
+			FXCollections.observableArrayList());
+	private IntegerProperty currentMana = new SimpleIntegerProperty();
 
-	public Avatar() {
-		// construir pj con stat base seteadas dependiendo de la clase
-
-	}
-
+	// constructor
 	public Avatar(Image appearance, ClassType work, List<Skill> skills, String name) {
 
-		this.work = work;
+		this.setWork(work);
 		this.setCurrentExp(0);
 		this.setMoney(0);
 		this.setName(name);
@@ -43,6 +47,23 @@ public class Avatar extends Attributes {
 		this.setTotalLevelExp(150);
 		this.setAppearance(appearance);
 		this.setCritChance(0);
+
+		Gear helm = new Gear("Casco de practicas");
+		helm.setPos(GearPosition.Helmet);
+		Gear chest = new Gear("Peto de practicas");
+		chest.setPos(GearPosition.Chest);
+		Gear gloves = new Gear("Guanteletes de practicas");
+		gloves.setPos(GearPosition.Gloves);
+		Gear leggings = new Gear("Pantalones de practicas");
+		leggings.setPos(GearPosition.Leggings);
+		Gear boots = new Gear("Botas de practicas");
+		boots.setPos(GearPosition.Boots);
+		Gear rightHand = new Gear("Arma de Practica");
+		rightHand.setPos(GearPosition.RightHand);
+		Gear leftHand = new Gear("Complemento de practica");
+		leftHand.setPos(GearPosition.LeftHand);
+
+		this.equipped.addAll(helm, chest, gloves, leggings, boots, rightHand, leftHand);
 
 		if (work.equals(ClassType.Archmage)) {
 
@@ -55,6 +76,7 @@ public class Avatar extends Attributes {
 			this.setMana(20);
 			this.setMagicDamage(9);
 			this.setMagicDef(7);
+			this.setCurrentLife(this.getCurrentLife());
 
 		} else if (work.equals(ClassType.Hunter)) {
 
@@ -83,7 +105,29 @@ public class Avatar extends Attributes {
 		}
 
 		this.setCurrentLife(this.getHealth());
-		
+
+	}
+
+	// funciones
+	public void addItemToInventory(Item item) {
+		Boolean added = false;
+		for (int i = 0; i < this.getInventory().size(); i++) {
+			if (this.getInventory().get(i).getName().equals(item.getName())) {
+				this.getInventory().get(i).setQuantity(this.getInventory().get(i).getQuantity()+1);
+				added = true;
+			}
+		}
+		if (!added) {
+			this.getInventory().add(item);
+		}
+	}
+	
+	public void useItem (Item item) {
+		if (item.getEffect().equals(Effect.HealRestore)) {
+			this.setCurrentLife(this.getHealth());
+		} else {
+			this.setCurrentMana(this.getMana());
+		}
 	}
 
 	public int atacar() {
@@ -100,14 +144,13 @@ public class Avatar extends Attributes {
 
 	public void recibeDaño(int danyo, boolean fisico) {
 		if (fisico)
-			this.currentLife.set(this.getCurrentLife() - (danyo - this.getPhysDef()));
+			this.setCurrentLife(this.getCurrentLife() - (danyo - this.getPhysDef()));
 		else
-			this.currentLife.set(this.getCurrentLife() - (danyo - this.getMagicDef()));
+			this.setCurrentLife(this.getCurrentLife() - (danyo - this.getMagicDef()));
 	}
 
 	public int atacar(Skill hability) {
 		int danyo = hability.getDamage();
-
 		this.setCurrentMana(this.getCurrentMana() - hability.getCost());
 
 		if (danyo > 0) {
@@ -116,15 +159,17 @@ public class Avatar extends Attributes {
 			} else {
 				danyo += (hability.getDamageMultiplier() * this.getMagicDamage());
 			}
-
 		} else {
 			if ((this.getCurrentLife() - danyo) > this.getHealth())
-				this.currentLife.set(this.getHealth());
+				this.setCurrentLife(this.getHealth());
 			else
-				this.currentLife.set(this.getCurrentLife() - danyo);
-
+				this.setCurrentLife(this.getCurrentLife() - danyo);
 		}
-
+		// calculo critico
+		int proc = ((int) Math.random() * 100);
+		if (proc <= this.getCritChance()+hability.getAddCritChance()) {
+			danyo *= 2;
+		}
 		return danyo;
 
 	}
@@ -132,7 +177,7 @@ public class Avatar extends Attributes {
 	public void levelUp() {
 
 		this.setLevel(this.getLevel() + 1);
-		this.setTotalLevelExp((int)(getTotalLevelExp()*1.25));
+		this.setTotalLevelExp((int) (getTotalLevelExp() * 1.25));
 		this.setCurrentExp(0);
 
 		if (work.equals(ClassType.Archmage)) {
@@ -167,6 +212,61 @@ public class Avatar extends Attributes {
 		}
 		return lvlup;
 	}
+
+	// equipar items
+	public void equipar(Gear equipment, Gear current) {
+		try {
+			Popup popup = new Popup();
+			EventHandler<MouseEvent> evento;
+			evento = new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent e) {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Equipamiento");
+					alert.setHeaderText("¿Quieres sustituir tu " + current.getName() + " por el recien obtenido "
+							+ equipment.getName());
+					alert.setContentText(
+							"Equipado: " + current.toString() + "\n o \n" + equipment.toString() + "\n ¿Qué decides?");
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get().equals(ButtonType.OK)) {
+						cambiaequipo(equipment, false);
+					} else {
+						cambiaequipo(equipment, true);
+					}
+				}
+			};
+			popup.setAutoHide(true);
+			// popup.show(owner);
+
+		} catch (NullPointerException e) {
+
+		}
+	}
+
+	private void cambiaequipo(Gear newequip, boolean vender) {
+		if (!vender) {
+			for (int i = 0; i < this.getEquipped().size(); i++) {
+				if (this.getEquipped().get(i).getPos().equals(newequip.getPos())) {
+					Gear viejo = this.getEquipped().get(i);
+					this.getEquipped().add(newequip);
+					// actualizarstarts
+					actualizarStats(viejo, newequip);
+					this.getEquipped().remove(i);
+				}
+			}
+		}
+	}
+
+	private void actualizarStats(Gear oldGear, Gear newGear) {
+		this.setHealth(this.getHealth() - oldGear.getHealth() + newGear.getHealth());
+		this.setMana(this.getMana() - oldGear.getMana() + newGear.getMana());
+		this.setLuck(this.getLuck() - oldGear.getLuck() + newGear.getLuck());
+		this.setCritChance(this.getCritChance() - oldGear.getCritChance() + newGear.getCritChance());
+		this.setPhysDamage(this.getPhysDamage() - oldGear.getPhysDamage() + newGear.getPhysDamage());
+		this.setPhysDef(this.getPhysDef() - oldGear.getPhysDef() + newGear.getPhysDef());
+		this.setMagicDamage(this.getMagicDamage() - oldGear.getMagicDamage() + newGear.getMagicDamage());
+		this.setMagicDef(this.getMagicDef() - oldGear.getMagicDef() + newGear.getMagicDef());
+	}
+	// getters-setters
 
 	public final IntegerProperty currentExpProperty() {
 		return this.currentExp;
@@ -271,15 +371,21 @@ public class Avatar extends Attributes {
 	public final ObjectProperty<Image> appearanceProperty() {
 		return this.appearance;
 	}
-	
 
 	public final Image getAppearance() {
 		return this.appearanceProperty().get();
 	}
-	
 
 	public final void setAppearance(final Image appearance) {
 		this.appearanceProperty().set(appearance);
 	}
-	
+
+	public ClassType getWork() {
+		return work;
+	}
+
+	public void setWork(ClassType work) {
+		this.work = work;
+	}
+
 }

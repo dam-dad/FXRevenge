@@ -1,41 +1,85 @@
-package models;
+package Models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
-//constructor
+//falta setear las apariencias
+//añadir generacion de item o gear para posible dropeo
 public class Enemy extends Attributes{
-	Race race;
-	IntegerProperty expDrop = new SimpleIntegerProperty();
-	IntegerProperty moneyDrop = new SimpleIntegerProperty();
-	Gear gearDrop;
-	Item itemdrop;
-	ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
+	private Race race;
+	private IntegerProperty expDrop = new SimpleIntegerProperty();
+	private IntegerProperty moneyDrop = new SimpleIntegerProperty();
+	private Gear gearDrop;
+	private Item itemdrop;
+	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
 	
 	public Enemy(Race raza,int nivel) {
 		this.race=raza;
 		switch(race) {
 		case Demon:
+			this.setHealth(90*nivel);
+			this.setPhysDamage(8*nivel);
+			this.setPhysDef(9*nivel);
+			this.setMagicDamage(8*nivel);
+			this.setMagicDef(9*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
 			this.setExpDrop(35*nivel);
 			this.setMoneyDrop(2+nivel);
 			break;
 		case Jelly:
+			this.setHealth(30*nivel);
+			this.setPhysDamage(3*nivel);
+			this.setPhysDef(4*nivel);
+			this.setMagicDamage(3*nivel);
+			this.setMagicDef(4*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
 			this.setExpDrop(5*nivel);
 			this.setMoneyDrop(0);
 			break;
 		case Orc:
+			this.setHealth(60*nivel);
+			this.setPhysDamage(7*nivel);
+			this.setPhysDef(8*nivel);
+			this.setMagicDamage(0);
+			this.setMagicDef(3*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
 			this.setExpDrop(15*nivel);
 			this.setMoneyDrop(9+nivel);
 			break;
 		case Skeleton:
+			this.setHealth(40*nivel);
+			this.setPhysDamage(3*nivel);
+			this.setPhysDef(3*nivel);
+			this.setMagicDamage(5*nivel);
+			this.setMagicDef(8*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
 			this.setExpDrop(25*nivel);
 			this.setMoneyDrop(1+nivel);
 		case Zombie:
+			this.setHealth(50*nivel);
+			this.setPhysDamage(6*nivel);
+			this.setPhysDef(5*nivel);
+			this.setMagicDamage(0);
+			this.setMagicDef(5*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
 			this.setExpDrop(5*nivel);
 			this.setMoneyDrop(15+nivel);
-		default:
+		default: //creacion de bosses
+			this.setHealth(170*nivel);
+			this.setPhysDamage(8*nivel);
+			this.setPhysDef(8*nivel);
+			this.setMagicDamage(8*nivel);
+			this.setMagicDef(8*nivel);
+			this.setCurrentLife(this.getCurrentLife());
+			
+			
 			this.setExpDrop(150*nivel);
 			this.setMoneyDrop(40*nivel);
 			break;
@@ -61,9 +105,9 @@ public class Enemy extends Attributes{
 		
 		else {
 			if(fisico)
-				this.currentLife.set(this.getCurrentLife()-(danyo-this.getPhysDef()));
+				this.setCurrentLife(this.getCurrentLife()-(danyo-this.getPhysDef()));
 			else
-				this.currentLife.set(this.getCurrentLife()-(danyo-this.getMagicDef()));
+				this.setCurrentLife(this.getCurrentLife()-(danyo-this.getMagicDef()));
 		}
 	}
 	

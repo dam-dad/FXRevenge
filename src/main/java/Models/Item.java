@@ -7,16 +7,60 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 //constructor
 public class Item {
-	Image icon;
-	StringProperty name = new SimpleStringProperty();
-	IntegerProperty quantity = new SimpleIntegerProperty();
-	IntegerProperty price = new SimpleIntegerProperty();
-	Effect effect;
+	private Image icon;
+	private StringProperty name = new SimpleStringProperty();
+	private IntegerProperty quantity = new SimpleIntegerProperty();
+	private IntegerProperty price = new SimpleIntegerProperty();
+	private Effect effect;
 	
 	public Item() {
 		
 	}
 	
+	
+	
+	public Item(Image icon, String name, Integer quantity, Integer price, Effect effect) {
+		super();
+		this.icon = icon;
+		this.setName(name);
+		this.setQuantity(quantity);
+		this.setPrice(price);
+		this.effect = effect;
+	}
+	
+	public Item generateHealPotion() {
+		Item potion = new Item();
+		potion.setName("Pocion");
+		potion.setQuantity(1);
+		potion.setPrice(5);
+		potion.effect=Effect.HealRestore;
+		return potion;
+	}
+	public Item generateManaPotion() {
+		Item potion = new Item();
+		potion.setName("Elixir");
+		potion.setQuantity(1);
+		potion.setPrice(5);
+		potion.effect=Effect.ManaRestore;
+		return potion;
+	}
+	public String effectDescription(Item it) {
+		if (it.effect.equals(Effect.HealRestore)) {
+			return "Este objeto restaura tu salud al máximo"; 
+		} else {
+			return "Este objeto restaura tu maná al máximo";
+		}
+	}
+
+
+	public Effect getEffect() {
+		return effect;
+	}
+
+	public void setEffect(Effect effect) {
+		this.effect = effect;
+	}
+
 	public final StringProperty nameProperty() {
 		return this.name;
 	}
