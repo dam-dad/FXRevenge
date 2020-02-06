@@ -65,7 +65,7 @@ public class PrologueDialog extends DialogScreen {
 			break;
 			
 		case 7:
-			CharacterTalking(nullCharacter, "(La dios Java se ha esfumado...)");
+			CharacterTalking(nullCharacter, "(La diosa Java se ha esfumado...)");
 			break;
 			
 		case 8:
