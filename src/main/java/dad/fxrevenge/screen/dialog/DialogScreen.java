@@ -3,7 +3,6 @@ package dad.fxrevenge.screen.dialog;
 import java.util.HashSet;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,177 +10,104 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
-public class DialogScreen extends Application {
+public class DialogScreen {
 
-	static Scene mainScene;
-	static GraphicsContext graphicsContext;
+	private Group root = new Group();
+	private Scene scene = new Scene(root);
 
-	static Dialog dialog;
+	private Canvas canvas;
+	private GraphicsContext graphicsContext;
 
-	// Roberto está usando una pantalla de 1000x800
-	// Mi resolución de prueba es 750x600
-	static int WIDTH = 750;
-	static int HEIGHT = 600;
+	private HashSet<String> currentlyActiveKeys;
 
-	static Canvas canvas;
-	static Image background;
+	protected Image background, leftCharacter, rightCharacter;
 
-	static Image leftCharacter;
-	static Image rightCharacter;
+	private Dialog dialog;
+	protected int dialogNumber = 0;
 
-	static Image left;
-	static Image leftGreen;
-
-	static Image right;
-	static Image rightGreen;
-
-	static HashSet<String> currentlyActiveKeys;
-
-	static Image character;
-	static String charName;
-	static String textDialog;
-	static Group root = new Group();
-	static int dialogNumber = 0;
-
-	public static void main(String[] args) {
-		launch(args);
+	public DialogScreen(Canvas canvas, GraphicsContext graphicContext) {
+		this.canvas = canvas;
+		this.graphicsContext = graphicContext;
 	}
 
-	@Override
-	public void start(Stage mainStage) {
+	public void setGraphics(Image background, Image leftCharacter, Image rightCharacter) {
+		this.background = background;
+		this.leftCharacter = leftCharacter;
+		this.rightCharacter = rightCharacter;
+	}
 
-		mainStage.setTitle("DialogScene");
+	public void start() {
 
-		
-		mainScene = new Scene(root, WIDTH, HEIGHT);
-		mainStage.setScene(mainScene);
-
-		canvas = new Canvas(mainScene.getWidth(), mainScene.getHeight());
 		root.getChildren().add(canvas);
+		graphicsContext = canvas.getGraphicsContext2D();
+
+		dialog = new Dialog(scene, graphicsContext);
 
 		prepareActionHandlers();
 
-		graphicsContext = canvas.getGraphicsContext2D();
-
-		dialog = new Dialog(mainScene, graphicsContext);
-
-		loadGraphics();
-
-		/**
-		 * Main "game" loop
-		 */
+		// Main "game" loop
 		new AnimationTimer() {
 			public void handle(long currentNanoTime) {
-
 				tickAndRender();
-
 			}
 		}.start();
 
-		mainStage.show();
 	}
 
-	private static void prepareActionHandlers() {
-		
+	private void prepareActionHandlers() {
+
 		// use a set so duplicates are not possible
 		currentlyActiveKeys = new HashSet<String>();
-		
-		mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				currentlyActiveKeys.add(event.getCode().toString());
 			}
 		});
-		
 	}
 
-	private static void loadGraphics() {
-		
-		background = new Image("/image/dialog_screen/background.jpg");
+	protected void tickAndRender() {
 
-		leftCharacter = new Image("/image/dialog_screen/all_might.png");
-		rightCharacter = new Image("/image/dialog_screen/all_might.png");
+		// Redimensionar canvas
+		canvas.setWidth(scene.getWidth());
+		canvas.setHeight(scene.getHeight());
 
-		left = new Image(getResource("/image/dialog_screen/left.png"));
-		leftGreen = new Image(getResource("/image/dialog_screen/leftG.png"));
+		// Limpiar canvas
+		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-		right = new Image(getResource("/image/dialog_screen/right.png"));
-		rightGreen = new Image(getResource("/image/dialog_screen/rightG.png"));
+		// Dibujar fondo
+		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
 
-	}
-
-	private static String getResource(String filename) {
-		return DialogScreen.class.getResource(filename).toString();
-	}
-
-	private static void tickAndRender() {
-
-		canvas.setWidth(mainScene.getWidth());
-		canvas.setHeight(mainScene.getHeight());
-
-		// clear canvas
-		graphicsContext.clearRect(0, 0, WIDTH, HEIGHT);
-
-		graphicsContext.drawImage(background, 0, 0, mainScene.getWidth(), mainScene.getHeight());
-
-		switch (dialogNumber) {
-
-		case 0:
-			CharacterTalking(leftCharacter, "MVC", "Mi venganza será terrible", true);
-			break;
-
-		case 1:
-			CharacterTalking(rightCharacter, "Mr. FX", "Y la mía también", false);
-			break;
-
-		default:
-			CharacterTalking(null, "(...)", "(Nadie está hablando...)", false);
-
+		// Si se presiona la flecha izquierda volver al diálogo anterior
+		if (currentlyActiveKeys.contains("LEFT")) {
+			currentlyActiveKeys.clear();
+			if (dialogNumber > 0)
+				dialogNumber--;
 		}
 
-		if (currentlyActiveKeys.contains("LEFT"))
-        {
+		// Si se presiona la flecha derecha avanzar al diálogo siguiente
+		if (currentlyActiveKeys.contains("RIGHT")) {
 			currentlyActiveKeys.clear();
-            graphicsContext.drawImage(leftGreen, 10 ,10);
-            
-            if (dialogNumber > 0) dialogNumber--;
-            System.out.println(dialogNumber);
-        } else {
-            graphicsContext.drawImage(left, 10 ,10);
-        }
+			dialogNumber++;
+		}
 
-        if (currentlyActiveKeys.contains("RIGHT")) {
-        	currentlyActiveKeys.clear();
-            graphicsContext.drawImage(rightGreen, mainScene.getWidth() - 64 - 10, 10);
-            
-            dialogNumber++;
-            System.out.println(dialogNumber);
-        } else {
-            graphicsContext.drawImage(right, mainScene.getWidth() - 64 - 10, 10);
-        }
 	}
 
-	private static void CharacterTalking(Image image, String characterName, String dialogText,
-			Boolean isLeftCharacter) {
+	protected void CharacterTalking(Image image, String characterName, String dialogText, Boolean isLeftCharacter) {
 
 		if (isLeftCharacter) {
-			graphicsContext.drawImage(image, mainScene.getWidth() / 6, mainScene.getHeight() / 7);
+			graphicsContext.drawImage(image, scene.getWidth() / 6, scene.getHeight() / 7);
 		} else {
-			graphicsContext.drawImage(image, mainScene.getWidth() / 2, mainScene.getHeight() / 7);
+			graphicsContext.drawImage(image, scene.getWidth() / 2, scene.getHeight() / 7);
 		}
 
 		dialog.showDialog(characterName, dialogText);
+	}
 
-	}
-	
-	public static Group getRoot() {
-		return root;
-	}
-	
-	public static Scene getScene() {
-		return mainScene;
+	public Scene getScene() {
+		return scene;
 	}
 
 }
