@@ -1,4 +1,4 @@
-package dad.fxrevenge.screen.dialog;
+package dad.fxrevenge.dialog.character;
 
 import javafx.scene.image.Image;
 

@@ -1,7 +1,7 @@
-package dad.fxrevenge.screen.dialog;
+package dad.fxrevenge.dialog;
 
 import java.util.HashSet;
-
+import dad.fxrevenge.dialog.character.Character;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 public class DialogScreen {
 	
+	@SuppressWarnings("unused")
 	private Stage stage;
 
 	private Group root = new Group();

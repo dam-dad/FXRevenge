@@ -2,8 +2,8 @@ package dad.fxrevenge.screen.title;
 
 import java.util.HashSet;
 
-import dad.fxrevenge.screen.dialog.Dialog;
-import dad.fxrevenge.screen.dialog.IntroDialogScreen;
+import dad.fxrevenge.dialog.Dialog;
+import dad.fxrevenge.dialog.screen.PrologueDialog;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -139,7 +139,7 @@ public class TitleScreen {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		// Iniciar pantalla de diálogo
-		IntroDialogScreen introDialog = new IntroDialogScreen(stage, canvas, graphicsContext);
+		PrologueDialog introDialog = new PrologueDialog(stage, canvas, graphicsContext);
 		introDialog.start();
 
 		// Cambiar la escena a la pantalla de diálogo

@@ -1,25 +1,25 @@
-package dad.fxrevenge.screen.dialog;
+package dad.fxrevenge.dialog.screen;
 
+import dad.fxrevenge.dialog.character.Character;
+import dad.fxrevenge.dialog.character.CharacterList;
+import dad.fxrevenge.dialog.DialogScreen;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class IntroDialogScreen extends DialogScreen {
+public class PrologueDialog extends DialogScreen {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog_screen/intro/background.jpg");
-	
-	// Personaje vacío para pruebas
-	private Character nullCharacter = new Character(null, null, false);
+	private Image dialogBackground = new Image("/image/dialog/background/prologue.jpg");
 	
 	// Personajes
-	private Character unknownCharacter = new Character("???", null, false);
+	private Character nullCharacter = CharacterList.getNullChar();
 	
-	private Character mainCharacter = new Character("Protagonista genérico (tú)", new Image("/image/dialog_screen/intro/main_character.png"), true);
-	private Character javaGoddess = new Character("Diosa Java", new Image("/image/dialog_screen/intro/java_goddess.png"), false);
+	private Character mainCharacter = CharacterList.getPlayer();
+	private Character javaGoddess = CharacterList.getJavaGoddess();
 	
-	public IntroDialogScreen(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
+	public PrologueDialog(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
 		super(stage, canvas, graphicContext);
 	}
 
@@ -45,7 +45,7 @@ public class IntroDialogScreen extends DialogScreen {
 			break;
 			
 		case 2:
-			CharacterTalking(unknownCharacter, "Este mundo es una manifestación de tus preocupaciones, sentimientos y deseos");
+			CharacterTalking(javaGoddess, "Este mundo es una manifestación de tus preocupaciones y temores");
 			break;
 			
 		case 3:
