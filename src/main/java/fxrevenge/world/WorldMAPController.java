@@ -5,35 +5,54 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import fxrevenge.animations.AnimationMobs;
 import fxrevenge.animations.TestMove;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class WorldMAPController extends Pane implements Initializable {
 
-	
 	@FXML
-    private Pane view;
+	private Pane view;
 
-    @FXML
-    private Canvas rectWorldCanvas;
+	@FXML
+	private Canvas rectWorldCanvas;
 
-    private WorldMAPModel model;
-    private GraphicsContext gc;
-    private StageObjectGame[][] itemsWorldMap;
-    private Scene scene;
-    TestMove pj;
-    
+	private WorldMAPModel model;
+	private GraphicsContext gc;
+	private Scene scene;
+
+	private String[][] world = {
+//			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
+			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", "T1", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", "m1", ".", ".", ".", "." },
+			{ ".", ".", ".", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2", ".", "." },
+			{ "T3", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T3" },
+			{ ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", ".", ".", ".", "." }, };
+	
+	private boolean[][] collision = new boolean[world.length][world[0].length];
+	private AnimationMobs skeleton;
+	TestMove pj;
+
 	public WorldMAPController() {
-		model =new WorldMAPModel(1000, 800,100,100);
-		FXMLLoader loader =new FXMLLoader(getClass().getResource("/fxml/WorldSceneView.fxml"));
+		model = new WorldMAPModel(800, 600, 800, 600, 50);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WorldSceneView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		try {
@@ -46,72 +65,89 @@ public class WorldMAPController extends Pane implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		scene=new Scene(view);
-		view.setPrefWidth(1000);
-		view.setPrefHeight(800);
-		
-		//----- Control de casillas Visual
-		rectWorldCanvas.setWidth(model.getWidthCanvas()+0.00);
-		rectWorldCanvas.setHeight(model.getHeightsCanvas());
+		scene = new Scene(view);
+		view.setPrefWidth(model.getWidth());
+		view.setPrefHeight(model.getHeigth());
+		rectWorldCanvas.setWidth(model.getWidthCanvas());
+		rectWorldCanvas.setHeight(model.getHeigthCanvas());
 		gc = rectWorldCanvas.getGraphicsContext2D();
-		itemsWorldMap=new StageObjectGame[(int)(model.getHeightsCanvas()/model.getHeightsImage())][(int)(model.getWidthCanvas()/model.getWidthImage())];
-		for (int j = 0; j <= model.getHeightsCanvas(); j+=model.getHeightsImage()*2) {
-			for (int i = 0; i <= model.getWidthCanvas(); i+= model.getWidthImage() * 2) {
-				
-				if (j%2==0) {
-				gc.setFill(Color.BLACK);
-				} else gc.setFill(Color.BLUE);
-				gc.fillRect(i, j, model.getWidthImage(),model.getHeightsImage());
-				gc.setStroke(Color.GRAY);
-				gc.strokeRect(model.getWidthImage(), model.getHeightsImage(), model.getWidthImage(), model.getHeightsImage());
-			
-				if (i > 0) {
+		int resto = 1;
+		for (int j = 0; j <= model.getHeigthCanvas(); j += model.getCell()) {
+			int cell = 0;
+			if (resto == 0)
+				resto = 1;
+			else
+				resto = 0;
+			for (int i = 0; i <= model.getWidthCanvas(); i += model.getCell()) {
+
+				if ((i / 50) % 2 == resto)
+					gc.setFill(Color.BLACK);
+				else
 					gc.setFill(Color.RED);
-					gc.fillRect(i - model.getWidthImage(), j - model.getHeightsImage(), model.getWidthImage(), model.getHeightsImage());
-				}
-				
+
+				gc.fillRect(i, j, model.getCell(), model.getCell());
+				String x = String.valueOf(cell);
+				gc.setFill(Color.WHITE);
+				gc.fillText(x, i, j);
+				cell++;
 			}
 		}
-		int tamY=(int)(model.getHeightsCanvas()/model.getHeightsImage());
-		int tamX=(int)(model.getWidthCanvas()/model.getWidthImage());
-		System.out.println(tamY+"C"+tamX);
-		boolean[][] mapColision=new boolean[tamY][tamX];
-		for (int i = 0; i <tamY ; i++) {
-			for (int j = 0; j <tamX; j++) {
-				mapColision[i][j]=(true);
-				
-			}
-		}
-		//------------Fin de control de casillas-----------
-		
-		for (int j = 0; j < tamY; j+=1) {
-			StageObjectGame objectInMap=new StageObjectGame("/Image/vegetation/baumTree.png", false);
-			itemsWorldMap[j][0]=objectInMap;
-			double difference=12;
-			itemsWorldMap[j][0].getImage().setY((model.getHeightsImage()*j)-difference);
-			itemsWorldMap[j][0].getImage().setX(-5);
-			mapColision[j][0]=false;
-			view.getChildren().add(itemsWorldMap[j][0].getImage());
-		}
-		int pos=(int)(model.getWidthCanvas()/model.getWidthImage())-1;
-		for (int j = 0; j <tamY; j+=1) {
-			StageObjectGame objectInMap=new StageObjectGame("/Image/vegetation/baumTree.png", false);
-			itemsWorldMap[j][pos]=objectInMap;
-			double difference=12;
-			itemsWorldMap[j][pos].getImage().setY((model.getHeightsImage()*j)-difference);
-			itemsWorldMap[j][pos].getImage().setX(900.0);
-			mapColision[j][pos]=false;
-			view.getChildren().add(itemsWorldMap[j][pos].getImage());
-		}
-		pj=new TestMove(mapColision,1,0);
+		paintWorld();
+		pj=new TestMove(collision,0,1);
 		view.getChildren().add(pj.getPjImage());
-		pj.getPjImage().setX(100);
-		pj.getPjImage().setY(0); 
+		pj.getPjImage().setX(0);
+		pj.getPjImage().setY(50); 
 		scene.setOnKeyPressed((KeyEvent event) -> pj.move(event));
-		System.out.println(scene.getWidth() +" "+scene.getHeight());
-	    }
-	
+	}
+
 	public Pane getView() {
 		return view;
+	}
+
+	public void paintWorld() {
+		String url;
+		Image image;
+		int posX = 0, posY = 0;
+		for (int j = 0; j < world.length; j++) {
+			posX = 0;
+			for (int i = 0; i < world[0].length; i++) {
+				switch (world[j][i]) {
+				case "T1":
+					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree1.png"));
+					gc.drawImage(image, posX, posY);
+					collision[j][i] = false;
+
+					break;
+				case "T2":
+					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree2.png"));
+					gc.drawImage(image, posX, posY);
+					collision[j][i] = false;
+					break;
+				case "T3":
+					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree3.png"));
+					gc.drawImage(image, posX, posY);
+					collision[j][i] = false;
+					break;
+				case ".":
+					collision[j][i] = true;
+					break;
+					
+				case "m1":
+					skeleton=new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY-50); 
+//					skeleton.staticAni(1, 4, 56, 0, 56, 84);
+					collision[j][i] = false;
+					break;
+				default:
+					break;
+
+				}
+
+				posX += model.getCell();
+			}
+			posY += model.getCell();
+		}
 	}
 }
