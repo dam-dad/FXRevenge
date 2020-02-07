@@ -96,43 +96,48 @@ public class PrologueDialog extends DialogScreen {
 
 		default:
 			
-			// MÁS COSAS DEL CONTROLADOR DE COMBATE :DDD
-			item1.setName("poti");
-			item1.setQuantity(2);
-			item2.setName("galleta");
-			item2.setQuantity(5);
-			item3.setName("orbe");
-			item3.setQuantity(1);
+			// CARGAR COMBATE
+			loadCombat();
 
-			skill1.setName("miniataque igneo");
-			skill2.setName("minihelada");
-			skill3.setName("minirayo");
-
-			ObservableList<Item> items = FXCollections.observableArrayList(item1, item2, item3);
-			ObservableList<Skill> skills = FXCollections.observableArrayList(skill1, skill2, skill3);
-			pj.setInventory(items);
-			pj.setSkills(skills);
-
-			bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
-
-			try {
-				combatController = new EscenarioController(pj, bichito);
-
-				animationTimer.stop();
-
-				Scene scene = new Scene(combatController.getView());
-				stage.setScene(scene);
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			CharacterTalking(nullCharacter, "FIN DEL DIÁLOGO");
+			//CharacterTalking(nullCharacter, "FIN DEL DIÁLOGO");
 			break;
 
 		}
 
+	}
+
+	private void loadCombat() {
+		// MÁS COSAS DEL CONTROLADOR DE COMBATE :DDD
+		item1.setName("poti");
+		item1.setQuantity(2);
+		item2.setName("galleta");
+		item2.setQuantity(5);
+		item3.setName("orbe");
+		item3.setQuantity(1);
+
+		skill1.setName("miniataque igneo");
+		skill2.setName("minihelada");
+		skill3.setName("minirayo");
+
+		ObservableList<Item> items = FXCollections.observableArrayList(item1, item2, item3);
+		ObservableList<Skill> skills = FXCollections.observableArrayList(skill1, skill2, skill3);
+		pj.setInventory(items);
+		pj.setSkills(skills);
+
+		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
+
+		try {
+			combatController = new EscenarioController(pj, bichito);
+
+			animationTimer.stop();
+
+			Scene scene = new Scene(combatController.getView());
+			stage.setScene(scene);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
