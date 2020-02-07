@@ -116,8 +116,6 @@ public class EscenarioController extends BorderPane implements Initializable {
 	void onDefenseAction(ActionEvent event) {
 
 		int defIn = pj.getPhysDef(), magIn = pj.getMagicDef();
-
-		eventArea.setText("");
 		
 		pj.setPhysDef((int)(defIn*1.25));
 		pj.setMagicDef((int)(magIn*1.25));

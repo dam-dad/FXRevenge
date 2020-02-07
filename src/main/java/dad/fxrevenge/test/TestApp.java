@@ -48,8 +48,8 @@ public class TestApp extends Application {
 		//introDialog = new PrologueDialog(primaryStage, canvas, graphicsContext);
 		//introDialog.start();
 		
-		mDialog = new MDialog(primaryStage, canvas, graphicsContext);
-		mDialog.start();
+		//mDialog = new MDialog(primaryStage, canvas, graphicsContext);
+		//mDialog.start();
 		
 		//vDialog = new VDialog(primaryStage, canvas, graphicsContext);
 		//vDialog.start();
@@ -57,13 +57,13 @@ public class TestApp extends Application {
 		//cDialog = new CDialog(primaryStage, canvas, graphicsContext);
 		//cDialog.start();
 		
-		//fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
-		//fxDialog.start();
+		fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
+		fxDialog.start();
 		
 		primaryStage.setTitle("FX Revenge");
 		
 		// Colocar aquí la escena a iniciar
-		primaryStage.setScene(mDialog.getScene());
+		primaryStage.setScene(fxDialog.getScene());
 		
 		primaryStage.setResizable(false);
 		primaryStage.show();
