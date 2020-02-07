@@ -26,6 +26,8 @@ public class TitleScreen {
 
 	private Group root = new Group();
 	private Scene scene = new Scene(root);
+	
+	private AnimationTimer animationTimer;
 
 	private Canvas canvas;
 	private GraphicsContext graphicsContext;
@@ -49,12 +51,14 @@ public class TitleScreen {
 
 		prepareActionHandlers();
 
-		// Main "game" loop
-		new AnimationTimer() {
-			public void handle(long currentNanoTime) {
+		// Main game loop
+		animationTimer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
 				tickAndRender();
 			}
-		}.start();
+		};
+		animationTimer.start();
 
 	}
 
