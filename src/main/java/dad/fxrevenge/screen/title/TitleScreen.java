@@ -106,7 +106,7 @@ public class TitleScreen {
 
 			loadIntroDialog();
 
-			System.out.println("ENTER pulsado");
+//			System.out.println("ENTER pulsado");
 		}
 
 	}
