@@ -21,13 +21,14 @@ public class TestMove {
 	private static ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
-	private boolean[][] map;
+	private int[][] map;
 	private int myPosX;
 	private int myPosY;
 	private int movePX=50;
 	private int aniS=900;
+	private boolean interact=false;
 	
-	public TestMove(boolean[][] habitability, int colX, int rowY) {
+	public TestMove(int[][] habitability, int colX, int rowY) {
 		pjImage = new ImageView(new Image("./Image/characters/mage_f.png"));
 		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 		map = habitability;
@@ -37,8 +38,7 @@ public class TestMove {
 	}
 
 	public void move(KeyEvent event) {
-		if (inMove == false & (event.getText().equals("w") | event.getText().equals("s") | event.getText().equals("a")
-				| event.getText().equals("d"))) {
+		if (inMove == false ) {
 			TranslateTransition transicion = new TranslateTransition();
 			int colsX, counts, offset_x, offset_y, width, height;
 			if (pjAni != null && pjAni.getStatus() == Status.RUNNING)
@@ -46,7 +46,7 @@ public class TestMove {
 			switch (event.getCode()) {
 
 			case W:
-				if ((myPosY-1) >= 0 && map[myPosY - 1][myPosX] == true) {
+				if ((myPosY-1) >= 0 && map[myPosY - 1][myPosX] == 0) {
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -77,7 +77,7 @@ public class TestMove {
 //			pjImage.setX(pjImage.getX()pjImage.getX());
 				break;
 			case D:
-				if ((myPosX + 1) < map[0].length && map[myPosY][myPosX + 1] == true) {
+				if ((myPosX + 1) < map[0].length && map[myPosY][myPosX + 1] == 0) {
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -109,7 +109,7 @@ public class TestMove {
 				}
 				break;
 			case A:
-				if ((myPosX - 1) >= 0 && map[myPosY][myPosX - 1] == true) {
+				if ((myPosX - 1) >= 0 && map[myPosY][myPosX - 1] ==0) {
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -140,7 +140,7 @@ public class TestMove {
 				}
 				break;
 			case S:
-				if ((myPosY + 1) < map.length && map[myPosY + 1][myPosX] == true) {
+				if ((myPosY + 1) < map.length && map[myPosY + 1][myPosX] == 0) {
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -171,18 +171,42 @@ public class TestMove {
 					break;
 				}
 			case E:
-				System.out.println(event.getCode());
-				inMove = false;
+				System.err.println(event.getCode());
+				System.out.println("AAAAAAAAAAAAAAA");
+				if ( map[myPosY + 1][myPosX] == 3  |  map[myPosY - 1][myPosX] == 3  |  map[myPosY][myPosX-1] == 3  |  map[myPosY][myPosX+1] == 3) {
+					setInteract(true);
+					System.out.println("E");
+					inMove = false;
+				}
+				
 			break;
 			default:
-				
+				System.out.println("DEFAULT");
+				System.err.println(event.getCode());
 				break;
 			}
 		}
 		
 	}
+	
+	
+	public boolean isInMove() {
+		return inMove;
+	}
+
+	public void setInMove(boolean inMove) {
+		this.inMove = inMove;
+	}
 
 	public static ImageView getPjImage() {
 		return pjImage;
+	}
+
+	public boolean isInteract() {
+		return interact;
+	}
+
+	public void setInteract(boolean interact) {
+		this.interact = interact;
 	}
 }
