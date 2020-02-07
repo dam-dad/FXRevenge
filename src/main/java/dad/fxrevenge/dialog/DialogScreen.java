@@ -13,12 +13,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class DialogScreen {
-	
-	@SuppressWarnings("unused")
-	private Stage stage;
+
+	protected Stage stage;
 
 	private Group root = new Group();
 	private Scene scene = new Scene(root);
+	
+	protected AnimationTimer animationTimer;
 
 	private Canvas canvas;
 	private GraphicsContext graphicsContext;
@@ -52,11 +53,13 @@ public class DialogScreen {
 		prepareActionHandlers();
 
 		// Main "game" loop
-		new AnimationTimer() {
-			public void handle(long currentNanoTime) {
+		animationTimer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
 				tickAndRender();
 			}
-		}.start();
+		};
+		animationTimer.start();
 
 	}
 
