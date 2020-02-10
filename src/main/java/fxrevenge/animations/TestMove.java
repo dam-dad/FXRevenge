@@ -1,5 +1,8 @@
 package fxrevenge.animations;
 
+import dad.fxrevenge.combat.App2;
+import dad.fxrevenge.dialog.screen.VDialog;
+import dad.fxrevenge.scene.SceneManager;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -37,8 +40,7 @@ public class TestMove {
 	}
 
 	public void move(KeyEvent event) {
-		if (inMove == false & (event.getText().equals("w") | event.getText().equals("s") | event.getText().equals("a")
-				| event.getText().equals("d"))) {
+		if (inMove == false) {
 			TranslateTransition transicion = new TranslateTransition();
 			int colsX, counts, offset_x, offset_y, width, height;
 			if (pjAni != null && pjAni.getStatus() == Status.RUNNING)
@@ -172,6 +174,10 @@ public class TestMove {
 				}
 			case E:
 				System.out.println(event.getCode());
+
+				// Cambio de escena
+				SceneManager.changeScene(new App2());
+
 				inMove = false;
 			break;
 			default:
