@@ -53,7 +53,7 @@ public class VDialog extends DialogScreen {
 			break;
 			
 		case 4:
-			CharacterTalking(v, "Ya está todo preparado, ¿está listo?");
+			CharacterTalking(v, "¡A trabajar!");
 			break;
 			
 		default:

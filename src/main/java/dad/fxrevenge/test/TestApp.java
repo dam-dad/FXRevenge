@@ -51,19 +51,19 @@ public class TestApp extends Application {
 		//mDialog = new MDialog(primaryStage, canvas, graphicsContext);
 		//mDialog.start();
 		
-		//vDialog = new VDialog(primaryStage, canvas, graphicsContext);
-		//vDialog.start();
+		vDialog = new VDialog(primaryStage, canvas, graphicsContext);
+		vDialog.start();
 		
 		//cDialog = new CDialog(primaryStage, canvas, graphicsContext);
 		//cDialog.start();
 		
-		fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
-		fxDialog.start();
+		//fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
+		//fxDialog.start();
 		
 		primaryStage.setTitle("FX Revenge");
 		
 		// Colocar aquí la escena a iniciar
-		primaryStage.setScene(fxDialog.getScene());
+		primaryStage.setScene(vDialog.getScene());
 		
 		primaryStage.setResizable(false);
 		primaryStage.show();

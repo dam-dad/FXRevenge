@@ -1,82 +1,29 @@
 package dad.fxrevenge.screen.title;
 
-import java.util.HashSet;
-
-import dad.fxrevenge.dialog.Dialog;
+import dad.fxrevenge.dialog.DialogScreen;
 import dad.fxrevenge.dialog.screen.PrologueDialog;
-import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class TitleScreen {
-
+public class TitleScreen extends DialogScreen {
+	
+	// Imagen de fondo de la escena
 	private Image background = new Image("/image/title_screen/background.jpg");
 
-	private Stage stage;
-
-	private Group root = new Group();
-	private Scene scene = new Scene(root);
-	
-	private AnimationTimer animationTimer;
-
-	private Canvas canvas;
-	private GraphicsContext graphicsContext;
-
-	private HashSet<String> currentlyActiveKeys;
-
-	private Dialog dialog;
-
+	// Constructor que recibe los componentes necesarios para crear la escena
 	public TitleScreen(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
-		this.stage = stage;
-		this.canvas = canvas;
-		this.graphicsContext = graphicContext;
+		super(stage, canvas, graphicContext);
 	}
 
-	public void start() {
-
-		root.getChildren().add(canvas);
-		graphicsContext = canvas.getGraphicsContext2D();
-
-		dialog = new Dialog(scene, graphicsContext);
-
-		prepareActionHandlers();
-
-		// Main game loop
-		animationTimer = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				tickAndRender();
-			}
-		};
-		animationTimer.start();
-
-	}
-
-	private void prepareActionHandlers() {
-
-		// use a set so duplicates are not possible
-		currentlyActiveKeys = new HashSet<String>();
-
-		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				currentlyActiveKeys.add(event.getCode().toString());
-			}
-		});
-	}
-
+	// Función que se ejecuta dentro del bucle principal
+	@Override
 	protected void tickAndRender() {
-
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());
 		canvas.setHeight(scene.getHeight());
@@ -87,30 +34,29 @@ public class TitleScreen {
 		// Dibujar fondo
 		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
 
+		// Fuente del texto
 		Font titleFont = Font.font("Arial", FontWeight.BOLD, 100);
 		Font pressKeyFont = Font.font("Arial", FontWeight.BOLD, 25);
 		Font creditsFont = Font.font("Arial", FontWeight.NORMAL, 15);
 
+		// Dibujar texto
 		drawText(titleFont, "FX Revenge", true);
 		drawText(pressKeyFont, "Pulsa ENTER para comenzar", false);
 
 		graphicsContext.setFont(creditsFont);
 
+		// Diálogo con el nombre de los creadores
 		dialog.showDialog("Realizado por:", "Adán Jiménez Sacramento" + "\n" + "Andrés Galván García" + "\n"
 				+ "Luis Adán Pérez Nazco" + "\n" + "Roberto González Linares");
 
+		// Si se presiona la tecla ENTER carga el diálogo de introducción
 		if (currentlyActiveKeys.contains("ENTER")) {
 			currentlyActiveKeys.clear();
-
-			// QUE HACER CUANDO SE PULSA LA TECLA ENTER
-
 			loadIntroDialog();
-
-			System.out.println("ENTER pulsado");
 		}
-
 	}
-
+	
+	// Función que dibuja el texto aplicándole estilos
 	private void drawText(Font font, String text, Boolean isTitle) {
 
 		Double x = canvas.getWidth() / 2;
@@ -137,6 +83,7 @@ public class TitleScreen {
 
 	}
 
+	// Función que carga el diálogo de introducción
 	private void loadIntroDialog() {
 
 		// Limpiar el canvas
@@ -148,10 +95,6 @@ public class TitleScreen {
 
 		// Cambiar la escena a la pantalla de diálogo
 		stage.setScene(introDialog.getScene());
-	}
-
-	public Scene getScene() {
-		return scene;
 	}
 
 }

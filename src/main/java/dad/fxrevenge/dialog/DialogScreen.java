@@ -12,37 +12,55 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+/**
+ * Clase (padre) que controla la pantalla de diálogos entre personajes
+ **/
+
 public class DialogScreen {
 	
+	// Variable necesaria para el cambio de escena
 	protected Stage stage;
 
+	// Nodo padre del canvas
 	private Group root = new Group();
-	private Scene scene = new Scene(root);
 	
-	protected AnimationTimer animationTimer;
+	// Escena que se creará a partir del nodo root
+	protected Scene scene = new Scene(root);
+	
+	// Clase encargada de renderizar la escena
+	private AnimationTimer animationTimer;
 
-	private Canvas canvas;
-	private GraphicsContext graphicsContext;
+	// Lienzo (canvas) sobre el que dibujar la escena
+	protected Canvas canvas;
+	protected GraphicsContext graphicsContext;
 
-	private HashSet<String> currentlyActiveKeys;
+	// Hashset en el que se registrarán las teclas que se vayan presionando
+	protected HashSet<String> currentlyActiveKeys;
+	
+	// Gráficos de la escena: fondo y retrato de los personajes izquierdo y derecho
+	private Image background, leftCharacter, rightCharacter;
 
-	protected Image background, leftCharacter, rightCharacter;
-
-	private Dialog dialog;
+	// Clase encargada de dibujar el texto de los diálogos
+	protected Dialog dialog;
+	
+	// Variable encargada de que se muestre el diálogo correspondiente
 	protected int dialogNumber = 0;
 
+	// Constructor que recibe los componentes necesarios para crear la escena
 	public DialogScreen(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
 		this.stage = stage;
 		this.canvas = canvas;
 		this.graphicsContext = graphicContext;
 	}
 
+	// Función para asignar los gráficos: imagen de fondo y los personajes que aparecerán en la escena
 	public void setGraphics(Image background, Character leftCharacter, Character rightCharacter) {
 		this.background = background;
 		this.leftCharacter = leftCharacter.getPortrait();
 		this.rightCharacter = rightCharacter.getPortrait();
 	}
 
+	// Función que inicia la escena
 	public void start() {
 
 		root.getChildren().add(canvas);
@@ -52,30 +70,40 @@ public class DialogScreen {
 
 		prepareActionHandlers();
 		
-		// Main game loop
+		// Bucle principal que controla la escena
 		animationTimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				tickAndRender();
 			}
 		};
+		
 		animationTimer.start();
 
 	}
+	
+	// Función que detiene la escena
+	public void stop() {
+		animationTimer.stop();
+	}
 
+	// Función que controla la entrada por teclado
 	private void prepareActionHandlers() {
 
-		// use a set so duplicates are not possible
+		// HashSet que registrará las teclas que se vayan presionando
 		currentlyActiveKeys = new HashSet<String>();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
+				// Añade la tecla presionada al HashSet
 				currentlyActiveKeys.add(event.getCode().toString());
 			}
 		});
+		
 	}
 
+	// Función que se ejecuta dentro del bucle principal
 	protected void tickAndRender() {
 
 		// Redimensionar canvas
@@ -88,14 +116,14 @@ public class DialogScreen {
 		// Dibujar fondo
 		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
 
-		// Si se presiona la flecha izquierda volver al diálogo anterior
+		// Si se presiona la flecha izquierda vuelve al diálogo anterior
 		if (currentlyActiveKeys.contains("LEFT")) {
 			currentlyActiveKeys.clear();
 			if (dialogNumber > 0)
 				dialogNumber--;
 		}
 
-		// Si se presiona la flecha derecha avanzar al diálogo siguiente
+		// Si se presiona la flecha derecha avanza al diálogo siguiente
 		if (currentlyActiveKeys.contains("RIGHT")) {
 			currentlyActiveKeys.clear();
 			dialogNumber++;
@@ -103,19 +131,61 @@ public class DialogScreen {
 
 	}
 
+	// Función que controla los diálogos de los personajes
 	protected void CharacterTalking(Character character, String dialogText) {
-
+		
+		// Determinar el lado de la pantalla en el que debe mostrarse el retrato del personaje y dibujarlo
 		if (character.getIsLeft()) {
 			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 6, scene.getHeight() / 7);
 		} else {
 			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 2, scene.getHeight() / 7);
 		}
 
+		// Dibujar diálogo del personaje
 		dialog.showDialog(character.getName(), dialogText);
 	}
 
+	// GETTERS Y SETTERS
+	
+	// Scene	
 	public Scene getScene() {
 		return scene;
+	}
+
+	// Stage
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+	// Imagen de Fondo
+	public Image getBackground() {
+		return background;
+	}
+
+	public void setBackground(Image background) {
+		this.background = background;
+	}
+
+	// Imagen del personaje izquierdo
+	public Image getLeftCharacter() {
+		return leftCharacter;
+	}
+
+	public void setLeftCharacter(Image leftCharacter) {
+		this.leftCharacter = leftCharacter;
+	}
+	
+	// Imagen del personaje derecho
+	public Image getRightCharacter() {
+		return rightCharacter;
+	}
+
+	public void setRightCharacter(Image rightCharacter) {
+		this.rightCharacter = rightCharacter;
 	}
 
 }
