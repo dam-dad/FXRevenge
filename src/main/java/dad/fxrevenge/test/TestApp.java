@@ -1,6 +1,6 @@
 package dad.fxrevenge.test;
 
-import dad.fxrevenge.dialog.screen.PrologueDialog;
+import dad.fxrevenge.dialog.screen.IntroductionDialog;
 import dad.fxrevenge.dialog.screen.VDialog;
 import dad.fxrevenge.dialog.screen.CDialog;
 import dad.fxrevenge.dialog.screen.FXDialog;
@@ -19,7 +19,7 @@ public class TestApp extends Application {
 	private GraphicsContext graphicsContext;
 	
 	private TitleScreen titleScreen;
-	private PrologueDialog introDialog;
+	private IntroductionDialog introDialog;
 	private MDialog mDialog;
 	private VDialog vDialog;
 	private CDialog cDialog;
@@ -35,30 +35,25 @@ public class TestApp extends Application {
 		primaryStage.setWidth(800);
 		primaryStage.setHeight(600);
 		
-		root = new Group();
-		canvas = new Canvas(primaryStage.getWidth(), primaryStage.getHeight());
-		root.getChildren().add(canvas);
-		
-		graphicsContext = canvas.getGraphicsContext2D();
 		
 		// Inicializar la pantalla / escena a probar
 		//titleScreen = new TitleScreen(primaryStage, canvas, graphicsContext);
-		//titleScreen.start();
+		//titleScreen.load();
 		
 		//introDialog = new PrologueDialog(primaryStage, canvas, graphicsContext);
-		//introDialog.start();
+		//introDialog.load();
 		
 		//mDialog = new MDialog(primaryStage, canvas, graphicsContext);
-		//mDialog.start();
+		//mDialog.load();
 		
-		vDialog = new VDialog(primaryStage, canvas, graphicsContext);
-		vDialog.start();
+		vDialog = new VDialog();
+		vDialog.load();
 		
 		//cDialog = new CDialog(primaryStage, canvas, graphicsContext);
-		//cDialog.start();
+		//cDialog.load();
 		
 		//fxDialog = new FXDialog(primaryStage, canvas, graphicsContext);
-		//fxDialog.start();
+		//fxDialog.load();
 		
 		primaryStage.setTitle("FX Revenge");
 		

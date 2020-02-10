@@ -1,7 +1,8 @@
 package dad.fxrevenge.screen.title;
 
-import dad.fxrevenge.dialog.DialogScreen;
-import dad.fxrevenge.dialog.screen.PrologueDialog;
+import dad.fxrevenge.dialog.screen.IntroductionDialog;
+import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -11,19 +12,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class TitleScreen extends DialogScreen {
+public class TitleScreen extends DialogScene {
+	
+	private IntroductionDialog introDialog = new IntroductionDialog();
 	
 	// Imagen de fondo de la escena
 	private Image background = new Image("/image/title_screen/background.jpg");
 
-	// Constructor que recibe los componentes necesarios para crear la escena
-	public TitleScreen(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
-		super(stage, canvas, graphicContext);
-	}
-
 	// Función que se ejecuta dentro del bucle principal
 	@Override
-	protected void tickAndRender() {
+	protected void update() {
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());
 		canvas.setHeight(scene.getHeight());
@@ -85,16 +83,23 @@ public class TitleScreen extends DialogScreen {
 
 	// Función que carga el diálogo de introducción
 	private void loadIntroDialog() {
-
-		// Limpiar el canvas
-		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		
+		
+		
+		/*
+		this.unload();
 
 		// Iniciar pantalla de diálogo
-		PrologueDialog introDialog = new PrologueDialog(stage, canvas, graphicsContext);
-		introDialog.start();
+		PrologueDialog introDialog = new PrologueDialog();
+		introDialog.load();
 
 		// Cambiar la escena a la pantalla de diálogo
 		stage.setScene(introDialog.getScene());
+		*/
+		
+		SceneManager.changeScene(introDialog);
+		
+		
 	}
 
 }

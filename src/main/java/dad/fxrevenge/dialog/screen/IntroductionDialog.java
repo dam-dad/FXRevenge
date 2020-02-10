@@ -2,36 +2,30 @@ package dad.fxrevenge.dialog.screen;
 
 import dad.fxrevenge.dialog.character.Character;
 import dad.fxrevenge.dialog.character.CharacterList;
-import dad.fxrevenge.dialog.DialogScreen;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.SceneManager;
+import fxrevenge.world.StrartAPP2;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
-public class PrologueDialog extends DialogScreen {
+public class IntroductionDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/prologue.jpg");
+	private Image dialogBackground = new Image("/image/dialog/background/introduction.jpg");
 	
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();
-	
 	private Character mainCharacter = CharacterList.getPlayer();
 	private Character javaGoddess = CharacterList.getJavaGoddess();
-	
-	public PrologueDialog(Stage stage, Canvas canvas, GraphicsContext graphicContext) {
-		super(stage, canvas, graphicContext);
-	}
 
 	@Override
-	public void start() {
+	public void load() {
 		setGraphics(dialogBackground, mainCharacter, javaGoddess);
-		super.start();
+		super.load();
 	}
 	
 	@Override
-	protected void tickAndRender() {
-		super.tickAndRender();
+	protected void update() {
+		super.update();
 
 		// Diálogos
 		switch (dialogNumber) {
@@ -73,11 +67,9 @@ public class PrologueDialog extends DialogScreen {
 			break;
 			
 		default:
-			CharacterTalking(nullCharacter, "FIN DEL DIÁLOGO");
+			// Cambio de escena
+			SceneManager.changeScene(new StrartAPP2());
 			break;
-
 		}
-
 	}
-
 }
