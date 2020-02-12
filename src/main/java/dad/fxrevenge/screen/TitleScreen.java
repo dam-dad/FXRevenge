@@ -1,23 +1,17 @@
-package dad.fxrevenge.screen.title;
+package dad.fxrevenge.screen;
 
-import dad.fxrevenge.dialog.screen.IntroductionDialog;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 public class TitleScreen extends DialogScene {
 	
-	private IntroductionDialog introDialog = new IntroductionDialog();
-	
 	// Imagen de fondo de la escena
-	private Image background = new Image("/image/title_screen/background.jpg");
+	private Image background = new Image("/image/background/titlescreen.jpg");
 
 	// Función que se ejecuta dentro del bucle principal
 	@Override
@@ -50,7 +44,7 @@ public class TitleScreen extends DialogScene {
 		// Si se presiona la tecla ENTER carga el diálogo de introducción
 		if (currentlyActiveKeys.contains("ENTER")) {
 			currentlyActiveKeys.clear();
-			loadIntroDialog();
+			SceneManager.changeScene(new IntroductionDialog());
 		}
 	}
 	
@@ -80,26 +74,4 @@ public class TitleScreen extends DialogScene {
 		graphicsContext.fillText(text, x, y);
 
 	}
-
-	// Función que carga el diálogo de introducción
-	private void loadIntroDialog() {
-		
-		
-		
-		/*
-		this.unload();
-
-		// Iniciar pantalla de diálogo
-		PrologueDialog introDialog = new PrologueDialog();
-		introDialog.load();
-
-		// Cambiar la escena a la pantalla de diálogo
-		stage.setScene(introDialog.getScene());
-		*/
-		
-		SceneManager.changeScene(introDialog);
-		
-		
-	}
-
 }

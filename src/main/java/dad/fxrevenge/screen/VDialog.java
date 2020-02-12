@@ -1,4 +1,4 @@
-package dad.fxrevenge.dialog.screen;
+package dad.fxrevenge.screen;
 
 import dad.fxrevenge.dialog.character.Character;
 import dad.fxrevenge.dialog.character.CharacterList;
@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public class VDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/v.png");
+	private Image dialogBackground = new Image("/image/background/v.png");
 	
 	// Personajes
 	private Character nullChar = new Character(null, null, false);

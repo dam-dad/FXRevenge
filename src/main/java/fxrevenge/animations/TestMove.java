@@ -1,8 +1,8 @@
 package fxrevenge.animations;
 
 import dad.fxrevenge.combat.App2;
-import dad.fxrevenge.dialog.screen.VDialog;
 import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.screen.VDialog;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

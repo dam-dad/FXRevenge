@@ -1,4 +1,4 @@
-package dad.fxrevenge.dialog.screen;
+package dad.fxrevenge.screen;
 
 import dad.fxrevenge.dialog.character.Character;
 import dad.fxrevenge.dialog.character.CharacterList;
@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public class MDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/m.png");
+	private Image dialogBackground = new Image("/image/background/m.png");
 	
 	// Personajes
 	private Character nullChar = new Character(null, null, false);
@@ -46,7 +46,7 @@ public class MDialog extends DialogScene {
 			break;
 			
 		case 4:
-			CharacterTalking(player, "¡Profe! No termino de pillarlo, ¿puedes repetir eso último?");
+			CharacterTalking(player, "No termino de pillarlo, ¿puedes repetir eso último?");
 			break;
 			
 		case 5:

@@ -1,7 +1,7 @@
 package dad.fxrevenge.app;
 
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.screen.title.TitleScreen;
+import dad.fxrevenge.screen.TitleScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

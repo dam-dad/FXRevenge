@@ -1,4 +1,4 @@
-package dad.fxrevenge.dialog.screen;
+package dad.fxrevenge.screen;
 
 import dad.fxrevenge.dialog.character.Character;
 import dad.fxrevenge.dialog.character.CharacterList;
@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 public class IntroductionDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/dialog/background/introduction.jpg");
+	private Image dialogBackground = new Image("/image/background/introduction.jpg");
 	
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();
@@ -35,7 +35,7 @@ public class IntroductionDialog extends DialogScene {
 			break;
 
 		case 1:
-			CharacterTalking(mainCharacter, "<< ¿Estaré soñando? Nunca había estado en un lugar como este >>");
+			CharacterTalking(mainCharacter, "<< ¿Estaré soñando? Nunca había estado en un lugar como éste >>");
 			break;
 			
 		case 2:
