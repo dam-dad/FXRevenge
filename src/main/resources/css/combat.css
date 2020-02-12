@@ -1,0 +1,112 @@
+.root{
+	-fx-background-color:#C35555;
+	/*-fx-background-image: url("../images/lightstream.png");*/
+}
+
+.button{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+        #9d4024,
+        #d86e3a,
+        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+.button:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+        radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+}
+.button:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+.button Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+/*
+.text-area{
+	-fx-border-style:dashed;
+	-fx-border-color: black;
+	-fx-border-radius: 25px;
+    
+    -fx-background-color: transparent;
+
+}*/
+/*
+.text-area {
+    -fx-font-family: Consolas;
+    -fx-font-size: 15;
+    -fx-text-fill: #ffffff;
+    -fx-display-caret:true;
+    
+    -fx-background-radius: 15px;
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    /*-fx-background-color: #000000;
+    -fx-border-style:dashed;
+	-fx-border-color: black;
+	-fx-border-radius: 25px;    
+	-fx-background-radius: 15px;
+	-fx-background-color: transparent;   
+}*/
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-focus-color: transparent;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, transparent, transparent, transparent;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+	
+    -fx-background-color: transparent, white, transparent, white;
+   	-fx-border-color: black;
+	-fx-border-radius: 100px;    
+    -fx-border-width: 5 ; 
+    
+    -fx-background-radius: 100px;
+    -fx-background-color: transparent;
+   /*-fx-padding:25px, 30px,20px,30px;*/
+   -fx-padding:25px, 50px,20px,50px;
+}
+
+.text-area {
+    -fx-background-color: rgba(0,0,0,0);
+ 	-fx-wrap-text: true;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.label{
+	-fx-background-color:linear-gradient(from 0% 0% to 100% 100%, yellow 0%, lightblue 70%);
+	-fx-background-radius:10px;
+	-fx-font-style:normal;
+	-fx-font-weight:bold;
+	-fx-text-fill:#000000;
+	-fx-padding:3px;
+}
+
+#playerLifeBar .bar, #enemyLifeBar .bar{
+	-fx-background-color:#00FF00;
+}

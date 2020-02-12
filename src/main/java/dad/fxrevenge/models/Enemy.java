@@ -20,6 +20,7 @@ public class Enemy extends Attributes {
 		this.race = raza;
 		switch (race) {
 		case Demon:
+			this.setName("Fernandinho el demoñoño");
 			this.setHealth(90 * nivel);
 			this.setPhysDamage(8 * nivel);
 			this.setPhysDef(9 * nivel);
@@ -30,6 +31,7 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(2 + nivel);
 			break;
 		case Jelly:
+			this.setName("Mira como tiemblo");
 			this.setHealth(30 * nivel);
 			this.setPhysDamage(3 * nivel);
 			this.setPhysDef(4 * nivel);
@@ -40,6 +42,7 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(0);
 			break;
 		case Orc:
+			this.setName("Afterparty 5 a.m");
 			this.setHealth(60 * nivel);
 			this.setPhysDamage(7 * nivel);
 			this.setPhysDef(8 * nivel);
@@ -50,6 +53,7 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(9 + nivel);
 			break;
 		case Skeleton:
+			this.setName("Huesitos");
 			this.setHealth(40 * nivel);
 			this.setPhysDamage(3 * nivel);
 			this.setPhysDef(3 * nivel);
@@ -59,6 +63,8 @@ public class Enemy extends Attributes {
 			this.setExpDrop(25 * nivel);
 			this.setMoneyDrop(1 + nivel);
 		case Zombie:
+
+			this.setName("Me caigo a trozos");
 			this.setHealth(50 * nivel);
 			this.setPhysDamage(6 * nivel);
 			this.setPhysDef(5 * nivel);
@@ -67,7 +73,10 @@ public class Enemy extends Attributes {
 
 			this.setExpDrop(5 * nivel);
 			this.setMoneyDrop(15 + nivel);
+			
 		default: // creacion de bosses
+			
+//			this.setName("Estoy mamadísimo");
 			this.setHealth(170 * nivel);
 			this.setPhysDamage(8 * nivel);
 			this.setPhysDef(8 * nivel);

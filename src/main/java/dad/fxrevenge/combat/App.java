@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 	private EscenarioController controller;
-	private Avatar pj = new Avatar(new Image(getClass().getResource("/images/lightstream.png").toString()), ClassType.Archmage, FXCollections.observableArrayList(), "Rayo");
+	private Avatar pj = new Avatar(new Image(getClass().getResource("/images/lightstream.png").toString()), ClassType.Warlord, FXCollections.observableArrayList(), "Rayo");
 	private Item item1=new Item(), item2=new Item(), item3=new Item();
 	private Skill skill1 = new Skill(),skill2 = new Skill(),skill3 = new Skill();
 	
@@ -41,7 +41,7 @@ public class App extends Application {
 		Enemy bichito = new Enemy(Race.Jelly, 1);
 		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
 		
-		controller = new EscenarioController(pj, bichito);
+		controller = new EscenarioController(pj, bichito, getClass().getResource("/image/background/v.png").toString());
 		
 		Scene scene = new Scene(controller.getView());
 		
