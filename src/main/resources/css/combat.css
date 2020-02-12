@@ -40,6 +40,7 @@
 	-fx-border-radius: 100px;    
     -fx-border-width: 5;
     -fx-background-radius: 100px;
+	-fx-font-family: "Arial Narrow";
    /*-fx-padding:25px, 30px,20px,30px;*/
    -fx-padding:25px, 50px,20px,50px;
 }
@@ -61,11 +62,24 @@
 
 .label{
 	-fx-background-color:linear-gradient(from 0% 0% to 100% 100%, yellow 0%, lightblue 70%);
+	-fx-font-style:normal;
+	-fx-text-fill:#000000;
+	-fx-padding:3px;
+	-fx-font-family: "Arial Narrow";
+   	-fx-fill: #818181;
+   	
+}
+
+#playerLabel, #enemyLabel{
+	-fx-background-color:linear-gradient(from 0% 0% to 100% 100%, yellow 0%, lightgreen 70%);
 	-fx-background-radius:10px;
 	-fx-font-style:normal;
 	-fx-font-weight:bold;
 	-fx-text-fill:#000000;
-	-fx-padding:3px;
+	-fx-padding:3px;-fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+
 }
 
 #playerLifeBar .bar, #enemyLifeBar .bar{

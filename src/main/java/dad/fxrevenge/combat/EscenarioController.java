@@ -12,7 +12,6 @@ import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,6 +38,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
@@ -140,12 +140,12 @@ public class EscenarioController extends BorderPane implements Initializable {
 		enemyAttack();
 		pj.setPhysDef(defIn);
 		pj.setMagicDef(magIn);
-		
+
 	}
 
 	@FXML
 	void onExitAction(ActionEvent event) {
-
+		Platform.exit();
 	}
 
 	private void enemyAttack() {
@@ -172,6 +172,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 	void onOpenInventoryAction(ActionEvent event) {
 
 		Popup popup = new Popup();
+		ListView<Item> list = new ListView<Item>();
 
 		EventHandler<MouseEvent> evento;
 		evento = new EventHandler<MouseEvent>() {
@@ -188,17 +189,75 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == elijoButton) {
-					System.out.println("OK Item");
+					Item item = list.getSelectionModel().getSelectedItem();
+
+					int mana = -1, cura = -1;
+					if (item.getEffect() != null) {
+						switch (item.getEffect()) {
+
+						case HealRestore:
+							cura = (int) (pj.getHealth() * 0.5);
+							break;
+
+						case ManaRestore:
+							mana = (int) (pj.getMana() * 0.5);
+							break;
+						case MaxiHealRestore:
+							cura = (int) (pj.getHealth() * 0.75);
+							break;
+
+						case MaxiManaRestore:
+							mana = (int) (pj.getMana() * 0.75);
+							break;
+						case MiniHealRestore:
+							cura = (int) (pj.getHealth() * 0.25);
+							break;
+						case miniManaRestore:
+							mana = (int) (pj.getMana() * 0.25);
+							break;
+						}
+
+						if (cura + pj.getCurrentLife() > pj.getHealth()) {
+							cura = pj.getHealth() - pj.getCurrentLife();
+							pj.setCurrentLife(pj.getHealth());
+						} else
+							pj.setCurrentLife(cura);
+
+						if (mana + pj.getCurrentMana() > pj.getMana()) {
+							mana = pj.getMana() - pj.getCurrentMana();
+							pj.setCurrentMana(pj.getMana());
+
+						} else
+							pj.setCurrentMana(mana);
+						
+						pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
+
+						if (cura != -1) {
+							eventArea.setText("Te has curado " + cura + " puntos de vida.");
+						} else if (mana != -1) {
+							eventArea.setText("Has recuperado " + mana + " puntos de mana.");
+						}
+						enemyAttack();
+
+					} else {
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Vaya...");
+						alert2.setContentText("Parece que no está implementado del todo el objeto, lo sentimos :(");
+						alert2.show();
+
+					}
+
+//System.out.println(list.getSelectionModel().getSelectedItem().getName());
+
 				} else {
 					popup.show(view.getScene().getWindow());
 				}
 			}
 		};
-
-		ListView<Item> list = new ListView<Item>();
 		list.setItems(pj.getInventory());
 		list.setOnMouseClicked(evento);
-
+		list.setMaxHeight(view.getHeight()/3.0);
+		
 		popup.getContent().add(list);
 		popup.setAutoHide(true);
 
@@ -210,6 +269,8 @@ public class EscenarioController extends BorderPane implements Initializable {
 	@FXML
 	void onUseHabilitiesAction(ActionEvent event) {
 		Popup popup = new Popup();
+
+		ListView<Skill> list = new ListView<Skill>();
 
 		EventHandler<MouseEvent> evento;
 		evento = new EventHandler<MouseEvent>() {
@@ -226,17 +287,47 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == elijoButton) {
-					// pj.atacar();
-					System.out.println(e.getSource().toString());
+					Skill hability = list.getSelectionModel().getSelectedItem();
+
+					int nuevoMana = pj.getCurrentMana() - hability.getCost();
+					if (nuevoMana < 0) {
+
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Vaya...");
+						alert2.setHeaderText("Sin maná");
+						alert2.setContentText("Parece que no tienes suficiente maná, un objeto podría ayudarte ;D");
+						alert2.showAndWait();
+
+						popup.show(view.getScene().getWindow());
+					} else {
+						pj.setCurrentMana(nuevoMana);
+
+						int damage = pj.atacar(hability);
+						boolean egoista = (Math.random() < 0.5) ? true : false;
+
+						eventArea.setText("");
+
+						if (egoista) {
+							eventArea.setText(eventArea.getText() + "\nHas infligido "
+									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+									+ hability.getName() + ".");
+							enemyAttack();
+						} else {
+							enemyAttack();
+							eventArea.setText(eventArea.getText() + "\nHas infligido "
+									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+									+ hability.getName() + ".");
+						}
+					}
 				} else {
 					popup.show(view.getScene().getWindow());
 				}
 			}
 		};
 
-		ListView<Skill> list = new ListView<Skill>();
 		list.setItems(pj.getSkills());
 		list.setOnMouseClicked(evento);
+		list.setMaxHeight(view.getHeight()/3.0);
 
 		popup.getContent().add(list);
 		popup.setAutoHide(true);
@@ -246,24 +337,11 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 	}
 
-	@FXML
-	void onUseItemClicked(MouseEvent event) {
-		// mouseEvent.getClickCount()
-	}
-	
 	private void setBackground() {
-		view.setBackground(
-	            new Background(
-	                    Collections.singletonList(new BackgroundFill(
-	                            Color.TRANSPARENT, 
-	                            CornerRadii.EMPTY, 
-	                            Insets.EMPTY)),
-	                    Collections.singletonList(new BackgroundImage(
-	                            backgroundImage,
-	                            BackgroundRepeat.NO_REPEAT,
-	                            BackgroundRepeat.NO_REPEAT,
-	                            BackgroundPosition.DEFAULT,
-	                            BackgroundSize.DEFAULT))));
+		view.setBackground(new Background(
+				Collections.singletonList(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)),
+				Collections.singletonList(new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
+						BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT))));
 	}
 
 	@Override
@@ -286,12 +364,12 @@ public class EscenarioController extends BorderPane implements Initializable {
 			Region r = (Region) playerLifeBar.lookup(".bar");
 			r.setStyle("-fx-background-color:" + web + ";");
 		});
-		
+
 		// bindeos bicho
 		enemyLabel.textProperty().bind(enemy.nameProperty());
 		enemyImage.imageProperty().bind(enemy.appearanceProperty());
 		enemyLifeBar.progressProperty().bind(enemy.currentLifeProperty().multiply(1.0).divide(enemy.getHealth()));
-		
+
 		enemyLifeBar.progressProperty().addListener((o, ov, nv) -> {
 			Color color = interpolate(Color.RED, Color.YELLOW, Color.GREEN, nv.doubleValue());
 			String web = color.toString().replace("0x", "#");
@@ -302,7 +380,6 @@ public class EscenarioController extends BorderPane implements Initializable {
 	}
 
 	public EscenarioController(Avatar pj, Enemy enemy) throws IOException {
-		// ANADIR QUE EL CONSTRUCTOR RECIBA UN PJ Y UN ENEMIGO PARA INICIAR EL COMBATE
 		super();
 
 		this.enemy = enemy;
@@ -316,7 +393,6 @@ public class EscenarioController extends BorderPane implements Initializable {
 	}
 
 	public EscenarioController(Avatar pj, Enemy enemy, Image fondo) throws IOException {
-		// ANADIR QUE EL CONSTRUCTOR RECIBA UN PJ Y UN ENEMIGO PARA INICIAR EL COMBATE
 		super();
 
 		this.enemy = enemy;
