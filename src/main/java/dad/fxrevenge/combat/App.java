@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
+	
+	// Imagen de fondo del combate
+	private Image backgroundImage = new Image("/image/background/c.png");
 
 	private EscenarioController controller;
 	private Avatar pj = new Avatar(new Image(getClass().getResource("/images/lightstream.png").toString()), ClassType.Warlord, FXCollections.observableArrayList(), "Rayo");
@@ -41,7 +44,7 @@ public class App extends Application {
 		Enemy bichito = new Enemy(Race.Jelly, 1);
 		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
 		
-		controller = new EscenarioController(pj, bichito, getClass().getResource("/image/background/v.png").toString());
+		controller = new EscenarioController(pj, bichito, backgroundImage);
 		
 		Scene scene = new Scene(controller.getView());
 		

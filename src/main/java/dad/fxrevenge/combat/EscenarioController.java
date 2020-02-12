@@ -2,6 +2,7 @@ package dad.fxrevenge.combat;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -17,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -29,11 +31,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
@@ -46,7 +50,8 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 //	private Stage stage = view.getScene().getWindow();
 
-	private String imageURL;
+	// Imagen de fondo
+	private Image backgroundImage;
 
 	@FXML
 	private BorderPane view;
@@ -135,7 +140,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 		enemyAttack();
 		pj.setPhysDef(defIn);
 		pj.setMagicDef(magIn);
-
+		
 	}
 
 	@FXML
@@ -245,20 +250,26 @@ public class EscenarioController extends BorderPane implements Initializable {
 	void onUseItemClicked(MouseEvent event) {
 		// mouseEvent.getClickCount()
 	}
+	
+	private void setBackground() {
+		view.setBackground(
+	            new Background(
+	                    Collections.singletonList(new BackgroundFill(
+	                            Color.TRANSPARENT, 
+	                            CornerRadii.EMPTY, 
+	                            Insets.EMPTY)),
+	                    Collections.singletonList(new BackgroundImage(
+	                            backgroundImage,
+	                            BackgroundRepeat.NO_REPEAT,
+	                            BackgroundRepeat.NO_REPEAT,
+	                            BackgroundPosition.DEFAULT,
+	                            BackgroundSize.DEFAULT))));
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-//		view.setBackground(
-//				new Background(
-//						new BackgroundImage(
-//								image, 
-//								BackgroundRepeat.NO_REPEAT, 
-//								BackgroundRepeat.NO_REPEAT, 
-//								BackgroundPosition.CENTER, 
-//								new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
-
-		view.getStylesheets().add("-fx-background-image: url(\"" + imageURL + "\")");
+		setBackground();
 
 		// bindeos jugador
 		playerLabel.textProperty().bind(pj.nameProperty());
@@ -304,13 +315,13 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 	}
 
-	public EscenarioController(Avatar pj, Enemy enemy, String fondo) throws IOException {
+	public EscenarioController(Avatar pj, Enemy enemy, Image fondo) throws IOException {
 		// ANADIR QUE EL CONSTRUCTOR RECIBA UN PJ Y UN ENEMIGO PARA INICIAR EL COMBATE
 		super();
 
 		this.enemy = enemy;
 		this.pj = pj;
-		this.imageURL = fondo;
+		this.backgroundImage = fondo;
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CombatView.fxml"));
 		loader.setController(this);
