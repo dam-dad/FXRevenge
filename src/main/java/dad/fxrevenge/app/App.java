@@ -4,6 +4,7 @@ import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.screen.TitleScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application {
 	
@@ -19,6 +20,7 @@ public class App extends Application {
 		mainStage = primaryStage;
 		SceneManager.setMainStage(mainStage);
 		
+		mainStage.initStyle(StageStyle.UNDECORATED);
 		mainStage.setWidth(800);
 		mainStage.setHeight(600);
 		
