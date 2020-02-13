@@ -33,20 +33,19 @@ public class WorldMAPController extends Pane implements Initializable {
 
 	private String[][] world = {
 //			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
-			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", "T1", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", "m1", ".", ".", ".", "." },
-			{ ".", ".", ".", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2", ".", "." },
-			{ "T3", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T3" },
-			{ ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", ".", ".", ".", "." }, };
+			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+			{ ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." , "."},
+			{ ".", "T1", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", "T1" },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", "M", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2", ".", "." , "."},
+			{ "T3", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T3" , "."},
+			{ ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", ".", ".", ".", "." ,"."}};
 	
-	private boolean[][] collision = new boolean[world.length][world[0].length];
 	private AnimationMobs skeleton;
 	TestMove pj;
 
@@ -72,31 +71,34 @@ public class WorldMAPController extends Pane implements Initializable {
 		rectWorldCanvas.setHeight(model.getHeigthCanvas());
 		gc = rectWorldCanvas.getGraphicsContext2D();
 		int resto = 1;
-		for (int j = 0; j <= model.getHeigthCanvas(); j += model.getCell()) {
+		int cellX=0,cellY=0;
+		for (int j = 0; j <= world.length; j++) {
 			int cell = 0;
 			if (resto == 0)
 				resto = 1;
 			else
 				resto = 0;
-			for (int i = 0; i <= model.getWidthCanvas(); i += model.getCell()) {
+			for (int i = 0; i <= world[0].length; i++) {
 
-				if ((i / 50) % 2 == resto)
+				if (i  % 2 == resto)
 					gc.setFill(Color.BLACK);
 				else
 					gc.setFill(Color.RED);
 
-				gc.fillRect(i, j, model.getCell(), model.getCell());
+				gc.fillRect(cellX, cellY, model.getCell(), model.getCell());
 				String x = String.valueOf(cell);
 				gc.setFill(Color.WHITE);
-				gc.fillText(x, i, j);
+				gc.fillText(x, cellX, cellY);
 				cell++;
+				cellX=cellX+model.getCell();
 			}
+			cellY=cellY+model.getCell();
+			cellX=0;
 		}
-		paintWorld();
-		pj=new TestMove(collision,0,1);
+		
+		pj=new TestMove(world, model.getCell(), 900, new Image("/Image/characters/mage_f.png"), 0,0, 32, 39,Orientation.EAST);
 		view.getChildren().add(pj.getPjImage());
-		pj.getPjImage().setX(0);
-		pj.getPjImage().setY(50); 
+		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> pj.move(event));
 	}
 
@@ -115,31 +117,29 @@ public class WorldMAPController extends Pane implements Initializable {
 				case "T1":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree1.png"));
 					gc.drawImage(image, posX, posY);
-					collision[j][i] = false;
 
 					break;
 				case "T2":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree2.png"));
 					gc.drawImage(image, posX, posY);
-					collision[j][i] = false;
 					break;
 				case "T3":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree3.png"));
 					gc.drawImage(image, posX, posY);
-					collision[j][i] = false;
-					break;
-				case ".":
-					collision[j][i] = true;
-					break;
-					
-				case "m1":
+					break;					
+				case "M":
 					skeleton=new AnimationMobs("./Image/npc/maga_Evil.png");
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY-50); 
 //					skeleton.staticAni(1, 4, 56, 0, 56, 84);
-					collision[j][i] = false;
 					break;
+				case "P":
+					
+					pj.getPjImage().setX(i*model.getCell());
+					pj.getPjImage().setY(j*model.getCell());
+					System.out.println(pj.getPjImage().getX());
+					System.out.println(pj.getPjImage().getY());
 				default:
 					break;
 

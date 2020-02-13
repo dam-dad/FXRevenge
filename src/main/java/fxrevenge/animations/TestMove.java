@@ -2,7 +2,7 @@ package fxrevenge.animations;
 
 import dad.fxrevenge.combat.App2;
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.screen.VDialog;
+import fxrevenge.world.Orientation;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -21,22 +21,46 @@ import javafx.util.Duration;
 
 public class TestMove {
 
-	private static ImageView pjImage;
+	private ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
-	private boolean[][] map;
-	private int myPosX;
-	private int myPosY;
-	private int movePX=50;
-	private int aniS=900;
-	
-	public TestMove(boolean[][] habitability, int colX, int rowY) {
-		pjImage = new ImageView(new Image("./Image/characters/mage_f.png"));
-		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
-		map = habitability;
-		myPosX = colX;
-		myPosY = rowY;
+	private String[][] map;
+	private int posX;
+	private int posY;
+	private int movePX = 50;
+	private int animationTime = 900;
+	private Orientation orientation = Orientation.SHOUT;
 
+	/**
+	 * Constructs an <code>TestMove</code> with the specified detail message.
+	 *
+	 * @param habitability  collision map based on Strings. "." = Passable; 
+	 * "M" = Enemy; 
+	 * "I" = Interactible Object;
+	 * @param movePX        displacement PIXEL;
+	 * @param animationTime animation duration in seconds
+	 * @param image         sprite sheet
+	 * @param minX          The x coordinate of the upper-left corner of the
+	 *                      {@code Rectangle2D}
+	 * @param minY          The y coordinate of the upper-left corner of the
+	 *                      {@code Rectangle2D}
+	 * @param width         The width of the {@code Rectangle2D}
+	 * @param height        The height of the {@code Rectangle2D}
+	 * @param orientation   character visual orientation point
+	 */
+
+	public TestMove(String[][] world, int movePX, int animationTime, Image image, int minX,
+			int minY, int width, int heigth, Orientation orientation) {
+
+		this.map =world;
+		this.movePX = movePX;
+		this.animationTime = animationTime;
+		this.pjImage = new ImageView(image);
+		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
+		this.orientation = orientation;
+		CheckPlayer();
+		System.out.println("Inicio");
+		CheckArray();
 	}
 
 	public void move(KeyEvent event) {
@@ -46,23 +70,25 @@ public class TestMove {
 			if (pjAni != null && pjAni.getStatus() == Status.RUNNING)
 				pjAni.stop();
 			switch (event.getCode()) {
-
+			
 			case W:
-				if ((myPosY-1) >= 0 && map[myPosY - 1][myPosX] == true) {
+				orientation = orientation.NORTH;
+				pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
+				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
+					System.out.println(event.getCode());
+					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
 					offset_x = 0;
-					offset_y = 36;
+					offset_y = 0;
 					width = 32;
 					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(aniS), colsX, counts, offset_x, offset_y,
-							width, height);
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
+							offset_y, width, height);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
-					transicion.setDelay(Duration.ZERO);
-					transicion.setDuration(Duration.seconds(1));
 					double nextPos = pjImage.getY() - movePX;
 					transicion.setToY(-movePX);
 					transicion.setNode(pjImage);
@@ -72,14 +98,22 @@ public class TestMove {
 						pjImage.setTranslateY(0);
 						inMove = false;
 						pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
-						myPosY--;
+						map[posY - 1][posX] = "P";
+						map[posY][posX] = ".";
+						posY--;
+						
 					});
+					
 					transicion.play();
 				}
 //			pjImage.setX(pjImage.getX()pjImage.getX());
 				break;
 			case D:
-				if ((myPosX + 1) < map[0].length && map[myPosY][myPosX + 1] == true) {
+				orientation = orientation.EAST;
+				pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
+				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
+					System.out.println(event.getCode());
+					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -87,13 +121,11 @@ public class TestMove {
 					offset_y = 36;
 					width = 32;
 					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(aniS), colsX, counts, offset_x, offset_y,
-							width, height);
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
+							offset_y, width, height);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
-					transicion.setDelay(Duration.ZERO);
-					transicion.setDuration(Duration.seconds(1));
 					double nextPos2 = pjImage.getX() + movePX;
 					transicion.setToX(movePX);
 					transicion.setNode(pjImage);
@@ -101,31 +133,35 @@ public class TestMove {
 					transicion.setOnFinished(e -> {
 						pjImage.setX(nextPos2);
 						pjImage.setTranslateX(0);
-						myPosX++;
+						map[posY][posX + 1] ="P";
+						map[posY][posX] = ".";
+						posX++;
 						inMove = false;
 						pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
 					});
-					
 					transicion.play();
-					
+
 				}
 				break;
 			case A:
-				if ((myPosX - 1) >= 0 && map[myPosY][myPosX - 1] == true) {
+				orientation = orientation.WEST;
+				pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
+				if ((posX - 1) >= 0 && map[posY][posX - 1] == ".") {
+					System.out.println(event.getCode());
+					
+					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
 					offset_x = 0;
 					offset_y = 108;
 					width = 32;
-					height =39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(aniS), colsX, counts, offset_x, offset_y,
-							width, height);
+					height = 39;
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
+							offset_y, width, height);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
-					transicion.setDelay(Duration.ZERO);
-					transicion.setDuration(Duration.seconds(1));
 					double nextPos3 = pjImage.getX() - movePX;
 					transicion.setToX(-movePX);
 					transicion.setNode(pjImage);
@@ -133,30 +169,34 @@ public class TestMove {
 					transicion.setOnFinished(e -> {
 						pjImage.setX(nextPos3);
 						pjImage.setTranslateX(0);
-						myPosX--;
+						map[posY][posX-1] = "P";
+						map[posY][posX] = ".";
+						posX--;
 						inMove = false;
-						pjImage.setViewport(new Rectangle2D(0, 108, 32,39 ));
+						pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 					});
 					transicion.play();
-					
+
 				}
 				break;
 			case S:
-				if ((myPosY + 1) < map.length && map[myPosY + 1][myPosX] == true) {
-					inMove = true;
+				orientation = orientation.SHOUT;
+				pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
+				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
+					inMove = true;	
+					System.out.println(event.getCode());
+					CheckArray();
 					colsX = 3;
 					counts = 3;
 					offset_x = 0;
 					offset_y = 72;
 					width = 32;
 					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(aniS), colsX, counts, offset_x, offset_y,
-							width, height);
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
+							offset_y, width, height);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
-					transicion.setDelay(Duration.ZERO);
-					transicion.setDuration(Duration.seconds(1));
 					double nextPos4 = pjImage.getY() + movePX;
 					transicion.setToY(+movePX);
 					transicion.setNode(pjImage);
@@ -164,31 +204,78 @@ public class TestMove {
 					transicion.setOnFinished(e -> {
 						pjImage.setY(nextPos4);
 						pjImage.setTranslateY(0);
-						myPosY++;
+						map[posY + 1][posX] = "P";
+						map[posY][posX] = ".";
+						posY++;
 						inMove = false;
 						pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
 					});
 					transicion.play();
-					
-					break;
 				}
+				break;
+
 			case E:
-				System.out.println(event.getCode());
-
-				// Cambio de escena
-				SceneManager.changeScene(new App2());
-
+				inMove = true;
+				interaction();
+				System.out.println("----");
 				inMove = false;
-			break;
+				System.out.println(inMove);
+				break;
 			default:
-				
+
 				break;
 			}
 		}
-		
+
 	}
 
-	public static ImageView getPjImage() {
+	private void interaction() {
+		switch (orientation) {
+		case NORTH:
+			System.out.println(orientation + "1");
+			if ((posY - 1) >= 0 && map[posY - 1][posX] =="M")
+				SceneManager.changeScene(new App2());
+			break;
+		case EAST:
+			System.out.println(orientation + "2");
+			if ((posX + 1) < map[0].length && map[posY][posX + 1] == "M")
+				SceneManager.changeScene(new App2());
+			break;
+		case WEST:
+			System.out.println(orientation + " 3");
+			if ((posX - 1) >= 0 && map[posY][posX - 1] == "M")
+				SceneManager.changeScene(new App2());
+			break;
+		case SHOUT:
+			System.out.println(orientation + " 4");
+			if ((posY + 1) < map.length && map[posY + 1][posX] == "M")
+				SceneManager.changeScene(new App2());
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	private void CheckArray() {
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+				System.out.print(map[i][j]+"\t");
+			}
+			System.out.println();
+		}
+	}
+
+	private void CheckPlayer() {
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+				if (map[i][j].equals("P")) {
+				posX=j;
+				posY=i;}
+			}
+		}
+	}
+	public ImageView getPjImage() {
 		return pjImage;
 	}
 }
