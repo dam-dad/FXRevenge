@@ -59,7 +59,7 @@ public class DialogScene extends dad.fxrevenge.scene.Scene {
 		graphicsContext = canvas.getGraphicsContext2D();
 		
 		root = new Group();
-		scene = new Scene(root);
+		scene = new Scene(root, SceneManager.getSceneWidth(), SceneManager.getSceneHeight());
 		root.getChildren().add(canvas);
 		
 		dialog = new Dialog(scene, graphicsContext);
