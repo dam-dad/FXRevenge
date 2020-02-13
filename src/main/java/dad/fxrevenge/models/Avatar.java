@@ -26,7 +26,8 @@ public class Avatar extends Attributes {
 	private IntegerProperty money = new SimpleIntegerProperty();
 	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
 	private ClassType work;
-	private ListProperty<Item> inventory = new SimpleListProperty<Item>();
+	private ListProperty<Item> inventory = new SimpleListProperty<Item>(this, "inventory",
+			FXCollections.observableArrayList());
 	private ListProperty<Gear> equipped = new SimpleListProperty<Gear>(this, "equipped",
 			FXCollections.observableArrayList());
 	private ListProperty<Skill> skills = new SimpleListProperty<Skill>(this, "skills",
@@ -37,7 +38,7 @@ public class Avatar extends Attributes {
 
 	// constructor
 	public Avatar(Image appearance, ClassType work, List<Skill> skills, String name) {
-
+		this.setLevel(1);
 		this.setWork(work);
 		this.setCurrentExp(0);
 		this.setMoney(0);
@@ -47,7 +48,8 @@ public class Avatar extends Attributes {
 		this.setTotalLevelExp(150);
 		this.setAppearance(appearance);
 		this.setCritChance(0);
-		this.setSkills(FXCollections.observableArrayList(skills));
+		this.setSkills(FXCollections.observableArrayList(Skill.generateClassSkills(work)));
+		skillchecker();
 
 		Gear helm = new Gear("Casco de practicas");
 		helm.setPos(GearPosition.Helmet);
@@ -74,6 +76,9 @@ public class Avatar extends Attributes {
 			this.setMana(20);
 			this.setMagicDamage(9);
 			this.setMagicDef(7);
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
 
 		} else if (work.equals(ClassType.Hunter)) {
 
@@ -84,6 +89,10 @@ public class Avatar extends Attributes {
 			this.setMagicDamage(0);
 			this.setMagicDef(3);
 
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
+
 		} else if (work.equals(ClassType.Warlord)) {
 
 			this.setHealth(30);
@@ -92,7 +101,9 @@ public class Avatar extends Attributes {
 			this.setMana(10);
 			this.setMagicDamage(0);
 			this.setMagicDef(10);
-
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
 		}
 
 		this.setCurrentLife(this.getHealth());
@@ -101,6 +112,15 @@ public class Avatar extends Attributes {
 	}
 
 	// funciones
+	private void skillchecker() {
+		learnedSkills.clear();
+		for (int i = 0; i < skills.size(); i++) {
+			if (skills.get(i).getUnlockLevel() <= this.getLevel()) {
+				learnedSkills.add(skills.get(i));
+			}
+		}
+	}
+
 	public void addItemToInventory(Item item) {
 		Boolean added = false;
 		for (int i = 0; i < this.getInventory().size(); i++) {
@@ -155,30 +175,25 @@ public class Avatar extends Attributes {
 
 	public int atacar(Skill hability) {
 		int danyo = hability.getDamage();
-		this.setCurrentMana(this.getCurrentMana() - hability.getCost());
-
 		if (danyo > 0) {
 			if (hability.getDamageType()) {
 				danyo += (hability.getDamageMultiplier() * this.getPhysDamage());
 			} else {
 				danyo += (hability.getDamageMultiplier() * this.getMagicDamage());
 			}
-		} else {
-			if ((this.getCurrentLife() - danyo) > this.getHealth())
-				this.setCurrentLife(this.getHealth());
-			else
-				this.setCurrentLife(this.getCurrentLife() - danyo);
 		}
+
 		// calculo critico
-		int proc = ((int) Math.random() * 100);
+		int proc = (int)(Math.random() * 100);
 		if (proc <= this.getCritChance() + hability.getAddCritChance()) {
 			danyo *= 2;
 		}
+
 		return danyo;
 
 	}
 
-	public void levelUp() {
+	private void levelUp() {
 
 		this.setLevel(this.getLevel() + 1);
 		this.setTotalLevelExp((int) (getTotalLevelExp() * 1.25));
@@ -207,6 +222,7 @@ public class Avatar extends Attributes {
 			this.setHealth(this.getHealth() + (int) (Math.random() * 60 + 40));
 
 		}
+		skillchecker();
 	}
 
 	public boolean sumarexp(int exp) {

@@ -17,8 +17,6 @@ public class Item {
 		
 	}
 	
-	
-	
 	public Item(Image icon, String name, Integer quantity, Integer price, Effect effect) {
 		super();
 		this.icon = icon;
@@ -28,27 +26,55 @@ public class Item {
 		this.effect = effect;
 	}
 	
-	public Item generateHealPotion() {
+	public Item generatePotion(Effect efect) {
 		Item potion = new Item();
-		potion.setName("Pocion");
-		potion.setQuantity(1);
-		potion.setPrice(5);
-		potion.effect=Effect.HealRestore;
-		return potion;
-	}
-	public Item generateManaPotion() {
-		Item potion = new Item();
-		potion.setName("Elixir");
-		potion.setQuantity(1);
-		potion.setPrice(5);
-		potion.effect=Effect.ManaRestore;
+		
+		switch (efect) {
+		case MiniHealRestore:
+			potion.setName("Mini-Pocion");
+			potion.setQuantity(1);
+			potion.setPrice(5);
+			potion.effect=Effect.MiniHealRestore;
+			break;
+		case HealRestore:
+			potion.setName("Pocion");
+			potion.setQuantity(1);
+			potion.setPrice(10);
+			potion.effect=Effect.HealRestore;
+			break;
+		case ManaRestore:
+			potion.setName("Elixir");
+			potion.setQuantity(1);
+			potion.setPrice(10);
+			potion.effect=Effect.ManaRestore;
+			break;
+		case MaxiHealRestore:
+			potion.setName("MaxiPocion");
+			potion.setQuantity(1);
+			potion.setPrice(15);
+			potion.effect=Effect.MaxiHealRestore;
+			break;
+		case MaxiManaRestore:
+			potion.setName("Maxi-Elixir");
+			potion.setQuantity(1);
+			potion.setPrice(15);
+			potion.effect=Effect.MaxiManaRestore;
+			break;
+		case MiniManaRestore:
+			potion.setName("Mini-Elixir");
+			potion.setQuantity(1);
+			potion.setPrice(5);
+			potion.effect=Effect.MiniManaRestore;
+			break;
+		
+		}
 		return potion;
 	}
 	public String effectDescription(Item it) {
-		if (it.effect.equals(Effect.HealRestore)) {
-			return "Este objeto restaura tu salud al máximo"; 
+		if (it.effect.equals(Effect.HealRestore) || it.effect.equals(Effect.MaxiHealRestore) || it.effect.equals(Effect.MiniHealRestore) ) {
+			return "Este objeto restaura una parte de tu salud"; 
 		} else {
-			return "Este objeto restaura tu maná al máximo";
+			return "Este objeto restaura una parte de tu maná";
 		}
 	}
 

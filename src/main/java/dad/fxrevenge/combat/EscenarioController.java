@@ -212,7 +212,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 						case MiniHealRestore:
 							cura = (int) (pj.getHealth() * 0.25);
 							break;
-						case miniManaRestore:
+						case MiniManaRestore:
 							mana = (int) (pj.getMana() * 0.25);
 							break;
 						}
@@ -325,7 +325,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 			}
 		};
 
-		list.setItems(pj.getSkills());
+		list.setItems(pj.getLearnedSkills());
 		list.setOnMouseClicked(evento);
 		list.setMaxHeight(view.getHeight()/3.0);
 

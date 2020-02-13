@@ -40,7 +40,7 @@ public class Skill {
 
 
 	//solo hay skills de prueba, añadir mas y ver como hacerlo desde json
-	public List<Skill> generateClassSkills(ClassType job) {
+	public static List<Skill> generateClassSkills(ClassType job) {
 		ArrayList<Skill> habilidades = new ArrayList<Skill>();
 		//skill(nombre,costemana,nivel de desbloqueo,daño base de la habilidad, tipo de daño (true=fisico / false=magico),
 		//multiplicador de daño, porcentaje de critico extra)
