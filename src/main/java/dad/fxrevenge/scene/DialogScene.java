@@ -2,7 +2,7 @@ package dad.fxrevenge.scene;
 
 import java.util.HashSet;
 
-import dad.fxrevenge.dialog.character.Character;
+import dad.fxrevenge.dialog.Character;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -16,7 +16,7 @@ import javafx.scene.input.KeyEvent;
  * Clase (padre) que controla la pantalla de diálogos entre personajes
  **/
 
-public class DialogScene extends dad.fxrevenge.scene.Scene {
+public class DialogScene implements GameScene, Parameters {
 
 	// Nodo padre del canvas
 	private Group root;
@@ -53,13 +53,13 @@ public class DialogScene extends dad.fxrevenge.scene.Scene {
 
 	// Función que inicia la escena
 	@Override
-	public void load() {
+	public void start() {
 		
 		canvas = new Canvas();
 		graphicsContext = canvas.getGraphicsContext2D();
 		
 		root = new Group();
-		scene = new Scene(root, SceneManager.getSceneWidth(), SceneManager.getSceneHeight());
+		scene = new Scene(root, GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT);
 		root.getChildren().add(canvas);
 		
 		dialog = new Dialog(scene, graphicsContext);
@@ -80,7 +80,7 @@ public class DialogScene extends dad.fxrevenge.scene.Scene {
 
 	// Función que detiene la escena
 	@Override
-	public void unload() {
+	public void stop() {
 		animationTimer.stop();
 	}
 
@@ -101,7 +101,6 @@ public class DialogScene extends dad.fxrevenge.scene.Scene {
 	}
 
 	// Función que se ejecuta dentro del bucle principal
-	@Override
 	protected void update() {
 		
 		// Redimensionar canvas
@@ -145,22 +144,10 @@ public class DialogScene extends dad.fxrevenge.scene.Scene {
 	}
 
 	// GETTERS Y SETTERS
-
-	// Scene
+	
 	public Scene getScene() {
 		return scene;
 	}
-
-	// Stage
-	/*
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
-	*/
 
 	// Imagen de Fondo
 	public Image getBackground() {

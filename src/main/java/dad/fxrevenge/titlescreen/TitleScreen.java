@@ -1,5 +1,6 @@
-package dad.fxrevenge.screen;
+package dad.fxrevenge.titlescreen;
 
+import dad.fxrevenge.dialog.IntroductionDialog;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.image.Image;
@@ -15,7 +16,7 @@ public class TitleScreen extends DialogScene {
 
 	// Función que se ejecuta dentro del bucle principal
 	@Override
-	protected void update() {
+	public void update() {
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());
 		canvas.setHeight(scene.getHeight());

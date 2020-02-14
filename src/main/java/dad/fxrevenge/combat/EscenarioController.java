@@ -1,23 +1,23 @@
 package dad.fxrevenge.combat;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
+import dad.fxrevenge.scene.GameScene;
+import dad.fxrevenge.scene.Parameters;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -38,17 +38,17 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
-public class EscenarioController extends BorderPane implements Initializable {
+public class EscenarioController extends BorderPane implements GameScene, Parameters {
 
 	// model
 	private Avatar pj;
 	private Enemy enemy;
 
-//	private Stage stage = view.getScene().getWindow();
+	@SuppressWarnings("unused")
+	private Scene scene; // Scene necesaria para SceneManager
 
 	// Imagen de fondo
 	private Image backgroundImage;
@@ -229,7 +229,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 						} else
 							pj.setCurrentMana(mana);
-						
+
 						pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
 
 						if (cura != -1) {
@@ -256,8 +256,8 @@ public class EscenarioController extends BorderPane implements Initializable {
 		};
 		list.setItems(pj.getInventory());
 		list.setOnMouseClicked(evento);
-		list.setMaxHeight(view.getHeight()/3.0);
-		
+		list.setMaxHeight(view.getHeight() / 3.0);
+
 		popup.getContent().add(list);
 		popup.setAutoHide(true);
 
@@ -327,7 +327,7 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 		list.setItems(pj.getLearnedSkills());
 		list.setOnMouseClicked(evento);
-		list.setMaxHeight(view.getHeight()/3.0);
+		list.setMaxHeight(view.getHeight() / 3.0);
 
 		popup.getContent().add(list);
 		popup.setAutoHide(true);
@@ -345,7 +345,9 @@ public class EscenarioController extends BorderPane implements Initializable {
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void start() {
+
+		scene = new Scene(view, GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT); // Crea la escena con la resolución especificada en la interfaz Parameters
 
 		setBackground();
 
@@ -423,6 +425,12 @@ public class EscenarioController extends BorderPane implements Initializable {
 
 	public BorderPane getView() {
 		return view;
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

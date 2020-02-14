@@ -1,9 +1,9 @@
-package fxrevenge.world;
+package dad.fxrevenge.world;
 
 public class MAIN {
 
 	public static void main(String[] args) {
-	  StrartAPP.main(args);
+	  App.main(args);
 	}
 
 }

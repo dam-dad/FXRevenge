@@ -1,22 +1,16 @@
-package fxrevenge.animations;
+package dad.fxrevenge.animations;
 
-import dad.fxrevenge.combat.App2;
+import dad.fxrevenge.dialog.VDialog;
 import dad.fxrevenge.scene.SceneManager;
-import fxrevenge.world.Orientation;
+import dad.fxrevenge.world.Orientation;
 import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
-import javafx.animation.Animation.Status;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class TestMove {
@@ -29,14 +23,13 @@ public class TestMove {
 	private int posY;
 	private int movePX = 50;
 	private int animationTime = 900;
-	private Orientation orientation = Orientation.SHOUT;
+	private Orientation orientation = Orientation.SOUTH;
 
 	/**
 	 * Constructs an <code>TestMove</code> with the specified detail message.
 	 *
-	 * @param habitability  collision map based on Strings. "." = Passable; 
-	 * "M" = Enemy; 
-	 * "I" = Interactible Object;
+	 * @param habitability  collision map based on Strings. "." = Passable; "M" =
+	 *                      Enemy; "I" = Interactible Object;
 	 * @param movePX        displacement PIXEL;
 	 * @param animationTime animation duration in seconds
 	 * @param image         sprite sheet
@@ -49,10 +42,10 @@ public class TestMove {
 	 * @param orientation   character visual orientation point
 	 */
 
-	public TestMove(String[][] world, int movePX, int animationTime, Image image, int minX,
-			int minY, int width, int heigth, Orientation orientation) {
+	public TestMove(String[][] world, int movePX, int animationTime, Image image, int minX, int minY, int width,
+			int heigth, Orientation orientation) {
 
-		this.map =world;
+		this.map = world;
 		this.movePX = movePX;
 		this.animationTime = animationTime;
 		this.pjImage = new ImageView(image);
@@ -70,9 +63,9 @@ public class TestMove {
 			if (pjAni != null && pjAni.getStatus() == Status.RUNNING)
 				pjAni.stop();
 			switch (event.getCode()) {
-			
+
 			case W:
-				orientation = orientation.NORTH;
+				orientation = Orientation.NORTH;
 				pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
 					System.out.println(event.getCode());
@@ -101,15 +94,15 @@ public class TestMove {
 						map[posY - 1][posX] = "P";
 						map[posY][posX] = ".";
 						posY--;
-						
+
 					});
-					
+
 					transicion.play();
 				}
 //			pjImage.setX(pjImage.getX()pjImage.getX());
 				break;
 			case D:
-				orientation = orientation.EAST;
+				orientation = Orientation.EAST;
 				pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
 					System.out.println(event.getCode());
@@ -133,7 +126,7 @@ public class TestMove {
 					transicion.setOnFinished(e -> {
 						pjImage.setX(nextPos2);
 						pjImage.setTranslateX(0);
-						map[posY][posX + 1] ="P";
+						map[posY][posX + 1] = "P";
 						map[posY][posX] = ".";
 						posX++;
 						inMove = false;
@@ -144,11 +137,11 @@ public class TestMove {
 				}
 				break;
 			case A:
-				orientation = orientation.WEST;
+				orientation = Orientation.WEST;
 				pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == ".") {
 					System.out.println(event.getCode());
-					
+
 					CheckArray();
 					inMove = true;
 					colsX = 3;
@@ -169,7 +162,7 @@ public class TestMove {
 					transicion.setOnFinished(e -> {
 						pjImage.setX(nextPos3);
 						pjImage.setTranslateX(0);
-						map[posY][posX-1] = "P";
+						map[posY][posX - 1] = "P";
 						map[posY][posX] = ".";
 						posX--;
 						inMove = false;
@@ -180,10 +173,10 @@ public class TestMove {
 				}
 				break;
 			case S:
-				orientation = orientation.SHOUT;
+				orientation = Orientation.SOUTH;
 				pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
-					inMove = true;	
+					inMove = true;
 					System.out.println(event.getCode());
 					CheckArray();
 					colsX = 3;
@@ -230,37 +223,43 @@ public class TestMove {
 	}
 
 	private void interaction() {
+
+		boolean interact = false;
+
 		switch (orientation) {
 		case NORTH:
 			System.out.println(orientation + "1");
-			if ((posY - 1) >= 0 && map[posY - 1][posX] =="M")
-				SceneManager.changeScene(new App2());
+			if ((posY - 1) >= 0 && map[posY - 1][posX] == "M")
+				interact = true;
 			break;
 		case EAST:
 			System.out.println(orientation + "2");
 			if ((posX + 1) < map[0].length && map[posY][posX + 1] == "M")
-				SceneManager.changeScene(new App2());
+				interact = true;
 			break;
 		case WEST:
 			System.out.println(orientation + " 3");
 			if ((posX - 1) >= 0 && map[posY][posX - 1] == "M")
-				SceneManager.changeScene(new App2());
+				interact = true;
 			break;
-		case SHOUT:
+		case SOUTH:
 			System.out.println(orientation + " 4");
 			if ((posY + 1) < map.length && map[posY + 1][posX] == "M")
-				SceneManager.changeScene(new App2());
+				interact = true;
 			break;
 		default:
 			break;
 		}
+
+		if (interact)
+			SceneManager.changeScene(new VDialog());
 
 	}
 
 	private void CheckArray() {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {
-				System.out.print(map[i][j]+"\t");
+				System.out.print(map[i][j] + "\t");
 			}
 			System.out.println();
 		}
@@ -270,11 +269,13 @@ public class TestMove {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {
 				if (map[i][j].equals("P")) {
-				posX=j;
-				posY=i;}
+					posX = j;
+					posY = i;
+				}
 			}
 		}
 	}
+
 	public ImageView getPjImage() {
 		return pjImage;
 	}

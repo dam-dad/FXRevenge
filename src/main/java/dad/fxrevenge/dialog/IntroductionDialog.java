@@ -1,10 +1,8 @@
-package dad.fxrevenge.screen;
+package dad.fxrevenge.dialog;
 
-import dad.fxrevenge.dialog.character.Character;
-import dad.fxrevenge.dialog.character.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import fxrevenge.world.StrartAPP2;
+import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
 public class IntroductionDialog extends DialogScene {
@@ -18,13 +16,13 @@ public class IntroductionDialog extends DialogScene {
 	private Character javaGoddess = CharacterList.getJavaGoddess();
 
 	@Override
-	public void load() {
+	public void start() {
 		setGraphics(dialogBackground, mainCharacter, javaGoddess);
-		super.load();
+		super.start();
 	}
 	
 	@Override
-	protected void update() {
+	public void update() {
 		super.update();
 
 		// Diálogos
@@ -68,7 +66,7 @@ public class IntroductionDialog extends DialogScene {
 			
 		default:
 			// Cambio de escena
-			SceneManager.changeScene(new StrartAPP2());
+			SceneManager.changeScene(new WorldMapController());
 			break;
 		}
 	}

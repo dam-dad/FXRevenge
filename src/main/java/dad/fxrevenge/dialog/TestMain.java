@@ -1,4 +1,4 @@
-package dad.fxrevenge.test;
+package dad.fxrevenge.dialog;
 
 public class TestMain {
 

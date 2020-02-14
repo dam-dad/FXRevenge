@@ -1,7 +1,6 @@
-package dad.fxrevenge.app;
+package dad.fxrevenge.world;
 
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.titlescreen.TitleScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,9 +13,9 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setMainStage(primaryStage);
-		SceneManager.changeScene(new TitleScreen());
+		SceneManager.changeScene(new WorldMapController());
 
-		primaryStage.setTitle("FX Revenge");
+		primaryStage.setTitle("WORLD MAP TEST");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}

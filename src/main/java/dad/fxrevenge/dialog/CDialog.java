@@ -1,7 +1,5 @@
-package dad.fxrevenge.screen;
+package dad.fxrevenge.dialog;
 
-import dad.fxrevenge.dialog.character.Character;
-import dad.fxrevenge.dialog.character.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
 import javafx.scene.image.Image;
 
@@ -17,13 +15,13 @@ public class CDialog extends DialogScene {
 	private Character c = CharacterList.getC();
 
 	@Override
-	public void load() {
+	public void start() {
 		setGraphics(dialogBackground, player, c);
-		super.load();
+		super.start();
 	}
 	
 	@Override
-	protected void update() {
+	public void update() {
 		super.update();
 
 		// Diálogos

@@ -1,14 +1,11 @@
-package dad.fxrevenge.test;
+package dad.fxrevenge.dialog;
 
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.screen.CDialog;
-import dad.fxrevenge.screen.FXDialog;
-import dad.fxrevenge.screen.MDialog;
-import dad.fxrevenge.screen.TitleScreen;
-import dad.fxrevenge.screen.VDialog;
+import dad.fxrevenge.titlescreen.TitleScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class TestApp extends Application {
 	
 	private Stage mainStage;

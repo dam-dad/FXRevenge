@@ -1,4 +1,4 @@
-package fxrevenge.animations;
+package dad.fxrevenge.animations;
 
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
