@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 
-//falta setear las apariencias
+
 //añadir generacion de item o gear para posible dropeo
 public class Enemy extends Attributes {
 	private Race race;
@@ -15,7 +15,11 @@ public class Enemy extends Attributes {
 	private Gear gearDrop;
 	private Item itemdrop;
 	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
-
+	/**
+	 * Constructor de los personajes enemigos donde se especifican varios valores
+	 * @param raza Especifica la raza a la que pertenecera el enemigo creado
+	 * @param nivel Especifica el nivel que tendra el enemigo generado
+	 */
 	public Enemy(Race raza, int nivel) {
 		this.race = raza;
 		switch (race) {
@@ -96,7 +100,10 @@ public class Enemy extends Attributes {
 		}
 		this.setCurrentLife(this.getHealth());
 	}
-
+	/**
+	 * Funcion de ataque de los personajes enemigos
+	 * @return El numero de daño que hara el ataque antes de aplicar los modificadores defensivos del objetivo del ataque
+	 */
 	public int atacar() {
 
 		int danyo = this.getPhysDamage();
@@ -108,7 +115,12 @@ public class Enemy extends Attributes {
 		}
 
 	}
-
+	/**
+	 * Funcion encargada de calcular el daño que recibira el enemigo despues de aplicar sus parametros defensivos
+	 * @param danyo Daño base del ataque que recibe
+	 * @param fisico Tipo de daño, si es fisico(true) o magico(false)
+	 * @return El daño que recibira despues de evaluar los parametros defensivos y aplicarlos
+	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 
 		if (this.race.equals(Race.Boss))
@@ -131,7 +143,7 @@ public class Enemy extends Attributes {
 
 		return danyo;
 	}
-
+	// getters - setters
 	public Race getRace() {
 		return race;
 	}

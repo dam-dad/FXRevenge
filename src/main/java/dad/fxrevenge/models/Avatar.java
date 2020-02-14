@@ -36,7 +36,14 @@ public class Avatar extends Attributes {
 			FXCollections.observableArrayList());
 	private IntegerProperty currentMana = new SimpleIntegerProperty();
 
-	// constructor
+	
+	/**
+	 *  Constructor del personaje protagonista
+	 * @param appearance Imagen para el aspecto del personaje principal
+	 * @param work Clase del personaje
+	 * @param skills Lista de habilidades que podra aprender el personaje
+	 * @param name Nombre que tendra el personaje
+	 */
 	public Avatar(Image appearance, ClassType work, List<Skill> skills, String name) {
 		this.setLevel(1);
 		this.setWork(work);
@@ -111,7 +118,11 @@ public class Avatar extends Attributes {
 
 	}
 
-	// funciones
+	
+	/**
+	 * Funcion que comprueba si al subir de nivel el personaje puede aprender nuevas habilidades
+	 * y en caso positivo, las aprende
+	 */
 	private void skillchecker() {
 		learnedSkills.clear();
 		for (int i = 0; i < skills.size(); i++) {
@@ -120,7 +131,10 @@ public class Avatar extends Attributes {
 			}
 		}
 	}
-
+	/**
+	 * Funcion utilizada para añadir un objeto al inventario
+	 * @param item Objeto que se añadira al inventario
+	 */
 	public void addItemToInventory(Item item) {
 		Boolean added = false;
 		for (int i = 0; i < this.getInventory().size(); i++) {
@@ -133,7 +147,10 @@ public class Avatar extends Attributes {
 			this.getInventory().add(item);
 		}
 	}
-
+	/**
+	 * Utilizar un objeto que se encuentre en el inventario
+	 * @param item El objeto que se utilizara
+	 */
 	public void useItem(Item item) {
 		if (item.getEffect().equals(Effect.HealRestore)) {
 			this.setCurrentLife(this.getHealth());
@@ -142,6 +159,10 @@ public class Avatar extends Attributes {
 		}
 	}
 
+	/**
+	 * Funcion de ataque del personaje protagonista, donde se calcula el daño que realizara con un ataque basico
+	 * @return Numero de daño que haria el personaje al enemigo antes de aplicar modificadores de defensa
+	 */
 	public int atacar() {
 		int danyo = this.getPhysDamage();
 
@@ -153,7 +174,13 @@ public class Avatar extends Attributes {
 
 		return danyo;
 	}
-
+	
+	/**
+	 * Funcion que calcula el daño que recibira el personaje en funcion de un ataque realizado por un enemigo
+	 * @param danyo Numero de daño que realiza el enemigo
+	 * @param fisico Tipo de daño de ataque del enemigo, "true" es fisico y "false" es magico
+	 * @return El daño que recibira el personaje una vez aplicados los parametros defensivos del personaje 
+	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 		if (fisico) {
 			danyo = (int) ((danyo * (1 - (this.getPhysDef() / (100.0 + this.getPhysDef())))));
@@ -172,7 +199,12 @@ public class Avatar extends Attributes {
 
 		return danyo;
 	}
-
+	/** 
+	 * Funcion de ataque sobrecargada para cuando el personaje utilice una habilidad para atacar, 
+	 * calculara el daño realizado por la habilidad
+	 * @param hability La habilidad de ataque que se utilizara
+	 * @return Numero de daño que hace el ataque con habilidad antes de aplicar modificadores de defensa enemigos
+	 */
 	public int atacar(Skill hability) {
 		int danyo = hability.getDamage();
 		if (danyo > 0) {
@@ -183,7 +215,7 @@ public class Avatar extends Attributes {
 			}
 		}
 
-		// calculo critico
+		// Calcula si se producira un impacto critico o no
 		int proc = (int)(Math.random() * 100);
 		if (proc <= this.getCritChance() + hability.getAddCritChance()) {
 			danyo *= 2;
@@ -192,7 +224,9 @@ public class Avatar extends Attributes {
 		return danyo;
 
 	}
-
+	/**
+	 * Funcion para subir de nivel, llamada en caso necesario desde la funcion {@link #sumarexp(int), sumarexp}  
+	 */
 	private void levelUp() {
 
 		this.setLevel(this.getLevel() + 1);
@@ -224,7 +258,11 @@ public class Avatar extends Attributes {
 		}
 		skillchecker();
 	}
-
+	/**
+	 * Suma una determinada cantidad de experiencia a la experiencia actual del personaje
+	 * @param exp La cantidad de experiencia a sumar
+	 * @return Booleano que indica si ha subido de nivel o no
+	 */
 	public boolean sumarexp(int exp) {
 		boolean lvlup = this.getCurrentExp() + exp > this.getTotalLevelExp();
 		if (lvlup) {
@@ -233,7 +271,11 @@ public class Avatar extends Attributes {
 		return lvlup;
 	}
 
-	// equipar items
+	/**
+	 * Funcion permite hacer una comparación previa entre una pieza de armadura recien adquirida y la ya equipada 
+	 * dejando que el jugador elija si quiere equipar la nueva pieza o mantener la antigua
+	 * @param equipment El nuevo objeto que se pretender comparar y en ultima instancia, equipar o no
+	 */
 	public void equipar(Gear equipment) {
 		Gear current = new Gear("test");
 		for (int i = 0; i < this.getEquipped().size(); i++) {
@@ -254,21 +296,30 @@ public class Avatar extends Attributes {
 		}
 
 	}
-
+	/** 
+	 * Funcion encargada de equipar una nueva pieza de armadura y eliminar la antigua
+	 * @param newequip Nueva pieza de armadura a equipar
+	 * @param vender Indica si la pieza de equipo se equipara(false) o se vendera(true)
+	 */
 	private void cambiaequipo(Gear newequip, boolean vender) {
 		if (!vender) {
 			for (int i = 0; i < this.getEquipped().size(); i++) {
 				if (this.getEquipped().get(i).getPos().equals(newequip.getPos())) {
 					Gear viejo = this.getEquipped().get(i);
 					this.getEquipped().add(newequip);
-					// actualizarstarts
+					
 					actualizarStats(viejo, newequip);
 					this.getEquipped().remove(i);
 				}
 			}
 		}
 	}
-
+	/**
+	 * Funcion encargada de actualizar las estadísticas del personaje tras un cambio de equipamiento, 
+	 * restando las estadisticas de la equipacion antigua y sumando las nuevas
+	 * @param oldGear Pieza de armadura que sera desequipada y por tanto se perderan sus estadisticas
+	 * @param newGear Pieza de armadura que sera equipada y por tanto sus estadisticas se añadiran al personaje 
+	 */
 	private void actualizarStats(Gear oldGear, Gear newGear) {
 		this.setHealth(this.getHealth() - oldGear.getHealth() + newGear.getHealth());
 		this.setMana(this.getMana() - oldGear.getMana() + newGear.getMana());

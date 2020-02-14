@@ -12,11 +12,19 @@ public class Item {
 	private IntegerProperty quantity = new SimpleIntegerProperty();
 	private IntegerProperty price = new SimpleIntegerProperty();
 	private Effect effect;
-	
+	/**
+	 * Constructor base
+	 */
 	public Item() {
 		
 	}
-	
+	/**
+	 * Constructor sobrecargado con una serie de parametros
+	 * @param name Nombre que tendra el objeto
+	 * @param quantity Cantidad de usos del objeto
+	 * @param price Precio en tienda del objeto
+	 * @param effect Efecto que tendra el objeto al usarlo
+	 */
 	public Item(Image icon, String name, Integer quantity, Integer price, Effect effect) {
 		super();
 		this.icon = icon;
@@ -25,7 +33,11 @@ public class Item {
 		this.setPrice(price);
 		this.effect = effect;
 	}
-	
+	/**
+	 * Genera una unidad de un determinado objeto con un tipo de efecto
+	 * @param efect El efecto que queremos que tenga el objeto generado
+	 * @return El objeto con el efecto deseado
+	 */
 	public Item generatePotion(Effect efect) {
 		Item potion = new Item();
 		
@@ -70,6 +82,12 @@ public class Item {
 		}
 		return potion;
 	}
+	/**
+	 * Funcion que devuelve un String explicativo del efecto del objeto que se le da
+	 * @param it El objeto del que queremos obtener la descripcion
+	 * @return String explicativo del efecto del objeto
+	 */
+	
 	public String effectDescription(Item it) {
 		if (it.effect.equals(Effect.HealRestore) || it.effect.equals(Effect.MaxiHealRestore) || it.effect.equals(Effect.MiniHealRestore) ) {
 			return "Este objeto restaura una parte de tu salud"; 
@@ -78,7 +96,7 @@ public class Item {
 		}
 	}
 
-
+	//setters - getters
 	public Effect getEffect() {
 		return effect;
 	}
