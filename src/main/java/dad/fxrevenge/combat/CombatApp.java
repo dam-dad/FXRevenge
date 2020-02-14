@@ -13,7 +13,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class App extends Application {
+/**
+ * Clase que lanzará una prueba de CombatController para su testeo
+ * @author Adan
+ *
+ */
+public class CombatApp extends Application {
 
 	// Imagen de fondo del combate
 //	private Image backgroundImage = new Image("/image/background/c.png");
@@ -21,7 +26,7 @@ public class App extends Application {
 //	private Image backgroundImage = new Image("/image/background/m.png");
 //	private Image backgroundImage = new Image("/image/background/v.png");
 
-	private EscenarioController controller;
+	private CombatController controller;
 	private Avatar pj = new Avatar(new Image(getClass().getResource("/images/lightstream.png").toString()),
 			ClassType.Warlord, Skill.generateClassSkills(ClassType.Warlord), "Rayo");
 	private Item item1 = new Item(), item2 = new Item(), item3 = new Item();
@@ -41,7 +46,7 @@ public class App extends Application {
 		Enemy bichito = new Enemy(Race.Jelly, 1);
 		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
 
-		controller = new EscenarioController(pj, bichito, backgroundImage);
+		controller = new CombatController(pj, bichito, backgroundImage);
 
 		SceneManager.setMainStage(primaryStage);
 		SceneManager.changeScene(controller); // SceneManager coge la Scene del controller directamente y la inicia
@@ -51,7 +56,10 @@ public class App extends Application {
 		primaryStage.show();
 
 	}
-
+	/**
+	 * Ejecutamos para que la app aparezca y con ello el combate
+	 * @param args parametros necesario para el lanzamiento de la app
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
