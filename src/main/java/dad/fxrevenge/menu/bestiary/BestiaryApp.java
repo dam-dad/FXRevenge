@@ -4,8 +4,6 @@ import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -27,7 +25,6 @@ public class BestiaryApp extends Application {
 		
 		SceneManager.setMainStage(primaryStage);
 		SceneManager.changeScene(controller);
-		
 		
 		primaryStage.setTitle("Bestiary TEST");
 		primaryStage.setResizable(false);

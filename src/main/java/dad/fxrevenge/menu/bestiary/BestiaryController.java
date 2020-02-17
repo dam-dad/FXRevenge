@@ -1,11 +1,8 @@
 package dad.fxrevenge.menu.bestiary;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import dad.fxrevenge.models.Enemy;
-import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.scene.GameScene;
 import javafx.beans.property.SimpleListProperty;
@@ -14,11 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
@@ -36,6 +31,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 	private SimpleListProperty<Enemy> listaBichos = new SimpleListProperty<Enemy>(this, "listaBichos",
 			FXCollections.observableArrayList());
 	
+	@SuppressWarnings("unused")
 	private Scene scene;
 
 	private Enemy enemy;
