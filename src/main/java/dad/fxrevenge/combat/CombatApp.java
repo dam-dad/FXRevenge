@@ -49,7 +49,6 @@ public class CombatApp extends Application {
 		pj.setInventory(items);
 
 		Enemy bichito = new Enemy(Race.Jelly, 1);
-		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
 
 		controller = new CombatController(pj, bichito, backgroundImage);
 
