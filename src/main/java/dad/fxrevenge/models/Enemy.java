@@ -40,7 +40,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(8 * nivel);
 			this.setMagicDef(9 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_firebat.png").toString()));
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_demon.png").toString()));
 			this.setDescription("A estos monstruos les gusta juntarse y danzar bajo el cielo nocturno.");
 
 			this.setExp(35);
@@ -55,7 +55,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(3 * nivel);
 			this.setMagicDef(4 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_slime.png").toString()));
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_jelly.png").toString()));
 			this.setDescription("Monstruos comunes que se encuentran por todos lados. ");
 
 			this.setExp(5);
@@ -86,12 +86,14 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(5 * nivel);
 			this.setMagicDef(8 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_skeletonwarrior.png").toString()));
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_skeleton.png").toString()));
 			this.setDescription(
 					"Difuntos soldados que patrullan esperando pillarte.");
 
 			this.setExp(25);
 			this.setMoney(1);
+			break;
+			
 		case Zombie:
 
 //			this.setName("Me caigo a trozos");
@@ -107,6 +109,7 @@ public class Enemy extends Attributes {
 
 			this.setExp(5);
 			this.setMoney(15);
+			break;
 
 		default: // creacion de bosses
 

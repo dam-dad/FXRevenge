@@ -123,11 +123,6 @@ public class BestiaryController extends BorderPane implements GameScene {
 		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
 		level.setValueFactory(valueFactory);
 
-		for (Race r : Race.values()) {
-			if (!r.equals(Race.Boss))
-				listaBichos.add(new Enemy(r, 1));
-		}
-
 		// seteos de la informacion
 
 		razaLabel.setText(enemy.getRace().toString());
@@ -140,9 +135,14 @@ public class BestiaryController extends BorderPane implements GameScene {
 		descripiconArea.setText(enemy.getDescription());
 	}
 
-	public BestiaryController(Enemy bichito) throws IOException {
+	public BestiaryController() throws IOException {
 		super();
-		this.enemy = bichito;
+		
+		for (Race r : Race.values()) {
+			if (!r.equals(Race.Boss))
+				listaBichos.add(new Enemy(r, 1));
+		}
+		this.enemy = listaBichos.get(0);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BestiarioView.fxml"));
 		loader.setController(this);

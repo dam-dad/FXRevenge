@@ -1,7 +1,5 @@
 package dad.fxrevenge.menu.bestiary;
 
-import dad.fxrevenge.models.Enemy;
-import dad.fxrevenge.models.Race;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,12 +14,10 @@ public class BestiaryApp extends Application {
 
 	private BestiaryController controller;
 	
-	private Enemy bichito = new Enemy(Race.Orc, 1);
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		controller = new BestiaryController(bichito);
+		controller = new BestiaryController();
 		
 		SceneManager.setMainStage(primaryStage);
 		SceneManager.changeScene(controller);
