@@ -70,6 +70,8 @@ public class Enemy extends Attributes {
 			this.setPhysDef(8 * nivel);
 			this.setMagicDamage(0);
 			this.setMagicDef(3 * nivel);
+
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_orc.png").toString()));
 			this.setDescription("Criaturas de enorme tamaño que pueden aplastar al enemigo con sus colosales mazas.");
 
 			this.setExp(15);
@@ -99,7 +101,9 @@ public class Enemy extends Attributes {
 			this.setPhysDef(5 * nivel);
 			this.setMagicDamage(0);
 			this.setMagicDef(5 * nivel);
-			this.setDescription("Cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
+
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString()));
+			this.setDescription("Se momificaron porque cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
 
 			this.setExp(5);
 			this.setMoney(15);
