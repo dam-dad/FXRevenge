@@ -15,11 +15,12 @@ public class Enemy extends Attributes {
 	private IntegerProperty moneyDrop = new SimpleIntegerProperty();
 	private Gear gearDrop;
 	private Item itemdrop;
-	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
+	private ObjectProperty<Image> combatSprite = new SimpleObjectProperty<Image>();
+	private ObjectProperty<Image> worldSprite = new SimpleObjectProperty<Image>();
 	private String description;
 	private IntegerProperty exp = new SimpleIntegerProperty();
 	private IntegerProperty money = new SimpleIntegerProperty();
-
+	
 	/**
 	 * Constructor de los personajes enemigos donde se especifican varios valores
 	 * 
@@ -40,7 +41,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(8 * nivel);
 			this.setMagicDef(9 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_demon.png").toString()));
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_demon.png").toString()));
 			this.setDescription("A estos monstruos les gusta juntarse y danzar bajo el cielo nocturno.");
 
 			this.setExp(35);
@@ -55,7 +56,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(3 * nivel);
 			this.setMagicDef(4 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_jelly.png").toString()));
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_jelly.png").toString()));
 			this.setDescription("Monstruos comunes que se encuentran por todos lados. ");
 
 			this.setExp(5);
@@ -71,7 +72,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(0);
 			this.setMagicDef(3 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_orc.png").toString()));
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_orc.png").toString()));
 			this.setDescription("Criaturas de enorme tamaño que pueden aplastar al enemigo con sus colosales mazas.");
 
 			this.setExp(15);
@@ -86,7 +87,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(5 * nivel);
 			this.setMagicDef(8 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_skeleton.png").toString()));
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_skeleton.png").toString()));
 			this.setDescription(
 					"Difuntos soldados que patrullan esperando pillarte.");
 
@@ -104,7 +105,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(0);
 			this.setMagicDef(5 * nivel);
 
-			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString()));
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString()));
 			this.setDescription("Se momificaron porque cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
 
 			this.setExp(5);
@@ -130,6 +131,30 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(getMoney() + nivel);
 		this.setExpDrop(this.getExp() * nivel);
 		this.setCurrentLife(this.getHealth());
+	}
+
+	public Gear getGearDrop() {
+		return gearDrop;
+	}
+
+	public void setGearDrop(Gear gearDrop) {
+		this.gearDrop = gearDrop;
+	}
+
+	public Item getItemdrop() {
+		return itemdrop;
+	}
+
+	public void setItemdrop(Item itemdrop) {
+		this.itemdrop = itemdrop;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -182,113 +207,101 @@ public class Enemy extends Attributes {
 		return danyo;
 	}
 
-	// getters - setters
-	public Race getRace() {
-		return race;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
-	}
-
-	public Gear getGearDrop() {
-		return gearDrop;
-	}
-
-	public void setGearDrop(Gear gearDrop) {
-		this.gearDrop = gearDrop;
-	}
-
-	public Item getItemdrop() {
-		return itemdrop;
-	}
-
-	public void setItemdrop(Item itemdrop) {
-		this.itemdrop = itemdrop;
-	}
-
-	public void setExpDrop(IntegerProperty expDrop) {
-		this.expDrop = expDrop;
-	}
-
-	public void setMoneyDrop(IntegerProperty moneyDrop) {
-		this.moneyDrop = moneyDrop;
-	}
-
 	public final IntegerProperty expDropProperty() {
 		return this.expDrop;
 	}
+	
 
 	public final int getExpDrop() {
 		return this.expDropProperty().get();
 	}
+	
 
 	public final void setExpDrop(final int expDrop) {
 		this.expDropProperty().set(expDrop);
 	}
+	
 
 	public final IntegerProperty moneyDropProperty() {
 		return this.moneyDrop;
 	}
+	
 
 	public final int getMoneyDrop() {
 		return this.moneyDropProperty().get();
 	}
+	
 
 	public final void setMoneyDrop(final int moneyDrop) {
 		this.moneyDropProperty().set(moneyDrop);
 	}
+	
 
-	public Enemy getEnemy() {
-		return this;
+	public final ObjectProperty<Image> combatSpriteProperty() {
+		return this.combatSprite;
 	}
+	
 
-	public final ObjectProperty<Image> appearanceProperty() {
-		return this.appearance;
+	public final Image getCombatSprite() {
+		return this.combatSpriteProperty().get();
 	}
+	
 
-	public final Image getAppearance() {
-		return this.appearanceProperty().get();
+	public final void setCombatSprite(final Image combatSprite) {
+		this.combatSpriteProperty().set(combatSprite);
 	}
+	
 
-	public final void setAppearance(final Image appearance) {
-		this.appearanceProperty().set(appearance);
+	public final ObjectProperty<Image> worldSpriteProperty() {
+		return this.worldSprite;
 	}
+	
 
-	public String getDescription() {
-		return description;
+	public final Image getWorldSprite() {
+		return this.worldSpriteProperty().get();
 	}
+	
 
-	public void setDescription(String description) {
-		this.description = description;
+	public final void setWorldSprite(final Image worldSprite) {
+		this.worldSpriteProperty().set(worldSprite);
 	}
-
-	public void setAppearance(ObjectProperty<Image> appearance) {
-		this.appearance = appearance;
-	}
+	
 
 	public final IntegerProperty expProperty() {
 		return this.exp;
 	}
+	
 
 	public final int getExp() {
 		return this.expProperty().get();
 	}
+	
 
 	public final void setExp(final int exp) {
 		this.expProperty().set(exp);
 	}
+	
 
 	public final IntegerProperty moneyProperty() {
 		return this.money;
 	}
+	
 
 	public final int getMoney() {
 		return this.moneyProperty().get();
 	}
+	
 
 	public final void setMoney(final int money) {
 		this.moneyProperty().set(money);
 	}
 
+	public Race getRace() {
+		// TODO Auto-generated method stub
+		return this.race;
+	}
+	
+	public void setRace(Race race) {
+		this.race=race;
+	}	
 }

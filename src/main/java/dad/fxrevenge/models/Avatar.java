@@ -21,7 +21,8 @@ public class Avatar extends Attributes {
 	private IntegerProperty currentExp = new SimpleIntegerProperty();
 	private IntegerProperty totalLevelExp = new SimpleIntegerProperty();
 	private IntegerProperty money = new SimpleIntegerProperty();
-	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
+	private ObjectProperty<Image> combatSprite = new SimpleObjectProperty<Image>();
+	private ObjectProperty<Image> worldSprite = new SimpleObjectProperty<Image>();
 	private ClassType work;
 	private ListProperty<Item> inventory = new SimpleListProperty<Item>(this, "inventory",
 			FXCollections.observableArrayList());
@@ -50,7 +51,7 @@ public class Avatar extends Attributes {
 		this.setLevel(1);
 		this.setLuck(0);
 		this.setTotalLevelExp(150);
-		this.setAppearance(appearance);
+		this.setCombatSprite(appearance);
 		this.setCritChance(0);
 		this.setSkills(FXCollections.observableArrayList(Skill.generateClassSkills(work)));
 		skillchecker();
@@ -429,16 +430,16 @@ public class Avatar extends Attributes {
 		return this;
 	}
 
-	public final ObjectProperty<Image> appearanceProperty() {
-		return this.appearance;
+	public final ObjectProperty<Image> combatSpriteProperty() {
+		return this.combatSprite;
 	}
 
-	public final Image getAppearance() {
-		return this.appearanceProperty().get();
+	public final Image getCombatSprite() {
+		return this.combatSpriteProperty().get();
 	}
 
-	public final void setAppearance(final Image appearance) {
-		this.appearanceProperty().set(appearance);
+	public final void setCombatSprite(final Image appearance) {
+		this.combatSpriteProperty().set(appearance);
 	}
 
 	public ClassType getWork() {
@@ -448,5 +449,23 @@ public class Avatar extends Attributes {
 	public void setWork(ClassType work) {
 		this.work = work;
 	}
+
+
+	public final ObjectProperty<Image> worldSpriteProperty() {
+		return this.worldSprite;
+	}
+	
+
+
+	public final Image getWorldSprite() {
+		return this.worldSpriteProperty().get();
+	}
+	
+
+
+	public final void setWorldSprite(final Image worldSprite) {
+		this.worldSpriteProperty().set(worldSprite);
+	}
+	
 
 }

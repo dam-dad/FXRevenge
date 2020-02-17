@@ -109,7 +109,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 		enemy.levelProperty().bind(level.valueProperty());
 		expTextField.textProperty().bind(enemy.expProperty().multiply(enemy.levelProperty()).asString());
 		oroTextField.textProperty().bind(enemy.moneyProperty().multiply(enemy.levelProperty()).asString());
-		enemyImage.imageProperty().bind(enemy.appearanceProperty());
+		enemyImage.imageProperty().bind(enemy.combatSpriteProperty());
 
 //REVISAR LISTA DE DROPS		dropList.setItems(enemy);
 		descripiconArea.setText(enemy.getDescription());
@@ -129,7 +129,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 		enemy.levelProperty().bind(level.valueProperty());
 		expTextField.textProperty().bind(enemy.expProperty().multiply(enemy.levelProperty()).asString());
 		oroTextField.textProperty().bind(enemy.moneyProperty().multiply(enemy.levelProperty()).asString());
-		enemyImage.imageProperty().bind(enemy.appearanceProperty());
+		enemyImage.imageProperty().bind(enemy.combatSpriteProperty());
 
 //REVISAR LISTA DE DROPS		dropList.setItems(enemy);
 		descripiconArea.setText(enemy.getDescription());

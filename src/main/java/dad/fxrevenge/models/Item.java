@@ -1,5 +1,8 @@
 package dad.fxrevenge.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.property.IntegerProperty;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -28,7 +31,6 @@ public class Item {
 	 * @param effect Efecto que tendra el objeto al usarlo
 	 */
 	public Item(Image icon, String name, Integer quantity, Integer price, Effect effect) {
-		super();
 		this.icon = icon;
 		this.setName(name);
 		this.setQuantity(quantity);
@@ -83,6 +85,41 @@ public class Item {
 		
 		}
 		return potion;
+	}
+	/**
+	 * Genera una pocion en base a unas determinadas probabilidades
+	 * @return Devuelve la pocion generada
+	 */
+	public Item generateRandomPotion() {
+		int num = (int)(Math.random()*100);
+		Item pot;
+		if (num>=0 && num <=5) {
+			pot=new Item().generatePotion(Effect.MaxiManaRestore);
+		} else if(num>5 && num <= 35) {
+			pot=new Item().generatePotion(Effect.MiniManaRestore);
+		}  else if(num>35 && num <=50) {
+			pot=new Item().generatePotion(Effect.ManaRestore);
+		} else if(num>50 && num <= 65) {
+			pot=new Item().generatePotion(Effect.HealRestore);
+		} else if(num>65 && num <= 95) {
+			pot=new Item().generatePotion(Effect.MiniHealRestore);
+		} else {
+			pot=new Item().generatePotion(Effect.MaxiHealRestore);
+		}
+		return pot;
+	}
+	/**
+	 * Genera una lista de Items aleatorios
+	 * @param maxItems Numero de items que queremos que genere la lista
+	 * @return La lista de Items generada
+	 */
+	public List<Item> generateVendorPotions(int maxItems){
+		ArrayList<Item> vendorList = new ArrayList<Item>();
+		for (int i = 0; i < maxItems; i++) {
+			vendorList.add(this.generateRandomPotion());
+			//comprobar si esta la poti y sumar 1 para no repetir
+		}
+		return vendorList;
 	}
 	/**
 	 * Funcion que devuelve un String explicativo del efecto del objeto que se le da

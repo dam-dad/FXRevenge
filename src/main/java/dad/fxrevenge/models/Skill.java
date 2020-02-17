@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-//añadir funcion: generarSkills( recibe una clase) y genera las skills de esa clase
 /**
  * Clase que define las habilidades de los personajes
  */
@@ -66,21 +65,33 @@ public class Skill {
 		ArrayList<Skill> habilidades = new ArrayList<Skill>();
 		//skill(nombre,costemana,nivel de desbloqueo,daño base de la habilidad, tipo de daño (true=fisico / false=magico),
 		//multiplicador de daño, porcentaje de critico extra)
+		
+		//Habilidades pendiente de testeo y ajustes una vez se prueben in-game
 		switch (job) {
 		case Archmage:
 			habilidades.add(new Skill("Piro",3,1,5,false,0.1,0));
-			habilidades.add(new Skill("Electro",3,1,5,false,0.1,0));
-			habilidades.add(new Skill("Thunder",3,2,5,false,0.1,0));
-			habilidades.add(new Skill("Icicle",3,1,5,false,0.1,0));
+			habilidades.add(new Skill("Electro",5,3,7,false,0.1,0));
+			habilidades.add(new Skill("Icicle",7,5,9,false,0.2,0));
+			habilidades.add(new Skill("Thunder",10,7,15,false,0.4,0));
+			habilidades.add(new Skill("Soul-Beam",20,9,35,false,0.7,30));
+			habilidades.add(new Skill("Cataclsym",50,13,50,false,1.0,50));
 			break;
 		case Warlord:
 			habilidades.add(new Skill("Slash",3,1,5,true,0.1,0));
-			habilidades.add(new Skill("Double-Slash",5,1,10,true,0.2,0));
+			habilidades.add(new Skill("Double-Slash",5,3,10,true,0.2,0));
+			habilidades.add(new Skill("Final Slash",7,5,12,true,0.4,10));
+			habilidades.add(new Skill("Shield-Slam",9,3,7,true,0.2,10));
+			habilidades.add(new Skill("Shield-Bash",11,5,10,true,0.3,15));
+			habilidades.add(new Skill("Shield-Crash",13,7,15,true,0.5,20));
 			break;
 		default: //hunter
-			habilidades.add(new Skill("Shot",5,1,10,true,0.2,0));
-			habilidades.add(new Skill("Double-Shot",5,1,10,true,0.2,0));
-			habilidades.add(new Skill("Aimed-Shot",5,1,15,true,0.3,0));
+			habilidades.add(new Skill("Shot",3,1,10,true,0.2,0));
+			habilidades.add(new Skill("Double-Shot",4,3,13,true,0.2,0));
+			habilidades.add(new Skill("Aimed-Shot",6,5,15,true,0.3,0));
+			habilidades.add(new Skill("Heavy-Shot",8,7,17,true,0.5,10));
+			habilidades.add(new Skill("Dragon-Shot",10,9,20,true,0.7,30));
+			habilidades.add(new Skill("Kill-Shot",15,11,25,true,0.5,80));
+			
 			break;
 		}
 		return habilidades;
