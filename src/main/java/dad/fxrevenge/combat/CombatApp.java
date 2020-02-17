@@ -2,6 +2,7 @@ package dad.fxrevenge.combat;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.ClassType;
+import dad.fxrevenge.models.Effect;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Race;
@@ -35,10 +36,13 @@ public class CombatApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		item1.setName("poti");
+		item1.setEffect(Effect.HealRestore);
 		item1.setQuantity(2);
 		item2.setName("galleta");
+		item2.setEffect(Effect.HealRestore);
 		item2.setQuantity(5);
 		item3.setName("orbe");
+		item3.setEffect(Effect.ManaRestore);
 		item3.setQuantity(1);
 
 		ObservableList<Item> items = FXCollections.observableArrayList(item1, item2, item3);

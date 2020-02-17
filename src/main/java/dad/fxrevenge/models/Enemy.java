@@ -40,6 +40,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(8 * nivel);
 			this.setMagicDef(9 * nivel);
 
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_firebat.png").toString()));
 			this.setDescription("A estos monstruos les gusta juntarse y danzar bajo el cielo nocturno.");
 
 			this.setExp(35);
@@ -53,8 +54,9 @@ public class Enemy extends Attributes {
 			this.setPhysDef(4 * nivel);
 			this.setMagicDamage(3 * nivel);
 			this.setMagicDef(4 * nivel);
-			this.setDescription("Monstruos comunes que se encuentran por todos lados. "
-					+ "Por su aspecto simple pero adorables tienen muchos admiradores.");
+
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_slime.png").toString()));
+			this.setDescription("Monstruos comunes que se encuentran por todos lados. ");
 
 			this.setExp(5);
 			this.setMoney(0);
@@ -81,8 +83,10 @@ public class Enemy extends Attributes {
 			this.setPhysDef(3 * nivel);
 			this.setMagicDamage(5 * nivel);
 			this.setMagicDef(8 * nivel);
+
+			this.setAppearance(new Image(getClass().getResource("/image/monsters/monster_skeletonwarrior.png").toString()));
 			this.setDescription(
-					"Difuntos soldados que patrullan puntuales esperando pillarte y que no abandones su mundo.");
+					"Difuntos soldados que patrullan esperando pillarte.");
 
 			this.setExp(25);
 			this.setMoney(1);
@@ -95,8 +99,7 @@ public class Enemy extends Attributes {
 			this.setPhysDef(5 * nivel);
 			this.setMagicDamage(0);
 			this.setMagicDef(5 * nivel);
-			this.setDescription("Cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas,"
-					+ " que se extienden conforme se van deteriorando aún más.");
+			this.setDescription("Cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
 
 			this.setExp(5);
 			this.setMoney(15);

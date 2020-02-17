@@ -13,6 +13,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 //añadir funcion: generarSkills( recibe una clase) y genera las skills de esa clase
+/**
+ * Clase que define las habilidades de los personajes
+ */
 public class Skill {
 	private StringProperty name = new SimpleStringProperty();
 	private IntegerProperty cost = new SimpleIntegerProperty();
@@ -22,10 +25,23 @@ public class Skill {
 	private DoubleProperty DamageMultiplier = new SimpleDoubleProperty();
 	private IntegerProperty AddCritChance = new SimpleIntegerProperty();
 
+	/**
+	 * Constructor vacio base de una habilidad
+	 */
 	public Skill() {
 
 	}
-	
+	/**
+	 * Constructor de una habilidad
+	 * 
+	 * @param name nombre
+	 * @param cost coste
+	 * @param unlockLevel nivel al que se desbloquea
+	 * @param damage daño base
+	 * @param damageType tipo de daño que inflige
+	 * @param damageMultiplier daño adicional en base al daño del personaje
+	 * @param addCritChance probabilidad base adicional para ser critico de la habilidad
+	 */
 	public Skill(String name, Integer cost, Integer unlockLevel, Integer damage,
 			Boolean damageType, Double damageMultiplier, Integer addCritChance) {
 		super();
@@ -40,6 +56,12 @@ public class Skill {
 
 
 	//solo hay skills de prueba, añadir mas y ver como hacerlo desde json
+	/**
+	 * Funcion que permite generar las habilidades de un personaje en base a su clase
+	 * 
+	 * @param job clase del personaje
+	 * @return lista de todas las habilidades que posee el personaje
+	 */
 	public static List<Skill> generateClassSkills(ClassType job) {
 		ArrayList<Skill> habilidades = new ArrayList<Skill>();
 		//skill(nombre,costemana,nivel de desbloqueo,daño base de la habilidad, tipo de daño (true=fisico / false=magico),

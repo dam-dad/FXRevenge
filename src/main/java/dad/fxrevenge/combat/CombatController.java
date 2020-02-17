@@ -208,68 +208,80 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 		EventHandler<MouseEvent> evento;
 		evento = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("¿Seguro que quieres usarlo?");
-				alert.setHeaderText("¿Seré invencible con esto?");
-				alert.setContentText("Aún tengo mis dudas...");
 
-				ButtonType elijoButton = new ButtonType("Decidido: ¡Te elijo a ti!");
-				ButtonType meNiegoButton = new ButtonType("Otro día...");
+				Item item = list.getSelectionModel().getSelectedItem();
 
-				alert.getButtonTypes().setAll(elijoButton, meNiegoButton);
+				if (item.getEffect() != null) {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("¿Seguro que quieres usarlo?");
+					alert.setHeaderText("¿Debería usar " + item.getName() + "?");
+					alert.setContentText(item.effectDescription(item));
 
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == elijoButton) {
-					Item item = list.getSelectionModel().getSelectedItem();
+					ButtonType elijoButton = new ButtonType("Decidido: ¡Te elijo a ti!");
+					ButtonType meNiegoButton = new ButtonType("Otro día...");
 
-					int mana = -1, cura = -1;
-					if (item.getEffect() != null) {
-						switch (item.getEffect()) {
+					alert.getButtonTypes().setAll(elijoButton, meNiegoButton);
 
-						case HealRestore:
-							cura = (int) (pj.getHealth() * 0.5);
-							break;
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == elijoButton) {
 
-						case ManaRestore:
-							mana = (int) (pj.getMana() * 0.5);
-							break;
-						case MaxiHealRestore:
-							cura = (int) (pj.getHealth() * 0.75);
-							break;
+						int mana = -1, cura = -1;
 
-						case MaxiManaRestore:
-							mana = (int) (pj.getMana() * 0.75);
-							break;
-						case MiniHealRestore:
-							cura = (int) (pj.getHealth() * 0.25);
-							break;
-						case MiniManaRestore:
-							mana = (int) (pj.getMana() * 0.25);
-							break;
+						if (item.getQuantity() > 0) {
+							switch (item.getEffect()) {
+
+							case HealRestore:
+								cura = (int) (pj.getHealth() * 0.5);
+								break;
+
+							case ManaRestore:
+								mana = (int) (pj.getMana() * 0.5);
+								break;
+							case MaxiHealRestore:
+								cura = (int) (pj.getHealth() * 0.75);
+								break;
+
+							case MaxiManaRestore:
+								mana = (int) (pj.getMana() * 0.75);
+								break;
+							case MiniHealRestore:
+								cura = (int) (pj.getHealth() * 0.25);
+								break;
+							case MiniManaRestore:
+								mana = (int) (pj.getMana() * 0.25);
+								break;
+							}
+
+							if (cura > 0) {
+								if (cura + pj.getCurrentLife() > pj.getHealth()) {
+									cura = pj.getHealth() - pj.getCurrentLife();
+									pj.setCurrentLife(pj.getHealth());
+								} else
+									pj.setCurrentLife(pj.getCurrentLife() + cura);
+							}
+							if (mana > 0) {
+								if (mana + pj.getCurrentMana() > pj.getMana()) {
+									mana = pj.getMana() - pj.getCurrentMana();
+									pj.setCurrentMana(pj.getMana());
+
+								} else
+									pj.setCurrentMana(pj.getCurrentMana() + mana);
+							}
+							pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
+
+							if (cura != -1) {
+								eventArea.setText("Te has curado " + cura + " puntos de vida.");
+							} else if (mana != -1) {
+								eventArea.setText("Has recuperado " + mana + " puntos de mana.");
+							}
+							enemyAttack();
+						} else {
+							Alert alert3 = new Alert(AlertType.INFORMATION);
+							alert3.setTitle("Vaya...");
+							alert3.setContentText(
+									"Parece que te has quedado sin " + item.getName() + ", compra cuanto antes.");
+							alert3.show();
 						}
-
-						if (cura + pj.getCurrentLife() > pj.getHealth()) {
-							cura = pj.getHealth() - pj.getCurrentLife();
-							pj.setCurrentLife(pj.getHealth());
-						} else
-							pj.setCurrentLife(cura);
-
-						if (mana + pj.getCurrentMana() > pj.getMana()) {
-							mana = pj.getMana() - pj.getCurrentMana();
-							pj.setCurrentMana(pj.getMana());
-
-						} else
-							pj.setCurrentMana(mana);
-
-						pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
-
-						if (cura != -1) {
-							eventArea.setText("Te has curado " + cura + " puntos de vida.");
-						} else if (mana != -1) {
-							eventArea.setText("Has recuperado " + mana + " puntos de mana.");
-						}
-						enemyAttack();
-
 					} else {
 						Alert alert2 = new Alert(AlertType.INFORMATION);
 						alert2.setTitle("Vaya...");
@@ -277,8 +289,6 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 						alert2.show();
 
 					}
-
-//System.out.println(list.getSelectionModel().getSelectedItem().getName());
 
 				} else {
 					popup.show(view.getScene().getWindow());

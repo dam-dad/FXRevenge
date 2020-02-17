@@ -73,7 +73,7 @@
 	-fx-border-radius: 5.0px;   
     -fx-border-style: segments(10.0, 15.0, 15.0, 15.0)  line-cap round ;*/
     
-    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 75% , #FC9B06, #eccd6a);
+    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 85% , #ffa420, #eccd6a);
     -fx-text-fill:#663300;
     -fx-font-size: 30.0px;
     -fx-font-family: "Comic Sans MS";
