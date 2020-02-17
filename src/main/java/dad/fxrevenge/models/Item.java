@@ -1,10 +1,15 @@
 package dad.fxrevenge.models;
 
 import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+
+//preguntar por creacion String descripcion y empleo de effectDescription
+//preguntar por cambio a estatico de la funcion generatePotion
+
 //constructor
 public class Item {
 	private Image icon;

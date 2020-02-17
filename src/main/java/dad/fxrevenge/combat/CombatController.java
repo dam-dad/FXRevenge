@@ -145,6 +145,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	/**
 	 * Incrementa la defensa del avatar para minimizar el siguiente daño recibido
+	 * 
 	 * @param event evento que ocurre cuando se llama a la función
 	 */
 	@FXML
@@ -162,6 +163,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	/**
 	 * Permite al usuario huir del combate
+	 * 
 	 * @param event evento que ocurre cuando se llama a la función
 	 */
 	@FXML
@@ -191,10 +193,12 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 		}
 
 	}
-/**
- * Permite usar objetos del inventario
- * @param event evento que ocurre cuando se llama a la función
- */
+
+	/**
+	 * Permite usar objetos del inventario
+	 * 
+	 * @param event evento que ocurre cuando se llama a la función
+	 */
 	@FXML
 	void onOpenInventoryAction(ActionEvent event) {
 
@@ -292,10 +296,12 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 			popup.show(view.getScene().getWindow());
 
 	}
-/**
- * Permite al usuario ver las habilidades aprendidas del avatar y usar una
- * @param event evento que ocurre cuando se llama a la función
- */
+
+	/**
+	 * Permite al usuario ver las habilidades aprendidas del avatar y usar una
+	 * 
+	 * @param event evento que ocurre cuando se llama a la función
+	 */
 	@FXML
 	void onUseHabilitiesAction(ActionEvent event) {
 		Popup popup = new Popup();
@@ -366,9 +372,10 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 			popup.show(view.getScene().getWindow());
 
 	}
-/**
- * Permite crear el fondo a partir de una imagen
- */
+
+	/**
+	 * Permite crear el fondo a partir de una imagen
+	 */
 	private void setBackground() {
 		view.setBackground(new Background(
 				Collections.singletonList(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)),
@@ -414,12 +421,14 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 		});
 
 	}
-/**
- * 
- * @param pj avatar que se enfrentará al enemigo
- * @param enemy enemigo al que se enfrentará el avatar
- * @throws IOException En caso de no encontrar el archivo .fxml para la carga de la vista
- */
+
+	/**
+	 * 
+	 * @param pj    avatar que se enfrentará al enemigo
+	 * @param enemy enemigo al que se enfrentará el avatar
+	 * @throws IOException En caso de no encontrar el archivo .fxml para la carga de
+	 *                     la vista
+	 */
 	public CombatController(Avatar pj, Enemy enemy) throws IOException {
 		super();
 
@@ -432,13 +441,15 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 		loader.load();
 
 	}
-/**
- * 
- * @param pj avatar que se enfrentará al enemigo
- * @param enemy enemigo al que se enfrentará el avatar
- * @param fondo imagen que será el fondo del combate
- * @throws IOException En caso de no encontrar el archivo .fxml para la carga de la vista
- */
+
+	/**
+	 * 
+	 * @param pj    avatar que se enfrentará al enemigo
+	 * @param enemy enemigo al que se enfrentará el avatar
+	 * @param fondo imagen que será el fondo del combate
+	 * @throws IOException En caso de no encontrar el archivo .fxml para la carga de
+	 *                     la vista
+	 */
 	public CombatController(Avatar pj, Enemy enemy, Image fondo) throws IOException {
 		super();
 
@@ -452,27 +463,30 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 		loader.load();
 
 	}
-/**
- * 
- * @param color1 primer color del progressbar
- * @param color2 segundo color del progressbar
- * @param percent valor numerico en el que se encuentra la barra del progressbar
- * @return retorna el color necesario en base a cómo de cerca se encuentra el color deseado con respecto a los extremos
- */
+
+	/**
+	 * 
+	 * @param color1  primer color del progressbar
+	 * @param color2  segundo color del progressbar
+	 * @param percent valor numerico en el que se encuentra la barra del progressbar
+	 * @return retorna el color necesario en base a cómo de cerca se encuentra el
+	 *         color deseado con respecto a los extremos
+	 */
 	public Color interpolate(Color color1, Color color2, double percent) {
 		double red = color1.getRed() + percent * (color2.getRed() - color1.getRed());
 		double green = color1.getGreen() + percent * (color2.getGreen() - color1.getGreen());
 		double blue = color1.getBlue() + percent * (color2.getBlue() - color1.getBlue());
 		return Color.color(Math.abs(red), Math.abs(green), Math.abs(blue));
 	}
-/**
- * 
- * @param color1 primer color del progressbar
- * @param color2 segundo color del progressbar
- * @param color3 tercer color del progressbar
- * @param percent valor numerico en el que se encuentra la barra del progressbar
- * @return llamada a interpolate {@link #interpolate(Color, Color, double)}
- */
+
+	/**
+	 * 
+	 * @param color1  primer color del progressbar
+	 * @param color2  segundo color del progressbar
+	 * @param color3  tercer color del progressbar
+	 * @param percent valor numerico en el que se encuentra la barra del progressbar
+	 * @return llamada a interpolate {@link #interpolate(Color, Color, double)}
+	 */
 	public Color interpolate(Color color1, Color color2, Color color3, double percent) {
 		if (percent <= 0.5) {
 			return interpolate(color1, color2, percent * 2);
@@ -480,10 +494,11 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 			return interpolate(color2, color3, (percent - 0.5) * 2);
 		}
 	}
-/**
- * 
- * @return devuelve el elemento padre del componente
- */
+
+	/**
+	 * 
+	 * @return devuelve el elemento padre del componente
+	 */
 	public BorderPane getView() {
 		return view;
 	}

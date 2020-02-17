@@ -6,7 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 
-
+//añadir seteo de apariencia en constructor
+//añadir a RACE los bosses individuales
 //añadir generacion de item o gear para posible dropeo
 public class Enemy extends Attributes {
 	private Race race;
@@ -15,13 +16,20 @@ public class Enemy extends Attributes {
 	private Gear gearDrop;
 	private Item itemdrop;
 	private ObjectProperty<Image> appearance = new SimpleObjectProperty<Image>();
+	private String description;
+	private IntegerProperty exp = new SimpleIntegerProperty();
+	private IntegerProperty money = new SimpleIntegerProperty();
+
 	/**
 	 * Constructor de los personajes enemigos donde se especifican varios valores
-	 * @param raza Especifica la raza a la que pertenecera el enemigo creado
+	 * 
+	 * @param raza  Especifica la raza a la que pertenecera el enemigo creado
 	 * @param nivel Especifica el nivel que tendra el enemigo generado
 	 */
 	public Enemy(Race raza, int nivel) {
 		this.race = raza;
+		this.setLevel(nivel);
+
 		switch (race) {
 		case Demon:
 //			this.setName("Fernandinho el demoñoño");
@@ -32,8 +40,10 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(8 * nivel);
 			this.setMagicDef(9 * nivel);
 
-			this.setExpDrop(35 * nivel);
-			this.setMoneyDrop(2 + nivel);
+			this.setDescription("A estos monstruos les gusta juntarse y danzar bajo el cielo nocturno.");
+
+			this.setExp(35);
+			this.setMoney(2);
 			break;
 		case Jelly:
 //			this.setName("Mira como tiemblo");
@@ -43,8 +53,11 @@ public class Enemy extends Attributes {
 			this.setPhysDef(4 * nivel);
 			this.setMagicDamage(3 * nivel);
 			this.setMagicDef(4 * nivel);
+			this.setDescription("Monstruos comunes que se encuentran por todos lados. "
+					+ "Por su aspecto simple pero adorables tienen muchos admiradores.");
 
-			this.setExpDrop(5 * nivel);
+			this.setExp(5);
+			this.setMoney(0);
 			this.setMoneyDrop(0);
 			break;
 		case Orc:
@@ -55,9 +68,10 @@ public class Enemy extends Attributes {
 			this.setPhysDef(8 * nivel);
 			this.setMagicDamage(0);
 			this.setMagicDef(3 * nivel);
+			this.setDescription("Criaturas de enorme tamaño que pueden aplastar al enemigo con sus colosales mazas.");
 
-			this.setExpDrop(15 * nivel);
-			this.setMoneyDrop(9 + nivel);
+			this.setExp(15);
+			this.setMoney(9);
 			break;
 		case Skeleton:
 //			this.setName("Huesitos");
@@ -67,9 +81,11 @@ public class Enemy extends Attributes {
 			this.setPhysDef(3 * nivel);
 			this.setMagicDamage(5 * nivel);
 			this.setMagicDef(8 * nivel);
+			this.setDescription(
+					"Difuntos soldados que patrullan puntuales esperando pillarte y que no abandones su mundo.");
 
-			this.setExpDrop(25 * nivel);
-			this.setMoneyDrop(1 + nivel);
+			this.setExp(25);
+			this.setMoney(1);
 		case Zombie:
 
 //			this.setName("Me caigo a trozos");
@@ -79,12 +95,14 @@ public class Enemy extends Attributes {
 			this.setPhysDef(5 * nivel);
 			this.setMagicDamage(0);
 			this.setMagicDef(5 * nivel);
+			this.setDescription("Cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas,"
+					+ " que se extienden conforme se van deteriorando aún más.");
 
-			this.setExpDrop(5 * nivel);
-			this.setMoneyDrop(15 + nivel);
-			
+			this.setExp(5);
+			this.setMoney(15);
+
 		default: // creacion de bosses
-			
+
 //			this.setName("Estoy mamadísimo");
 //			this.setName(race.toString());
 			this.setHealth(170 * nivel);
@@ -92,17 +110,23 @@ public class Enemy extends Attributes {
 			this.setPhysDef(8 * nivel);
 			this.setMagicDamage(8 * nivel);
 			this.setMagicDef(8 * nivel);
-			
 
-			this.setExpDrop(150 * nivel);
+			this.setExp(150);
 			this.setMoneyDrop(40 * nivel);
 			break;
 		}
+
+		if (!raza.equals(Race.Boss) && !raza.equals(Race.Jelly))
+			this.setMoneyDrop(getMoney() + nivel);
+		this.setExpDrop(this.getExp() * nivel);
 		this.setCurrentLife(this.getHealth());
 	}
+
 	/**
 	 * Funcion de ataque de los personajes enemigos
-	 * @return El numero de daño que hara el ataque antes de aplicar los modificadores defensivos del objetivo del ataque
+	 * 
+	 * @return El numero de daño que hara el ataque antes de aplicar los
+	 *         modificadores defensivos del objetivo del ataque
 	 */
 	public int atacar() {
 
@@ -115,11 +139,15 @@ public class Enemy extends Attributes {
 		}
 
 	}
+
 	/**
-	 * Funcion encargada de calcular el daño que recibira el enemigo despues de aplicar sus parametros defensivos
-	 * @param danyo Daño base del ataque que recibe
+	 * Funcion encargada de calcular el daño que recibira el enemigo despues de
+	 * aplicar sus parametros defensivos
+	 * 
+	 * @param danyo  Daño base del ataque que recibe
 	 * @param fisico Tipo de daño, si es fisico(true) o magico(false)
-	 * @return El daño que recibira despues de evaluar los parametros defensivos y aplicarlos
+	 * @return El daño que recibira despues de evaluar los parametros defensivos y
+	 *         aplicarlos
 	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 
@@ -133,16 +161,17 @@ public class Enemy extends Attributes {
 			danyo = (int) (danyo * (1 - (this.getMagicDef() / (100.0 + this.getMagicDef()))));
 		}
 
-		if(this.getCurrentLife()<Math.abs(danyo)) {
+		if (this.getCurrentLife() < Math.abs(danyo)) {
 			danyo = this.getCurrentLife();
 			this.setCurrentLife(0);
-		}else {
+		} else {
 			this.setCurrentLife(
 					(int) (this.getCurrentLife() - (danyo * (1 - (this.getPhysDef() / (100.0 + this.getPhysDef()))))));
 		}
 
 		return danyo;
 	}
+
 	// getters - setters
 	public Race getRace() {
 		return race;
@@ -214,6 +243,42 @@ public class Enemy extends Attributes {
 
 	public final void setAppearance(final Image appearance) {
 		this.appearanceProperty().set(appearance);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setAppearance(ObjectProperty<Image> appearance) {
+		this.appearance = appearance;
+	}
+
+	public final IntegerProperty expProperty() {
+		return this.exp;
+	}
+
+	public final int getExp() {
+		return this.expProperty().get();
+	}
+
+	public final void setExp(final int exp) {
+		this.expProperty().set(exp);
+	}
+
+	public final IntegerProperty moneyProperty() {
+		return this.money;
+	}
+
+	public final int getMoney() {
+		return this.moneyProperty().get();
+	}
+
+	public final void setMoney(final int money) {
+		this.moneyProperty().set(money);
 	}
 
 }
