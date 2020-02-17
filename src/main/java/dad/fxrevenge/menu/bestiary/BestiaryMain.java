@@ -12,6 +12,6 @@ public class BestiaryMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BestiaryApp2.main(args);
+		BestiaryApp.main(args);
 	}
 }

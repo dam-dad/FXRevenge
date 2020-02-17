@@ -4,6 +4,7 @@ import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -17,17 +18,16 @@ public class BestiaryApp extends Application {
 
 	private BestiaryController controller;
 	
-	private Enemy bichito = new Enemy(Race.Jelly, 1);
+	private Enemy bichito = new Enemy(Race.Orc, 1);
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		bichito.setAppearance(new Image(getClass().getResource("/images/chest.png").toString()));
-		
 		controller = new BestiaryController(bichito);
 		
 		SceneManager.setMainStage(primaryStage);
-		SceneManager.changeScene(controller); // SceneManager coge la Scene del controller directamente y la inicia
+		SceneManager.changeScene(controller);
+		
 		
 		primaryStage.setTitle("Bestiary TEST");
 		primaryStage.setResizable(false);
