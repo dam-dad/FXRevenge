@@ -3,6 +3,7 @@ package dad.fxrevenge.animations;
 import dad.fxrevenge.dialog.VDialog;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.Orientation;
+import dad.fxrevenge.world.VMap;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
@@ -99,6 +100,12 @@ public class TestMove {
 
 					transicion.play();
 				}
+
+				// Pasar del mapa principal a la cueva de Valery
+				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
+					SceneManager.changeScene(new VMap());
+				}
+
 //			pjImage.setX(pjImage.getX()pjImage.getX());
 				break;
 			case D:
@@ -231,6 +238,7 @@ public class TestMove {
 			System.out.println(orientation + "1");
 			if ((posY - 1) >= 0 && map[posY - 1][posX] == "M")
 				interact = true;
+
 			break;
 		case EAST:
 			System.out.println(orientation + "2");
