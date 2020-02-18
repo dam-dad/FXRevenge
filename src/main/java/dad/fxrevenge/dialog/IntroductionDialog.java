@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public class IntroductionDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/background/introduction.jpg");
+	private Image dialogBackground = new Image("/image/background/introduction.png");
 	
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();

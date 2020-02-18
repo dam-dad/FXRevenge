@@ -27,8 +27,12 @@ public class WorldMapController implements GameScene, Parameters {
 	private Canvas rectWorldCanvas;
 	private GraphicsContext gc;
 
-	private static String[][] world = {
-//			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
+	private Image background;
+
+	private static String[][] world;
+
+	private String[][] overworld = {
+//			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
 			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -44,6 +48,15 @@ public class WorldMapController implements GameScene, Parameters {
 
 	private AnimationMobs skeleton;
 	TestMove pj;
+
+	public WorldMapController() {
+		WorldMapController.world = overworld;
+	}
+
+	public WorldMapController(String[][] map, Image background) {
+		WorldMapController.world = map;
+		this.background = background;
+	}
 
 	@Override
 	public void start() {
@@ -93,6 +106,9 @@ public class WorldMapController implements GameScene, Parameters {
 	public void paintWorld() {
 		Image image;
 		int posX = 0, posY = 0;
+
+		// background = new Image("/image/background/v.png");
+		gc.drawImage(background, 0, 0, rectWorldCanvas.getWidth(), rectWorldCanvas.getHeight());
 
 		for (int j = 0; j < world.length; j++) {
 
