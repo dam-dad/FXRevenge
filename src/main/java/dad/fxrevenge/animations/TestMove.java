@@ -2,6 +2,8 @@ package dad.fxrevenge.animations;
 
 import dad.fxrevenge.dialog.VDialog;
 import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.world.CMap;
+import dad.fxrevenge.world.MMap;
 import dad.fxrevenge.world.Orientation;
 import dad.fxrevenge.world.VMap;
 import javafx.animation.Animation;
@@ -142,6 +144,12 @@ public class TestMove {
 					transicion.play();
 
 				}
+				
+				// Pasar del mapa principal al castillo de Calipso
+				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
+					SceneManager.changeScene(new CMap());
+				}
+				
 				break;
 			case A:
 				orientation = Orientation.WEST;
@@ -178,6 +186,13 @@ public class TestMove {
 					transicion.play();
 
 				}
+				
+				// Pasar del mapa principal al bosque de Meridio
+				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
+					SceneManager.changeScene(new MMap());
+				}
+				
+				
 				break;
 			case S:
 				orientation = Orientation.SOUTH;
