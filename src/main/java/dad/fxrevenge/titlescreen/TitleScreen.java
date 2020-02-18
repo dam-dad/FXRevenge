@@ -12,7 +12,7 @@ import javafx.scene.text.TextAlignment;
 public class TitleScreen extends DialogScene {
 	
 	// Imagen de fondo de la escena
-	private Image background = new Image("/image/background/titlescreen.jpg");
+	private Image background = new Image("/image/background/titlescreen.png");
 
 	// Función que se ejecuta dentro del bucle principal
 	@Override

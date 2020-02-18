@@ -1,71 +1,75 @@
 package dad.fxrevenge.world;
 
-import java.io.IOException;
-
 import dad.fxrevenge.animations.AnimationMobs;
 import dad.fxrevenge.animations.TestMove;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.Parameters;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class WorldMapController extends Pane implements GameScene, Parameters {
+public class WorldMapController implements GameScene, Parameters {
 
-	@FXML
-	private Pane view;
+	// MODEL
 
-	@FXML
-	private Canvas rectWorldCanvas;
+	private WorldMapModel model = new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE);
 
-	private WorldMapModel model;
-	private GraphicsContext gc;
+	// VIEW
+
+	private Group view;
+
 	private Scene scene;
 
-	private String[][] world = {
-//			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
-			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", "T1", ".", ".", ".", ".", "T2", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", "M", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2", ".", ".", "." },
-			{ "T3", "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T3", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", "T1", ".", ".", ".", ".", ".", ".", "." } };
+	private Canvas rectWorldCanvas;
+	private GraphicsContext gc;
+
+	private Image background;
+
+	private static String[][] world;
+
+	private static String[][] overworld = {
+//			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
+			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "VM", "VM", "T2", "T2", "T2", "T2", "T2", "T2", "T2" },
+			{ "T2", ".", ".", ".", ".", "T1", ".", ".", ".", ".", "T1", ".", ".", ".", ".", "T1" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
+			{ "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", "T1" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "MM", ".", ".", ".", ".", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", "CM" },
+			{ "MM", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "CM" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", "M", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", "T1" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
+			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "T3", "T3", "T2", "T2", "T2", "T2", "T2", "T2", "T2" } };
 
 	private AnimationMobs skeleton;
 	TestMove pj;
 
 	public WorldMapController() {
-		model = new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WorldSceneView.fxml"));
-		loader.setController(this);
-		loader.setRoot(this);
-		try {
-			loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WorldMapController.world = overworld;
+	}
+
+	public WorldMapController(String[][] map, Image background) {
+		WorldMapController.world = map;
+		this.background = background;
 	}
 
 	@Override
 	public void start() {
-		scene = new Scene(view, model.getWidth(), model.getHeigth());
 
-		rectWorldCanvas.setWidth(model.getWidth());
-		rectWorldCanvas.setHeight(model.getHeigth());
+		// Creamos el canvas y su graphics context asociado
+		rectWorldCanvas = new Canvas(model.getWidth(), model.getHeigth());
 		gc = rectWorldCanvas.getGraphicsContext2D();
+
+		// Inicializamos el nodo que contendrá la vista, su escena y añadimos el canvas
+		view = new Group();
+		scene = new Scene(view, model.getWidth(), model.getHeigth());
+		view.getChildren().add(rectWorldCanvas);
+
 		int resto = 1;
 		int cellX = 0, cellY = 0;
 		for (int j = 0; j <= world.length; j++) {
@@ -99,17 +103,20 @@ public class WorldMapController extends Pane implements GameScene, Parameters {
 		scene.setOnKeyPressed((KeyEvent event) -> pj.move(event));
 	}
 
-	public Pane getView() {
-		return view;
-	}
-
 	public void paintWorld() {
-		// String url;
 		Image image;
 		int posX = 0, posY = 0;
+
+		// Dibujar el fondo
+		//background = new Image("/image/background/m.png");
+		gc.drawImage(background, 0, 0, rectWorldCanvas.getWidth(), rectWorldCanvas.getHeight());
+
 		for (int j = 0; j < world.length; j++) {
+
 			posX = 0;
+
 			for (int i = 0; i < world[0].length; i++) {
+
 				switch (world[j][i]) {
 				case "T1":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree1.png"));
@@ -119,10 +126,12 @@ public class WorldMapController extends Pane implements GameScene, Parameters {
 				case "T2":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree2.png"));
 					gc.drawImage(image, posX, posY);
+
 					break;
 				case "T3":
 					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree3.png"));
 					gc.drawImage(image, posX, posY);
+
 					break;
 				case "M":
 					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
@@ -130,28 +139,32 @@ public class WorldMapController extends Pane implements GameScene, Parameters {
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
 //					skeleton.staticAni(1, 4, 56, 0, 56, 84);
+
 					break;
 				case "P":
-
 					pj.getPjImage().setX(i * model.getCell());
 					pj.getPjImage().setY(j * model.getCell());
 					System.out.println(pj.getPjImage().getX());
 					System.out.println(pj.getPjImage().getY());
-				default:
-					break;
 
+					break;
 				}
 
 				posX += model.getCell();
 			}
+
 			posY += model.getCell();
 		}
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 
 	}
-	
+
+	@Override
+	public Scene getScene() {
+		return scene;
+	}
+
 }

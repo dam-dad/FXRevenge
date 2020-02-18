@@ -1,6 +1,8 @@
 package dad.fxrevenge.dialog;
 
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.world.FXMap;
 import javafx.scene.image.Image;
 
 public class FXDialog extends DialogScene {
@@ -9,8 +11,6 @@ public class FXDialog extends DialogScene {
 	private Image dialogBackground = new Image("/image/background/fx.jpg");
 	
 	// Personajes
-	private Character nullChar = new Character(null, null, false);
-	
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
 
@@ -56,7 +56,7 @@ public class FXDialog extends DialogScene {
 			break;
 			
 		default:
-			CharacterTalking(nullChar, "FIN DEL DIÁLOGO");
+			SceneManager.changeScene(new FXMap());
 			break;
 
 		}
