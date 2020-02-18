@@ -1,6 +1,8 @@
 package dad.fxrevenge.dialog;
 
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
 public class VDialog extends DialogScene {
@@ -49,6 +51,7 @@ public class VDialog extends DialogScene {
 			
 		default:
 			CharacterTalking(nullChar, "FIN DEL DIÁLOGO");
+			SceneManager.changeScene(new WorldMapController());
 			break;
 
 		}

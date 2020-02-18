@@ -28,7 +28,7 @@ public class WorldMapController extends Pane implements GameScene, Parameters {
 	private GraphicsContext gc;
 	private Scene scene;
 
-	private String[][] world = {
+	private static String[][] world = {
 //			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
 			{ "T1", "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
