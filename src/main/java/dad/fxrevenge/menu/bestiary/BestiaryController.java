@@ -26,7 +26,6 @@ import javafx.scene.layout.VBox;
 
 public class BestiaryController extends BorderPane implements GameScene {
 
-//QUITAR CAIDOS? POSIBLES DROPS?
 	// model
 	private SimpleListProperty<Enemy> listaBichos = new SimpleListProperty<Enemy>(this, "listaBichos",
 			FXCollections.observableArrayList());
@@ -111,7 +110,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 		oroTextField.textProperty().bind(enemy.moneyProperty().multiply(enemy.levelProperty()).asString());
 		enemyImage.imageProperty().bind(enemy.combatSpriteProperty());
 
-//REVISAR LISTA DE DROPS		dropList.setItems(enemy);
+//REVISAR LISTA DE DROPS dropList.setItems(enemy);
 		descripiconArea.setText(enemy.getDescription());
 	}
 
