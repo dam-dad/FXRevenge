@@ -107,7 +107,8 @@ public class WorldMapController implements GameScene, Parameters {
 		Image image;
 		int posX = 0, posY = 0;
 
-		background = new Image("/image/background/m.png");
+		// Dibujar el fondo
+		//background = new Image("/image/background/m.png");
 		gc.drawImage(background, 0, 0, rectWorldCanvas.getWidth(), rectWorldCanvas.getHeight());
 
 		for (int j = 0; j < world.length; j++) {
