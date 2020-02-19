@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public class FXDialog extends DialogScene {
 	
 	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/background/fx.jpg");
+	private Image dialogBackground = new Image("/image/background/fx.png");
 	
 	// Personajes
 	private Character player = CharacterList.getPlayer();

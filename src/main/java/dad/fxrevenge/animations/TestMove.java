@@ -1,11 +1,16 @@
 package dad.fxrevenge.animations;
 
+import dad.fxrevenge.dialog.CDialog;
+import dad.fxrevenge.dialog.FXDialog;
+import dad.fxrevenge.dialog.MDialog;
 import dad.fxrevenge.dialog.VDialog;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.CMap;
+import dad.fxrevenge.world.FXMap;
 import dad.fxrevenge.world.MMap;
 import dad.fxrevenge.world.Orientation;
 import dad.fxrevenge.world.VMap;
+import dad.fxrevenge.world.WorldMapController;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
@@ -106,6 +111,8 @@ public class TestMove {
 				// Pasar del mapa principal a la cueva de Valery
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
 					SceneManager.changeScene(new VMap());
+				} else if ((posY - 1) >= 0 && map[posY - 1][posX] == "WM") {
+					SceneManager.changeScene(new WorldMapController());
 				}
 
 //			pjImage.setX(pjImage.getX()pjImage.getX());
@@ -144,12 +151,14 @@ public class TestMove {
 					transicion.play();
 
 				}
-				
+
 				// Pasar del mapa principal al castillo de Calipso
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
 					SceneManager.changeScene(new CMap());
+				} else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "WM") {
+					SceneManager.changeScene(new WorldMapController());
 				}
-				
+
 				break;
 			case A:
 				orientation = Orientation.WEST;
@@ -186,13 +195,14 @@ public class TestMove {
 					transicion.play();
 
 				}
-				
+
 				// Pasar del mapa principal al bosque de Meridio
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
 					SceneManager.changeScene(new MMap());
+				} else if ((posX - 1) >= 0 && map[posY][posX - 1] == "WM") {
+					SceneManager.changeScene(new WorldMapController());
 				}
-				
-				
+
 				break;
 			case S:
 				orientation = Orientation.SOUTH;
@@ -227,6 +237,12 @@ public class TestMove {
 					});
 					transicion.play();
 				}
+
+				// Volver al World Map
+				if ((posY + 1) < map.length && map[posY + 1][posX] == "WM") {
+					SceneManager.changeScene(new WorldMapController());
+				}
+
 				break;
 
 			case E:
@@ -246,36 +262,79 @@ public class TestMove {
 
 	private void interaction() {
 
-		boolean interact = false;
+		String interaction = "N/A";
 
 		switch (orientation) {
 		case NORTH:
-			System.out.println(orientation + "1");
 			if ((posY - 1) >= 0 && map[posY - 1][posX] == "M")
-				interact = true;
-
+				interaction = "M";
+			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "V")
+				interaction = "V";
+			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "C")
+				interaction = "C";
+			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "FX")
+				interaction = "FX";
+			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "L")
+				interaction = "L";
 			break;
 		case EAST:
-			System.out.println(orientation + "2");
 			if ((posX + 1) < map[0].length && map[posY][posX + 1] == "M")
-				interact = true;
+				interaction = "M";
+			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "V")
+				interaction = "V";
+			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "C")
+				interaction = "C";
+			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "FX")
+				interaction = "FX";
+			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "L")
+				interaction = "L";
 			break;
 		case WEST:
-			System.out.println(orientation + " 3");
 			if ((posX - 1) >= 0 && map[posY][posX - 1] == "M")
-				interact = true;
+				interaction = "M";
+			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "V")
+				interaction = "V";
+			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "C")
+				interaction = "C";
+			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "FX")
+				interaction = "FX";
+			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "L")
+				interaction = "L";
 			break;
 		case SOUTH:
-			System.out.println(orientation + " 4");
 			if ((posY + 1) < map.length && map[posY + 1][posX] == "M")
-				interact = true;
-			break;
-		default:
+				interaction = "M";
+			else if ((posY + 1) < map.length && map[posY + 1][posX] == "V")
+				interaction = "V";
+			else if ((posY + 1) < map.length && map[posY + 1][posX] == "C")
+				interaction = "C";
+			else if ((posY + 1) < map.length && map[posY + 1][posX] == "FX")
+				interaction = "FX";
+			else if ((posY + 1) < map.length && map[posY + 1][posX] == "L")
+				interaction = "L";
 			break;
 		}
 
-		if (interact)
+		switch (interaction) {
+		case "N/A":
+			break;
+		case "M":
+			SceneManager.changeScene(new MDialog());
+			break;
+		case "V":
 			SceneManager.changeScene(new VDialog());
+			break;
+		case "C":
+			SceneManager.changeScene(new CDialog());
+			break;
+		case "FX":
+			SceneManager.changeScene(new FXDialog());
+			break;
+		case "L":
+			SceneManager.changeScene(new FXMap());
+			break;
+
+		}
 
 	}
 

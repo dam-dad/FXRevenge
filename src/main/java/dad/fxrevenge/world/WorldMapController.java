@@ -29,25 +29,25 @@ public class WorldMapController implements GameScene, Parameters {
 
 	private Image background;
 
+	private AnimationMobs skeleton;
+	TestMove pj;
+
 	private static String[][] world;
 
 	private static String[][] overworld = {
 //			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
-			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "VM", "VM", "T2", "T2", "T2", "T2", "T2", "T2", "T2" },
-			{ "T2", ".", ".", ".", ".", "T1", ".", ".", ".", ".", "T1", ".", ".", ".", ".", "T1" },
-			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", "T1" },
+			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "T2", "VM", "T2", "T2", "T2", "T2", "T2", "T2", "T2" },
 			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
-			{ "MM", ".", ".", ".", ".", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", "CM" },
-			{ "MM", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "CM" },
-			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", "M", ".", ".", ".", ".", ".", "T2" },
-			{ "T2", "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1", "T1" },
-			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "T3", "T3", "T2", "T2", "T2", "T2", "T2", "T2", "T2" } };
-
-	private AnimationMobs skeleton;
-	TestMove pj;
+			{ "T2", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "MM", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "CM" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", "L", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T2" },
+			{ "T2", "T2", "T2", "T2", "T2", "T2", "T2", "T3", "T2", "T2", "T2", "T2", "T2", "T2", "T2", "T2" } };
 
 	public WorldMapController() {
 		WorldMapController.world = overworld;
@@ -108,7 +108,7 @@ public class WorldMapController implements GameScene, Parameters {
 		int posX = 0, posY = 0;
 
 		// Dibujar el fondo
-		//background = new Image("/image/background/m.png");
+		// background = new Image("/image/background/m.png");
 		gc.drawImage(background, 0, 0, rectWorldCanvas.getWidth(), rectWorldCanvas.getHeight());
 
 		for (int j = 0; j < world.length; j++) {
@@ -141,6 +141,39 @@ public class WorldMapController implements GameScene, Parameters {
 //					skeleton.staticAni(1, 4, 56, 0, 56, 84);
 
 					break;
+
+				case "V":
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY - 50);
+
+					break;
+
+				case "C":
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY - 50);
+
+					break;
+
+				case "FX":
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY - 50);
+
+					break;
+					
+				case "L":
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY - 50);
+
+					break;
+
 				case "P":
 					pj.getPjImage().setX(i * model.getCell());
 					pj.getPjImage().setY(j * model.getCell());
