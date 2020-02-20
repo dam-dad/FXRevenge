@@ -13,7 +13,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setMainStage(primaryStage);
-		SceneManager.changeScene(new FXMap());
+		SceneManager.changeScene(new WorldMapController());
 
 		primaryStage.setTitle("WORLD MAP TEST");
 		primaryStage.setResizable(false);
