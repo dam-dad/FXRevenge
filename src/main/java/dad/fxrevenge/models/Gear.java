@@ -3,9 +3,12 @@ package dad.fxrevenge.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Gear extends Attributes {
 	private GearPosition pos;
-	//añadir coste a los objetos 
+	private IntegerProperty price = new SimpleIntegerProperty();
 	//añadir una funcion que genere item aleatorio
 	
 	/**
@@ -24,6 +27,7 @@ public class Gear extends Attributes {
 		this.setMagicDef(0);
 		this.setLuck(0);
 		this.setCritChance(0);
+		this.setPrice(0);
 	}
 
 	/**
@@ -45,6 +49,7 @@ public class Gear extends Attributes {
 		this.setMagicDef(0);
 		this.setLuck(0);
 		this.setCritChance(0);
+		this.setPrice(0);
 	}
 
 	/**
@@ -60,6 +65,7 @@ public class Gear extends Attributes {
 	public Gear(String name, int level, GearPosition pos) {
 		this.setName(name);
 		this.setPos(pos);
+		this.setLevel(level);
 		this.setHealth((int) (Math.random() * level * 10));
 		this.setMana((int) (Math.random() * level * 6));
 		this.setPhysDamage((int) (Math.random() * level));
@@ -68,6 +74,7 @@ public class Gear extends Attributes {
 		this.setMagicDef((int) (Math.random() * level));
 		this.setLuck((int) (Math.random() * level));
 		this.setCritChance((int) (Math.random() * 6));
+		this.setPrice(level*15);
 	}
 	/**
 	 * Funcion para generar nombres semi-aleatorios de equipamiento
@@ -180,6 +187,20 @@ public class Gear extends Attributes {
 		this.pos = pos;
 	}
 
+	public final IntegerProperty priceProperty() {
+		return this.price;
+	}
+	
+
+	public final int getPrice() {
+		return this.priceProperty().get();
+	}
+	
+
+	public final void setPrice(final int price) {
+		this.priceProperty().set(price);
+	}
+	
 	/**
 	 * Funcion que da formato de texto a un objeto de equipamiento, informando de
 	 * todas sus estadisticas y atributos

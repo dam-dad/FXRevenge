@@ -48,12 +48,10 @@ public class Vendor {
 	public final ListProperty<Item> potsProperty() {
 		return this.pots;
 	}
-	
 
 	public final ObservableList<Item> getPots() {
 		return this.potsProperty().get();
 	}
-	
 
 	public final void setPots(final ObservableList<Item> pots) {
 		this.potsProperty().set(pots);
