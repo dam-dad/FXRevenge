@@ -1,8 +1,9 @@
-package dad.fxrevenge.dialog;
+package dad.fxrevenge.boss;
 
+import dad.fxrevenge.dialog.Character;
+import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.world.CMap;
 import javafx.scene.image.Image;
 
 public class CDialog extends DialogScene {

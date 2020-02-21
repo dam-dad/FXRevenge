@@ -1,5 +1,6 @@
-package dad.fxrevenge.world;
+package dad.fxrevenge.boss;
 
+import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
 public class MMap extends WorldMapController {

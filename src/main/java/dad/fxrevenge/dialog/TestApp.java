@@ -1,5 +1,6 @@
 package dad.fxrevenge.dialog;
 
+import dad.fxrevenge.boss.VDialog;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.titlescreen.TitleScreen;
 import javafx.application.Application;

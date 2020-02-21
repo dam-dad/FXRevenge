@@ -1,15 +1,15 @@
 package dad.fxrevenge.animations;
 
-import dad.fxrevenge.dialog.CDialog;
-import dad.fxrevenge.dialog.FXDialog;
-import dad.fxrevenge.dialog.MDialog;
-import dad.fxrevenge.dialog.VDialog;
+import dad.fxrevenge.boss.CDialog;
+import dad.fxrevenge.boss.CMap;
+import dad.fxrevenge.boss.FXDialog;
+import dad.fxrevenge.boss.FXMap;
+import dad.fxrevenge.boss.MDialog;
+import dad.fxrevenge.boss.MMap;
+import dad.fxrevenge.boss.VDialog;
+import dad.fxrevenge.boss.VMap;
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.world.CMap;
-import dad.fxrevenge.world.FXMap;
-import dad.fxrevenge.world.MMap;
 import dad.fxrevenge.world.Orientation;
-import dad.fxrevenge.world.VMap;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
