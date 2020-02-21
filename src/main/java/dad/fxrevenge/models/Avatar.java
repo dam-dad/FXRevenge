@@ -312,6 +312,14 @@ public class Avatar extends Attributes {
 			}
 		}
 	}
+	
+	private void comprar(Gear g) {
+		
+	}
+	private void comprar(Item it) {
+		
+	}
+	
 	/**
 	 * Funcion encargada de actualizar las estadísticas del personaje tras un cambio de equipamiento, 
 	 * restando las estadisticas de la equipacion antigua y sumando las nuevas
