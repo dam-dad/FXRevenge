@@ -1,89 +1,80 @@
 package dad.fxrevenge.menu;
 
 import dad.fxrevenge.menu.bestiary.BestiaryController;
-import dad.fxrevenge.models.Enemy;
-import dad.fxrevenge.models.Race;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.PopupControl;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Popup;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Sphere;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PruebaMenuApp extends Application {
 
 	private BestiaryController controller;
-	private BorderPane pane;
-	private Button popButton;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		 PopupControl popup = new PopupControl();
+		// Drawing a Circle
+		Circle circle = new Circle(300, 135, 100);
+		circle.setFill(Color.DARKSLATEBLUE);
+		circle.setStroke(Color.BLACK);
 
-		EventHandler<ActionEvent> evento = new EventHandler<ActionEvent>() {
+		// Drawing Sphere
+		Sphere sphere = new Sphere(50);
 
-			@Override
-			public void handle(ActionEvent event) {
-				
-				 // if (!popup.isShowing()) popup.show(pane.getScene().getWindow());
-				 
-				  Scene scene2 = new Scene(controller.getView());
-				  
-				  Stage segundaEscena = new Stage();
-				  segundaEscena.setTitle("Pruebita");
-				  segundaEscena.setResizable(false);
-				  segundaEscena.setScene(scene2);
-				  segundaEscena.show();
-				  
-//				Dialog<Integer> dialog = new Dialog<>();
-//				dialog.setTitle("Login Dialog");
-//				dialog.setHeaderText("Look, a Custom Login Dialog");
-//				dialog.getDialogPane().setContent(controller.getView());
-//				
-//				dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
-//				
-//				dialog.showAndWait();
+		// Creating a text
+		Text text = new Text("Hello how are you");
 
-			}
-		};
-		
-		controller = new BestiaryController();
+		// Setting the font of the text
+		text.setFont(Font.font(null, FontWeight.BOLD, 15));
 
-		pane = new BorderPane();
+		// Setting the color of the text
+		text.setFill(Color.CRIMSON);
 
-		popButton = new Button("Click me");
+		// setting the position of the text
+		text.setX(20);
+		text.setY(50);
 
-		popButton.setOnAction(evento);
+		// Creating a Stackpane
+		StackPane stackPane = new StackPane();
 
-		pane.setCenter(popButton);
+		// Setting the margin for the circle
+		StackPane.setMargin(circle, new Insets(50, 50, 50, 50));
 
-		
-//		  popup.getScene().setRoot(controller.getView()); popup.setAutoHide(true);
-		 
+		// Retrieving the observable list of the Stack Pane
+		ObservableList<Node> list = stackPane.getChildren();
 
-		Scene scene = new Scene(pane);
+		Button boton = new Button("Click");
+		boton.setOnAction(e->{
+			circle.setVisible(true);
+		});
+		// Adding all the nodes to tShe pane
+		list.addAll(circle, sphere, text, boton);
 
-		primaryStage.setTitle("Menu TEST");
-		primaryStage.setResizable(false);
+		circle.setVisible(false);
+		// Creating a scene object
+		Scene scene = new Scene(stackPane);
+
+		// Setting title to the Stage
+		primaryStage.setTitle("Stack Pane Example");
+
+		// Adding scene to the stage
 		primaryStage.setScene(scene);
-		primaryStage.show();
 
+		// Displaying the contents of the stage
+		primaryStage.show();
 	}
+
+	
 
 	/**
 	 * Ejecutamos para que la app aparezca y con ello el combate

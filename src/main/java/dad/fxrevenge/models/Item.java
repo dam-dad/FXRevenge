@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.IntegerProperty;
-
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 //constructor
 public class Item {
-	private Image icon;
+	private ObjectProperty<Image> icon = new SimpleObjectProperty<Image>();
 	private StringProperty name = new SimpleStringProperty();
 	private IntegerProperty quantity = new SimpleIntegerProperty();
 	private IntegerProperty price = new SimpleIntegerProperty();
@@ -31,7 +32,7 @@ public class Item {
 	 * @param effect Efecto que tendra el objeto al usarlo
 	 */
 	public Item(Image icon, String name, Integer quantity, Integer price, Effect effect) {
-		this.icon = icon;
+		this.setIcon(icon);
 		this.setName(name);
 		this.setQuantity(quantity);
 		this.setPrice(price);
@@ -51,36 +52,42 @@ public class Item {
 			potion.setQuantity(1);
 			potion.setPrice(5);
 			potion.effect=Effect.MiniHealRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/MiniHeal.png").toExternalForm()));
 			break;
 		case HealRestore:
 			potion.setName("Pocion");
 			potion.setQuantity(1);
 			potion.setPrice(10);
 			potion.effect=Effect.HealRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/Heal.png").toExternalForm()));
 			break;
 		case ManaRestore:
 			potion.setName("Elixir");
 			potion.setQuantity(1);
-			potion.setPrice(10);
+			potion.setPrice(8);
 			potion.effect=Effect.ManaRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/Mana.png").toExternalForm()));
 			break;
 		case MaxiHealRestore:
 			potion.setName("MaxiPocion");
 			potion.setQuantity(1);
 			potion.setPrice(15);
 			potion.effect=Effect.MaxiHealRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/MaxiHeal.png").toExternalForm()));
 			break;
 		case MaxiManaRestore:
 			potion.setName("Maxi-Elixir");
 			potion.setQuantity(1);
-			potion.setPrice(15);
+			potion.setPrice(12);
 			potion.effect=Effect.MaxiManaRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/MaxiMana.png").toExternalForm()));
 			break;
 		case MiniManaRestore:
 			potion.setName("Mini-Elixir");
 			potion.setQuantity(1);
-			potion.setPrice(5);
+			potion.setPrice(4);
 			potion.effect=Effect.MiniManaRestore;
+			potion.setIcon(new Image(getClass().getResource("/image/items/MiniMana.png").toExternalForm()));
 			break;
 		
 		}
@@ -184,5 +191,29 @@ public class Item {
 	public String toString() {
 		return getName()+" x"+getQuantity();
 	}
+	
+	//Esta funcion es meramente para las pruebas
+	public String verItem() {
+		return "Item [icon=" + icon + ", name=" + name + ", quantity=" + quantity + ", price=" + price + ", effect="
+				+ effect + "]";
+	}
+	//Esta funcion se implemento para las pruebas
+	public Item doyImagen(Image icon) {
+		this.setIcon(icon);
+		return this;
+	}
+	
+	public final ObjectProperty<Image> iconProperty() {
+		return this.icon;
+	}
+	
+	public final Image getIcon() {
+		return this.iconProperty().get();
+	}
+	
+	public final void setIcon(final Image icon) {
+		this.iconProperty().set(icon);
+	}
+	
 	
 }
