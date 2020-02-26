@@ -62,11 +62,11 @@
     -fx-background-color: transparent;
 }
 
-#datosBox{
+#datosBox, #decripcionBox{
 	-fx-background-color:#663300;
 }
 
-#razaLabel{
+#tituloLabel{
 
 	/*-fx-border-color: blue ;
     -fx-border-width: 5.0px ; 

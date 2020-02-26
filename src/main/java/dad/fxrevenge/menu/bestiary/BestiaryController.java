@@ -63,7 +63,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 	private HBox tituloHBox;
 
 	@FXML
-	private Label razaLabel;
+	private Label tituloLabel;
 
 	@FXML
 	private Button previousButton;
@@ -104,7 +104,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 	}
 
 	private void bindeos() {
-		razaLabel.setText(enemy.getRace().toString());
+		tituloLabel.setText(enemy.getRace().toString());
 		enemy.levelProperty().bind(level.valueProperty());
 		expTextField.textProperty().bind(enemy.expProperty().multiply(enemy.levelProperty()).asString());
 		oroTextField.textProperty().bind(enemy.moneyProperty().multiply(enemy.levelProperty()).asString());
@@ -124,7 +124,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 
 		// seteos de la informacion
 
-		razaLabel.setText(enemy.getRace().toString());
+		tituloLabel.setText(enemy.getRace().toString());
 		enemy.levelProperty().bind(level.valueProperty());
 		expTextField.textProperty().bind(enemy.expProperty().multiply(enemy.levelProperty()).asString());
 		oroTextField.textProperty().bind(enemy.moneyProperty().multiply(enemy.levelProperty()).asString());

@@ -58,7 +58,7 @@ public class InventoryController extends BorderPane implements GameScene {
 	private HBox tituloHBox;
 
 	@FXML
-	private Label nameLabel;
+	private Label tituloLabel;
 
 	@FXML
 	private Button previousButton;
@@ -99,7 +99,7 @@ public class InventoryController extends BorderPane implements GameScene {
 	}
 
 	private void bindeos() {
-		nameLabel.setText(item.getName());
+		tituloLabel.setText(item.getName());
 		cantidadTextField.textProperty().bind(item.quantityProperty().asString());
 		precioTextField.textProperty().bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
 		itemImage.imageProperty().bind(item.iconProperty());
@@ -114,7 +114,7 @@ public class InventoryController extends BorderPane implements GameScene {
 
 		// seteos de la informacion
 
-		nameLabel.setText(item.getName());
+		tituloLabel.setText(item.getName());
 		cantidadTextField.textProperty().bind(item.quantityProperty().asString());
 		precioTextField.textProperty().bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
 		itemImage.imageProperty().bind(item.iconProperty());
