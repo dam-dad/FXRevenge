@@ -1,8 +1,7 @@
-package dad.fxrevenge.boss.fight;
+package dad.fxrevenge.combat;
 
 import java.io.IOException;
 
-import dad.fxrevenge.boss.map.MMap;
 import dad.fxrevenge.combat.CombatController;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.models.Avatar;
@@ -13,27 +12,29 @@ import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.world.WorldMapController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
-public class MFight extends CombatController {
+public class SimpleCombat extends CombatController {
 
 	// COSITAS DEL COMBATE
 
-	private Image background = new Image("/image/background/m.png");
+	private Image background = new Image("/image/background/v.png");
 
 	private Avatar pj;
 
-	private Enemy enemy = new Enemy(Race.M, 1);
-
-	private Item item1 = new Item(), item2 = new Item(), item3 = new Item();
+	private Enemy enemy;
+	private WorldMapController worldMapController;
 
 	// FIN COSITAS DEL COMBATE
 
-	public MFight(Avatar avatar) throws IOException {
+	public SimpleCombat(Avatar avatar,Enemy enemy) throws IOException {
 		super();
 		this.pj=avatar;
+		this.enemy=enemy;
+//		this.worldMapController=worldMapController;
 	}
 
 	@Override
@@ -41,27 +42,13 @@ public class MFight extends CombatController {
 		super.setPj(pj);
 		super.setEnemy(enemy);
 		super.setBackgroundImage(background);
-
-		item1.setName("poti");
-		item1.setEffect(Effect.HealRestore);
-		item1.setQuantity(2);
-		item2.setName("galleta");
-		item2.setEffect(Effect.HealRestore);
-		item2.setQuantity(5);
-		item3.setName("orbe");
-		item3.setEffect(Effect.ManaRestore);
-		item3.setQuantity(1);
-
-		ObservableList<Item> items = FXCollections.observableArrayList(item1, item2, item3);
-		pj.setInventory(items);
-
 		super.start();
 
 	}
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new MMap(pj));
+		SceneManager.changeScene(new WorldMapController(pj));
 	}
 
 }

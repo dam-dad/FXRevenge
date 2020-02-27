@@ -1,6 +1,5 @@
 package dad.fxrevenge.boss.test;
 
-import dad.fxrevenge.boss.fight.FXFight;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,7 +13,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setMainStage(primaryStage);
-		SceneManager.changeScene(new FXFight());
+//		SceneManager.changeScene(new FXFight());
 
 		primaryStage.setTitle("TEST");
 		primaryStage.setResizable(false);

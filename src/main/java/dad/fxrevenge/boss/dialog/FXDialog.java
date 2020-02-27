@@ -5,18 +5,24 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.FXFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.image.Image;
 
 public class FXDialog extends DialogScene {
 	
+	private Avatar avatar;
 	// Imagen de fondo
 	private Image dialogBackground = new Image("/image/background/fx.png");
 	
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
+
+	public FXDialog(Avatar avatar) {
+		this.avatar=avatar;
+	}
 
 	@Override
 	public void start() {
@@ -61,7 +67,7 @@ public class FXDialog extends DialogScene {
 			
 		default:
 			try {
-				SceneManager.changeScene(new FXFight());
+				SceneManager.changeScene(new FXFight(avatar));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

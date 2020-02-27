@@ -1,10 +1,15 @@
 package dad.fxrevenge.world;
 
+import java.io.IOException;
+
 import dad.fxrevenge.animations.AnimationMobs;
 import dad.fxrevenge.animations.TestMove;
+import dad.fxrevenge.combat.SimpleCombat;
 import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.Parameters;
+import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -109,7 +114,26 @@ public class WorldMapController implements GameScene, Parameters {
 
 	private void update(KeyEvent event) {
 		 pj.move(event);
-		 
+		 enemyRandom();
+	}
+
+	private void enemyRandom() {
+//		new Enemy(races[randomRace], randomLevel)
+		
+		if ((int)(Math.floor(Math.random()*10))<=3) {
+		int minLevel=model.getAvatar().getLevel()+1;
+		int maxLevel=model.getAvatar().getLevel()+1;
+		System.out.println(maxLevel);
+		int randomRace=(int)(Math.floor(Math.random()*model.getRaces().size()));
+		int randomLevel=(int)(Math.floor(Math.random()*(maxLevel-minLevel+1)+minLevel));
+		try {
+			SceneManager.changeScene(new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
 	}
 
 	public void paintWorld() {

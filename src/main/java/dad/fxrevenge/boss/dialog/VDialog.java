@@ -5,18 +5,24 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.VFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.image.Image;
 
 public class VDialog extends DialogScene {
 
+	private Avatar avatar;
 	// Imagen de fondo
 	private Image background = new Image("/image/background/v.png");
 
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character v = CharacterList.getV();
+
+	public VDialog(Avatar avatar) {
+		this.avatar=avatar;
+	}
 
 	@Override
 	public void start() {
@@ -53,7 +59,7 @@ public class VDialog extends DialogScene {
 
 		default:
 			try {
-				SceneManager.changeScene(new VFight());
+				SceneManager.changeScene(new VFight(avatar));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

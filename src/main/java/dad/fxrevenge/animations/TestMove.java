@@ -1,13 +1,8 @@
 package dad.fxrevenge.animations;
 
-import dad.fxrevenge.boss.dialog.CDialog;
-import dad.fxrevenge.boss.dialog.FXDialog;
-import dad.fxrevenge.boss.dialog.MDialog;
-import dad.fxrevenge.boss.dialog.VDialog;
-import dad.fxrevenge.boss.map.CMap;
-import dad.fxrevenge.boss.map.FXMap;
-import dad.fxrevenge.boss.map.MMap;
-import dad.fxrevenge.boss.map.VMap;
+
+import dad.fxrevenge.boss.dialog.*;
+import dad.fxrevenge.boss.map.*;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.Orientation;
@@ -17,7 +12,6 @@ import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -79,8 +73,6 @@ public class TestMove {
 				orientation = Orientation.NORTH;
 				pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
-					System.out.println(event.getCode());
-					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -124,8 +116,6 @@ public class TestMove {
 				orientation = Orientation.EAST;
 				pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
-					System.out.println(event.getCode());
-					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -167,9 +157,6 @@ public class TestMove {
 				orientation = Orientation.WEST;
 				pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == ".") {
-					System.out.println(event.getCode());
-
-					CheckArray();
 					inMove = true;
 					colsX = 3;
 					counts = 3;
@@ -212,8 +199,6 @@ public class TestMove {
 				pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
 					inMove = true;
-					System.out.println(event.getCode());
-					CheckArray();
 					colsX = 3;
 					counts = 3;
 					offset_x = 0;
@@ -322,16 +307,16 @@ public class TestMove {
 		case "N/A":
 			break;
 		case "M":
-			SceneManager.changeScene(new MDialog());
+			SceneManager.changeScene(new MDialog(avatar));
 			break;
 		case "V":
-			SceneManager.changeScene(new VDialog());
+			SceneManager.changeScene(new VDialog(avatar));
 			break;
 		case "C":
-			SceneManager.changeScene(new CDialog());
+			SceneManager.changeScene(new CDialog(avatar));
 			break;
 		case "FX":
-			SceneManager.changeScene(new FXDialog());
+			SceneManager.changeScene(new FXDialog(avatar));
 			break;
 		case "L":
 			SceneManager.changeScene(new FXMap(avatar));
