@@ -1,4 +1,4 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.world.WorldMapController;

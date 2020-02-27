@@ -1,4 +1,4 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.test;
 
 public class Main {
 

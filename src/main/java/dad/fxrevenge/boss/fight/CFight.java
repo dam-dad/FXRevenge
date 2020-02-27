@@ -1,7 +1,8 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.fight;
 
 import java.io.IOException;
 
+import dad.fxrevenge.boss.map.CMap;
 import dad.fxrevenge.combat.CombatController;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.models.Avatar;
@@ -16,22 +17,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
-public class MFight extends CombatController {
+public class CFight extends CombatController {
 
 	// COSITAS DEL COMBATE
 
-	private Image background = new Image("/image/background/m.png");
+	private Image background = new Image("/image/background/c.png");
 
 	private Avatar pj = new Avatar(CharacterList.getPlayer().getPortrait(), ClassType.Warlord,
 			Skill.generateClassSkills(ClassType.Warlord), CharacterList.getPlayer().getName());
 
-	private Enemy enemy = new Enemy(Race.M, 1);
+	private Enemy enemy = new Enemy(Race.C, 1);
 
 	private Item item1 = new Item(), item2 = new Item(), item3 = new Item();
 
 	// FIN COSITAS DEL COMBATE
 
-	public MFight() throws IOException {
+	public CFight() throws IOException {
 		super();
 	}
 
@@ -60,7 +61,7 @@ public class MFight extends CombatController {
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new MMap(pj));
+		SceneManager.changeScene(new CMap(pj));
 	}
 
 }

@@ -1,7 +1,8 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.dialog;
 
 import java.io.IOException;
 
+import dad.fxrevenge.boss.fight.MFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;

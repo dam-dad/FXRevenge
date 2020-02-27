@@ -1,12 +1,12 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
-public class CMap extends WorldMapController {
+public class VMap extends WorldMapController {
 
-	private static Image background = new Image("/image/background/c.png");
+	private static Image background = new Image("/image/background/v.png");
 
 	private static String[][] map = {
 //			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
@@ -16,15 +16,15 @@ public class CMap extends WorldMapController {
 			{ "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x" },
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "WM", "P", ".", ".", ".", ".", ".", ".", ".", "C", ".", ".", ".", ".", ".", "." },
-			{ "T3", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", ".", ".", ".", "V", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
+			{ ".", ".", ".", ".", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
+			{ ".", ".", ".", ".", "T3", "WM", "T3", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
-	public CMap(Avatar avatar) {
-		super(map, background, avatar);
+	public VMap( Avatar avatar) {
+		super(map, background,avatar);
 	}
 
 }

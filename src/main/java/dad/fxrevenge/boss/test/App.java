@@ -1,5 +1,6 @@
-package dad.fxrevenge.boss;
+package dad.fxrevenge.boss.test;
 
+import dad.fxrevenge.boss.fight.FXFight;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
