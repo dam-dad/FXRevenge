@@ -51,6 +51,7 @@ public class Gear extends Attributes {
 		this.setCritChance((int) (Math.random() * 6));
 		this.setPrice(level*15);
 	}
+	
 	/**
 	 * Funcion para generar nombres semi-aleatorios de equipamiento
 	 * @param pos Posicion de la pieza a la que se quiere generar el nombre

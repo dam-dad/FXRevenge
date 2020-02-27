@@ -1,5 +1,8 @@
 package dad.fxrevenge.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -187,6 +190,15 @@ public class Enemy extends Attributes {
 //		this.setExpDrop(this.getExp() * nivel);
 
 		this.setCurrentLife(this.getHealth()); // Setea la vida del enemigo
+		//Generar geardrop
+		ArrayList<GearPosition> gpaux = new ArrayList<GearPosition>();
+		gpaux.addAll(Arrays.asList(GearPosition.Boots,GearPosition.Chest,GearPosition.Gloves,GearPosition.Helmet,GearPosition.LeftHand,GearPosition.Leggings,GearPosition.RightHand));
+		ArrayList<ClassType> ctaux = new ArrayList<ClassType>();
+		ctaux.addAll(Arrays.asList(ClassType.Archmage,ClassType.Warlord,ClassType.Hunter));
+		int RandGearPosIndex = (int) Math.random()*gpaux.size();
+		int RandJobIndex = (int) Math.random()*ctaux.size();
+		Gear g = new Gear(this.getLevel(), gpaux.get(RandGearPosIndex), ctaux.get(RandJobIndex));
+		this.setGearDrop(g);
 	}
 
 	public Gear getGearDrop() {
