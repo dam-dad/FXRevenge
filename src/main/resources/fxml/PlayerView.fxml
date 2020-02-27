@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -107,13 +108,14 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER_LEFT">
+      <VBox alignment="CENTER" spacing="5.0">
          <children>
             <Label fx:id="notaLabel" text="Nota: Los atributos del personaje incluyen los beneficios de su equipamiento." wrapText="true" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackAction" text="Menú" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
-      </HBox>
+      </VBox>
    </bottom>
 </fx:root>

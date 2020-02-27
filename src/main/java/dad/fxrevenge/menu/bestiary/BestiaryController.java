@@ -74,6 +74,14 @@ public class BestiaryController extends BorderPane implements GameScene {
 
 	@FXML
 	private Button nextButton;
+	
+	@FXML
+    private Button backButton;
+
+    @FXML
+    void onBackAction(ActionEvent event) {
+
+    }
 
 	@FXML
 	void onNextAction(ActionEvent event) {
@@ -150,7 +158,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 		super();
 
 		for (Race r : Race.values()) {
-			if (!r.equals(Race.M) || !r.equals(Race.V) || !r.equals(Race.C) || !r.equals(Race.FX))
+			if (!r.equals(Race.M) && !r.equals(Race.V) && !r.equals(Race.C) && !r.equals(Race.FX))
 				listaBichos.add(new Enemy(r, 1));
 		}
 		this.enemy = listaBichos.get(0);

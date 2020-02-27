@@ -8,30 +8,25 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 
 <fx:root fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/menu.css" type="BorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <StackPane fx:id="menuPane" prefHeight="150.0" prefWidth="200.0">
+      <GridPane fx:id="botonesGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <GridPane fx:id="botonesGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" vgap="5.0" StackPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="estadisticasButton" mnemonicParsing="false" onAction="#onOpenEstadisticasAction" prefWidth="150.0" text="Estadísticas" />
-                  <Button fx:id="habilidadesButton" mnemonicParsing="false" onAction="#onOpenAbilitiesButton" prefWidth="150.0" text="Habilidades" GridPane.columnIndex="1" />
-                  <Button fx:id="objetosButton" mnemonicParsing="false" onAction="#onOpenInventarioAction" prefWidth="150.0" text="Objetos" GridPane.rowIndex="1" />
-                  <Button fx:id="bestiarioButton" mnemonicParsing="false" onAction="#onOpenBestiarioAction" prefWidth="150.0" text="Bestiario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
+            <Button fx:id="estadisticasButton" mnemonicParsing="false" onAction="#onOpenEstadisticasAction" prefWidth="150.0" text="Estadísticas" />
+            <Button fx:id="habilidadesButton" mnemonicParsing="false" onAction="#onOpenAbilitiesButton" prefWidth="150.0" text="Habilidades" GridPane.columnIndex="1" />
+            <Button fx:id="objetosButton" mnemonicParsing="false" onAction="#onOpenInventarioAction" prefWidth="150.0" text="Objetos" GridPane.rowIndex="1" />
+            <Button fx:id="bestiarioButton" mnemonicParsing="false" onAction="#onOpenBestiarioAction" prefWidth="150.0" text="Bestiario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
-      </StackPane>
+      </GridPane>
    </center>
    <top>
       <HBox fx:id="tituloHBox" alignment="CENTER" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -49,7 +44,7 @@
    <bottom>
       <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackAction" text="Menú" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackAction" text="Volver al mapa" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

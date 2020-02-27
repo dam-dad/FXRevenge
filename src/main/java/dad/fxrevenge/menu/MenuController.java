@@ -15,8 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 
 /**
  * Componente que permite visualizar los enemigos que no son jefes
@@ -24,23 +24,33 @@ import javafx.scene.layout.StackPane;
  */
 public class MenuController extends BorderPane implements GameScene {
 
-	//model
 	private Avatar pj;
 	
-	//controladores
-	private AbilitiesController habilidades;
-	private BestiaryController bestiario;
-	private InventoryController inventario;
-	private PlayerController estadisticasJugador;
-	
+	private AbilitiesController habilidadesPane;
+	private BestiaryController bestiarioPane;
+	private InventoryController inventarioPane;
+	private PlayerController estadisticasPane;
+
 	@SuppressWarnings("unused")
 	private Scene scene;
 
-    @FXML
+	@FXML
     private BorderPane view;
 
     @FXML
-    private StackPane menuPane;
+    private GridPane botonesGrid;
+
+    @FXML
+    private Button estadisticasButton;
+
+    @FXML
+    private Button habilidadesButton;
+
+    @FXML
+    private Button objetosButton;
+
+    @FXML
+    private Button bestiarioButton;
 
     @FXML
     private HBox tituloHBox;
@@ -50,18 +60,40 @@ public class MenuController extends BorderPane implements GameScene {
 
     @FXML
     private Button backButton;
+    
+	@FXML
+	void onBackAction(ActionEvent event) {
+	}
 
-    @FXML
-    void onBackAction(ActionEvent event) {
+	@FXML
+	void onOpenAbilitiesButton(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void onOpenBestiarioAction(ActionEvent event) {
+	}
+
+	@FXML
+	void onOpenEstadisticasAction(ActionEvent event) {
+	}
+
+	@FXML
+	void onOpenInventarioAction(ActionEvent event) {
+	}
 
 	@Override
 	public void start() {
 
 		scene = new Scene(view);
-		
-		
+
+		try {
+			bestiarioPane = new BestiaryController();
+			estadisticasPane = new PlayerController(pj);
+			habilidadesPane = new AbilitiesController(pj);
+			inventarioPane = new InventoryController(pj);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -72,13 +104,8 @@ public class MenuController extends BorderPane implements GameScene {
 	 */
 	public MenuController(Avatar pj) throws IOException {
 		super();
-
 		this.pj=pj;
-		bestiario = new BestiaryController();
-		estadisticasJugador = new PlayerController(pj);
-		habilidades = new AbilitiesController(pj);
-		inventario = new InventoryController(pj);
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MenuView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);

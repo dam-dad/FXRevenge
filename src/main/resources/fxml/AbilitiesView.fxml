@@ -103,6 +103,11 @@
             </Button>
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackAction" text="Menú" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
                   <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onNextAction">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">

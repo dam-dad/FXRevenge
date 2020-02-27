@@ -68,6 +68,14 @@ public class InventoryController extends BorderPane implements GameScene {
 
 	@FXML
 	private Button nextButton;
+	
+	@FXML
+	private Button backButton;
+
+	@FXML
+	void onBackAction(ActionEvent event) {
+
+	}
 
 	@FXML
 	void onNextAction(ActionEvent event) {
@@ -107,7 +115,8 @@ public class InventoryController extends BorderPane implements GameScene {
 	private void bindeos() {
 		tituloLabel.setText(item.getName());
 		cantidadTextField.textProperty().bind(item.quantityProperty().asString());
-		precioTextField.textProperty().bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
+		precioTextField.textProperty()
+				.bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
 		itemImage.imageProperty().bind(item.iconProperty());
 
 		descripiconArea.setText(item.effectDescription(item));
@@ -122,7 +131,8 @@ public class InventoryController extends BorderPane implements GameScene {
 
 		tituloLabel.setText(item.getName());
 		cantidadTextField.textProperty().bind(item.quantityProperty().asString());
-		precioTextField.textProperty().bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
+		precioTextField.textProperty()
+				.bind(item.priceProperty().asString().concat(" / ").concat(item.priceProperty().divide(2).asString()));
 		itemImage.imageProperty().bind(item.iconProperty());
 
 		descripiconArea.setText(item.effectDescription(item));

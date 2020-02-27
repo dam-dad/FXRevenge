@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.GameScene;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -77,6 +79,14 @@ public class PlayerController extends BorderPane implements GameScene {
 
     @FXML
     private Label notaLabel;
+    
+	@FXML
+    private Button backButton;
+
+    @FXML
+    void onBackAction(ActionEvent event) {
+
+    }
 
 	@Override
 	public void start() {

@@ -68,12 +68,20 @@ public class AbilitiesController extends BorderPane implements GameScene {
 	@FXML
 	private Label tituloLabel;
 
-	@FXML
+    @FXML
 	private Button previousButton;
 
 	@FXML
 	private Button nextButton;
 
+	@FXML
+    private Button backButton;
+
+    @FXML
+    void onBackAction(ActionEvent event) {
+
+    }
+	
 	@FXML
 	void onNextAction(ActionEvent event) {
 		Skill nuevo = null;
