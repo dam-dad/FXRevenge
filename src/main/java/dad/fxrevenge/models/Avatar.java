@@ -154,10 +154,51 @@ public class Avatar extends Attributes {
 	 * @param item El objeto que se utilizara
 	 */
 	public void useItem(Item item) {
-		if (item.getEffect().equals(Effect.HealRestore)) {
-			this.setCurrentLife(this.getHealth());
-		} else {
-			this.setCurrentMana(this.getMana());
+		switch (item.getEffect()) {
+		case MiniHealRestore:
+			if (this.getCurrentLife() + this.getHealth() * 0.25 > this.getHealth()) {
+				this.setCurrentLife(this.getHealth());
+			} else {
+				this.setCurrentLife(((int) (this.getCurrentLife() + this.getHealth() * 0.25)));
+			}
+			break;
+		case HealRestore:
+			if (this.getCurrentLife() + this.getHealth() * 0.5 > this.getHealth()) {
+				this.setCurrentLife(this.getHealth());
+			} else {
+				this.setCurrentLife(((int) (this.getCurrentLife() + this.getHealth() * 0.5)));
+			}
+			break;
+		case MaxiHealRestore:
+			if (this.getCurrentLife() + this.getHealth() * 0.75 > this.getHealth()) {
+				this.setCurrentLife(this.getHealth());
+			} else {
+				this.setCurrentLife(((int) (this.getCurrentLife() + this.getHealth() * 0.75)));
+			}
+			break;
+		case MiniManaRestore:
+			if (this.getCurrentMana() + this.getMana() * 0.25 > this.getMana()) {
+				this.setCurrentMana(this.getMana());
+			} else {
+				this.setCurrentMana(((int) (this.getCurrentMana() + this.getMana() * 0.25)));
+			}
+			break;
+		case ManaRestore:
+			if (this.getCurrentMana() + this.getMana() * 0.5 > this.getMana()) {
+				this.setCurrentMana(this.getMana());
+			} else {
+				this.setCurrentMana(((int) (this.getCurrentMana() + this.getMana() * 0.5)));
+			}
+			break;
+		case MaxiManaRestore:
+			if (this.getCurrentMana() + this.getMana() * 0.75 > this.getMana()) {
+				this.setCurrentMana(this.getMana());
+			} else {
+				this.setCurrentMana(((int) (this.getCurrentMana() + this.getMana() * 0.75)));
+			}
+			break;
+		default: 
+			break;
 		}
 	}
 
@@ -340,11 +381,11 @@ public class Avatar extends Attributes {
 	}
 
 	private void comprar(Gear g) {
-		
+
 	}
 
 	private void comprar(Item it) {
-		
+
 	}
 
 	/**
@@ -395,7 +436,7 @@ public class Avatar extends Attributes {
 
 		}
 		this.setInventory(nuevos);
-		
+
 		return nuevos;
 	}
 
