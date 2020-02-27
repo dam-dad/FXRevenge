@@ -67,16 +67,19 @@
 }
 
 #tituloLabel{
-
-	/*-fx-border-color: blue ;
-    -fx-border-width: 5.0px ; 
-	-fx-border-radius: 5.0px;   
-    -fx-border-style: segments(10.0, 15.0, 15.0, 15.0)  line-cap round ;*/
-    
-    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 85% , #ffa420, #eccd6a);
+    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 40% , #FF5252, #eccd6a);
     -fx-text-fill:#663300;
     -fx-font-size: 30.0px;
     -fx-font-family: "Comic Sans MS";
+}
+
+#notaLabel{
+	-fx-border-color: brown ;
+    -fx-border-width: 2.0px ; 
+	-fx-border-radius: 2.0px;   
+    -fx-border-style: segments(10.0, 15.0, 15.0, 15.0)  line-cap round ;
+	-fx-text-fill:#663300; 
+	-fx-background-color:#D38300; 
 }
 
 .label{
