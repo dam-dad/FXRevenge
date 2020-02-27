@@ -1,5 +1,7 @@
 package dad.fxrevenge.models;
 
+import java.util.Arrays;
+
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -28,20 +30,8 @@ public class Vendor {
 	public Vendor (Image shop,Image world) {
 		this.shopSprite = shop;
 		this.worldSprite = world;
-	}
-	/**
-	 * Constructor sobrecargado
-	 * @param shop Imagen del vendedor en la tienda
-	 * @param world Imagen del vendedor en el mundoi
-	 * @param potNum Numero de pociones que tendra para vender
-	 * @param level Numero utilizado como modificador para escalar el nivel del equipamiento que genera el vendedor
-	 */
-	public Vendor (Image shop,Image world,int potNum, int level) {
-		this.shopSprite = shop;
-		this.worldSprite = world;
-		this.pots.addAll(new Item().generateVendorPotions(potNum));
-		//falta añadir equipo aleatorio
-		
+		this.pots.addAll(Arrays.asList(new Item().generatePotion(Effect.MiniHealRestore),new Item().generatePotion(Effect.HealRestore),new Item().generatePotion(Effect.MaxiHealRestore),
+				new Item().generatePotion(Effect.MiniManaRestore),new Item().generatePotion(Effect.ManaRestore),new Item().generatePotion(Effect.MaxiHealRestore)));
 	}
 	
 	//getters-setters

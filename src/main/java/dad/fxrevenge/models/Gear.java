@@ -9,10 +9,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Gear extends Attributes {
 	private GearPosition pos;
 	private IntegerProperty price = new SimpleIntegerProperty();
-	//añadir una funcion que genere item aleatorio
-	
 	/**
-	 * Constructor base de un equipo que setea todos su parametros a cero y solo
+	 * Constructor de un equipo que setea todos su parametros a cero y solo
 	 * añade un nombre al equipo
 	 * 
 	 * @param name Nombre de la pieza de equipamiento
@@ -29,41 +27,18 @@ public class Gear extends Attributes {
 		this.setCritChance(0);
 		this.setPrice(0);
 	}
-
+	
 	/**
-	 * Constructor base sobrecargado, en el cual se puede indicar ademas de el
-	 * nombre, la posicion del equipo
+	 * Constructor de equipamiento que permite generar equipo en funcion de un nivel,
+	 * una posicion de equipamiento y una clase de personaje
 	 * 
-	 * @param name Nombre del objeto
-	 * @param pos  Posicion en la que irá el objeto, obtenida del enumerado
-	 *             GearPosition
-	 */
-	public Gear(String name, GearPosition pos) {
-		this.setName(name);
-		this.setPos(pos);
-		this.setHealth(0);
-		this.setPhysDamage(0);
-		this.setPhysDef(0);
-		this.setMana(0);
-		this.setMagicDamage(0);
-		this.setMagicDef(0);
-		this.setLuck(0);
-		this.setCritChance(0);
-		this.setPrice(0);
-	}
-
-	/**
-	 * Constructor sobrecargado que ademas de indicar nombre y posicion también se
-	 * le puede indicar un nivel para que genere objetos acorde a un determinado
-	 * nivel del personaje
-	 * 
-	 * @param name  Nombre del objeto
 	 * @param level Modificador que aumenta la calidad del objeto asi como sus
 	 *              estadisticas
 	 * @param pos   Posicion del equipamiento que ocupa
+	 * @param job   Utilizado para generar un nombre de equipo adecuado a la clase
 	 */
-	public Gear(String name, int level, GearPosition pos) {
-		this.setName(name);
+	public Gear(int level, GearPosition pos, ClassType job) {
+		this.setName(this.generateGearName(pos, job));
 		this.setPos(pos);
 		this.setLevel(level);
 		this.setHealth((int) (Math.random() * level * 10));
@@ -82,7 +57,7 @@ public class Gear extends Attributes {
 	 * @param job Clase para la que se va a generar la pieza
 	 * @return Nombre de la pieza de equipamiento
 	 */
-	public String generateGearName(GearPosition pos, ClassType job) {
+	private String generateGearName(GearPosition pos, ClassType job) {
 		StringBuilder str = new StringBuilder();
 
 		ArrayList<String> casco = new ArrayList<String>();
@@ -175,7 +150,6 @@ public class Gear extends Attributes {
 		str.append(suffix.get(auxSec));
 		return str.toString();
 	}
-	
 
 	// getters - setters
 

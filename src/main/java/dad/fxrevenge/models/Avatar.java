@@ -382,12 +382,16 @@ public class Avatar extends Attributes {
 		}
 	}
 
-	private void comprar(Gear g) {
-
-	}
-
-	private void comprar(Item it) {
-
+	private void comprar(Item it, int cantidad) {
+		this.money.subtract(it.getPrice()*cantidad);
+		for (int i = 0; i < this.inventory.size(); i++) {
+			if (this.inventory.get(i).getEffect().equals(it.getEffect())) {
+				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity()+cantidad);
+			}  else {
+				it.setQuantity(cantidad);
+				this.inventory.add(it);
+			}
+		}
 	}
 
 	/**
