@@ -4,14 +4,12 @@ import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.ClassType;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
-public class IntroductionDialog extends DialogScene {
-	
-	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/background/introduction.png");
+public class IntroductionDialog extends DialogScene implements Parameters {
 	
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();
@@ -20,7 +18,7 @@ public class IntroductionDialog extends DialogScene {
 
 	@Override
 	public void start() {
-		setGraphics(dialogBackground, mainCharacter, javaGoddess);
+		setGraphics(mainCharacter, javaGoddess, BACKGROUND_INTRODUCTION);
 		super.start();
 	}
 	

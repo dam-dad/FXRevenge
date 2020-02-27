@@ -7,15 +7,11 @@ import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.image.Image;
 
-public class FXDialog extends DialogScene {
-	
-	private Avatar avatar;
-	// Imagen de fondo
-	private Image dialogBackground = new Image("/image/background/fx.png");
-	
+public class FXDialog extends DialogScene implements Parameters {
+
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
@@ -26,10 +22,10 @@ public class FXDialog extends DialogScene {
 
 	@Override
 	public void start() {
-		setGraphics(dialogBackground, player, fx);
+		setGraphics(player, fx, BACKGROUND_FX);
 		super.start();
 	}
-	
+
 	@Override
 	public void update() {
 		super.update();
@@ -44,27 +40,29 @@ public class FXDialog extends DialogScene {
 		case 1:
 			CharacterTalking(player, "(Aterrorizado) ¿Cómo? Vamos a morir.");
 			break;
-			
+
 		case 2:
-			CharacterTalking(fx, "¡Es broma! Hoy les voy a explicar la técnica secreta de Chuck Norris para derrotar a sus enemigos.");
+			CharacterTalking(fx,
+					"¡Es broma! Hoy les voy a explicar la técnica secreta de Chuck Norris para derrotar a sus enemigos.");
 			break;
-			
+
 		case 3:
-			CharacterTalking(fx, "¡Bindeos! Gracias a ellos es capaz de predecir los movimientos de sus atacantes y responder eficazmente.");
+			CharacterTalking(fx,
+					"¡Bindeos! Gracias a ellos es capaz de predecir los movimientos de sus atacantes y responder eficazmente.");
 			break;
-			
+
 		case 4:
 			CharacterTalking(player, "(Te asustas aún más)");
 			break;
-			
+
 		case 5:
 			CharacterTalking(fx, "¿Algún voluntario para hacer una demostración?");
 			break;
-			
+
 		case 6:
 			CharacterTalking(player, "(Sientes tanto miedo que agachas la cabeza suplicando clemencia)");
 			break;
-			
+
 		default:
 			try {
 				SceneManager.changeScene(new FXFight(avatar));

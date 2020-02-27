@@ -7,14 +7,10 @@ import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.image.Image;
 
-public class VDialog extends DialogScene {
-
-	private Avatar avatar;
-	// Imagen de fondo
-	private Image background = new Image("/image/background/v.png");
+public class VDialog extends DialogScene implements Parameters {
 
 	// Personajes
 	private Character player = CharacterList.getPlayer();
@@ -26,7 +22,7 @@ public class VDialog extends DialogScene {
 
 	@Override
 	public void start() {
-		setGraphics(background, player, v);
+		setGraphics(player, v, BACKGROUND_V);
 		super.start();
 	}
 
