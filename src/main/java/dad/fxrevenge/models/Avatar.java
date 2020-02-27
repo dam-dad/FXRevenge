@@ -112,6 +112,8 @@ public class Avatar extends Attributes {
 					new Item().generatePotion(Effect.MiniHealRestore));
 		}
 
+		this.setInventory(this.ordenarInventario());
+		
 		this.setCurrentLife(this.getHealth());
 		this.setCurrentMana(this.getMana());
 
@@ -416,6 +418,12 @@ public class Avatar extends Attributes {
 		boolean hay = false;
 		int pos = 0;
 
+		for(int i=0; i<objetosPj.size(); i++) {
+			if(objetosPj.get(i).getQuantity()<0) {
+				objetosPj.remove(i);
+			}
+		}
+		
 		for (int i = 0; i < objetosPj.size(); i++) {
 			for (int z = 0; z < nuevos.size(); z++) {
 				if (objetosPj.get(i).getName().equals(nuevos.get(z).getName())) {

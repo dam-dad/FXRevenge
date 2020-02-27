@@ -268,7 +268,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 									pj.setCurrentMana(pj.getCurrentMana() + mana);
 							}
 							pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
-
+							
 							if (cura != -1) {
 								eventArea.setText("Te has curado " + cura + " puntos de vida.");
 							} else if (mana != -1) {

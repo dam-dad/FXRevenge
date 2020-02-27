@@ -1,7 +1,7 @@
 package dad.fxrevenge.menu;
 
-public class PruebaMenuMain {
+public class MenuMain {
 	public static void main(String[] args) {
-		PruebaMenuApp.main(args);
+		MenuApp.main(args);
 	}
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/menu.css" type="BorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane fx:id="menuPane" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <GridPane fx:id="botonesGrid" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" vgap="5.0" StackPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="estadisticasButton" mnemonicParsing="false" onAction="#onOpenEstadisticasAction" prefWidth="150.0" text="Estadísticas" />
+                  <Button fx:id="habilidadesButton" mnemonicParsing="false" onAction="#onOpenAbilitiesButton" prefWidth="150.0" text="Habilidades" GridPane.columnIndex="1" />
+                  <Button fx:id="objetosButton" mnemonicParsing="false" onAction="#onOpenInventarioAction" prefWidth="150.0" text="Objetos" GridPane.rowIndex="1" />
+                  <Button fx:id="bestiarioButton" mnemonicParsing="false" onAction="#onOpenBestiarioAction" prefWidth="150.0" text="Bestiario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
+   </center>
+   <top>
+      <HBox fx:id="tituloHBox" alignment="CENTER" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <Label fx:id="tituloLabel" text="Menú" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackAction" text="Menú" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</fx:root>
