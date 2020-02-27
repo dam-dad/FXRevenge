@@ -368,7 +368,7 @@ public class Avatar extends Attributes {
 		this.setMagicDef(this.getMagicDef() - oldGear.getMagicDef() + newGear.getMagicDef());
 	}
 
-	public ObservableList<Item> listarInventario() {
+	public ObservableList<Item> ordenarInventario() {
 
 		ArrayList<Item> objetosPj = new ArrayList<Item>(this.getInventory());
 		ObservableList<Item> nuevos = new SimpleListProperty<Item>(this, "nuevos", FXCollections.observableArrayList());
@@ -394,7 +394,8 @@ public class Avatar extends Attributes {
 			pos = 0;
 
 		}
-
+		this.setInventory(nuevos);
+		
 		return nuevos;
 	}
 

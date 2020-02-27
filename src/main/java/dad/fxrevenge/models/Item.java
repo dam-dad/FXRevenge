@@ -192,17 +192,6 @@ public class Item {
 		return getName()+" x"+getQuantity();
 	}
 	
-	//Esta funcion es meramente para las pruebas
-	public String verItem() {
-		return "Item [icon=" + icon + ", name=" + name + ", quantity=" + quantity + ", price=" + price + ", effect="
-				+ effect + "]";
-	}
-	//Esta funcion se implemento para las pruebas
-	public Item doyImagen(Image icon) {
-		this.setIcon(icon);
-		return this;
-	}
-	
 	public final ObjectProperty<Image> iconProperty() {
 		return this.icon;
 	}

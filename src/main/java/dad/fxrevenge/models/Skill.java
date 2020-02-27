@@ -173,12 +173,6 @@ public class Skill {
 	public String toString() {
 		return getName() + " (" + getCost() + ")";
 	}
-
-	public String verTodo() {
-		return "Skill [name=" + name + ", cost=" + cost + ", unlockLevel=" + unlockLevel + ", Damage=" + Damage
-				+ ", DamageType=" + DamageType + ", DamageMultiplier=" + DamageMultiplier + ", AddCritChance="
-				+ AddCritChance + "]";
-	}
 	
 	public final IntegerProperty unlockLevelProperty() {
 		return this.unlockLevel;

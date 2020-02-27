@@ -125,7 +125,7 @@ public class InventoryController extends BorderPane implements GameScene {
 	public InventoryController(Avatar pj) throws IOException {
 		super();
 
-		listaItems = new SimpleListProperty<Item>(pj.listarInventario());
+		listaItems = new SimpleListProperty<Item>(pj.ordenarInventario());
 		item = listaItems.get(0);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/InventoryView.fxml"));

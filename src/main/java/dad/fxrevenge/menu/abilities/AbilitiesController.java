@@ -109,11 +109,16 @@ public class AbilitiesController extends BorderPane implements GameScene {
 		costeText.textProperty().bind(ability.costProperty().asString());
 		nivelText.textProperty().bind(ability.unlockLevelProperty().asString());
 		danioText.textProperty().bind(
-				ability.DamageProperty().asString().concat("+").concat(ability.DamageMultiplierProperty().asString()));
+				
+				Bindings.when(ability.DamageTypeProperty().isEqualTo(new SimpleBooleanProperty(false)))
+				.then(ability.DamageProperty().add(ability.DamageMultiplierProperty().multiply(magia).intValue()))
+				.otherwise(ability.DamageProperty().add(ability.DamageMultiplierProperty().multiply(ataque).intValue())).asString()
+				
+				);
 
 		fisicoLabel.textProperty()
-				.bind(Bindings.when(ability.DamageTypeProperty().isEqualTo(new SimpleBooleanProperty(false))).then("No")
-						.otherwise("Sí"));
+				.bind(Bindings.when(ability.DamageTypeProperty().isEqualTo(new SimpleBooleanProperty(false))).then("Mágico")
+						.otherwise("Físico"));
 
 //		descriptionArea.setText(ability.effectDescription(ability));
 	}

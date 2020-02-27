@@ -41,7 +41,12 @@
                         <TextField fx:id="costeText" alignment="CENTER_RIGHT" editable="false" prefWidth="50.0" GridPane.columnIndex="1" />
                         <Label text="Tipo de daño:" GridPane.rowIndex="3" />
                         <Label text="Coste:" />
-                        <Label text="Nivel desbloqueo:" GridPane.rowIndex="1" />
+                        <VBox GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Nivel de" />
+                              <Label text="aprendizaje:" />
+                           </children>
+                        </VBox>
                         <Label text="Daño:" GridPane.rowIndex="2" />
                         <TextField fx:id="nivelText" alignment="CENTER_RIGHT" editable="false" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="danioText" alignment="CENTER_RIGHT" editable="false" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
