@@ -118,7 +118,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(12*nivel);
 			this.setMagicDef(10*nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/m.png").toString())); //cambiar a combatsprite del boss
 			this.setDescription("");
 
 			this.setExp(500);
@@ -132,7 +132,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(10*nivel);
 			this.setMagicDef(13*nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/v.png").toString())); //cambiar a combatsprite del boss
 			this.setDescription("");
 
 			this.setExp(700);
@@ -146,7 +146,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(13*nivel);
 			this.setMagicDef(13*nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/c.png").toString())); //cambiar a combatsprite del boss
 			this.setDescription("");
 
 			this.setExp(900);
@@ -160,7 +160,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(15*nivel);
 			this.setMagicDef(15*nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/fx.png").toString())); //cambiar a combatsprite del boss
 			this.setDescription("");
 
 			this.setExp(3000);

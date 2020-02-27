@@ -7,7 +7,6 @@ import java.util.Optional;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Item;
-import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.Parameters;
@@ -130,15 +129,18 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 					eventArea.getText() + "\nHas infligido " + enemy.recibeDaño(damage, true) + " puntos de daño.");
 		}
 //DROPEO DE ITEM Y GEAR		
-		if (enemy.getCurrentLife() == 0) {
-			if (enemy.getRace().equals(Race.Boss)) {
-				pj.equipar(enemy.getGearDrop());
-			} else {
+		if (enemy.getCurrentLife() <= 0) {
+//			if (enemy.getRace().equals(Race.Boss)) {
+//				pj.equipar(enemy.getGearDrop());
+//			}
 
-			}
-
+			victory();
 		}
 
+	}
+
+	protected void victory() {
+		// Enemigo derrotado. Hacer override al heredar
 	}
 
 	/**
@@ -430,6 +432,13 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	}
 
+	public CombatController() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CombatView.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		loader.load();
+	}
+
 	/**
 	 * 
 	 * @param pj    avatar que se enfrentará al enemigo
@@ -513,8 +522,19 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 
+	}
+
+	public void setPj(Avatar pj) {
+		this.pj = pj;
+	}
+
+	public void setEnemy(Enemy enemy) {
+		this.enemy = enemy;
+	}
+
+	public void setBackgroundImage(Image backgroundImage) {
+		this.backgroundImage = backgroundImage;
 	}
 
 }

@@ -1,5 +1,7 @@
 package dad.fxrevenge.boss;
 
+import java.io.IOException;
+
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
@@ -33,7 +35,8 @@ public class MDialog extends DialogScene {
 			break;
 
 		case 1:
-			CharacterTalking(m, "Hoy voy a explicar los hechizos sincronizados, son muy prácticos pero no los más poderosos.");
+			CharacterTalking(m,
+					"Hoy voy a explicar los hechizos sincronizados, son muy prácticos pero no los más poderosos.");
 			break;
 
 		case 2:
@@ -53,7 +56,11 @@ public class MDialog extends DialogScene {
 			break;
 
 		default:
-			SceneManager.changeScene(new MMap());
+			try {
+				SceneManager.changeScene(new MFight());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 
 		}
