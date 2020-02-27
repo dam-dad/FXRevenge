@@ -25,8 +25,9 @@ public class VFight extends CombatController {
 
 	// FIN COSITAS DEL COMBATE
 
-	public VFight() throws IOException {
+	public VFight(Avatar avatar) throws IOException {
 		super();
+		this.pj=avatar;
 	}
 
 	@Override

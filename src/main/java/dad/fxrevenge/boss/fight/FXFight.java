@@ -25,8 +25,9 @@ public class FXFight extends CombatController {
 
 	// FIN COSITAS DEL COMBATE
 
-	public FXFight() throws IOException {
+	public FXFight(Avatar avatar) throws IOException {
 		super();
+		this.pj=avatar;
 	}
 
 	@Override

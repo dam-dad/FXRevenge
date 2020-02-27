@@ -24,7 +24,7 @@ public class TestApp extends Application {
 		mainStage.setWidth(800);
 		mainStage.setHeight(600);
 		
-		SceneManager.changeScene(new VDialog());
+//		SceneManager.changeScene(new VDialog());
 		
 		mainStage.setTitle("FX Revenge");
 		mainStage.setResizable(false);

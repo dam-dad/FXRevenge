@@ -25,8 +25,9 @@ public class CFight extends CombatController {
 
 	// FIN COSITAS DEL COMBATE
 
-	public CFight() throws IOException {
+	public CFight(Avatar avatar) throws IOException {
 		super();
+		this.pj=avatar;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.VFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
@@ -14,6 +15,10 @@ public class VDialog extends DialogScene implements Parameters {
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character v = CharacterList.getV();
+
+	public VDialog(Avatar avatar) {
+		this.avatar=avatar;
+	}
 
 	@Override
 	public void start() {
@@ -50,7 +55,7 @@ public class VDialog extends DialogScene implements Parameters {
 
 		default:
 			try {
-				SceneManager.changeScene(new VFight());
+				SceneManager.changeScene(new VFight(avatar));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

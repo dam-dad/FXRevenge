@@ -15,8 +15,6 @@ public class WorldMapModel {
 	private IntegerProperty heigth = new SimpleIntegerProperty();
 	private IntegerProperty widthCanvas = new SimpleIntegerProperty();
 	private IntegerProperty heigthCanvas = new SimpleIntegerProperty();
-	private IntegerProperty maxLevel = new SimpleIntegerProperty();
-	private IntegerProperty minLevel = new SimpleIntegerProperty();
 	private ArrayList<Race> races=new ArrayList<Race>();
 	private Avatar avatar;
 
@@ -97,6 +95,14 @@ public class WorldMapModel {
 
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
+	}
+
+	public ArrayList<Race> getRaces() {
+		return races;
+	}
+
+	public void setRaces(ArrayList<Race> races) {
+		this.races = races;
 	}
 
 }

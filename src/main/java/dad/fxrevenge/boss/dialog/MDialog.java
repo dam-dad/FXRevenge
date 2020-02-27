@@ -5,6 +5,7 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.MFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
@@ -14,6 +15,10 @@ public class MDialog extends DialogScene implements Parameters {
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character m = CharacterList.getM();
+
+	public MDialog(Avatar avatar) {
+		this.avatar=avatar;
+	}
 
 	@Override
 	public void start() {
@@ -55,7 +60,7 @@ public class MDialog extends DialogScene implements Parameters {
 
 		default:
 			try {
-				SceneManager.changeScene(new MFight());
+				SceneManager.changeScene(new MFight(avatar));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
