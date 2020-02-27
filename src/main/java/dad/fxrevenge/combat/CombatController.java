@@ -141,6 +141,14 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	protected void victory() {
 		// Enemigo derrotado. Hacer override al heredar
+		int DropGearProc = (int) Math.random()*100;
+		if(DropGearProc>90) {
+			pj.equipar(enemy.getGearDrop());
+		} else {
+			
+		}
+		pj.sumarexp(enemy.getExpDrop());
+		pj.setMoney(pj.getMoney()+enemy.getMoneyDrop());
 	}
 
 	/**
