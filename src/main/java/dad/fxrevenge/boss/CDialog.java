@@ -1,5 +1,7 @@
 package dad.fxrevenge.boss;
 
+import java.io.IOException;
+
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
@@ -54,7 +56,11 @@ public class CDialog extends DialogScene {
 			break;
 
 		default:
-			SceneManager.changeScene(new CMap());
+			try {
+				SceneManager.changeScene(new CFight());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 
 		}

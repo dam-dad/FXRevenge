@@ -1,5 +1,7 @@
 package dad.fxrevenge.boss;
 
+import java.io.IOException;
+
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
@@ -57,7 +59,11 @@ public class FXDialog extends DialogScene {
 			break;
 			
 		default:
-			SceneManager.changeScene(new FXMap());
+			try {
+				SceneManager.changeScene(new FXFight());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 
 		}
