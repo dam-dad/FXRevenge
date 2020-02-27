@@ -10,7 +10,7 @@ import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
 
 public class CDialog extends DialogScene implements Parameters {
-	
+
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character c = CharacterList.getC();
