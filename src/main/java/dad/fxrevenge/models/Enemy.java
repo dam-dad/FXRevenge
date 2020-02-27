@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 
 //añadir seteo de apariencia en constructor
-//añadir a RACE los bosses individuales
 //añadir generacion de item o gear para posible dropeo
 public class Enemy extends Attributes {
 	private Race race;
@@ -20,7 +19,7 @@ public class Enemy extends Attributes {
 	private String description;
 	private IntegerProperty exp = new SimpleIntegerProperty();
 	private IntegerProperty money = new SimpleIntegerProperty();
-	
+
 	/**
 	 * Constructor de los personajes enemigos donde se especifican varios valores
 	 * 
@@ -88,13 +87,12 @@ public class Enemy extends Attributes {
 			this.setMagicDef(8 * nivel);
 
 			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_skeleton.png").toString()));
-			this.setDescription(
-					"Difuntos soldados que patrullan esperando pillarte.");
+			this.setDescription("Difuntos soldados que patrullan esperando pillarte.");
 
 			this.setExp(25);
 			this.setMoney(1);
 			break;
-			
+
 		case Zombie:
 
 //			this.setName("Me caigo a trozos");
@@ -106,13 +104,69 @@ public class Enemy extends Attributes {
 			this.setMagicDef(5 * nivel);
 
 			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString()));
-			this.setDescription("Se momificaron porque cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
+			this.setDescription(
+					"Se momificaron porque cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
 
 			this.setExp(5);
 			this.setMoney(15);
 			break;
+		case Eme: //decidir si pega fisico o magico y cambiar acorde a esas stats
+			this.setName(race.toString()); //cambiar a nombre verdadero del boss
+			this.setHealth(230*nivel);
+			this.setPhysDamage(12*nivel);
+			this.setPhysDef(10*nivel);
+			this.setMagicDamage(12*nivel);
+			this.setMagicDef(10*nivel);
 
-		default: // creacion de bosses
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setDescription("");
+
+			this.setExp(500);
+			this.setMoney(90);
+			break;
+		case Uve:
+			this.setName(race.toString()); //cambiar a nombre verdadero del boss
+			this.setHealth(250*nivel);
+			this.setPhysDamage(10*nivel);
+			this.setPhysDef(13*nivel);
+			this.setMagicDamage(10*nivel);
+			this.setMagicDef(13*nivel);
+
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setDescription("");
+
+			this.setExp(700);
+			this.setMoney(100);
+			break;
+		case Ce:
+			this.setName(race.toString()); //cambiar a nombre verdadero del boss
+			this.setHealth(270*nivel);
+			this.setPhysDamage(13*nivel);
+			this.setPhysDef(13*nivel);
+			this.setMagicDamage(13*nivel);
+			this.setMagicDef(13*nivel);
+
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setDescription("");
+
+			this.setExp(900);
+			this.setMoney(110);
+			break;
+		case EfeEquis:
+			this.setName(race.toString()); //cambiar a nombre verdadero del boss
+			this.setHealth(300*nivel);
+			this.setPhysDamage(15*nivel);
+			this.setPhysDef(15*nivel);
+			this.setMagicDamage(15*nivel);
+			this.setMagicDef(15*nivel);
+
+			this.setCombatSprite(new Image(getClass().getResource("/image/monsters/monster_zombie.png").toString())); //cambiar a combatsprite del boss
+			this.setDescription("");
+
+			this.setExp(3000);
+			this.setMoney(900);
+			break;
+		default: // nunca se deberia de meter aqui
 
 //			this.setName("Estoy mamadísimo");
 //			this.setName(race.toString());
@@ -127,10 +181,10 @@ public class Enemy extends Attributes {
 			break;
 		}
 
-		if (!raza.equals(Race.Boss) && !raza.equals(Race.Jelly))
-			this.setMoneyDrop(getMoney() + nivel);
-		this.setExpDrop(this.getExp() * nivel);
-		this.setCurrentLife(this.getHealth());
+//		if (!raza.equals(Race.Boss) && !raza.equals(Race.Jelly))
+//			this.setMoneyDrop(getMoney() + nivel);
+//		this.setExpDrop(this.getExp() * nivel);
+//		this.setCurrentLife(this.getHealth());
 	}
 
 	public Gear getGearDrop() {
@@ -167,7 +221,7 @@ public class Enemy extends Attributes {
 
 		int danyo = this.getPhysDamage();
 
-		if (!this.race.equals(Race.Boss)) {
+		if (!this.race.equals(Race.EfeEquis) || !this.race.equals(Race.Ce) || !this.race.equals(Race.Uve) || !this.race.equals(Race.Eme)) {
 			return danyo;
 		} else {
 			return (int) (danyo * 1.1);
@@ -186,7 +240,7 @@ public class Enemy extends Attributes {
 	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 
-		if (this.race.equals(Race.Boss))
+		if (this.race.equals(Race.EfeEquis) || !this.race.equals(Race.Ce) || !this.race.equals(Race.Uve) || !this.race.equals(Race.Eme))
 			danyo *= 0.75;
 
 		if (fisico) {
@@ -210,87 +264,70 @@ public class Enemy extends Attributes {
 	public final IntegerProperty expDropProperty() {
 		return this.expDrop;
 	}
-	
 
 	public final int getExpDrop() {
 		return this.expDropProperty().get();
 	}
-	
 
 	public final void setExpDrop(final int expDrop) {
 		this.expDropProperty().set(expDrop);
 	}
-	
 
 	public final IntegerProperty moneyDropProperty() {
 		return this.moneyDrop;
 	}
-	
 
 	public final int getMoneyDrop() {
 		return this.moneyDropProperty().get();
 	}
-	
 
 	public final void setMoneyDrop(final int moneyDrop) {
 		this.moneyDropProperty().set(moneyDrop);
 	}
-	
 
 	public final ObjectProperty<Image> combatSpriteProperty() {
 		return this.combatSprite;
 	}
-	
 
 	public final Image getCombatSprite() {
 		return this.combatSpriteProperty().get();
 	}
-	
 
 	public final void setCombatSprite(final Image combatSprite) {
 		this.combatSpriteProperty().set(combatSprite);
 	}
-	
 
 	public final ObjectProperty<Image> worldSpriteProperty() {
 		return this.worldSprite;
 	}
-	
 
 	public final Image getWorldSprite() {
 		return this.worldSpriteProperty().get();
 	}
-	
 
 	public final void setWorldSprite(final Image worldSprite) {
 		this.worldSpriteProperty().set(worldSprite);
 	}
-	
 
 	public final IntegerProperty expProperty() {
 		return this.exp;
 	}
-	
 
 	public final int getExp() {
 		return this.expProperty().get();
 	}
-	
 
 	public final void setExp(final int exp) {
 		this.expProperty().set(exp);
 	}
-	
 
 	public final IntegerProperty moneyProperty() {
 		return this.money;
 	}
-	
 
 	public final int getMoney() {
 		return this.moneyProperty().get();
 	}
-	
 
 	public final void setMoney(final int money) {
 		this.moneyProperty().set(money);
@@ -300,8 +337,8 @@ public class Enemy extends Attributes {
 		// TODO Auto-generated method stub
 		return this.race;
 	}
-	
+
 	public void setRace(Race race) {
-		this.race=race;
-	}	
+		this.race = race;
+	}
 }
