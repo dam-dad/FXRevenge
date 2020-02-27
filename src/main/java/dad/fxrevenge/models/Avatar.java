@@ -340,11 +340,11 @@ public class Avatar extends Attributes {
 	}
 
 	private void comprar(Gear g) {
-
+		
 	}
 
 	private void comprar(Item it) {
-
+		
 	}
 
 	/**
