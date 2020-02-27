@@ -110,7 +110,7 @@ public class Enemy extends Attributes {
 			this.setExp(5);
 			this.setMoney(15);
 			break;
-		case Eme: //decidir si pega fisico o magico y cambiar acorde a esas stats
+		case M: //decidir si pega fisico o magico y cambiar acorde a esas stats
 			this.setName(race.toString()); //cambiar a nombre verdadero del boss
 			this.setHealth(230*nivel);
 			this.setPhysDamage(12*nivel);
@@ -124,7 +124,7 @@ public class Enemy extends Attributes {
 			this.setExp(500);
 			this.setMoney(90);
 			break;
-		case Uve:
+		case V:
 			this.setName(race.toString()); //cambiar a nombre verdadero del boss
 			this.setHealth(250*nivel);
 			this.setPhysDamage(10*nivel);
@@ -138,7 +138,7 @@ public class Enemy extends Attributes {
 			this.setExp(700);
 			this.setMoney(100);
 			break;
-		case Ce:
+		case C:
 			this.setName(race.toString()); //cambiar a nombre verdadero del boss
 			this.setHealth(270*nivel);
 			this.setPhysDamage(13*nivel);
@@ -152,7 +152,7 @@ public class Enemy extends Attributes {
 			this.setExp(900);
 			this.setMoney(110);
 			break;
-		case EfeEquis:
+		case FX:
 			this.setName(race.toString()); //cambiar a nombre verdadero del boss
 			this.setHealth(300*nivel);
 			this.setPhysDamage(15*nivel);
@@ -221,7 +221,7 @@ public class Enemy extends Attributes {
 
 		int danyo = this.getPhysDamage();
 
-		if (!this.race.equals(Race.EfeEquis) || !this.race.equals(Race.Ce) || !this.race.equals(Race.Uve) || !this.race.equals(Race.Eme)) {
+		if (!this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V) || !this.race.equals(Race.M)) {
 			return danyo;
 		} else {
 			return (int) (danyo * 1.1);
@@ -240,7 +240,7 @@ public class Enemy extends Attributes {
 	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 
-		if (this.race.equals(Race.EfeEquis) || !this.race.equals(Race.Ce) || !this.race.equals(Race.Uve) || !this.race.equals(Race.Eme))
+		if (this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V) || !this.race.equals(Race.M))
 			danyo *= 0.75;
 
 		if (fisico) {

@@ -4,5 +4,5 @@ package dad.fxrevenge.models;
  * 
  */
 public enum Race {
-	Skeleton, Jelly, Orc, Zombie, Demon, Eme, Uve, Ce, EfeEquis;
+	Skeleton, Jelly, Orc, Zombie, Demon, M, V, C, FX;
 }
