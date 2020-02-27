@@ -22,6 +22,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Componente que permite visualizar la lista de habilidades que tiene aprendida el personaje
+ */
 public class AbilitiesController extends BorderPane implements GameScene {
 
 	// model
@@ -103,6 +106,9 @@ public class AbilitiesController extends BorderPane implements GameScene {
 		bindeos();
 	}
 
+	/**
+	 * Funcion para bindear de nuevo los datos tras el cambio de objeto
+	 */
 	private void bindeos() {
 
 		tituloLabel.setText(ability.getName());
@@ -147,7 +153,13 @@ public class AbilitiesController extends BorderPane implements GameScene {
 
 //		descriptionArea.setText(ability.effectDescription(ability));
 	}
-
+	
+	/**
+	 * Constructor que carga las habilidades a visualizar
+	 * 
+	 * @param pj Personaje de donde cogemos las habilidades
+	 * @throws IOException Si ocurre algún error durante la carga del archivo
+	 */
 	public AbilitiesController(Avatar pj) throws IOException {
 		super();
 

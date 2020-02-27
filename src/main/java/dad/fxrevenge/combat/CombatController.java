@@ -44,8 +44,6 @@ import javafx.stage.Popup;
 /**
  * Clase java, que actua como componente JavaFX que permite emular un combate
  * entre un avatar y un enemigo
- * 
- * @author Adan
  *
  */
 public class CombatController extends BorderPane implements GameScene, Parameters {

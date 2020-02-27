@@ -2,8 +2,6 @@ package dad.fxrevenge.menu.bestiary;
 
 /**
  * Clase de pruebas para el componente BestiaryController
- * @author Adan
- *
  */
 public class BestiaryMain {
 	

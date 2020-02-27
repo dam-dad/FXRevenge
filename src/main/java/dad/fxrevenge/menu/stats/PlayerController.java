@@ -15,6 +15,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Componente que visualiza los atributos del personaje
+ *
+ */
 public class PlayerController extends BorderPane implements GameScene {
 
 	//model
@@ -96,6 +100,12 @@ public class PlayerController extends BorderPane implements GameScene {
 		
 	}
 
+	/**
+	 * Construtor que carga el fxml para la vista de la app con los datos del avatar
+	 * 
+	 * @param pj Personaje del que visualizamos los atributos
+	 * @throws IOException Si ocurre algún error durante la carga del archivo
+	 */
 	public PlayerController(Avatar pj) throws IOException {
 		super();
 

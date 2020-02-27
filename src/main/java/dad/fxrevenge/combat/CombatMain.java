@@ -2,7 +2,6 @@ package dad.fxrevenge.combat;
 
 /**
  * Clase de pruebas para el componente CombatController
- * @author Adan
  *
  */
 public class CombatMain {

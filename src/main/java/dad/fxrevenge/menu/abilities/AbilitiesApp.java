@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Clase que lanzará una prueba de BestiaryController para su testeo
+ * Clase que lanzará una prueba de AbiiltiesController para su testeo
  * 
  * @author Adan
  *
@@ -36,7 +36,7 @@ public class AbilitiesApp extends Application {
 	}
 
 	/**
-	 * Ejecutamos para que la app aparezca y con ello el combate
+	 * Ejecutamos para que la app aparezca y con ello las habilidades
 	 * 
 	 * @param args parametros necesario para el lanzamiento de la app
 	 */

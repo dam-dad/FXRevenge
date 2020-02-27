@@ -1,14 +1,13 @@
 package dad.fxrevenge.menu.abilities;
 
 /**
- * Clase de pruebas para el componente BestiaryController
- * @author Adan
+ * Clase de pruebas para el componente AbiiltiesController
  *
  */
 public class AbilitiesMain {
 	
 	/**
-	 * Llamada a la clase que lanzará el BestiaryController
+	 * Llamada a la clase que lanzará el AbilitiesController
 	 * @param args
 	 */
 	public static void main(String[] args) {

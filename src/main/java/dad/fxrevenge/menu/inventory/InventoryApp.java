@@ -11,9 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Clase que lanzará una prueba de BestiaryController para su testeo
- * 
- * @author Adan
+ * Clase que lanzará una prueba de InventarioController para su testeo
  *
  */
 public class InventoryApp extends Application {
@@ -26,8 +24,9 @@ public class InventoryApp extends Application {
 		Avatar pj = new Avatar(new Image(getClass().getResource("/image/characters/mage_fIco.png").toExternalForm()),
 				ClassType.Archmage, Skill.generateClassSkills(ClassType.Archmage), "Veronica");
 
-		pj.getInventory().addAll(new Item().generatePotion(Effect.MaxiHealRestore), new Item().generatePotion(Effect.MiniHealRestore), new Item().generatePotion(Effect.MaxiManaRestore));
-		
+		pj.getInventory().addAll(new Item().generatePotion(Effect.MaxiHealRestore),
+				new Item().generatePotion(Effect.MiniHealRestore), new Item().generatePotion(Effect.MaxiManaRestore));
+
 		controller = new InventoryController(pj);
 
 		SceneManager.setMainStage(primaryStage);
@@ -40,7 +39,7 @@ public class InventoryApp extends Application {
 	}
 
 	/**
-	 * Ejecutamos para que la app aparezca y con ello el combate
+	 * Ejecutamos para que la app aparezca y con ello el inventario
 	 * 
 	 * @param args parametros necesario para el lanzamiento de la app
 	 */

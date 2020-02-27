@@ -24,12 +24,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Componente que permite visualizar los enemigos que no son jefes
+ * 
+ */
 public class BestiaryController extends BorderPane implements GameScene {
 
 	// model
 	private SimpleListProperty<Enemy> listaBichos = new SimpleListProperty<Enemy>(this, "listaBichos",
 			FXCollections.observableArrayList());
-	
+
 	@SuppressWarnings("unused")
 	private Scene scene;
 
@@ -103,6 +107,9 @@ public class BestiaryController extends BorderPane implements GameScene {
 		bindeos();
 	}
 
+	/**
+	 * Funcion para bindear de nuevo los datos tras el cambio de enemigo
+	 */
 	private void bindeos() {
 		tituloLabel.setText(enemy.getRace().toString());
 		enemy.levelProperty().bind(level.valueProperty());
@@ -116,7 +123,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 
 	@Override
 	public void start() {
-		
+
 		scene = new Scene(view);
 
 		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
@@ -134,11 +141,16 @@ public class BestiaryController extends BorderPane implements GameScene {
 		descripiconArea.setText(enemy.getDescription());
 	}
 
+	/**
+	 * Constructor que genera la lista de enemigos para visualizarlos
+	 * 
+	 * @throws IOException Si ocurre algún error durante la carga del archivo
+	 */
 	public BestiaryController() throws IOException {
 		super();
-		
+
 		for (Race r : Race.values()) {
-			if (!r.equals(Race.Boss))
+			if (!r.equals(Race.M) || !r.equals(Race.V) || !r.equals(Race.C) || !r.equals(Race.FX))
 				listaBichos.add(new Enemy(r, 1));
 		}
 		this.enemy = listaBichos.get(0);
@@ -168,7 +180,7 @@ public class BestiaryController extends BorderPane implements GameScene {
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

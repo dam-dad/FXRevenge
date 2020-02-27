@@ -2,8 +2,6 @@ package dad.fxrevenge.menu.stats;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.ClassType;
-import dad.fxrevenge.models.Effect;
-import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
@@ -11,9 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Clase que lanzará una prueba de BestiaryController para su testeo
- * 
- * @author Adan
+ * Clase que lanzará una prueba de PlayerController para su testeo
  *
  */
 public class PlayerApp extends Application {
@@ -38,7 +34,7 @@ public class PlayerApp extends Application {
 	}
 
 	/**
-	 * Ejecutamos para que la app aparezca y con ello el combate
+	 * Ejecutamos para que la app aparezca y con ello los atributos del personaje
 	 * 
 	 * @param args parametros necesario para el lanzamiento de la app
 	 */

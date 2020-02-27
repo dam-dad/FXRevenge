@@ -22,6 +22,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Componente que permite ver los objetos del inventario de un personaje
+ */
 public class InventoryController extends BorderPane implements GameScene {
 
 	// model
@@ -98,6 +101,9 @@ public class InventoryController extends BorderPane implements GameScene {
 		bindeos();
 	}
 
+	/**
+	 * Funcion para bindear de nuevo los datos tras el cambio de objeto
+	 */
 	private void bindeos() {
 		tituloLabel.setText(item.getName());
 		cantidadTextField.textProperty().bind(item.quantityProperty().asString());
@@ -122,6 +128,12 @@ public class InventoryController extends BorderPane implements GameScene {
 		descripiconArea.setText(item.effectDescription(item));
 	}
 
+	/**
+	 * Constructor que carga el inventario a visualizar
+	 * 
+	 * @param pj Personaje de donde cogemos el inventario
+	 * @throws IOException Si ocurre algún error durante la carga del archivo
+	 */
 	public InventoryController(Avatar pj) throws IOException {
 		super();
 

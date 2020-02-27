@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 
 /**
  * Clase que lanzará una prueba de CombatController para su testeo
- * 
- * @author Adan
  *
  */
 public class CombatApp extends Application {

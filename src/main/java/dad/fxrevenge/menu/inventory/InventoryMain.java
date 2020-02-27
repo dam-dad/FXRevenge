@@ -1,14 +1,13 @@
 package dad.fxrevenge.menu.inventory;
 
 /**
- * Clase de pruebas para el componente BestiaryController
- * @author Adan
+ * Clase de pruebas para el componente InventarioController
  *
  */
 public class InventoryMain {
 	
 	/**
-	 * Llamada a la clase que lanzará el BestiaryController
+	 * Llamada a la clase que lanzará el InventarioController
 	 * @param args
 	 */
 	public static void main(String[] args) {
