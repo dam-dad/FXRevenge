@@ -110,57 +110,73 @@ public class Enemy extends Attributes {
 			this.setExp(5);
 			this.setMoney(15);
 			break;
-		case M: //decidir si pega fisico o magico y cambiar acorde a esas stats
-			this.setName(race.toString()); //cambiar a nombre verdadero del boss
-			this.setHealth(230*nivel);
-			this.setPhysDamage(12*nivel);
-			this.setPhysDef(10*nivel);
-			this.setMagicDamage(12*nivel);
-			this.setMagicDef(10*nivel);
+		case M: // decidir si pega fisico o magico y cambiar acorde a esas stats
+			this.setName(race.toString()); // cambiar a nombre verdadero del boss
+			this.setHealth(230 * nivel);
+			this.setPhysDamage(12 * nivel);
+			this.setPhysDef(10 * nivel);
+			this.setMagicDamage(12 * nivel);
+			this.setMagicDef(10 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/m.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/m.png").toString())); // cambiar
+																													// a
+																													// combatsprite
+																													// del
+																													// boss
 			this.setDescription("");
 
 			this.setExp(500);
 			this.setMoney(90);
 			break;
 		case V:
-			this.setName(race.toString()); //cambiar a nombre verdadero del boss
-			this.setHealth(250*nivel);
-			this.setPhysDamage(10*nivel);
-			this.setPhysDef(13*nivel);
-			this.setMagicDamage(10*nivel);
-			this.setMagicDef(13*nivel);
+			this.setName(race.toString()); // cambiar a nombre verdadero del boss
+			this.setHealth(250 * nivel);
+			this.setPhysDamage(10 * nivel);
+			this.setPhysDef(13 * nivel);
+			this.setMagicDamage(10 * nivel);
+			this.setMagicDef(13 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/v.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/v.png").toString())); // cambiar
+																													// a
+																													// combatsprite
+																													// del
+																													// boss
 			this.setDescription("");
 
 			this.setExp(700);
 			this.setMoney(100);
 			break;
 		case C:
-			this.setName(race.toString()); //cambiar a nombre verdadero del boss
-			this.setHealth(270*nivel);
-			this.setPhysDamage(13*nivel);
-			this.setPhysDef(13*nivel);
-			this.setMagicDamage(13*nivel);
-			this.setMagicDef(13*nivel);
+			this.setName(race.toString()); // cambiar a nombre verdadero del boss
+			this.setHealth(270 * nivel);
+			this.setPhysDamage(13 * nivel);
+			this.setPhysDef(13 * nivel);
+			this.setMagicDamage(13 * nivel);
+			this.setMagicDef(13 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/c.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/c.png").toString())); // cambiar
+																													// a
+																													// combatsprite
+																													// del
+																													// boss
 			this.setDescription("");
 
 			this.setExp(900);
 			this.setMoney(110);
 			break;
 		case FX:
-			this.setName(race.toString()); //cambiar a nombre verdadero del boss
-			this.setHealth(300*nivel);
-			this.setPhysDamage(15*nivel);
-			this.setPhysDef(15*nivel);
-			this.setMagicDamage(15*nivel);
-			this.setMagicDef(15*nivel);
+			this.setName(race.toString()); // cambiar a nombre verdadero del boss
+			this.setHealth(300 * nivel);
+			this.setPhysDamage(15 * nivel);
+			this.setPhysDef(15 * nivel);
+			this.setMagicDamage(15 * nivel);
+			this.setMagicDef(15 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/fx.png").toString())); //cambiar a combatsprite del boss
+			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/fx.png").toString())); // cambiar
+																													// a
+																													// combatsprite
+																													// del
+																													// boss
 			this.setDescription("");
 
 			this.setExp(3000);
@@ -184,7 +200,8 @@ public class Enemy extends Attributes {
 //		if (!raza.equals(Race.Boss) && !raza.equals(Race.Jelly))
 //			this.setMoneyDrop(getMoney() + nivel);
 //		this.setExpDrop(this.getExp() * nivel);
-//		this.setCurrentLife(this.getHealth());
+
+		this.setCurrentLife(this.getHealth()); // Setea la vida del enemigo
 	}
 
 	public Gear getGearDrop() {
@@ -221,7 +238,8 @@ public class Enemy extends Attributes {
 
 		int danyo = this.getPhysDamage();
 
-		if (!this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V) || !this.race.equals(Race.M)) {
+		if (!this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V)
+				|| !this.race.equals(Race.M)) {
 			return danyo;
 		} else {
 			return (int) (danyo * 1.1);
@@ -240,7 +258,8 @@ public class Enemy extends Attributes {
 	 */
 	public int recibeDaño(int danyo, boolean fisico) {
 
-		if (this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V) || !this.race.equals(Race.M))
+		if (this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V)
+				|| !this.race.equals(Race.M))
 			danyo *= 0.75;
 
 		if (fisico) {
