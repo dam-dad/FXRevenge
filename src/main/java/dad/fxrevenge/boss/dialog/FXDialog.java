@@ -17,7 +17,7 @@ public class FXDialog extends DialogScene implements Parameters {
 	private Character fx = CharacterList.getFX();
 
 	public FXDialog(Avatar avatar) {
-		this.avatar=avatar;
+		this.avatar = avatar;
 	}
 
 	@Override

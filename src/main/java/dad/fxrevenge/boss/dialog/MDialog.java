@@ -17,7 +17,7 @@ public class MDialog extends DialogScene implements Parameters {
 	private Character m = CharacterList.getM();
 
 	public MDialog(Avatar avatar) {
-		this.avatar=avatar;
+		this.avatar = avatar;
 	}
 
 	@Override

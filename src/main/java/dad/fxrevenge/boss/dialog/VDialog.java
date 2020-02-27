@@ -17,7 +17,7 @@ public class VDialog extends DialogScene implements Parameters {
 	private Character v = CharacterList.getV();
 
 	public VDialog(Avatar avatar) {
-		this.avatar=avatar;
+		this.avatar = avatar;
 	}
 
 	@Override

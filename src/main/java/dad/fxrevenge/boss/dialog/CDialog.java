@@ -16,9 +16,8 @@ public class CDialog extends DialogScene implements Parameters {
 	private Character player = CharacterList.getPlayer();
 	private Character c = CharacterList.getC();
 
-	
-	public CDialog(Avatar avatar2) {
-		this.avatar=avatar;
+	public CDialog(Avatar avatar) {
+		this.avatar = avatar;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package dad.fxrevenge.scene;
 import java.util.HashSet;
 
 import dad.fxrevenge.dialog.Character;
+import dad.fxrevenge.models.Avatar;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -17,6 +18,8 @@ import javafx.scene.input.KeyEvent;
  **/
 
 public class DialogScene implements GameScene, Parameters {
+
+	protected Avatar avatar;
 
 	// Nodo padre del canvas
 	private Group root;
