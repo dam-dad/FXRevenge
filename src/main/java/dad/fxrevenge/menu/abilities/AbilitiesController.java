@@ -126,7 +126,7 @@ public class AbilitiesController extends BorderPane implements GameScene {
 				.bind(Bindings.when(ability.DamageTypeProperty().isEqualTo(new SimpleBooleanProperty(false))).then("Mágico")
 						.otherwise("Físico"));
 
-//		descriptionArea.setText(ability.effectDescription(ability));
+		descriptionArea.textProperty().bind(ability.DescriptionProperty());
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class AbilitiesController extends BorderPane implements GameScene {
 				.bind(Bindings.when(ability.DamageTypeProperty().isEqualTo(new SimpleBooleanProperty(false))).then("Mágico")
 						.otherwise("Físico"));
 
-//		descriptionArea.setText(ability.effectDescription(ability));
+		descriptionArea.textProperty().bind(ability.DescriptionProperty());
 	}
 	
 	/**
