@@ -1,5 +1,6 @@
 package dad.fxrevenge.boss;
 
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
@@ -22,8 +23,8 @@ public class VMap extends WorldMapController {
 			{ ".", ".", ".", ".", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", "T3", "WM", "T3", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
-	public VMap() {
-		super(map, background);
+	public VMap( Avatar avatar) {
+		super(map, background,avatar);
 	}
 
 }

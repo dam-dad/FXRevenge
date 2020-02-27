@@ -60,7 +60,7 @@ public class FXFight extends CombatController {
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new FXMap());
+		SceneManager.changeScene(new FXMap(pj));
 	}
 
 }

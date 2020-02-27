@@ -60,7 +60,7 @@ public class VFight extends CombatController {
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new VMap());
+		SceneManager.changeScene(new VMap(pj));
 	}
 
 }

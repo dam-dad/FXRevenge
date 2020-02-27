@@ -1,5 +1,8 @@
 package dad.fxrevenge.dialog;
 
+import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.models.ClassType;
+import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.WorldMapController;
@@ -66,7 +69,9 @@ public class IntroductionDialog extends DialogScene {
 			
 		default:
 			// Cambio de escena
-			SceneManager.changeScene(new WorldMapController());
+			Avatar avatarTemporal=new Avatar(new Image("/Image/characters/warriorBattle.png"),ClassType.Warlord, Skill.generateClassSkills(ClassType.Warlord), "PACO");
+			avatarTemporal.setWorldSprite(new Image("/Image/characters/warrior_m.png"));
+			SceneManager.changeScene(new WorldMapController(avatarTemporal));
 			break;
 		}
 	}

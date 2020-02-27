@@ -8,6 +8,7 @@ import dad.fxrevenge.boss.MDialog;
 import dad.fxrevenge.boss.MMap;
 import dad.fxrevenge.boss.VDialog;
 import dad.fxrevenge.boss.VMap;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.Orientation;
 import dad.fxrevenge.world.WorldMapController;
@@ -23,6 +24,7 @@ import javafx.util.Duration;
 
 public class TestMove {
 
+	private Avatar avatar;
 	private ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
@@ -50,13 +52,14 @@ public class TestMove {
 	 * @param orientation   character visual orientation point
 	 */
 
-	public TestMove(String[][] world, int movePX, int animationTime, Image image, int minX, int minY, int width,
+	public TestMove(String[][] world, int movePX, int animationTime, Avatar avatar, int minX, int minY, int width,
 			int heigth, Orientation orientation) {
 
 		this.map = world;
 		this.movePX = movePX;
 		this.animationTime = animationTime;
-		this.pjImage = new ImageView(image);
+		this.avatar=avatar;
+		this.pjImage = new ImageView(this.avatar.getWorldSprite());
 		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 		this.orientation = orientation;
 		CheckPlayer();
@@ -110,9 +113,9 @@ public class TestMove {
 
 				// Pasar del mapa principal a la cueva de Valery
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
-					SceneManager.changeScene(new VMap());
+					SceneManager.changeScene(new VMap(avatar));
 				} else if ((posY - 1) >= 0 && map[posY - 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new WorldMapController(avatar));
 				}
 
 //			pjImage.setX(pjImage.getX()pjImage.getX());
@@ -154,9 +157,9 @@ public class TestMove {
 
 				// Pasar del mapa principal al castillo de Calipso
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
-					SceneManager.changeScene(new CMap());
+					SceneManager.changeScene(new CMap(this.avatar));
 				} else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new WorldMapController(avatar));
 				}
 
 				break;
@@ -198,9 +201,9 @@ public class TestMove {
 
 				// Pasar del mapa principal al bosque de Meridio
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
-					SceneManager.changeScene(new MMap());
+					SceneManager.changeScene(new MMap(avatar));
 				} else if ((posX - 1) >= 0 && map[posY][posX - 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new WorldMapController(avatar));
 				}
 
 				break;
@@ -240,7 +243,7 @@ public class TestMove {
 
 				// Volver al World Map
 				if ((posY + 1) < map.length && map[posY + 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new WorldMapController(avatar));
 				}
 
 				break;
@@ -331,7 +334,7 @@ public class TestMove {
 			SceneManager.changeScene(new FXDialog());
 			break;
 		case "L":
-			SceneManager.changeScene(new FXMap());
+			SceneManager.changeScene(new FXMap(avatar));
 			break;
 
 		}

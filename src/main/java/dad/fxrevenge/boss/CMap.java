@@ -1,5 +1,6 @@
 package dad.fxrevenge.boss;
 
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
@@ -22,8 +23,8 @@ public class CMap extends WorldMapController {
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
-	public CMap() {
-		super(map, background);
+	public CMap(Avatar avatar) {
+		super(map, background, avatar);
 	}
 
 }

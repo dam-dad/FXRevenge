@@ -60,7 +60,7 @@ public class CFight extends CombatController {
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new CMap());
+		SceneManager.changeScene(new CMap(pj));
 	}
 
 }

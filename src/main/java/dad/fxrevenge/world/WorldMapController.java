@@ -2,6 +2,7 @@ package dad.fxrevenge.world;
 
 import dad.fxrevenge.animations.AnimationMobs;
 import dad.fxrevenge.animations.TestMove;
+import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.Parameters;
 import javafx.scene.Group;
@@ -16,7 +17,7 @@ public class WorldMapController implements GameScene, Parameters {
 
 	// MODEL
 
-	private WorldMapModel model = new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE);
+	private WorldMapModel model;
 
 	// VIEW
 
@@ -31,7 +32,7 @@ public class WorldMapController implements GameScene, Parameters {
 
 	private AnimationMobs skeleton;
 	TestMove pj;
-
+	
 	private static String[][] world;
 
 	private static String[][] overworld = {
@@ -49,12 +50,14 @@ public class WorldMapController implements GameScene, Parameters {
 			{ "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "x" },
 			{ "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x" } };
 
-	public WorldMapController() {
+	public WorldMapController(Avatar avatar) {
+		model=new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE, avatar);
 		WorldMapController.world = overworld;
 		this.background = new Image("/image/background/overworld.png");
 	}
 
-	public WorldMapController(String[][] map, Image background) {
+	public WorldMapController(String[][] map, Image background,Avatar avatar) {
+		model=new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE, avatar);
 		WorldMapController.world = map;
 		this.background = background;
 	}
@@ -97,11 +100,16 @@ public class WorldMapController implements GameScene, Parameters {
 			cellX = 0;
 		}
 
-		pj = new TestMove(world, model.getCell(), 900, new Image("/Image/characters/mage_f.png"), 0, 0, 32, 39,
+		pj = new TestMove(world, model.getCell(), 900, model.getAvatar(), 0, 0, 32, 39,
 				Orientation.EAST);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
-		scene.setOnKeyPressed((KeyEvent event) -> pj.move(event));
+		scene.setOnKeyPressed((KeyEvent event) -> update(event));
+	}
+
+	private void update(KeyEvent event) {
+		 pj.move(event);
+		 
 	}
 
 	public void paintWorld() {

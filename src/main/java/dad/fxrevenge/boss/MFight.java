@@ -60,7 +60,7 @@ public class MFight extends CombatController {
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new MMap());
+		SceneManager.changeScene(new MMap(pj));
 	}
 
 }
