@@ -6,13 +6,10 @@ import dad.fxrevenge.boss.fight.MFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.image.Image;
 
-public class MDialog extends DialogScene {
-
-	// Imagen de fondo
-	private Image background = new Image("/image/background/m.png");
+public class MDialog extends DialogScene implements Parameters {
 
 	// Personajes
 	private Character player = CharacterList.getPlayer();
@@ -20,7 +17,7 @@ public class MDialog extends DialogScene {
 
 	@Override
 	public void start() {
-		setGraphics(background, player, m);
+		setGraphics(player, m, BACKGROUND_M);
 		super.start();
 	}
 

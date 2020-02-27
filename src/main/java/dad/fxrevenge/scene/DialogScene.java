@@ -35,7 +35,7 @@ public class DialogScene implements GameScene, Parameters {
 	protected HashSet<String> currentlyActiveKeys;
 
 	// Gráficos de la escena: fondo y retrato de los personajes izquierdo y derecho
-	private Image background, leftCharacter, rightCharacter;
+	private Image player, enemy, background;
 
 	// Clase encargada de dibujar el texto de los diálogos
 	protected Dialog dialog;
@@ -45,23 +45,23 @@ public class DialogScene implements GameScene, Parameters {
 
 	// Función para asignar los gráficos: imagen de fondo y los personajes que
 	// aparecerán en la escena
-	public void setGraphics(Image background, Character leftCharacter, Character rightCharacter) {
+	public void setGraphics(Character player, Character enemy, Image background) {
+		this.player = player.getPortrait();
+		this.enemy = enemy.getPortrait();
 		this.background = background;
-		this.leftCharacter = leftCharacter.getPortrait();
-		this.rightCharacter = rightCharacter.getPortrait();
 	}
 
 	// Función que inicia la escena
 	@Override
 	public void start() {
-		
+
 		canvas = new Canvas();
 		graphicsContext = canvas.getGraphicsContext2D();
-		
+
 		root = new Group();
 		scene = new Scene(root, GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT);
 		root.getChildren().add(canvas);
-		
+
 		dialog = new Dialog(scene, graphicsContext);
 
 		prepareActionHandlers();
@@ -102,7 +102,7 @@ public class DialogScene implements GameScene, Parameters {
 
 	// Función que se ejecuta dentro del bucle principal
 	protected void update() {
-		
+
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());
 		canvas.setHeight(scene.getHeight());
@@ -144,7 +144,7 @@ public class DialogScene implements GameScene, Parameters {
 	}
 
 	// GETTERS Y SETTERS
-	
+
 	public Scene getScene() {
 		return scene;
 	}
@@ -160,20 +160,20 @@ public class DialogScene implements GameScene, Parameters {
 
 	// Imagen del personaje izquierdo
 	public Image getLeftCharacter() {
-		return leftCharacter;
+		return player;
 	}
 
 	public void setLeftCharacter(Image leftCharacter) {
-		this.leftCharacter = leftCharacter;
+		this.player = leftCharacter;
 	}
 
 	// Imagen del personaje derecho
 	public Image getRightCharacter() {
-		return rightCharacter;
+		return enemy;
 	}
 
 	public void setRightCharacter(Image rightCharacter) {
-		this.rightCharacter = rightCharacter;
+		this.enemy = rightCharacter;
 	}
 
 }

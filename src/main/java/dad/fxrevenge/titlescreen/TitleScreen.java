@@ -2,17 +2,14 @@ package dad.fxrevenge.titlescreen;
 
 import dad.fxrevenge.dialog.IntroductionDialog;
 import dad.fxrevenge.scene.DialogScene;
+import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-public class TitleScreen extends DialogScene {
-	
-	// Imagen de fondo de la escena
-	private Image background = new Image("/image/background/titlescreen.png");
+public class TitleScreen extends DialogScene implements Parameters {
 
 	// Función que se ejecuta dentro del bucle principal
 	@Override
@@ -25,7 +22,7 @@ public class TitleScreen extends DialogScene {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		// Dibujar fondo
-		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
+		graphicsContext.drawImage(BACKGROUND_TITLESCREEN, 0, 0, canvas.getWidth(), canvas.getHeight());
 
 		// Fuente del texto
 		Font titleFont = Font.font("Arial", FontWeight.BOLD, 100);
