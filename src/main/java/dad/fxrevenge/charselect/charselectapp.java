@@ -17,7 +17,7 @@ public class charselectapp extends Application{
 		charcont = new CharSelectControl();
 		
 		Scene scene = new Scene(charcont.getView(), 800, 600);
-		
+		primaryStage.setScene(scene);
 		primaryStage.setTitle("charselecttest");
 		primaryStage.setResizable(false);
 		primaryStage.show();
