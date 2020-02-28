@@ -22,7 +22,7 @@ public class SimpleCombat extends CombatController {
 	@Override
 	protected void victory() {
 		int DropGearProc = (int) (Math.random() * 100);
-		if (DropGearProc > 50) {
+		if (DropGearProc > 25) {
 			player.equipar(enemy.getGearDrop());
 		} else {
 
