@@ -95,12 +95,8 @@ public class CombatController extends BorderPane implements GameScene {
 			eventArea.setText(
 					eventArea.getText() + "\nHas infligido " + enemy.recibeDaño(damage, true) + " puntos de daño.");
 		}
-//DROPEO DE ITEM Y GEAR		
+//DROPEO	
 		if (enemy.getCurrentLife() <= 0) {
-//			if (enemy.getRace().equals(Race.Boss)) {
-//				pj.equipar(enemy.getGearDrop());
-//			}
-
 			victory();
 		}
 
