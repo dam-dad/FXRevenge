@@ -113,7 +113,7 @@ public class Avatar extends Attributes {
 					new Item().generatePotion(Effect.MiniHealRestore));
 		}
 
-		this.setInventory(this.ordenarInventario());
+		this.ordenarInventario();
 		
 		this.setCurrentLife(this.getHealth());
 		this.setCurrentMana(this.getMana());
@@ -416,7 +416,7 @@ public class Avatar extends Attributes {
 		this.setMagicDef(this.getMagicDef() - oldGear.getMagicDef() + newGear.getMagicDef());
 	}
 
-	public ObservableList<Item> ordenarInventario() {
+	public void ordenarInventario() {
 
 		ArrayList<Item> objetosPj = new ArrayList<Item>(this.getInventory());
 		ObservableList<Item> nuevos = new SimpleListProperty<Item>(this, "nuevos", FXCollections.observableArrayList());
@@ -449,8 +449,6 @@ public class Avatar extends Attributes {
 
 		}
 		this.setInventory(nuevos);
-
-		return nuevos;
 	}
 
 	// getters-setters
