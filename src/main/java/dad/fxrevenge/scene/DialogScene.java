@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.parameters.Parameters;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -17,7 +18,7 @@ import javafx.scene.input.KeyEvent;
  * Clase (padre) que controla la pantalla de diálogos entre personajes
  **/
 
-public class DialogScene implements GameScene, Parameters {
+public class DialogScene implements GameScene {
 
 	protected Avatar avatar;
 
@@ -62,7 +63,7 @@ public class DialogScene implements GameScene, Parameters {
 		graphicsContext = canvas.getGraphicsContext2D();
 
 		root = new Group();
-		scene = new Scene(root, GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT);
+		scene = new Scene(root, Parameters.getResolutionWidth(), Parameters.getResolutionHeight());
 		root.getChildren().add(canvas);
 
 		dialog = new Dialog(scene, graphicsContext);

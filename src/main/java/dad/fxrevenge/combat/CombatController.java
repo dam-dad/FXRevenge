@@ -8,8 +8,8 @@ import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Skill;
+import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.scene.GameScene;
-import dad.fxrevenge.scene.Parameters;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,17 +45,14 @@ import javafx.stage.Popup;
  * entre un avatar y un enemigo
  *
  */
-public class CombatController extends BorderPane implements GameScene, Parameters {
-
-	// model
-	private Avatar pj;
-	private Enemy enemy;
+public class CombatController extends BorderPane implements GameScene {
 
 	@SuppressWarnings("unused")
 	private Scene scene; // Scene necesaria para SceneManager
 
-	// Imagen de fondo
-	private Image backgroundImage;
+	private Avatar player;
+	private Enemy enemy;
+	private Image background; // Imagen de fondo
 
 	@FXML
 	private BorderPane view;
@@ -64,46 +61,16 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	private TextArea eventArea;
 
 	@FXML
-	private Button attackButton;
+	private Button attackButton, defenseButton, habilitiesButton, inventoryButton, exitButton;
 
 	@FXML
-	private Button habilitiesButton;
+	private Label playerLabel, playerHealthLabel, playerManaLabel, enemyLabel;
 
 	@FXML
-	private Button defenseButton;
+	private ProgressBar playerLifeBar, playerManaBar, enemyLifeBar;
 
 	@FXML
-	private Button inventoryButton;
-
-	@FXML
-	private Button exitButton;
-
-	@FXML
-	private Label playerLabel;
-
-	@FXML
-	private Label playerHealthLabel;
-
-	@FXML
-	private ProgressBar playerLifeBar;
-
-	@FXML
-	private Label playerManaLabel;
-
-	@FXML
-	private ImageView playerImage;
-
-	@FXML
-	private Label enemyLabel;
-
-	@FXML
-	private ProgressBar enemyLifeBar;
-
-	@FXML
-	private ProgressBar playerManaBar;
-
-	@FXML
-	private ImageView enemyImage;
+	private ImageView playerImage, enemyImage;
 
 	/**
 	 * Función que maneja el ataque "básico" del avatar, es decir, cuando no usa
@@ -114,7 +81,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	@FXML
 	void onAttackAction(ActionEvent event) {
 
-		int damage = pj.atacar();
+		int damage = player.atacar();
 		boolean egoista = (Math.random() < 0.5) ? true : false;
 
 		eventArea.setText("");
@@ -141,14 +108,14 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 	protected void victory() {
 		// Enemigo derrotado. Hacer override al heredar
-		int DropGearProc = (int) Math.random()*100;
-		if(DropGearProc>90) {
-			pj.equipar(enemy.getGearDrop());
+		int DropGearProc = (int) Math.random() * 100;
+		if (DropGearProc > 90) {
+			player.equipar(enemy.getGearDrop());
 		} else {
-			
+
 		}
-		pj.sumarexp(enemy.getExpDrop());
-		pj.setMoney(pj.getMoney()+enemy.getMoneyDrop());
+		player.sumarexp(enemy.getExpDrop());
+		player.setMoney(player.getMoney() + enemy.getMoneyDrop());
 	}
 
 	/**
@@ -159,13 +126,13 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	@FXML
 	void onDefenseAction(ActionEvent event) {
 		eventArea.setText("");
-		int defIn = pj.getPhysDef(), magIn = pj.getMagicDef();
+		int defIn = player.getPhysDef(), magIn = player.getMagicDef();
 
-		pj.setPhysDef((int) (defIn * 1.25));
-		pj.setMagicDef((int) (magIn * 1.25));
+		player.setPhysDef((int) (defIn * 1.25));
+		player.setMagicDef((int) (magIn * 1.25));
 		enemyAttack();
-		pj.setPhysDef(defIn);
-		pj.setMagicDef(magIn);
+		player.setPhysDef(defIn);
+		player.setMagicDef(magIn);
 
 	}
 
@@ -186,10 +153,10 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 		int damage = enemy.atacar();
 
-		eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " ataca con " + pj.recibeDaño(damage, true)
+		eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " ataca con " + player.recibeDaño(damage, true)
 				+ " puntos de daño.");
 
-		if (pj.getCurrentLife() == 0) {
+		if (player.getCurrentLife() == 0) {
 
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Vaya vaya...");
@@ -239,44 +206,45 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 							switch (item.getEffect()) {
 
 							case HealRestore:
-								cura = (int) (pj.getHealth() * 0.5);
+								cura = (int) (player.getHealth() * 0.5);
 								break;
 
 							case ManaRestore:
-								mana = (int) (pj.getMana() * 0.5);
+								mana = (int) (player.getMana() * 0.5);
 								break;
 							case MaxiHealRestore:
-								cura = (int) (pj.getHealth() * 0.75);
+								cura = (int) (player.getHealth() * 0.75);
 								break;
 
 							case MaxiManaRestore:
-								mana = (int) (pj.getMana() * 0.75);
+								mana = (int) (player.getMana() * 0.75);
 								break;
 							case MiniHealRestore:
-								cura = (int) (pj.getHealth() * 0.25);
+								cura = (int) (player.getHealth() * 0.25);
 								break;
 							case MiniManaRestore:
-								mana = (int) (pj.getMana() * 0.25);
+								mana = (int) (player.getMana() * 0.25);
 								break;
 							}
 
 							if (cura > 0) {
-								if (cura + pj.getCurrentLife() > pj.getHealth()) {
-									cura = pj.getHealth() - pj.getCurrentLife();
-									pj.setCurrentLife(pj.getHealth());
+								if (cura + player.getCurrentLife() > player.getHealth()) {
+									cura = player.getHealth() - player.getCurrentLife();
+									player.setCurrentLife(player.getHealth());
 								} else
-									pj.setCurrentLife(pj.getCurrentLife() + cura);
+									player.setCurrentLife(player.getCurrentLife() + cura);
 							}
 							if (mana > 0) {
-								if (mana + pj.getCurrentMana() > pj.getMana()) {
-									mana = pj.getMana() - pj.getCurrentMana();
-									pj.setCurrentMana(pj.getMana());
+								if (mana + player.getCurrentMana() > player.getMana()) {
+									mana = player.getMana() - player.getCurrentMana();
+									player.setCurrentMana(player.getMana());
 
 								} else
-									pj.setCurrentMana(pj.getCurrentMana() + mana);
+									player.setCurrentMana(player.getCurrentMana() + mana);
 							}
-							pj.getInventory().get(pj.getInventory().indexOf(item)).setQuantity(item.getQuantity() - 1);
-							
+							player.getInventory().get(player.getInventory().indexOf(item))
+									.setQuantity(item.getQuantity() - 1);
+
 							if (cura != -1) {
 								eventArea.setText("Te has curado " + cura + " puntos de vida.");
 							} else if (mana != -1) {
@@ -303,7 +271,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 				}
 			}
 		};
-		list.setItems(pj.getInventory());
+		list.setItems(player.getInventory());
 		list.setOnMouseClicked(evento);
 		list.setMaxHeight(view.getHeight() / 3.0);
 
@@ -343,7 +311,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 				if (result.get() == elijoButton) {
 					Skill hability = list.getSelectionModel().getSelectedItem();
 
-					int nuevoMana = pj.getCurrentMana() - hability.getCost();
+					int nuevoMana = player.getCurrentMana() - hability.getCost();
 					if (nuevoMana < 0) {
 
 						Alert alert2 = new Alert(AlertType.INFORMATION);
@@ -354,9 +322,9 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 
 						popup.show(view.getScene().getWindow());
 					} else {
-						pj.setCurrentMana(nuevoMana);
+						player.setCurrentMana(nuevoMana);
 
-						int damage = pj.atacar(hability);
+						int damage = player.atacar(hability);
 						boolean egoista = (Math.random() < 0.5) ? true : false;
 
 						eventArea.setText("");
@@ -379,7 +347,7 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 			}
 		};
 
-		list.setItems(pj.getLearnedSkills());
+		list.setItems(player.getLearnedSkills());
 		list.setOnMouseClicked(evento);
 		list.setMaxHeight(view.getHeight() / 3.0);
 
@@ -397,28 +365,30 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	private void setBackground() {
 		view.setBackground(new Background(
 				Collections.singletonList(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)),
-				Collections.singletonList(new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
+				Collections.singletonList(new BackgroundImage(background, BackgroundRepeat.NO_REPEAT,
 						BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT))));
 	}
 
 	@Override
 	public void start() {
 
-		scene = new Scene(view, GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT); // Crea la escena con la resolución
-																				// especificada en la interfaz
-																				// Parameters
+		scene = new Scene(view, Parameters.getResolutionWidth(), Parameters.getResolutionHeight()); // Crea la escena
+																									// con la resolución
+		// especificada en la interfaz
+		// Parameters
 
 		setBackground();
 
 		// bindeos jugador
-		playerLabel.textProperty().bind(pj.nameProperty());
-		playerImage.imageProperty().bind(pj.combatSpriteProperty());
+		playerLabel.textProperty().bind(player.nameProperty());
+		playerImage.imageProperty().bind(player.combatSpriteProperty());
 		playerHealthLabel.textProperty()
-				.bind(pj.currentLifeProperty().asString().concat("/").concat(pj.HealthProperty()));
-		playerManaLabel.textProperty().bind(pj.currentManaProperty().asString().concat("/").concat(pj.ManaProperty()));
+				.bind(player.currentLifeProperty().asString().concat("/").concat(player.HealthProperty()));
+		playerManaLabel.textProperty()
+				.bind(player.currentManaProperty().asString().concat("/").concat(player.ManaProperty()));
 
-		playerLifeBar.progressProperty().bind((pj.currentLifeProperty().multiply(1.0).divide(pj.getHealth())));
-		playerManaBar.progressProperty().bind(pj.currentManaProperty().multiply(1.0).divide(pj.getMana()));
+		playerLifeBar.progressProperty().bind((player.currentLifeProperty().multiply(1.0).divide(player.getHealth())));
+		playerManaBar.progressProperty().bind(player.currentManaProperty().multiply(1.0).divide(player.getMana()));
 		playerLifeBar.progressProperty().addListener((o, ov, nv) -> {
 			Color color = interpolate(Color.RED, Color.YELLOW, Color.GREEN, nv.doubleValue());
 			String web = color.toString().replace("0x", "#");
@@ -455,38 +425,22 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	 *                     la vista
 	 */
 	public CombatController(Avatar pj, Enemy enemy) throws IOException {
-		super();
-
+		this();
 		this.enemy = enemy;
-		this.pj = pj;
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CombatView.fxml"));
-		loader.setController(this);
-		loader.setRoot(this);
-		loader.load();
-
+		this.player = pj;
 	}
 
 	/**
 	 * 
-	 * @param pj    avatar que se enfrentará al enemigo
-	 * @param enemy enemigo al que se enfrentará el avatar
-	 * @param fondo imagen que será el fondo del combate
+	 * @param pj         avatar que se enfrentará al enemigo
+	 * @param enemy      enemigo al que se enfrentará el avatar
+	 * @param background imagen que será el fondo del combate
 	 * @throws IOException En caso de no encontrar el archivo .fxml para la carga de
 	 *                     la vista
 	 */
-	public CombatController(Avatar pj, Enemy enemy, Image fondo) throws IOException {
-		super();
-
-		this.enemy = enemy;
-		this.pj = pj;
-		this.backgroundImage = fondo;
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CombatView.fxml"));
-		loader.setController(this);
-		loader.setRoot(this);
-		loader.load();
-
+	public CombatController(Avatar pj, Enemy enemy, Image background) throws IOException {
+		this(pj, enemy);
+		this.background = background;
 	}
 
 	/**
@@ -531,18 +485,6 @@ public class CombatController extends BorderPane implements GameScene, Parameter
 	@Override
 	public void stop() {
 
-	}
-
-	public void setPj(Avatar pj) {
-		this.pj = pj;
-	}
-
-	public void setEnemy(Enemy enemy) {
-		this.enemy = enemy;
-	}
-
-	public void setBackgroundImage(Image backgroundImage) {
-		this.backgroundImage = backgroundImage;
 	}
 
 }

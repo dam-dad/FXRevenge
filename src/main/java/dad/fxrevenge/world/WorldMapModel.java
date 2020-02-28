@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Race;
+import dad.fxrevenge.parameters.Player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -15,15 +16,14 @@ public class WorldMapModel {
 	private IntegerProperty heigth = new SimpleIntegerProperty();
 	private IntegerProperty widthCanvas = new SimpleIntegerProperty();
 	private IntegerProperty heigthCanvas = new SimpleIntegerProperty();
-	private ArrayList<Race> races=new ArrayList<Race>();
-	private Avatar avatar;
+	private ArrayList<Race> races = new ArrayList<Race>();
+	private Avatar avatar = Player.getPlayer();
 
-	public WorldMapModel(int width, int heigth, int cell, Avatar avatar) {
-		this.avatar=avatar;
+	public WorldMapModel(int width, int heigth, int cell) {
 		this.cell.set(cell);
 		this.width.set(width);
 		this.heigth.set(heigth);
-		races.addAll(Arrays.asList(Race.Jelly,Race.Skeleton,Race.Orc,Race.Zombie,Race.Demon));
+		races.addAll(Arrays.asList(Race.Jelly, Race.Skeleton, Race.Orc, Race.Zombie, Race.Demon));
 		System.out.println(races.size());
 		// this.widthCanvas.set(widthCanvas);
 		// this.heigthCanvas.set(heigthCanvas);

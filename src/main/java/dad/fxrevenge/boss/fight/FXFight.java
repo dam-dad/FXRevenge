@@ -2,60 +2,33 @@ package dad.fxrevenge.boss.fight;
 
 import java.io.IOException;
 
-import dad.fxrevenge.boss.map.FXMap;
+import dad.fxrevenge.boss.dialog.FXDialog;
 import dad.fxrevenge.combat.CombatController;
-import dad.fxrevenge.dialog.CharacterList;
-import dad.fxrevenge.models.Avatar;
-import dad.fxrevenge.models.ClassType;
-import dad.fxrevenge.models.Effect;
-import dad.fxrevenge.models.Item;
-import dad.fxrevenge.models.Skill;
+import dad.fxrevenge.parameters.Backgrounds;
+import dad.fxrevenge.parameters.Bosses;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class FXFight extends CombatController {
 
-	// COSITAS DEL COMBATE
+	private static boolean defeated = false;
 
-	private Avatar pj = new Avatar(CharacterList.getPlayer().getPortrait(), ClassType.Warlord,
-			Skill.generateClassSkills(ClassType.Warlord), CharacterList.getPlayer().getName());
-
-	private Item item1 = new Item(), item2 = new Item(), item3 = new Item();
-
-	// FIN COSITAS DEL COMBATE
-
-	public FXFight(Avatar avatar) throws IOException {
-		super();
-		this.pj=avatar;
-	}
-
-	@Override
-	public void start() {
-		super.setPj(pj);
-		super.setEnemy(BOSS_FX);
-		super.setBackgroundImage(BACKGROUND_FX);
-
-		item1.setName("poti");
-		item1.setEffect(Effect.HealRestore);
-		item1.setQuantity(2);
-		item2.setName("galleta");
-		item2.setEffect(Effect.HealRestore);
-		item2.setQuantity(5);
-		item3.setName("orbe");
-		item3.setEffect(Effect.ManaRestore);
-		item3.setQuantity(1);
-
-		ObservableList<Item> items = FXCollections.observableArrayList(item1, item2, item3);
-		pj.setInventory(items);
-
-		super.start();
-
+	public FXFight() throws IOException {
+		super(Player.getPlayer(), Bosses.getFX(), Backgrounds.getFX());
 	}
 
 	@Override
 	protected void victory() {
-		SceneManager.changeScene(new FXMap(pj));
+		defeated = true;
+		SceneManager.changeScene(new FXDialog());
+	}
+
+	public static boolean isDefeated() {
+		return defeated;
+	}
+
+	public static void setDefeated(boolean defeated) {
+		FXFight.defeated = defeated;
 	}
 
 }

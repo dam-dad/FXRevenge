@@ -76,8 +76,8 @@ public class Avatar extends Attributes {
 
 		if (work.equals(ClassType.Archmage)) {
 
-			this.setHealth(20);
-			this.setPhysDamage(2);
+			this.setHealth(920);
+			this.setPhysDamage(72);
 			this.setPhysDef(5);
 			this.setMana(20);
 			this.setMagicDamage(9);
@@ -88,8 +88,8 @@ public class Avatar extends Attributes {
 
 		} else if (work.equals(ClassType.Hunter)) {
 
-			this.setHealth(25);
-			this.setPhysDamage(8);
+			this.setHealth(925);
+			this.setPhysDamage(78);
 			this.setPhysDef(5);
 			this.setMana(15);
 			this.setMagicDamage(0);
@@ -101,8 +101,8 @@ public class Avatar extends Attributes {
 
 		} else if (work.equals(ClassType.Warlord)) {
 
-			this.setHealth(30);
-			this.setPhysDamage(5);
+			this.setHealth(930);
+			this.setPhysDamage(75);
 			this.setPhysDef(10);
 			this.setMana(10);
 			this.setMagicDamage(0);

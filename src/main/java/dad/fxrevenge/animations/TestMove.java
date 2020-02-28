@@ -105,9 +105,9 @@ public class TestMove {
 
 				// Pasar del mapa principal a la cueva de Valery
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
-					SceneManager.changeScene(new VMap(avatar));
+					SceneManager.changeScene(new VMap());
 				} else if ((posY - 1) >= 0 && map[posY - 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController(avatar));
+					SceneManager.changeScene(new WorldMapController());
 				}
 
 //			pjImage.setX(pjImage.getX()pjImage.getX());
@@ -147,9 +147,9 @@ public class TestMove {
 
 				// Pasar del mapa principal al castillo de Calipso
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
-					SceneManager.changeScene(new CMap(this.avatar));
+					SceneManager.changeScene(new CMap());
 				} else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController(avatar));
+					SceneManager.changeScene(new WorldMapController());
 				}
 
 				break;
@@ -188,9 +188,9 @@ public class TestMove {
 
 				// Pasar del mapa principal al bosque de Meridio
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
-					SceneManager.changeScene(new MMap(avatar));
+					SceneManager.changeScene(new MMap());
 				} else if ((posX - 1) >= 0 && map[posY][posX - 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController(avatar));
+					SceneManager.changeScene(new WorldMapController());
 				}
 
 				break;
@@ -228,7 +228,7 @@ public class TestMove {
 
 				// Volver al World Map
 				if ((posY + 1) < map.length && map[posY + 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController(avatar));
+					SceneManager.changeScene(new WorldMapController());
 				}
 
 				break;
@@ -307,19 +307,19 @@ public class TestMove {
 		case "N/A":
 			break;
 		case "M":
-			SceneManager.changeScene(new MDialog(avatar));
+			SceneManager.changeScene(new MDialog());
 			break;
 		case "V":
-			SceneManager.changeScene(new VDialog(avatar));
+			SceneManager.changeScene(new VDialog());
 			break;
 		case "C":
-			SceneManager.changeScene(new CDialog(avatar));
+			SceneManager.changeScene(new CDialog());
 			break;
 		case "FX":
-			SceneManager.changeScene(new FXDialog(avatar));
+			SceneManager.changeScene(new FXDialog());
 			break;
 		case "L":
-			SceneManager.changeScene(new FXMap(avatar));
+			SceneManager.changeScene(new FXMap());
 			break;
 
 		}

@@ -1,15 +1,13 @@
 package dad.fxrevenge.dialog;
 
-import dad.fxrevenge.models.Avatar;
-import dad.fxrevenge.models.ClassType;
-import dad.fxrevenge.models.Skill;
+import dad.fxrevenge.parameters.Backgrounds;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.DialogScene;
-import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
-public class IntroductionDialog extends DialogScene implements Parameters {
+public class IntroductionDialog extends DialogScene {
 	
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();
@@ -18,7 +16,7 @@ public class IntroductionDialog extends DialogScene implements Parameters {
 
 	@Override
 	public void start() {
-		setGraphics(mainCharacter, javaGoddess, BACKGROUND_INTRODUCTION);
+		setGraphics(mainCharacter, javaGoddess, Backgrounds.getIntro());
 		super.start();
 	}
 	
@@ -67,9 +65,8 @@ public class IntroductionDialog extends DialogScene implements Parameters {
 			
 		default:
 			// Cambio de escena
-			Avatar avatarTemporal=new Avatar(new Image("/Image/characters/warriorBattle.png"),ClassType.Warlord, Skill.generateClassSkills(ClassType.Warlord), "PACO");
-			avatarTemporal.setWorldSprite(new Image("/Image/characters/warrior_m.png"));
-			SceneManager.changeScene(new WorldMapController(avatarTemporal));
+			Player.getPlayer().setWorldSprite(new Image("/Image/characters/warrior_m.png"));
+			SceneManager.changeScene(new WorldMapController());
 			break;
 		}
 	}

@@ -5,10 +5,9 @@ import java.io.IOException;
 import dad.fxrevenge.animations.AnimationMobs;
 import dad.fxrevenge.animations.TestMove;
 import dad.fxrevenge.combat.SimpleCombat;
-import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
+import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.scene.GameScene;
-import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,7 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
-public class WorldMapController implements GameScene, Parameters {
+public class WorldMapController implements GameScene {
 
 	// MODEL
 
@@ -37,7 +36,7 @@ public class WorldMapController implements GameScene, Parameters {
 
 	private AnimationMobs skeleton;
 	TestMove pj;
-	
+
 	private static String[][] world;
 
 	private static String[][] overworld = {
@@ -55,14 +54,16 @@ public class WorldMapController implements GameScene, Parameters {
 			{ "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "x" },
 			{ "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x" } };
 
-	public WorldMapController(Avatar avatar) {
-		model=new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE, avatar);
+	public WorldMapController() {
+		model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
+				Parameters.getMapCellSize());
 		WorldMapController.world = overworld;
 		this.background = new Image("/image/background/overworld.png");
 	}
 
-	public WorldMapController(String[][] map, Image background,Avatar avatar) {
-		model=new WorldMapModel(GAME_RESOLUTION_WIDTH, GAME_RESOLUTION_HEIGHT, MAP_CELL_SIZE, avatar);
+	public WorldMapController(String[][] map, Image background) {
+		model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
+				Parameters.getMapCellSize());
 		WorldMapController.world = map;
 		this.background = background;
 	}
@@ -105,35 +106,35 @@ public class WorldMapController implements GameScene, Parameters {
 			cellX = 0;
 		}
 
-		pj = new TestMove(world, model.getCell(), 900, model.getAvatar(), 0, 0, 32, 39,
-				Orientation.EAST);
+		pj = new TestMove(world, model.getCell(), 900, model.getAvatar(), 0, 0, 32, 39, Orientation.EAST);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
 	}
 
 	private void update(KeyEvent event) {
-		 pj.move(event);
-		 enemyRandom();
+		pj.move(event);
+		enemyRandom();
 	}
 
 	private void enemyRandom() {
 //		new Enemy(races[randomRace], randomLevel)
-		
-		if ((int)(Math.floor(Math.random()*10))<=3) {
-		int minLevel=model.getAvatar().getLevel()+1;
-		int maxLevel=model.getAvatar().getLevel()+1;
-		System.out.println(maxLevel);
-		int randomRace=(int)(Math.floor(Math.random()*model.getRaces().size()));
-		int randomLevel=(int)(Math.floor(Math.random()*(maxLevel-minLevel+1)+minLevel));
-		try {
-			SceneManager.changeScene(new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel)));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
+			int minLevel = model.getAvatar().getLevel() + 1;
+			int maxLevel = model.getAvatar().getLevel() + 1;
+			System.out.println(maxLevel);
+			int randomRace = (int) (Math.floor(Math.random() * model.getRaces().size()));
+			int randomLevel = (int) (Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel));
+			try {
+				SceneManager.changeScene(
+						new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		}
-		
+
 	}
 
 	public void paintWorld() {
@@ -197,7 +198,7 @@ public class WorldMapController implements GameScene, Parameters {
 					skeleton.getImageMob().setY(posY - 50);
 
 					break;
-					
+
 				case "L":
 					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
 					view.getChildren().add(skeleton.getImageMob());

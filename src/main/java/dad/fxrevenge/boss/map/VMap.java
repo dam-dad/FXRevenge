@@ -1,12 +1,9 @@
 package dad.fxrevenge.boss.map;
 
-import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.world.WorldMapController;
-import javafx.scene.image.Image;
 
 public class VMap extends WorldMapController {
-
-	private static Image background = new Image("/image/background/v.png");
 
 	private static String[][] map = {
 //			{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"},
@@ -23,8 +20,8 @@ public class VMap extends WorldMapController {
 			{ ".", ".", ".", ".", ".", "P", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ ".", ".", ".", ".", "T3", "WM", "T3", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
-	public VMap( Avatar avatar) {
-		super(map, background,avatar);
+	public VMap() {
+		super(map, Backgrounds.getV());
 	}
 
 }

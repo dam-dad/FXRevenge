@@ -5,24 +5,19 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.CFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
-import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.scene.DialogScene;
-import dad.fxrevenge.scene.Parameters;
 import dad.fxrevenge.scene.SceneManager;
 
-public class CDialog extends DialogScene implements Parameters {
+public class CDialog extends DialogScene {
 
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character c = CharacterList.getC();
 
-	public CDialog(Avatar avatar) {
-		this.avatar = avatar;
-	}
-
 	@Override
 	public void start() {
-		setGraphics(player, c, BACKGROUND_C);
+		setGraphics(player, c, Backgrounds.getC());
 		super.start();
 	}
 
@@ -60,7 +55,7 @@ public class CDialog extends DialogScene implements Parameters {
 
 		default:
 			try {
-				SceneManager.changeScene(new CFight(avatar));
+				SceneManager.changeScene(new CFight());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
