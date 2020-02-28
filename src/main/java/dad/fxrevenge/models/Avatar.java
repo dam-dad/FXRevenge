@@ -476,7 +476,7 @@ public class Avatar extends Attributes {
 
 			if (hay) {
 				Item obj = nuevos.get(pos);
-				obj.setQuantity(obj.getQuantity() + 1);
+				obj.setQuantity(obj.getQuantity() + objetosPj.get(i).getQuantity());
 			} else {
 				nuevos.add(objetosPj.get(i));
 			}

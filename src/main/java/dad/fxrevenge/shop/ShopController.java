@@ -91,7 +91,8 @@ public class ShopController extends GridPane implements Initializable {
 		for (int i = 0; i < rightList.getSelectionModel().getSelectedItems().size(); i++) {
 
 			objeto = rightList.getSelectionModel().getSelectedItems().get(i);
-
+			Item aux = new Item().generatePotion(objeto.getEffect());
+			
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Compra");
@@ -109,7 +110,7 @@ public class ShopController extends GridPane implements Initializable {
 
 			TextField cantidadText = new TextField();
 
-			grid.add(new Label(objeto.getName() + "/" + objeto.getPrice()), 0, 0);
+			grid.add(new Label(aux.getName() + "/" + aux.getPrice()), 0, 0);
 			grid.add(cantidadText, 1, 0);
 
 			Node aceptButton = dialog.getDialogPane().lookupButton(aceptButtonType);
@@ -118,7 +119,7 @@ public class ShopController extends GridPane implements Initializable {
 			cantidadText.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (!newValue.trim().isEmpty()) {
 					aceptButton.setDisable(!newValue.matches("[0-9]*")
-							|| Integer.valueOf(newValue) * objeto.getPrice() > pj.getMoney());
+							|| Integer.valueOf(newValue) * aux.getPrice() > pj.getMoney());
 				}
 			});
 
@@ -136,8 +137,8 @@ public class ShopController extends GridPane implements Initializable {
 			result.ifPresent(usernamePassword -> {
 				cantidad = Integer.valueOf(result.get());
 System.out.println("Cantidad "+cantidad);
-System.out.println("Objeto "+objeto);
-				pj.comprar(objeto, cantidad);
+System.out.println("Objeto "+aux);
+				pj.comprar(aux, cantidad);
 				objeto = null;
 			});
 
@@ -153,7 +154,8 @@ System.out.println("Objeto "+objeto);
 		for (int i = 0; i < leftList.getSelectionModel().getSelectedItems().size(); i++) {
 
 			objeto = leftList.getSelectionModel().getSelectedItems().get(i);
-
+			Item aux = new Item().generatePotion(objeto.getEffect());
+			
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Venta");
@@ -171,7 +173,7 @@ System.out.println("Objeto "+objeto);
 
 			TextField cantidadText = new TextField();
 
-			grid.add(new Label(objeto.getName() + "/" + objeto.getPrice() / 2), 0, 0);
+			grid.add(new Label(aux.getName() + "/" + aux.getPrice() / 2), 0, 0);
 			grid.add(cantidadText, 1, 0);
 
 			// Enable/Disable login button depending on whether a username was entered.
@@ -182,7 +184,7 @@ System.out.println("Objeto "+objeto);
 			cantidadText.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (!newValue.trim().isEmpty()) {
 					aceptButton.setDisable(
-							!newValue.matches("[0-9]*") || Integer.valueOf(newValue) > objeto.getQuantity());
+							!newValue.matches("[0-9]*") || Integer.valueOf(newValue) > aux.getQuantity());
 				}
 			});
 
@@ -201,7 +203,7 @@ System.out.println("Objeto "+objeto);
 				cantidad = Integer.valueOf(result.get());
 			});
 
-			pj.vender(objeto, cantidad);
+			pj.vender(aux, cantidad);
 			objeto = null;
 		}
 	}
