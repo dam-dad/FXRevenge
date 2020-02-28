@@ -85,6 +85,7 @@ public class Avatar extends Attributes {
 			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
 					new Item().generatePotion(Effect.MiniManaRestore),
 					new Item().generatePotion(Effect.MiniHealRestore));
+			
 
 		} else if (work.equals(ClassType.Hunter)) {
 
@@ -349,7 +350,7 @@ public class Avatar extends Attributes {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Equipamiento");
 		alert.setHeaderText(
-				"¿Quieres sustituir tu " + current.getName() + " por el recien obtenido " + equipment.getName());
+				"¿Quieres sustituir tu " + current.getName() + " por el recien obtenido " + equipment.getName()+" ?");
 		alert.setContentText("Equipado: " + current.toString() + "\n o \n" + equipment.toString() + "\n ¿Qué decides?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get().equals(ButtonType.OK)) {

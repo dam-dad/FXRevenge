@@ -191,17 +191,16 @@ public class Enemy extends Attributes {
 
 		this.setCurrentLife(this.getHealth()); // Setea la vida del enemigo
 		
-		// CÓDIGO COMENTADO PORQUE HACE QUE PETE EL JUEGO EN CIERTAS COSAS (EJ: COMBATES CONTRA JEFES)
 		
 		//Generar geardrop
-//		ArrayList<GearPosition> gpaux = new ArrayList<GearPosition>();
-//		gpaux.addAll(Arrays.asList(GearPosition.Boots,GearPosition.Chest,GearPosition.Gloves,GearPosition.Helmet,GearPosition.LeftHand,GearPosition.Leggings,GearPosition.RightHand));
-//		ArrayList<ClassType> ctaux = new ArrayList<ClassType>();
-//		ctaux.addAll(Arrays.asList(ClassType.Archmage,ClassType.Warlord,ClassType.Hunter));
-//		int RandGearPosIndex = (int) Math.random()*gpaux.size();
-//		int RandJobIndex = (int) Math.random()*ctaux.size();
-//		Gear g = new Gear(this.getLevel(), gpaux.get(RandGearPosIndex), ctaux.get(RandJobIndex));
-//		this.setGearDrop(g);
+		ArrayList<GearPosition> gpaux = new ArrayList<GearPosition>();
+		gpaux.addAll(Arrays.asList(GearPosition.Boots,GearPosition.Chest,GearPosition.Gloves,GearPosition.Helmet,GearPosition.LeftHand,GearPosition.Leggings,GearPosition.RightHand));
+		ArrayList<ClassType> ctaux = new ArrayList<ClassType>();
+		ctaux.addAll(Arrays.asList(ClassType.Archmage,ClassType.Warlord,ClassType.Hunter));
+		int RandGearPosIndex = (int) Math.random()*gpaux.size();
+		int RandJobIndex = (int) Math.random()*ctaux.size();
+		Gear g = new Gear(this.getLevel(), gpaux.get(RandGearPosIndex), ctaux.get(RandJobIndex));
+		this.setGearDrop(g);
 	}
 
 	public Gear getGearDrop() {

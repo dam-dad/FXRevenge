@@ -103,15 +103,7 @@ public class CombatController extends BorderPane implements GameScene {
 	}
 
 	protected void victory() {
-		// Enemigo derrotado. Hacer override al heredar
-		int DropGearProc = (int) Math.random() * 100;
-		if (DropGearProc > 90) {
-			player.equipar(enemy.getGearDrop());
-		} else {
-
-		}
-		player.sumarexp(enemy.getExpDrop());
-		player.setMoney(player.getMoney() + enemy.getMoneyDrop());
+		// Enemigo derrotado. Hacer override al heredar. Cualquier cosa que deba pasar al derrotar a un enemigo se pone en el victory de SimpleCombat
 	}
 
 	/**
