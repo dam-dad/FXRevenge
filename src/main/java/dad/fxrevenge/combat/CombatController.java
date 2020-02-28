@@ -376,7 +376,7 @@ public class CombatController extends BorderPane implements GameScene {
 		setBackground();
 
 		// bindeos jugador
-		playerLabel.textProperty().bind(player.nameProperty());
+		playerLabel.textProperty().bind(player.nameProperty().concat(" Lv. ").concat(enemy.levelProperty().asString()));
 		playerImage.imageProperty().bind(player.combatSpriteProperty());
 		playerHealthLabel.textProperty()
 				.bind(player.currentLifeProperty().asString().concat("/").concat(player.HealthProperty()));
@@ -393,7 +393,7 @@ public class CombatController extends BorderPane implements GameScene {
 		});
 
 		// bindeos bicho
-		enemyLabel.textProperty().bind(enemy.nameProperty());
+		enemyLabel.textProperty().bind(enemy.nameProperty().concat(" Lv. ").concat(enemy.levelProperty().asString()));
 		enemyImage.imageProperty().bind(enemy.combatSpriteProperty());
 		enemyLifeBar.progressProperty().bind(enemy.currentLifeProperty().multiply(1.0).divide(enemy.getHealth()));
 
