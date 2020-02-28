@@ -54,7 +54,10 @@ public class ShopController extends GridPane implements Initializable {
 
 	@FXML
 	private Label leftLabel;
-
+	
+	@FXML
+	private TextField dineroTextField;
+	
 	@FXML
 	private ListView<Item> leftList;
 
@@ -136,13 +139,13 @@ public class ShopController extends GridPane implements Initializable {
 
 			result.ifPresent(usernamePassword -> {
 				cantidad = Integer.valueOf(result.get());
-System.out.println("Cantidad "+cantidad);
-System.out.println("Objeto "+aux);
+
 				pj.comprar(aux, cantidad);
 				objeto = null;
+				
+				vendedorArea.setText("Gracias por comprar.");
+				
 			});
-
-
 			
 		}
 
@@ -201,10 +204,12 @@ System.out.println("Objeto "+aux);
 
 			result.ifPresent(usernamePassword -> {
 				cantidad = Integer.valueOf(result.get());
+				pj.vender(aux, cantidad);
+				objeto = null;
+
+				vendedorArea.setText("Espero que te haya gustado el trato.");
 			});
 
-			pj.vender(aux, cantidad);
-			objeto = null;
 		}
 	}
 
@@ -226,6 +231,8 @@ System.out.println("Objeto "+aux);
 		moveRightButton.disableProperty().bind(leftList.getSelectionModel().selectedItemProperty().isNull());
 		moveLeftButton.disableProperty().bind(rightList.getSelectionModel().selectedItemProperty().isNull());
 
+		dineroTextField.textProperty().bind(pj.moneyProperty().asString());
+		
 		vendedorArea.setText("Te doy la bienvenida a mi tienda");
 	}
 

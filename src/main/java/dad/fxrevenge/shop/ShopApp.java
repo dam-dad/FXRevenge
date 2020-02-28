@@ -24,7 +24,7 @@ public class ShopApp extends Application {
 		
 		Scene scene = new Scene(controller.getView(), 800, 600);
 		
-		primaryStage.setTitle("HolaMundoMVC");
+		primaryStage.setTitle("TEST SHOP");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
