@@ -383,18 +383,54 @@ public class Avatar extends Attributes {
 		}
 	}
 
-	private void comprar(Item it, int cantidad) {
-		this.money.subtract(it.getPrice()*cantidad);
-		for (int i = 0; i < this.inventory.size(); i++) {
-			if (this.inventory.get(i).getEffect().equals(it.getEffect())) {
-				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity()+cantidad);
-			}  else {
-				it.setQuantity(cantidad);
-				this.inventory.add(it);
-			}
-		}
+	public void comprar(Item it, int cantidad) {
+		System.out.println("dinero antes de la transaccion "+this.getMoney());
+		System.out.println("inventario antes de la transaccion ");
+		for(int i=0; i<this.getInventory().size(); i++)
+			System.out.println(this.getInventory().get(i));
+		
+		this.setMoney(this.getMoney()-it.getPrice()*cantidad);
+		it.setQuantity(cantidad);
+		this.inventory.add(it);
+//		for (int i = 0; i < this.inventory.size(); i++) {
+//			if (this.inventory.get(i).getEffect().equals(it.getEffect())) {
+//				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity()+cantidad);
+//			}  else {
+//				it.setQuantity(cantidad);
+//				this.inventory.add(it);
+//			}
+//		}
+
+		this.ordenarInventario();
+		
+		System.out.println("dinero despues de la transaccion "+this.getMoney());
+		System.out.println("inventario despues de la transaccion ");
+		for(int i=0; i<this.getInventory().size(); i++)
+			System.out.println(this.getInventory().get(i));
 	}
 
+	public void vender(Item it, int cantidad) {
+		System.out.println("dinero antes de la transaccion "+this.getMoney());
+		System.out.println("inventario antes de la transaccion ");
+		for(int i=0; i<this.getInventory().size(); i++)
+			System.out.println(this.getInventory().get(i));
+		
+		this.setMoney(this.getMoney() + it.getPrice()/2*cantidad);
+		
+		for(int i=0; i<this.inventory.size(); i++) {
+			if(this.inventory.get(i).getEffect().equals(it.getEffect())) {
+				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity()-cantidad);
+			}	
+		}
+		
+		this.ordenarInventario();
+		
+		System.out.println("dinero despues de la transaccion "+this.getMoney());
+		System.out.println("inventario despues de la transaccion ");
+		for(int i=0; i<this.getInventory().size(); i++)
+			System.out.println(this.getInventory().get(i));
+	}
+	
 	/**
 	 * Funcion encargada de actualizar las estadísticas del personaje tras un cambio
 	 * de equipamiento, restando las estadisticas de la equipacion antigua y sumando
@@ -424,7 +460,7 @@ public class Avatar extends Attributes {
 		int pos = 0;
 
 		for(int i=0; i<objetosPj.size(); i++) {
-			if(objetosPj.get(i).getQuantity()<0) {
+			if(objetosPj.get(i).getQuantity()==0) {
 				objetosPj.remove(i);
 			}
 		}

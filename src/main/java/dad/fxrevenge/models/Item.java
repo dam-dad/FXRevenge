@@ -1,8 +1,5 @@
 package dad.fxrevenge.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;

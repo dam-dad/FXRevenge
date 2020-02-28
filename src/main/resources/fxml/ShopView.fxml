@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root fx:id="view" alignment="CENTER" hgap="5.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/menu.css" type="GridPane" vgap="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" prefWidth="300.0" />
+      <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="225.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" prefWidth="300.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints vgrow="ALWAYS" />
+      <RowConstraints vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+      <VBox fx:id="izquierdaBox" alignment="CENTER" spacing="25.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <children>
+            <Label fx:id="leftLabel" text="Inventario" />
+            <ListView fx:id="leftList" maxHeight="-Infinity" maxWidth="-Infinity" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <ImageView fx:id="vendedorImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="vendedorArea" editable="false" prefHeight="100.0" prefWidth="100.0" wrapText="true" />
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="moveRightButton" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onVendoAction" prefHeight="25.0" prefWidth="100.0" text="Vendo" />
+                  <Button fx:id="moveLeftButton" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onComproAction" prefHeight="25.0" prefWidth="100.0" text="Compro" />
+               </children>
+            </HBox>
+            <Button fx:id="salirButton" mnemonicParsing="false" onAction="#onSalirAction" text="Salir" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="derechaBox" alignment="CENTER" spacing="25.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <children>
+            <Label fx:id="rightLabel" text="A la venta" />
+            <ListView fx:id="rightList" maxHeight="-Infinity" maxWidth="-Infinity" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" GridPane.columnIndex="1">
+         <children>
+            <Label fx:id="tituloLabel" text="Tienda" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</fx:root>

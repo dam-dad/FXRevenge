@@ -62,7 +62,7 @@
     -fx-background-color: transparent;
 }
 
-#datosBox, #decripcionBox{
+#datosBox, #decripcionBox, #derechaBox, #izquierdaBox{
 	-fx-background-color:#663300;
 }
 
