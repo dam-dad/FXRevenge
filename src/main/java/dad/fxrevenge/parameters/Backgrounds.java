@@ -10,7 +10,8 @@ public class Backgrounds {
 	private static Image v = new Image("/image/background/v.png");
 	private static Image c = new Image("/image/background/c.png");
 	private static Image fx = new Image("/image/background/fx.png");
-
+	private static Image mapDefault= new Image("/image/background/overworld.png");
+	
 	public static Image getTitleScreen() {
 		return titleScreen;
 	}
@@ -35,4 +36,7 @@ public class Backgrounds {
 		return fx;
 	}
 
+	public static Image getMapDefault() {
+		return mapDefault;
+	}
 }

@@ -39,28 +39,6 @@ public class WorldMapController implements GameScene {
 
 	private static String[][] world;
 
-	private static String[][] overworld = {
-//			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
-			{ "T1", "x", "x", "x", "x", "x", "x", "x", "x", "x", "VM", "VM", "VM", "x", "x", "T1" },
-			{ "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x" },
-			{ "T1", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ "x", ".", ".", "x", "x", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x" },
-			{ "x", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "T1" },
-			{ "MM", ".", ".", ".", ".", "x", "L", ".", ".", ".", ".", ".", ".", ".", ".", "x" },
-			{ "MM", ".", ".", ".", ".", "x", "x", "x", "x", "x", "x", ".", ".", ".", ".", "x" },
-			{ "MM", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "CM" },
-			{ "x", ".", ".", "T3", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "CM" },
-			{ "T1", ".", ".", ".", ".", ".", ".", "P", ".", ".", "x", ".", ".", ".", ".", "CM" },
-			{ "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "x" },
-			{ "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x" } };
-
-	public WorldMapController() {
-		model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
-				Parameters.getMapCellSize());
-		WorldMapController.world = overworld;
-		this.background = new Image("/image/background/overworld.png");
-	}
-
 	public WorldMapController(String[][] map, Image background) {
 		model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
 				Parameters.getMapCellSize());
@@ -113,13 +91,13 @@ public class WorldMapController implements GameScene {
 	}
 
 	private void update(KeyEvent event) {
+		
 		pj.move(event);
-		enemyRandom();
+		if (pj.isNewPos()==true)
+			enemyRandom();
 	}
 
 	private void enemyRandom() {
-//		new Enemy(races[randomRace], randomLevel)
-
 		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
 			int minLevel = model.getAvatar().getLevel() + 1;
 			int maxLevel = model.getAvatar().getLevel() + 1;
@@ -128,7 +106,7 @@ public class WorldMapController implements GameScene {
 			int randomLevel = (int) (Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel));
 			try {
 				SceneManager.changeScene(
-						new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel)));
+						new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel),auxWorld()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -223,6 +201,9 @@ public class WorldMapController implements GameScene {
 		}
 	}
 
+	public WorldMapController auxWorld() {
+	return new WorldMapController(this.world, this.background);
+	}
 	@Override
 	public void stop() {
 
