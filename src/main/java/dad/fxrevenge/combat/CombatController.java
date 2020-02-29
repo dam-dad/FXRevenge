@@ -321,12 +321,18 @@ public class CombatController extends BorderPane implements GameScene {
 							eventArea.setText(eventArea.getText() + "\nHas infligido "
 									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
 									+ hability.getName() + ".");
+							if (enemy.getCurrentLife() <= 0) {
+								victory();
+							}
 							enemyAttack();
 						} else {
 							enemyAttack();
 							eventArea.setText(eventArea.getText() + "\nHas infligido "
 									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
 									+ hability.getName() + ".");
+							if (enemy.getCurrentLife() <= 0) {
+								victory();
+							}
 						}
 					}
 				} else {
@@ -334,6 +340,7 @@ public class CombatController extends BorderPane implements GameScene {
 				}
 			}
 		};
+		
 
 		list.setItems(player.getLearnedSkills());
 		list.setOnMouseClicked(evento);

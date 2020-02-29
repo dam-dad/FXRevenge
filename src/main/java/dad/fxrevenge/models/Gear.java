@@ -118,13 +118,13 @@ public class Gear extends Attributes {
 		case LeftHand:
 			switch (job) {
 			case Archmage:
-				str.append("Varita");
+				str.append("Varita ");
 				break;
 			case Warlord:
-				str.append("Escudo");
+				str.append("Escudo ");
 				break;
 			case Hunter:
-				str.append("Daga");
+				str.append("Daga ");
 				break;
 			default:
 				break;
@@ -133,13 +133,13 @@ public class Gear extends Attributes {
 		case RightHand:
 			switch (job) {
 			case Archmage:
-				str.append("Baston");
+				str.append("Baston ");
 				break;
 			case Warlord:
-				str.append("Espada");
+				str.append("Espada ");
 				break;
 			case Hunter:
-				str.append("Gran arco");
+				str.append("Gran arco ");
 				break;
 			default:
 				break;
