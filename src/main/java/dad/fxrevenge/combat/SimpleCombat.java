@@ -29,8 +29,16 @@ public class SimpleCombat extends CombatController {
 		}
 		
 		//pendiente de comprobar si suma exp y dinero
+		System.out.println("Exp actual: "+player.getCurrentExp()+" /Total: "+player.getTotalLevelExp());
 		player.sumarexp(enemy.getExpDrop());
+		System.out.println("Enemy exp: "+enemy.getExp());
+		System.out.println("After Exp actual: "+player.getCurrentExp()+" /Total: "+player.getTotalLevelExp());
+		System.out.println("Player money: "+player.getMoney());
+		System.out.println("Enemy money: "+enemy.getMoneyDrop());
 		player.setMoney(player.getMoney() + enemy.getMoneyDrop());
+		System.out.println("Player money after: "+player.getMoney());
+		
+		player.ordenarInventario();
 
 		SceneManager.changeScene(new WorldMapController());
 	}

@@ -121,19 +121,6 @@ public class Avatar extends Attributes {
 	}
 
 	/**
-	 * Funcion que comprueba si al subir de nivel el personaje puede aprender nuevas
-	 * habilidades y en caso positivo, las aprende
-	 */
-	private void skillchecker() {
-		learnedSkills.clear();
-		for (int i = 0; i < skills.size(); i++) {
-			if (skills.get(i).getUnlockLevel() <= this.getLevel()) {
-				learnedSkills.add(skills.get(i));
-			}
-		}
-	}
-
-	/**
 	 * Funcion utilizada para añadir un objeto al inventario
 	 * 
 	 * @param item Objeto que se añadira al inventario
@@ -280,6 +267,30 @@ public class Avatar extends Attributes {
 		return danyo;
 
 	}
+	
+	/**
+	 * Suma una determinada cantidad de experiencia a la experiencia actual del
+	 * personaje
+	 * 
+	 * @param exp La cantidad de experiencia a sumar
+	 * @return Booleano que indica si ha subido de nivel o no
+	 */
+	public void sumarexp(int exp) {
+		this.setCurrentExp(this.getCurrentExp()+exp);
+		System.out.println("Se deberia haber sumado exp");
+		if (this.getCurrentExp()>this.getTotalLevelExp()) {
+			this.setCurrentExp(this.getCurrentExp()-this.getTotalLevelExp());
+			this.levelUp();
+			System.out.println("Se ha llamado a level up");
+		}
+		
+//		boolean lvlup = (this.getCurrentExp() + exp) > this.getTotalLevelExp();
+//		if (lvlup) {
+//			this.levelUp();
+//		} else {
+//			this.setCurrentExp(this.getCurrentExp()+exp);
+//		}
+	}
 
 	/**
 	 * Funcion para subir de nivel, llamada en caso necesario desde la funcion
@@ -289,7 +300,6 @@ public class Avatar extends Attributes {
 
 		this.setLevel(this.getLevel() + 1);
 		this.setTotalLevelExp((int) (getTotalLevelExp() * 1.25));
-		this.setCurrentExp(0);
 
 		if (work.equals(ClassType.Archmage)) {
 			this.setPhysDamage(this.getPhysDamage() + 1);
@@ -318,20 +328,18 @@ public class Avatar extends Attributes {
 	}
 
 	/**
-	 * Suma una determinada cantidad de experiencia a la experiencia actual del
-	 * personaje
-	 * 
-	 * @param exp La cantidad de experiencia a sumar
-	 * @return Booleano que indica si ha subido de nivel o no
+	 * Funcion que comprueba si al subir de nivel el personaje puede aprender nuevas
+	 * habilidades y en caso positivo, las aprende
 	 */
-	public boolean sumarexp(int exp) {
-		boolean lvlup = this.getCurrentExp() + exp > this.getTotalLevelExp();
-		if (lvlup) {
-			this.levelUp();
+	private void skillchecker() {
+		learnedSkills.clear();
+		for (int i = 0; i < skills.size(); i++) {
+			if (skills.get(i).getUnlockLevel() <= this.getLevel()) {
+				learnedSkills.add(skills.get(i));
+			}
 		}
-		return lvlup;
 	}
-
+	
 	/**
 	 * Funcion permite hacer una comparación previa entre una pieza de armadura
 	 * recien adquirida y la ya equipada dejando que el jugador elija si quiere

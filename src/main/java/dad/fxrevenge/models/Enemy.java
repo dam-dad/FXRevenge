@@ -21,7 +21,6 @@ public class Enemy extends Attributes {
 	private ObjectProperty<Image> worldSprite = new SimpleObjectProperty<Image>();
 	private String description;
 	private IntegerProperty exp = new SimpleIntegerProperty();
-	private IntegerProperty money = new SimpleIntegerProperty();
 
 	/**
 	 * Constructor de los personajes enemigos donde se especifican varios valores
@@ -47,7 +46,7 @@ public class Enemy extends Attributes {
 			this.setDescription("A estos monstruos les gusta juntarse y danzar bajo el cielo nocturno.");
 
 			this.setExp(35);
-			this.setMoney(2);
+			this.setMoneyDrop(5);
 			break;
 		case Jelly:
 //			this.setName("Mira como tiemblo");
@@ -62,7 +61,6 @@ public class Enemy extends Attributes {
 			this.setDescription("Monstruos comunes que se encuentran por todos lados. ");
 
 			this.setExp(5);
-			this.setMoney(0);
 			this.setMoneyDrop(0);
 			break;
 		case Orc:
@@ -78,7 +76,7 @@ public class Enemy extends Attributes {
 			this.setDescription("Criaturas de enorme tamaño que pueden aplastar al enemigo con sus colosales mazas.");
 
 			this.setExp(15);
-			this.setMoney(9);
+			this.setMoneyDrop(8);
 			break;
 		case Skeleton:
 //			this.setName("Huesitos");
@@ -93,7 +91,7 @@ public class Enemy extends Attributes {
 			this.setDescription("Difuntos soldados que patrullan esperando pillarte.");
 
 			this.setExp(25);
-			this.setMoney(1);
+			this.setMoneyDrop(2);
 			break;
 
 		case Zombie:
@@ -111,7 +109,7 @@ public class Enemy extends Attributes {
 					"Se momificaron porque cuando se empiezan a pudrir, su aliento y sus uñas de llenan de toxinas.");
 
 			this.setExp(5);
-			this.setMoney(15);
+			this.setMoneyDrop(15);
 			break;
 		case M: 
 			this.setName(race.toString());
@@ -126,7 +124,7 @@ public class Enemy extends Attributes {
 			this.setDescription("");
 
 			this.setExp(500);
-			this.setMoney(90);
+			this.setMoneyDrop(90);
 			break;
 		case V:
 			this.setName(race.toString()); 
@@ -140,7 +138,7 @@ public class Enemy extends Attributes {
 			this.setDescription("");
 
 			this.setExp(700);
-			this.setMoney(100);
+			this.setMoneyDrop(100);
 			break;
 		case C:
 			this.setName(race.toString()); 
@@ -153,7 +151,7 @@ public class Enemy extends Attributes {
 			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/c.png").toString())); 
 																												
 			this.setExp(900);
-			this.setMoney(110);
+			this.setMoneyDrop(110);
 			break;
 		case FX:
 			this.setName(race.toString()); 
@@ -168,7 +166,7 @@ public class Enemy extends Attributes {
 			this.setDescription("");
 
 			this.setExp(3000);
-			this.setMoney(900);
+			this.setMoneyDrop(900);
 			break;
 		default: // nunca se deberia de meter aqui
 
@@ -337,18 +335,6 @@ public class Enemy extends Attributes {
 
 	public final void setExp(final int exp) {
 		this.expProperty().set(exp);
-	}
-
-	public final IntegerProperty moneyProperty() {
-		return this.money;
-	}
-
-	public final int getMoney() {
-		return this.moneyProperty().get();
-	}
-
-	public final void setMoney(final int money) {
-		this.moneyProperty().set(money);
 	}
 
 	public Race getRace() {
