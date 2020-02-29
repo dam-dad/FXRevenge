@@ -56,7 +56,7 @@ public class Skill {
 	}
 
 
-	//solo hay skills de prueba, añadir mas y ver como hacerlo desde json
+	//solo hay skills de prueba
 	/**
 	 * Funcion que permite generar las habilidades de un personaje en base a su clase
 	 * 
@@ -71,28 +71,28 @@ public class Skill {
 		//Habilidades pendiente de testeo y ajustes una vez se prueben in-game
 		switch (job) {
 		case Archmage:
-			habilidades.add(new Skill("Piro",3,1,5,false,0.1,0,"Generas una bola de fuego en tu mano y la lanzas hacia tu enemigo"));
-			habilidades.add(new Skill("Electro",5,3,7,false,0.1,0,"Alzas tu arma al cielo para invocar una corriente eléctrica que daña a tu enemigo"));
-			habilidades.add(new Skill("Icicle",7,5,9,false,0.2,0,"Condensas la humedad alrededor de tu mano, enfriándola para generar una estaca de hielo para lanzarla hacia tu enemigo"));
-			habilidades.add(new Skill("Thunder",10,7,15,false,0.4,0,"Poderoso conjuro que hace caer un poderoso relámpago sobre tu enemigo"));
-			habilidades.add(new Skill("Soul-Beam",20,9,35,false,0.7,30,"Extraes el poder mágico de tu alma y lo concentras en tu báculo para lanzar un poderoso laser que daña a tus enemigos"));
-			habilidades.add(new Skill("Cataclsym",50,13,50,false,1.0,50,"Convocas las fuerzas de la naturaleza haciendo caer su ira sobre tus enemigos"));
+			habilidades.add(new Skill("Piro",3,1,5,false,1.1,0,"Generas una bola de fuego en tu mano y la lanzas hacia tu enemigo"));
+			habilidades.add(new Skill("Electro",5,3,7,false,1.1,0,"Alzas tu arma al cielo para invocar una corriente eléctrica que daña a tu enemigo"));
+			habilidades.add(new Skill("Icicle",7,5,9,false,1.2,0,"Condensas la humedad alrededor de tu mano, enfriándola para generar una estaca de hielo para lanzarla hacia tu enemigo"));
+			habilidades.add(new Skill("Thunder",10,7,15,false,1.4,0,"Poderoso conjuro que hace caer un poderoso relámpago sobre tu enemigo"));
+			habilidades.add(new Skill("Soul-Beam",20,9,35,false,1.7,30,"Extraes el poder mágico de tu alma y lo concentras en tu báculo para lanzar un poderoso laser que daña a tus enemigos"));
+			habilidades.add(new Skill("Cataclsym",50,13,50,false,2.0,50,"Convocas las fuerzas de la naturaleza haciendo caer su ira sobre tus enemigos"));
 			break;
 		case Warlord:
-			habilidades.add(new Skill("Slash",3,1,5,true,0.1,0,"Un poderoso tajo con tu arma hacia el enemigo"));
-			habilidades.add(new Skill("Double-Slash",5,3,10,true,0.2,0,"Realiza dos poderosos y rápidos tajos sobre el enemigo"));
-			habilidades.add(new Skill("Final Slash",7,5,12,true,0.4,10,"Te concentras para analizar a tu enemigo, buscando un punto debil al cual atacas con un poderoso tajo que causa mucho daño"));
-			habilidades.add(new Skill("Shield-Slam",9,3,7,true,0.2,10,"Golpeas con el canto del escudo a tu enemigo haciendole un poco de daño"));
-			habilidades.add(new Skill("Shield-Bash",11,5,10,true,0.3,15,"Agarras el escudo con ambas manos para golpear con fuerza al enemigo"));
-			habilidades.add(new Skill("Shield-Crash",13,7,15,true,0.5,20,"Arremetes con ferocidad hacia el enemigo utilizando toda tu fuerza para ello"));
+			habilidades.add(new Skill("Slash",3,1,5,true,1.1,0,"Un poderoso tajo con tu arma hacia el enemigo"));
+			habilidades.add(new Skill("Double-Slash",5,3,10,true,1.2,0,"Realiza dos poderosos y rápidos tajos sobre el enemigo"));
+			habilidades.add(new Skill("Final Slash",7,5,12,true,1.4,10,"Te concentras para analizar a tu enemigo, buscando un punto debil al cual atacas con un poderoso tajo que causa mucho daño"));
+			habilidades.add(new Skill("Shield-Slam",9,3,7,true,1.2,10,"Golpeas con el canto del escudo a tu enemigo haciendole un poco de daño"));
+			habilidades.add(new Skill("Shield-Bash",11,5,10,true,1.3,15,"Agarras el escudo con ambas manos para golpear con fuerza al enemigo"));
+			habilidades.add(new Skill("Shield-Crash",13,7,15,true,1.5,20,"Arremetes con ferocidad hacia el enemigo utilizando toda tu fuerza para ello"));
 			break;
 		default: //hunter
-			habilidades.add(new Skill("Shot",3,1,10,true,0.2,0,"Dispara una flecha normal hacia tu enemigo"));
-			habilidades.add(new Skill("Double-Shot",4,3,13,true,0.2,0,"Dispara dos flechas normales hacia tu enemigo"));
-			habilidades.add(new Skill("Aimed-Shot",6,5,15,true,0.3,0,"Te concentras y apuntas hacia un organo vital de tu enemigo antes de disparar"));
-			habilidades.add(new Skill("Heavy-Shot",8,7,17,true,0.5,10,"Dispara una flecha pesada a tu enemigo"));
-			habilidades.add(new Skill("Dragon-Shot",10,9,20,true,0.7,30,"Disparas una flecha dracónica a tu enemigo, causando mucho daño"));
-			habilidades.add(new Skill("Kill-Shot",15,11,25,true,0.5,80,"Te concentras totalmente en los puntos vitales de tu enemigo y disparas una flecha que perseguirá al enemigo hasta golpearlo"));
+			habilidades.add(new Skill("Shot",3,1,10,true,1.2,0,"Dispara una flecha normal hacia tu enemigo"));
+			habilidades.add(new Skill("Double-Shot",4,3,13,true,1.2,0,"Dispara dos flechas normales hacia tu enemigo"));
+			habilidades.add(new Skill("Aimed-Shot",6,5,15,true,1.3,0,"Te concentras y apuntas hacia un organo vital de tu enemigo antes de disparar"));
+			habilidades.add(new Skill("Heavy-Shot",8,7,17,true,1.5,10,"Dispara una flecha pesada a tu enemigo"));
+			habilidades.add(new Skill("Dragon-Shot",10,9,20,true,1.7,30,"Disparas una flecha dracónica a tu enemigo, causando mucho daño"));
+			habilidades.add(new Skill("Kill-Shot",15,11,25,true,2.0,80,"Te concentras totalmente en los puntos vitales de tu enemigo y disparas una flecha que perseguirá al enemigo hasta golpearlo"));
 			
 			break;
 		}
