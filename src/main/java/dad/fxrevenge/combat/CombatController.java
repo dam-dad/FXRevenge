@@ -368,7 +368,7 @@ public class CombatController extends BorderPane implements GameScene {
 		setBackground();
 
 		// bindeos jugador
-		playerLabel.textProperty().bind(player.nameProperty().concat(" Lv. ").concat(enemy.levelProperty().asString()));
+		playerLabel.textProperty().bind(player.nameProperty().concat(" Lv. ").concat(player.levelProperty().asString()));
 		playerImage.imageProperty().bind(player.combatSpriteProperty());
 		playerHealthLabel.textProperty()
 				.bind(player.currentLifeProperty().asString().concat("/").concat(player.HealthProperty()));
