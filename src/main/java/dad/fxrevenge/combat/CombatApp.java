@@ -23,14 +23,13 @@ public class CombatApp extends Application {
 //	private Image backgroundImage = new Image("/image/background/v.png");
 
 	private CombatController controller;
-	private Avatar pj = new Avatar(new Image(getClass().getResource("/images/lightstream.png").toString()),
+	private Avatar pj = new Avatar(new Image(getClass().getResource("/image/characters/select/m/warrior.png").toString()),
 			ClassType.Warlord, Skill.generateClassSkills(ClassType.Warlord), "Rayo");
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
 		Enemy bichito = new Enemy(Race.Jelly, 1);
-System.out.println("vida Jelly "+bichito.getHealth());
 		controller = new CombatController(pj, bichito, backgroundImage);
 
 		SceneManager.setMainStage(primaryStage);

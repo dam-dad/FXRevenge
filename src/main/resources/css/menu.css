@@ -1,5 +1,5 @@
 .root{
-	-fx-background-image: url("../image/bestiary/map.jpg");
+	-fx-background-image: url("../image/menu/map.jpg");
 }
 .button{
     -fx-padding: 8.0 15.0 15.0 15.0;
@@ -44,7 +44,7 @@
     -fx-border-width: 5.0;
     -fx-background-radius: 100.0px;
 	-fx-font-family: "Arial";
-   -fx-padding:25.0px, 50.0px,20.0px,50.0px;
+    -fx-padding:25.0px, 50.0px,20.0px,50.0px;
 }
 
 .text-area {
@@ -62,7 +62,7 @@
     -fx-background-color: transparent;
 }
 
-#datosBox, #decripcionBox, #derechaBox, #izquierdaBox{
+#datosBox, #decripcionBox, #derechaBox, #izquierdaBox, #nombreBox, #sexoBox, #profesionBox, #resultadoBox{
 	-fx-background-color:#663300;
 }
 
@@ -82,7 +82,7 @@
 	-fx-background-color:#D38300; 
 }
 
-.label{
+.label, .radio-button{
 	
     -fx-font-size: 15.0px; 
 	-fx-font-style:normal;
@@ -90,4 +90,9 @@
 	-fx-padding:3.0px;
     -fx-font-family: "Comic Sans MS";
    	
+}
+
+.radio-button{
+	-fx-font-size: 13.0px; 
+	-fx-text-fill:#FFFFFF;	
 }

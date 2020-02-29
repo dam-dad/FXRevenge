@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class charselectapp extends Application{
-	private CharSelectControl charcont;
+	private CharSelectControl2 charcont;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -14,7 +14,7 @@ public class charselectapp extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		charcont = new CharSelectControl();
+		charcont = new CharSelectControl2();
 		
 		Scene scene = new Scene(charcont.getView(), 800, 600);
 		primaryStage.setScene(scene);
