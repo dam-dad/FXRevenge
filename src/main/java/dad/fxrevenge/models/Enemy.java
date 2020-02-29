@@ -183,20 +183,18 @@ public class Enemy extends Attributes {
 			break;
 		}
 
-//		if (!raza.equals(Race.Boss) && !raza.equals(Race.Jelly))
-//			this.setMoneyDrop(getMoney() + nivel);
-//		this.setExpDrop(this.getExp() * nivel);
-
 		this.setCurrentLife(this.getHealth()); // Setea la vida del enemigo
-		
+		this.setExpDrop((int)(this.getExp()+(0.15*this.getExp()*this.getLevel())));
 		
 		//Generar geardrop
 		ArrayList<GearPosition> gpaux = new ArrayList<GearPosition>();
 		gpaux.addAll(Arrays.asList(GearPosition.Boots,GearPosition.Chest,GearPosition.Gloves,GearPosition.Helmet,GearPosition.LeftHand,GearPosition.Leggings,GearPosition.RightHand));
 		ArrayList<ClassType> ctaux = new ArrayList<ClassType>();
 		ctaux.addAll(Arrays.asList(ClassType.Archmage,ClassType.Warlord,ClassType.Hunter));
-		int RandGearPosIndex = (int) Math.random()*gpaux.size();
-		int RandJobIndex = (int) Math.random()*ctaux.size();
+		
+		int RandGearPosIndex = (int) (Math.random()*gpaux.size());
+		int RandJobIndex = (int) (Math.random()*ctaux.size());
+		
 		Gear g = new Gear(this.getLevel(), gpaux.get(RandGearPosIndex), ctaux.get(RandJobIndex));
 		this.setGearDrop(g);
 	}

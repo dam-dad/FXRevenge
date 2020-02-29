@@ -62,7 +62,7 @@ public class Gear extends Attributes {
 		StringBuilder str = new StringBuilder();
 
 		ArrayList<String> casco = new ArrayList<String>();
-		casco.add("Casco");
+		casco.add("Casco ");
 		casco.add("Yelmo ");
 		casco.add("Sombrero ");
 		casco.add("Tiara ");

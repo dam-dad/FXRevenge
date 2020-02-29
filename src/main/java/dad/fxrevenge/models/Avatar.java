@@ -277,19 +277,10 @@ public class Avatar extends Attributes {
 	 */
 	public void sumarexp(int exp) {
 		this.setCurrentExp(this.getCurrentExp()+exp);
-		System.out.println("Se deberia haber sumado exp");
 		if (this.getCurrentExp()>this.getTotalLevelExp()) {
 			this.setCurrentExp(this.getCurrentExp()-this.getTotalLevelExp());
 			this.levelUp();
-			System.out.println("Se ha llamado a level up");
 		}
-		
-//		boolean lvlup = (this.getCurrentExp() + exp) > this.getTotalLevelExp();
-//		if (lvlup) {
-//			this.levelUp();
-//		} else {
-//			this.setCurrentExp(this.getCurrentExp()+exp);
-//		}
 	}
 
 	/**
