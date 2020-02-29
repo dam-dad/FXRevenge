@@ -22,6 +22,7 @@ public class TestMove {
 	private ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
+	private boolean newPos=false;
 	private String[][] map;
 	private int posX;
 	private int posY;
@@ -93,6 +94,7 @@ public class TestMove {
 						pjImage.setY(nextPos);
 						pjImage.setTranslateY(0);
 						inMove = false;
+						newPos=true;
 						pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
 						map[posY - 1][posX] = "P";
 						map[posY][posX] = ".";
@@ -107,7 +109,7 @@ public class TestMove {
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
 					SceneManager.changeScene(new VMap());
 				} else if ((posY - 1) >= 0 && map[posY - 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new LevelMap());
 				}
 
 //			pjImage.setX(pjImage.getX()pjImage.getX());
@@ -139,6 +141,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posX++;
 						inMove = false;
+						newPos=true;
 						pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
 					});
 					transicion.play();
@@ -149,7 +152,7 @@ public class TestMove {
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
 					SceneManager.changeScene(new CMap());
 				} else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new LevelMap());
 				}
 
 				break;
@@ -180,6 +183,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posX--;
 						inMove = false;
+						newPos=true;
 						pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 					});
 					transicion.play();
@@ -190,7 +194,7 @@ public class TestMove {
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
 					SceneManager.changeScene(new MMap());
 				} else if ((posX - 1) >= 0 && map[posY][posX - 1] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new LevelMap());
 				}
 
 				break;
@@ -221,6 +225,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posY++;
 						inMove = false;
+						newPos=true;
 						pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
 					});
 					transicion.play();
@@ -228,7 +233,7 @@ public class TestMove {
 
 				// Volver al World Map
 				if ((posY + 1) < map.length && map[posY + 1][posX] == "WM") {
-					SceneManager.changeScene(new WorldMapController());
+					SceneManager.changeScene(new LevelMap());
 				}
 
 				break;
@@ -236,12 +241,11 @@ public class TestMove {
 			case E:
 				inMove = true;
 				interaction();
-				System.out.println("----");
 				inMove = false;
-				System.out.println(inMove);
+				newPos=false;
 				break;
 			default:
-
+				newPos=false;
 				break;
 			}
 		}
@@ -348,5 +352,9 @@ public class TestMove {
 
 	public ImageView getPjImage() {
 		return pjImage;
+	}
+
+	public boolean isNewPos() {
+		return newPos;
 	}
 }
