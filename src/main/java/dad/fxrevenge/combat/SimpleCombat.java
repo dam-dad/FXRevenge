@@ -7,6 +7,8 @@ import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.WorldMapController;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
 public class SimpleCombat extends CombatController {
@@ -43,6 +45,11 @@ public class SimpleCombat extends CombatController {
 		
 		player.ordenarInventario();
 
+		SceneManager.changeScene(world);
+	}
+	
+	@Override
+	protected void onExitAction(ActionEvent event) {
 		SceneManager.changeScene(world);
 	}
 
