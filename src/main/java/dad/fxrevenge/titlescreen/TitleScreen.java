@@ -1,6 +1,8 @@
 package dad.fxrevenge.titlescreen;
 
-import dad.fxrevenge.dialog.IntroductionDialog;
+import java.io.IOException;
+
+import dad.fxrevenge.charselect.CharSelectController;
 import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
@@ -10,7 +12,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 public class TitleScreen extends DialogScene {
-	
+
 	// Función que se ejecuta dentro del bucle principal
 	@Override
 	public void update() {
@@ -42,10 +44,15 @@ public class TitleScreen extends DialogScene {
 		// Si se presiona la tecla ENTER carga el diálogo de introducción
 		if (currentlyActiveKeys.contains("ENTER")) {
 			currentlyActiveKeys.clear();
-			SceneManager.changeScene(new IntroductionDialog());
+
+			try {
+				SceneManager.changeScene(new CharSelectController());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	// Función que dibuja el texto aplicándole estilos
 	private void drawText(Font font, String text, Boolean isTitle) {
 

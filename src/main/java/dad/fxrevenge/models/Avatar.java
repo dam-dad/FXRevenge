@@ -85,7 +85,6 @@ public class Avatar extends Attributes {
 			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
 					new Item().generatePotion(Effect.MiniManaRestore),
 					new Item().generatePotion(Effect.MiniHealRestore));
-			
 
 		} else if (work.equals(ClassType.Hunter)) {
 
@@ -114,7 +113,7 @@ public class Avatar extends Attributes {
 		}
 
 		this.ordenarInventario();
-		
+
 		this.setCurrentLife(this.getHealth());
 		this.setCurrentMana(this.getMana());
 
@@ -187,7 +186,7 @@ public class Avatar extends Attributes {
 				this.setCurrentMana(((int) (this.getCurrentMana() + this.getMana() * 0.75)));
 			}
 			break;
-		default: 
+		default:
 			break;
 		}
 	}
@@ -267,7 +266,7 @@ public class Avatar extends Attributes {
 		return danyo;
 
 	}
-	
+
 	/**
 	 * Suma una determinada cantidad de experiencia a la experiencia actual del
 	 * personaje
@@ -276,9 +275,9 @@ public class Avatar extends Attributes {
 	 * @return Booleano que indica si ha subido de nivel o no
 	 */
 	public void sumarexp(int exp) {
-		this.setCurrentExp(this.getCurrentExp()+exp);
-		if (this.getCurrentExp()>this.getTotalLevelExp()) {
-			this.setCurrentExp(this.getCurrentExp()-this.getTotalLevelExp());
+		this.setCurrentExp(this.getCurrentExp() + exp);
+		if (this.getCurrentExp() > this.getTotalLevelExp()) {
+			this.setCurrentExp(this.getCurrentExp() - this.getTotalLevelExp());
 			this.levelUp();
 		}
 	}
@@ -330,7 +329,7 @@ public class Avatar extends Attributes {
 			}
 		}
 	}
-	
+
 	/**
 	 * Funcion permite hacer una comparación previa entre una pieza de armadura
 	 * recien adquirida y la ya equipada dejando que el jugador elija si quiere
@@ -349,7 +348,7 @@ public class Avatar extends Attributes {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Equipamiento");
 		alert.setHeaderText(
-				"¿Quieres sustituir tu " + current.getName() + " por el recien obtenido " + equipment.getName()+" ?");
+				"¿Quieres sustituir tu " + current.getName() + " por el recien obtenido " + equipment.getName() + " ?");
 		alert.setContentText("Equipado: " + current.toString() + "\n o \n" + equipment.toString() + "\n ¿Qué decides?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get().equals(ButtonType.OK)) {
@@ -384,7 +383,7 @@ public class Avatar extends Attributes {
 
 	public void comprar(Item it, int cantidad) {
 
-		this.setMoney(this.getMoney()-it.getPrice()*cantidad);
+		this.setMoney(this.getMoney() - it.getPrice() * cantidad);
 		it.setQuantity(cantidad);
 		this.inventory.add(it);
 
@@ -394,18 +393,18 @@ public class Avatar extends Attributes {
 
 	public void vender(Item it, int cantidad) {
 
-		this.setMoney(this.getMoney() + it.getPrice()/2*cantidad);
-		
-		for(int i=0; i<this.inventory.size(); i++) {
-			if(this.inventory.get(i).getEffect().equals(it.getEffect())) {
-				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity()-cantidad);
-			}	
+		this.setMoney(this.getMoney() + it.getPrice() / 2 * cantidad);
+
+		for (int i = 0; i < this.inventory.size(); i++) {
+			if (this.inventory.get(i).getEffect().equals(it.getEffect())) {
+				this.inventory.get(i).setQuantity(this.inventory.get(i).getQuantity() - cantidad);
+			}
 		}
-		
+
 		this.ordenarInventario();
 
 	}
-	
+
 	/**
 	 * Funcion encargada de actualizar las estadísticas del personaje tras un cambio
 	 * de equipamiento, restando las estadisticas de la equipacion antigua y sumando
@@ -434,12 +433,12 @@ public class Avatar extends Attributes {
 		boolean hay = false;
 		int pos = 0;
 
-		for(int i=0; i<objetosPj.size(); i++) {
-			if(objetosPj.get(i).getQuantity()==0) {
+		for (int i = 0; i < objetosPj.size(); i++) {
+			if (objetosPj.get(i).getQuantity() == 0) {
 				objetosPj.remove(i);
 			}
 		}
-		
+
 		for (int i = 0; i < objetosPj.size(); i++) {
 			for (int z = 0; z < nuevos.size(); z++) {
 				if (objetosPj.get(i).getName().equals(nuevos.get(z).getName())) {

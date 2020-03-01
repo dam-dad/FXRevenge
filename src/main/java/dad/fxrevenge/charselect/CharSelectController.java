@@ -1,9 +1,12 @@
 package dad.fxrevenge.charselect;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
+import dad.fxrevenge.dialog.IntroductionDialog;
+import dad.fxrevenge.parameters.Parameters;
+import dad.fxrevenge.parameters.Player;
+import dad.fxrevenge.scene.GameScene;
+import dad.fxrevenge.scene.SceneManager;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,7 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -22,9 +25,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class CharSelectControl2 extends VBox implements Initializable {
+public class CharSelectController extends VBox implements GameScene {
 	private ToggleGroup sexo = new ToggleGroup();
 	private ToggleGroup job = new ToggleGroup();
+
+	@SuppressWarnings("unused")
+	private Scene scene;
 
 	@FXML
 	private VBox root;
@@ -71,17 +77,18 @@ public class CharSelectControl2 extends VBox implements Initializable {
 	@FXML
 	private Button FinalizarButton;
 
-	public CharSelectControl2() throws IOException {
+	public CharSelectController() throws IOException {
 		super();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CharSelect2.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CharSelectView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		loader.load();
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+	public void start() {
+
+		scene = new Scene(root, Parameters.getResolutionWidth(), Parameters.getResolutionHeight());
 
 		MasculinoRB.setToggleGroup(sexo);
 		FemeninoRB.setToggleGroup(sexo);
@@ -133,6 +140,15 @@ public class CharSelectControl2 extends VBox implements Initializable {
 //		 this.job.getSelectedToggle();  obtiene el togle seleccionado
 
 		// aqui va el codigo para saltar a la siguiente pantalla
+
+		Player.setName(nombreLabel.getText());
+		Player.setPortrait(playerImage.getImage());
+		// Implementar selección de clase
+		// Player.setRole(ClassType.valueOf(this.job.getSelectedToggle().toString()));
+
+		new Player();
+
+		SceneManager.changeScene(new IntroductionDialog());
 	}
 
 	private ObjectProperty<Image> getImage(String path) {
@@ -145,5 +161,10 @@ public class CharSelectControl2 extends VBox implements Initializable {
 
 	public VBox getView() {
 		return root;
+	}
+
+	@Override
+	public void stop() {
+
 	}
 }
