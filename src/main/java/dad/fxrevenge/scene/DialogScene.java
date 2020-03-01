@@ -117,15 +117,15 @@ public class DialogScene implements GameScene {
 		// Dibujar fondo
 		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
 
-		// Si se presiona la flecha izquierda vuelve al diálogo anterior
-		if (currentlyActiveKeys.contains("LEFT")) {
+		// Vuelve al diálogo anterior
+		if (currentlyActiveKeys.contains("Q")) {
 			currentlyActiveKeys.clear();
 			if (dialogNumber > 0)
 				dialogNumber--;
 		}
 
-		// Si se presiona la flecha derecha avanza al diálogo siguiente
-		if (currentlyActiveKeys.contains("RIGHT")) {
+		// Avanza al diálogo siguiente
+		if (currentlyActiveKeys.contains("E")) {
 			currentlyActiveKeys.clear();
 			dialogNumber++;
 		}

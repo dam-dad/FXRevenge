@@ -1,10 +1,10 @@
 package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.parameters.Backgrounds;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.world.WorldMapController;
-import javafx.scene.image.Image;
 
-public class LevelMap extends WorldMapController {
+public class Overworld extends WorldMapController {
 
 	public static String[][] overworld = {
 //			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
@@ -22,8 +22,9 @@ public class LevelMap extends WorldMapController {
 			{ "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x" } };
 
 
-	public LevelMap() {
-		super(overworld, Backgrounds.getMapDefault());
+	public Overworld() {
+		super(overworld, Backgrounds.getOverworld());
+		Player.setInSafeZone(true);
 	}
 
 }

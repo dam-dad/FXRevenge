@@ -6,6 +6,8 @@ import dad.fxrevenge.models.ClassType;
 import dad.fxrevenge.models.Skill;
 
 public class Player {
+	
+	private static boolean inSafeZone;
 
 	private static Avatar player = new Avatar(
 			CharacterList.getPlayer().getPortrait(), 
@@ -16,6 +18,14 @@ public class Player {
 
 	public static Avatar getPlayer() {
 		return player;
+	}
+
+	public static boolean isInSafeZone() {
+		return inSafeZone;
+	}
+
+	public static void setInSafeZone(boolean inSafeZone) {
+		Player.inSafeZone = inSafeZone;
 	}
 
 }

@@ -1,11 +1,10 @@
 package dad.fxrevenge.dialog;
 
-import dad.fxrevenge.boss.map.LevelMap;
+import dad.fxrevenge.boss.map.Overworld;
 import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.world.WorldMapController;
 import javafx.scene.image.Image;
 
 public class IntroductionDialog extends DialogScene {
@@ -67,7 +66,7 @@ public class IntroductionDialog extends DialogScene {
 		default:
 			// Cambio de escena
 			Player.getPlayer().setWorldSprite(new Image("/Image/characters/warrior_m.png"));
-			SceneManager.changeScene(new LevelMap());
+			SceneManager.changeScene(new Overworld());
 			break;
 		}
 	}

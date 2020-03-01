@@ -7,6 +7,7 @@ import dad.fxrevenge.animations.TestMove;
 import dad.fxrevenge.combat.SimpleCombat;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.parameters.Parameters;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.Group;
@@ -21,7 +22,8 @@ public class WorldMapController implements GameScene {
 
 	// MODEL
 
-	private WorldMapModel model;
+	private WorldMapModel model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
+			Parameters.getMapCellSize());
 
 	// VIEW
 
@@ -37,12 +39,10 @@ public class WorldMapController implements GameScene {
 	private AnimationMobs skeleton;
 	TestMove pj;
 
-	private static String[][] world;
+	private String[][] world;
 
 	public WorldMapController(String[][] map, Image background) {
-		model = new WorldMapModel(Parameters.getResolutionWidth(), Parameters.getResolutionHeight(),
-				Parameters.getMapCellSize());
-		WorldMapController.world = map;
+		this.world = map;
 		this.background = background;
 	}
 
@@ -91,9 +91,9 @@ public class WorldMapController implements GameScene {
 	}
 
 	private void update(KeyEvent event) {
-		
+
 		pj.move(event);
-		if (pj.isNewPos()==true)
+		if (pj.isNewPos() == true)
 			enemyRandom();
 	}
 
@@ -105,8 +105,12 @@ public class WorldMapController implements GameScene {
 			int randomRace = (int) (Math.floor(Math.random() * model.getRaces().size()));
 			int randomLevel = (int) (Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel));
 			try {
-				SceneManager.changeScene(
-						new SimpleCombat(model.getAvatar(), new Enemy(model.getRaces().get(randomRace), randomLevel),auxWorld()));
+
+				if (!Player.isInSafeZone()) {
+					SceneManager.changeScene(
+							new SimpleCombat(new Enemy(model.getRaces().get(randomRace), randomLevel), auxWorld()));
+				}
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -202,8 +206,9 @@ public class WorldMapController implements GameScene {
 	}
 
 	public WorldMapController auxWorld() {
-	return new WorldMapController(this.world, this.background);
+		return new WorldMapController(this.world, this.background);
 	}
+
 	@Override
 	public void stop() {
 
@@ -212,6 +217,10 @@ public class WorldMapController implements GameScene {
 	@Override
 	public Scene getScene() {
 		return scene;
+	}
+
+	public Image getBackground() {
+		return background;
 	}
 
 }

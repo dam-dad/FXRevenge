@@ -109,7 +109,7 @@ public class TestMove {
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == "VM") {
 					SceneManager.changeScene(new VMap());
 				} else if ((posY - 1) >= 0 && map[posY - 1][posX] == "WM") {
-					SceneManager.changeScene(new LevelMap());
+					SceneManager.changeScene(new Overworld());
 				}
 
 //			pjImage.setX(pjImage.getX()pjImage.getX());
@@ -152,7 +152,7 @@ public class TestMove {
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == "CM") {
 					SceneManager.changeScene(new CMap());
 				} else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "WM") {
-					SceneManager.changeScene(new LevelMap());
+					SceneManager.changeScene(new Overworld());
 				}
 
 				break;
@@ -194,7 +194,7 @@ public class TestMove {
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == "MM") {
 					SceneManager.changeScene(new MMap());
 				} else if ((posX - 1) >= 0 && map[posY][posX - 1] == "WM") {
-					SceneManager.changeScene(new LevelMap());
+					SceneManager.changeScene(new Overworld());
 				}
 
 				break;
@@ -233,7 +233,7 @@ public class TestMove {
 
 				// Volver al World Map
 				if ((posY + 1) < map.length && map[posY + 1][posX] == "WM") {
-					SceneManager.changeScene(new LevelMap());
+					SceneManager.changeScene(new Overworld());
 				}
 
 				break;
