@@ -41,6 +41,7 @@ public class Skill {
 	 * @param damageType tipo de daño que inflige
 	 * @param damageMultiplier daño adicional en base al daño del personaje
 	 * @param addCritChance probabilidad base adicional para ser critico de la habilidad
+	 * @param descript Describe el tipo de habilidad
 	 */
 	public Skill(String name, Integer cost, Integer unlockLevel, Integer damage,
 			Boolean damageType, Double damageMultiplier, Integer addCritChance, String descript) {

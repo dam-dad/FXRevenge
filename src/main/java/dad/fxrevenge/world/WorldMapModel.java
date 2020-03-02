@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Clase <code>WorldMapModel</code>.
- * @implNote Implementa los modelos utilizados para manejar los datos de las entidades WorldMapController;
+ * Implementa los modelos utilizados para manejar los datos de las entidades WorldMapController;
  */
 public class WorldMapModel {
 

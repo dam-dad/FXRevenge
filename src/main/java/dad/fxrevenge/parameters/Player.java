@@ -32,7 +32,7 @@ public class Player {
 	/**
 	 * Funcion de testeo para el informe
 	 * 
-	 * @return
+	 * @return devuelve un objeto avatar
 	 */
 	public static Avatar getNewPlayer() {
 

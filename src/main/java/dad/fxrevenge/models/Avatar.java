@@ -124,7 +124,7 @@ public class Avatar extends Attributes {
 	 * Constructor de prueba para los informes
 	 * 
 	 * @param work   Clase del personaje
-	 * @param skills Lista de habilidades que podra aprender el personaje
+	 * @param generateClassSkills Lista de habilidades que podra aprender el personaje
 	 * @param name   Nombre que tendra el personaje
 	 */
 	public Avatar(ClassType work, List<Skill> generateClassSkills, String name) {

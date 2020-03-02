@@ -277,7 +277,7 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>auxWorld</code>.
 	 * 
-	 * Función para obetener el mundo/nivel actual para poder traspasarlo a otra
+	 * @return el mundo/nivel actual para poder traspasarlo a otra
 	 * clase.
 	 */
 	public WorldMapController auxWorld() {

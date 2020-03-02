@@ -28,7 +28,7 @@ public class SimpleCombat extends CombatController {
 	 * 
 	 * @param enemy Obtiene el enemy con el que se enfrentará el jugador
 	 * @param world Almacena el mundo actual antes de realizar el combate.
-	 * 
+	 * @throws devuelve como errror un IOException
 	 */
 	public SimpleCombat(Enemy enemy, WorldMapController world) throws IOException {
 		super(Player.getPlayer(), enemy, world.getBackground());

@@ -17,7 +17,7 @@ public class AnimationMobs {
 
 	/**
 	 * Constructs an <code>TestMove</code> with the specified detail message.
-	 * String urlImage la imagen sprite que tendrán los objetos interacutables.
+	 *@param urlImage la imagen sprite que tendrán los objetos interacutables.
 	 * @param width    ancho del fragmento de imagen a dibujar
 	 * @param heigth   alto del fragmento de imagen a dibujar
 	 * @param offsetX desplasamiento en columnas,

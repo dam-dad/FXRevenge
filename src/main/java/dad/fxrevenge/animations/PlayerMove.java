@@ -91,7 +91,7 @@ public class PlayerMove {
 	/**
 	 * Función <code>move</code>.
 	 * 
-	 * Según el evento del teclado que se le pase, realizará tareas de movimiento en
+	 *@param event Según el evento del teclado que se le pase, realizará tareas de movimiento en
 	 * un sentido concreto(W/D/S/A). O si es la E el jugador interactura con los
 	 * personajes que lo permitan.
 	 */
