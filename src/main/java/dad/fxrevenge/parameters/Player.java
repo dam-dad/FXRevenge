@@ -13,8 +13,6 @@ public class Player {
 	private static Image portrait;
 	private static ClassType role = ClassType.Warlord;
 
-	private static boolean inSafeZone;
-
 	public Player() {
 		player = new Avatar(portrait, role, Skill.generateClassSkills(role), name);
 	}
@@ -41,14 +39,6 @@ public class Player {
 
 	public static void setRole(ClassType role) {
 		Player.role = role;
-	}
-
-	public static boolean isInSafeZone() {
-		return inSafeZone;
-	}
-
-	public static void setInSafeZone(boolean inSafeZone) {
-		Player.inSafeZone = inSafeZone;
 	}
 
 }

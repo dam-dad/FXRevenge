@@ -1,7 +1,6 @@
 package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.parameters.Backgrounds;
-import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.world.WorldMapController;
 
 public class MMap extends WorldMapController {
@@ -22,8 +21,7 @@ public class MMap extends WorldMapController {
 			{ "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1", "T1" } };
 
 	public MMap() {
-		super(map, Backgrounds.getM());
-		Player.setInSafeZone(false);
+		super(map, Backgrounds.getM(), false);
 	}
 
 }

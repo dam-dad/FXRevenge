@@ -1,7 +1,6 @@
 package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.parameters.Backgrounds;
-import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.world.WorldMapController;
 
 public class Overworld extends WorldMapController {
@@ -21,10 +20,8 @@ public class Overworld extends WorldMapController {
 			{ "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", "x" },
 			{ "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x", "T1", "x" } };
 
-
 	public Overworld() {
-		super(overworld, Backgrounds.getOverworld());
-		Player.setInSafeZone(true);
+		super(overworld, Backgrounds.getOverworld(), true);
 	}
 
 }

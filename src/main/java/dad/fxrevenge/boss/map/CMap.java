@@ -1,7 +1,6 @@
 package dad.fxrevenge.boss.map;
 
 import dad.fxrevenge.parameters.Backgrounds;
-import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.world.WorldMapController;
 
 public class CMap extends WorldMapController {
@@ -22,8 +21,7 @@ public class CMap extends WorldMapController {
 			{ ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
 	public CMap() {
-		super(map, Backgrounds.getC());
-		Player.setInSafeZone(false);
+		super(map, Backgrounds.getC(), false);
 	}
 
 }

@@ -261,13 +261,7 @@ public class CombatController extends BorderPane implements GameScene {
 									"Parece que te has quedado sin " + item.getName() + ", compra cuanto antes.");
 							alert3.show();
 						}
-					} else {
-						Alert alert2 = new Alert(AlertType.INFORMATION);
-						alert2.setTitle("Vaya...");
-						alert2.setContentText("Parece que no está implementado del todo el objeto, lo sentimos :(");
-						alert2.show();
-
-					}
+					} 
 
 				} else {
 					popup.show(view.getScene().getWindow());

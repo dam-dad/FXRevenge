@@ -9,7 +9,6 @@ import dad.fxrevenge.combat.SimpleCombat;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Race;
 import dad.fxrevenge.parameters.Parameters;
-import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.scene.Group;
@@ -22,8 +21,9 @@ import javafx.scene.paint.Color;
 
 /**
  * Clase <code>WorldMapController</code>.
-  * @implNote Esta clase se instancias todas las entidades del juego 
-  * y se dibujan los mapas de formato de Sttrings.
+ * 
+ * @implNote Esta clase se instancias todas las entidades del juego y se dibujan
+ *           los mapas de formato de Sttrings.
  */
 public class WorldMapController implements GameScene {
 
@@ -48,22 +48,26 @@ public class WorldMapController implements GameScene {
 
 	private String[][] world;
 
+	private boolean safeZone;
+
 	/**
-	 *Cosntructor <code>WorldMapController</code> para developer.
-	 *@param map  de coliciones y entidades del nivel actual.
-	 *@param backgorund  Imagen de fondo a establecer en el mapa.
+	 * Cosntructor <code>WorldMapController</code> para developer.
+	 * 
+	 * @param map        de coliciones y entidades del nivel actual.
+	 * @param backgorund Imagen de fondo a establecer en el mapa.
 	 */
-	public WorldMapController(String[][] map, Image background) {
+	public WorldMapController(String[][] map, Image background, Boolean safeZone) {
 		this.world = map;
 		this.background = background;
+		this.safeZone = safeZone;
 	}
 
-	
 	/**
 	 * Función <code>start</code> para developer.
-	  * @implNote Pinta todas las celdas y  
-	  * indica el número de columnas que hay para poder identificar de forma fácil las celdas.
-	  * Si tiene imagen de fondo esta sobrescribe las celddas;
+	 * 
+	 * @implNote Pinta todas las celdas y indica el número de columnas que hay para
+	 *           poder identificar de forma fácil las celdas. Si tiene imagen de
+	 *           fondo esta sobrescribe las celddas;
 	 */
 	@Override
 	public void start() {
@@ -76,10 +80,10 @@ public class WorldMapController implements GameScene {
 		view = new Group();
 		scene = new Scene(view, model.getWidth(), model.getHeigth());
 		view.getChildren().add(rectWorldCanvas);
-		
-		//Pasamos las razas al modelo
+
+		// Pasamos las razas al modelo
 		model.getRaces().addAll(Arrays.asList(Race.Jelly, Race.Skeleton, Race.Orc, Race.Zombie, Race.Demon));
-		//Pintamos las celdas del mapa
+		// Pintamos las celdas del mapa
 		int resto = 1;
 		int cellX = 0, cellY = 0;
 		for (int j = 0; j <= world.length; j++) {
@@ -105,25 +109,24 @@ public class WorldMapController implements GameScene {
 			cellY = cellY + model.getCell();
 			cellX = 0;
 		}
-		//Iniciamos el jugador.
-		//Definimos los parametros de salto entre movimientos.
-		int[][] diferenceImage={
-				{0,0},
-				{0,36},
-				{0,108},
-				{0,72}
-				};
-		pj = new PlayerMove(world, model.getCell(), 900, 32, 38, Orientation.EAST,3,3,diferenceImage);
+		// Iniciamos el jugador.
+		// Definimos los parametros de salto entre movimientos.
+		int[][] diferenceImage = { { 0, 0 }, { 0, 36 }, { 0, 108 }, { 0, 72 } };
+		pj = new PlayerMove(world, model.getCell(), 900, 32, 38, Orientation.EAST, 3, 3, diferenceImage);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
 	}
+
 	/**
 	 * Función <code>update</code>.
-	  * @implNote se llama cuando el escuchador lee entradas por teclado.
-	  * LLamando a pj.move y  enemy random si se ha movido el personaje.
+	 * 
+	 * @implNote se llama cuando el escuchador lee entradas por teclado. LLamando a
+	 *           pj.move y enemy random si se ha movido el personaje.
 	 */
 	private void update(KeyEvent event) {
+		
+		System.out.println(safeZone);
 
 		pj.move(event);
 		if (pj.isNewPos() == true)
@@ -132,12 +135,14 @@ public class WorldMapController implements GameScene {
 
 	/**
 	 * Función <code>enemyRandom</code>.
-	 * @param min nivel minimo que se superarán los enemigos una vez sumado el el nivel del personaje
-	 * @param max nivel maximo que se no superarán los enemigos una vez sumado el el nivel del personaje
-	  * @implNote Encargada de crear enemigos aleatorios 
-	  * entre todas las razas disponibles 
-	  * y  partiendo de un nivel aleatorios 
-	  * entre los paramnetros enviados y el nivel del personaje.
+	 * 
+	 * @param min nivel minimo que se superarán los enemigos una vez sumado el el
+	 *            nivel del personaje
+	 * @param max nivel maximo que se no superarán los enemigos una vez sumado el el
+	 *            nivel del personaje
+	 * @implNote Encargada de crear enemigos aleatorios entre todas las razas
+	 *           disponibles y partiendo de un nivel aleatorios entre los
+	 *           paramnetros enviados y el nivel del personaje.
 	 */
 	private void enemyRandom() {
 		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
@@ -147,7 +152,7 @@ public class WorldMapController implements GameScene {
 			int randomLevel = (int) (Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel));
 			try {
 
-				if (!Player.isInSafeZone()) {
+				if (!safeZone) {
 					SceneManager.changeScene(
 							new SimpleCombat(new Enemy(model.getRaces().get(randomRace), randomLevel), auxWorld()));
 				}
@@ -162,9 +167,10 @@ public class WorldMapController implements GameScene {
 
 	/**
 	 * Función <code>paintWorld</code>.
-	* @implNote Recorre el mapa y  instancia  
-	* los objetos que pueden ser animimados.
-	* En casos de que sea un entidad no sea animada Pintará respectivamente las imagenes.
+	 * 
+	 * @implNote Recorre el mapa y instancia los objetos que pueden ser animimados.
+	 *           En casos de que sea un entidad no sea animada Pintará
+	 *           respectivamente las imagenes.
 	 */
 	public void paintWorld() {
 		Image image;
@@ -196,7 +202,7 @@ public class WorldMapController implements GameScene {
 
 					break;
 				case "M":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -205,7 +211,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "V":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -213,7 +219,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "C":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -221,7 +227,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "FX":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -229,7 +235,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "S":
-					skeleton = new AnimationMobs("/image/characters/vendor.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("/image/characters/vendor.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 25);
@@ -237,7 +243,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "L":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -246,7 +252,7 @@ public class WorldMapController implements GameScene {
 
 				case "P":
 					pj.getPjImage().setX(i * model.getCell());
-					pj.getPjImage().setY(j * model.getCell());				
+					pj.getPjImage().setY(j * model.getCell());
 
 					break;
 				}
@@ -260,24 +266,26 @@ public class WorldMapController implements GameScene {
 
 	/**
 	 * Función <code>auxWorld</code>.
-	* @implNote Función para obetener el mundo/nivel actual para poder traspasarlo a otra clase.
+	 * 
+	 * @implNote Función para obetener el mundo/nivel actual para poder traspasarlo
+	 *           a otra clase.
 	 */
 	public WorldMapController auxWorld() {
-		return new WorldMapController(this.world, this.background);
+		return new WorldMapController(this.world, this.background, this.safeZone);
 	}
 
 	@Override
 	public void stop() {
 
 	}
+	
+	public Image getBackground() {
+		return background;
+	}
 
 	@Override
 	public Scene getScene() {
 		return scene;
-	}
-
-	public Image getBackground() {
-		return background;
 	}
 
 }
