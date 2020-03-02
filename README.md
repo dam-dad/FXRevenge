@@ -22,4 +22,5 @@ Colaboradores:
 
 Documentación:
 
-- [Guia de usuario](FXRevenge_GuiaUsuario)
+- [Guia de usuario](https://github.com/dam-dad/FXRevenge/blob/master/FXRevenge_GuiaUsuario.md)
+
