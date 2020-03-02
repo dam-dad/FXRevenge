@@ -44,7 +44,7 @@ public class TestMove {
 	private int posY;
 	private int movePX = 50;
 	private int[][] offset;
-	private int colsX, counts, offset_x, offset_y;
+	private int colsX, counts;
 	private int animationTime = 900;
 	private Orientation orientation = Orientation.SOUTH;
 
@@ -62,12 +62,15 @@ public class TestMove {
 	 * @param orientation   puntero virtual para saber donde apunta la imagen.
 	 * @param cols          Número de columnas del personaje en el sprite.
 	 * @param counts        Número de filas o contador
-	 * @param offset		Una matrix de valores enteros que especifican en 
-	 * el cambio del  pixeles  entre animación
-	 *  Movimiento hacia arriba W [0][0] deplazamiento en fila, [0][1] desplazamiento en columna
-	 *  Movimiento hacia la derecha D [1][0] deplazamiento en fila, [1][1] desplazamiento en columna
-	 *   Movimiento hacia izquierda A [2][0] deplazamiento en fila, [2][1] desplazamiento en columna
-	 *    Movimiento hacia abajo S [3][0] deplazamiento en fila, [3][1] desplazamiento en columna
+	 * @param offset        Una matrix de valores enteros que especifican en el
+	 *                      cambio del pixeles entre animación Movimiento hacia
+	 *                      arriba W [0][0] deplazamiento en columna, [0][1]
+	 *                      desplazamiento en fila Movimiento hacia la derecha D
+	 *                      [1][0] deplazamiento en columna, [1][1] desplazamiento
+	 *                      en fila Movimiento hacia izquierda A [2][0]
+	 *                      deplazamiento en columna, [2][1] desplazamiento en fila
+	 *                      Movimiento hacia abajo S [3][0] deplazamiento en
+	 *                      columna, [3][1] desplazamiento en fila
 	 */
 
 	public TestMove(String[][] world, int movePX, int animationTime, int width, int heigth, Orientation orientation,
@@ -78,7 +81,7 @@ public class TestMove {
 		this.animationTime = animationTime;
 		this.width = width;
 		this.heigth = heigth;
-		this.offset=offset;
+		this.offset = offset;
 		this.colsX = colsX;
 		this.counts = counts;
 		this.pjImage = new ImageView(Player.getPlayer().getWorldSprite());
@@ -90,10 +93,11 @@ public class TestMove {
 	}
 
 	/**
-	 * Función  <code>move</code>.
-	  * @implNote Según el evento del teclado que se le pase,
-	  * realizará tareas de movimiento en un sentido concreto(W/D/S/A).
-	  * O si es la E el jugador interactura con los personajes que lo permitan.
+	 * Función <code>move</code>.
+	 * 
+	 * @implNote Según el evento del teclado que se le pase, realizará tareas de
+	 *           movimiento en un sentido concreto(W/D/S/A). O si es la E el jugador
+	 *           interactura con los personajes que lo permitan.
 	 */
 	public void move(KeyEvent event) {
 		if (inMove == false) {
@@ -105,6 +109,7 @@ public class TestMove {
 
 			case W:
 				orientation = Orientation.NORTH;
+				// Animación
 				pjImage.setViewport(new Rectangle2D(0, 0, this.width, this.heigth));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
 					inMove = true;
@@ -112,6 +117,7 @@ public class TestMove {
 							offset[0][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
+					// Transicion de movimiento
 					transicion = new TranslateTransition();
 					double nextPos = pjImage.getY() - movePX;
 					transicion.setToY(-movePX);
@@ -146,11 +152,12 @@ public class TestMove {
 				pjImage.setViewport(new Rectangle2D(0, 36, this.width, this.heigth));
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
 					inMove = true;
-
+					// Animación
 					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[1][0],
 							offset[1][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
+					// Transicion de movimiento
 					transicion = new TranslateTransition();
 					double nextPos2 = pjImage.getX() + movePX;
 					transicion.setToX(movePX);
@@ -183,11 +190,13 @@ public class TestMove {
 				pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == ".") {
 					inMove = true;
-				
 
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[2][0],offset[2][1], this.width, this.heigth);
+					// Animación
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[2][0],
+							offset[2][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
+					// Transicion de movimiento
 					transicion = new TranslateTransition();
 					double nextPos3 = pjImage.getX() - movePX;
 					transicion.setToX(-movePX);
@@ -220,10 +229,12 @@ public class TestMove {
 				pjImage.setViewport(new Rectangle2D(0, 72, this.width, this.heigth));
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
 					inMove = true;
-
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[3][0],offset[3][1], this.width, this.heigth);
+					// Animación
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[3][0],
+							offset[3][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
+					// Transicion de movimiento
 					transicion = new TranslateTransition();
 					double nextPos4 = pjImage.getY() + movePX;
 					transicion.setToY(+movePX);
@@ -266,7 +277,7 @@ public class TestMove {
 	/**
 	 * Función <code>interaction</code>.
 	 * 
-	 * @implNote Encargada de disparar los dialogos cuando el jugador este a una
+	 * @implNote Encargada de disparar,Eventos,... Cuando el jugador este a una
 	 *           casilla de una entidad y este la este mirando hacia el objetivo
 	 *
 	 */
@@ -361,9 +372,11 @@ public class TestMove {
 		}
 
 	}
+
 	/**
-	 * Función  <code>CheckArray</code> para developers.
-	  * @implNote Simplemente muestra el mapa actual por terminal.
+	 * Función <code>CheckArray</code> para developers.
+	 * 
+	 * @implNote Simplemente muestra el mapa actual por terminal.
 	 */
 	private void CheckArray() {
 		for (int i = 0; i < map.length; i++) {
@@ -374,12 +387,12 @@ public class TestMove {
 		}
 	}
 
-
 	/**
-	 * Función  <code>CheckPlayer</code>.
-	  * @implNote Localiza la ubicación para que la clase TestMove 
-	  * sepa donde empieza el jugador. 
-	  * Permitiendo que se pueda matipular de forma correcta el movimiento
+	 * Función <code>CheckPlayer</code>.
+	 * 
+	 * @implNote Localiza la ubicación para que la clase TestMove sepa donde empieza
+	 *           el jugador. Permitiendo que se pueda matipular de forma correcta el
+	 *           movimiento
 	 */
 	private void CheckPlayer() {
 		for (int i = 0; i < map.length; i++) {

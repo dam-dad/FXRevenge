@@ -1,11 +1,13 @@
 package dad.fxrevenge.world;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import dad.fxrevenge.animations.AnimationMobs;
 import dad.fxrevenge.animations.TestMove;
 import dad.fxrevenge.combat.SimpleCombat;
 import dad.fxrevenge.models.Enemy;
+import dad.fxrevenge.models.Race;
 import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.GameScene;
@@ -74,7 +76,10 @@ public class WorldMapController implements GameScene {
 		view = new Group();
 		scene = new Scene(view, model.getWidth(), model.getHeigth());
 		view.getChildren().add(rectWorldCanvas);
-
+		
+		//Pasamos las razas al modelo
+		model.getRaces().addAll(Arrays.asList(Race.Jelly, Race.Skeleton, Race.Orc, Race.Zombie, Race.Demon));
+		//Pintamos las celdas del mapa
 		int resto = 1;
 		int cellX = 0, cellY = 0;
 		for (int j = 0; j <= world.length; j++) {
@@ -100,6 +105,8 @@ public class WorldMapController implements GameScene {
 			cellY = cellY + model.getCell();
 			cellX = 0;
 		}
+		//Iniciamos el jugador.
+		//Definimos los parametros de salto entre movimientos.
 		int[][] diferenceImage={
 				{0,0},
 				{0,36},
@@ -190,7 +197,7 @@ public class WorldMapController implements GameScene {
 
 					break;
 				case "M":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -199,7 +206,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "V":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -207,7 +214,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "C":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -215,7 +222,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "FX":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
@@ -223,7 +230,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "S":
-					skeleton = new AnimationMobs("/image/characters/vendor.png");
+					skeleton = new AnimationMobs("/image/characters/vendor.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 25);
@@ -231,7 +238,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "L":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png",0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);

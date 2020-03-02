@@ -9,6 +9,10 @@ import dad.fxrevenge.parameters.Player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ * Clase <code>WorldMapModel</code>.
+ * @implNote Implementa los modelos utilizados para manejar los datos de las entidades WorldMapController;
+ */
 public class WorldMapModel {
 
 	private IntegerProperty cell = new SimpleIntegerProperty();
@@ -19,11 +23,17 @@ public class WorldMapModel {
 	private ArrayList<Race> races = new ArrayList<Race>();
 	private Avatar avatar = Player.getPlayer();
 
+	/**
+	 * Constructor <code>WorldMapModel(</code>.
+	 * Obtiene los valores mínimos para setear el mapa
+	 * @param width ancho del mapa
+	 * @param heigth altura del mapa
+	 * @param cell tamaño de la celdas(Cuadradro)
+	 */
 	public WorldMapModel(int width, int heigth, int cell) {
 		this.cell.set(cell);
 		this.width.set(width);
 		this.heigth.set(heigth);
-		races.addAll(Arrays.asList(Race.Jelly, Race.Skeleton, Race.Orc, Race.Zombie, Race.Demon));
 		System.out.println(races.size());
 		// this.widthCanvas.set(widthCanvas);
 		// this.heigthCanvas.set(heigthCanvas);
