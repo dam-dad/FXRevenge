@@ -25,71 +25,91 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
+/**
+ * Clase <code>TestMove</code>.
+ * 
+ * @implNote Encargada de establecer el movimiento y el traspaso de mapas al
+ *           igual que la interactuación con los personajes.
+ */
 public class TestMove {
 
 	private ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
 	private boolean newPos = false;
+	private int width;
+	private int heigth;
 	private String[][] map;
 	private int posX;
 	private int posY;
 	private int movePX = 50;
+	private int[][] offset;
+	private int colsX, counts, offset_x, offset_y;
 	private int animationTime = 900;
 	private Orientation orientation = Orientation.SOUTH;
 
 	/**
 	 * Constructs an <code>TestMove</code> with the specified detail message.
 	 *
-	 * @param habitability  collision map based on Strings. "." = Passable; "M" =
-	 *                      Enemy; "I" = Interactible Object;
-	 * @param movePX        displacement PIXEL;
-	 * @param animationTime animation duration in seconds
-	 * @param image         sprite sheet
-	 * @param minX          The x coordinate of the upper-left corner of the
-	 *                      {@code Rectangle2D}
-	 * @param minY          The y coordinate of the upper-left corner of the
-	 *                      {@code Rectangle2D}
-	 * @param width         The width of the {@code Rectangle2D}
-	 * @param height        The height of the {@code Rectangle2D}
-	 * @param orientation   character visual orientation point
+	 * @param habitability  Mapa de coliciones Matriz Strings. "." = Caminable; "M"
+	 *                      = Enemigo; "I" = Entidad interactuable;
+	 * @param movePX        Deplacamiento en pixeles;
+	 * @param animationTime duración de las tranciciones;
+	 * @param avatar        Objeto que contiene todos los datos del pj, asi como su
+	 *                      imagen SPRITE;
+	 * @param width         ancho del fragmento de imagen a dibujar
+	 * @param height        alto del fragmento de imagen a dibujar
+	 * @param orientation   puntero virtual para saber donde apunta la imagen.
+	 * @param cols          Número de columnas del personaje en el sprite.
+	 * @param counts        Número de filas o contador
+	 * @param offset		Una matrix de valores enteros que especifican en 
+	 * el cambio del  pixeles  entre animación
+	 *  Movimiento hacia arriba W [0][0] deplazamiento en fila, [0][1] desplazamiento en columna
+	 *  Movimiento hacia la derecha D [1][0] deplazamiento en fila, [1][1] desplazamiento en columna
+	 *   Movimiento hacia izquierda A [2][0] deplazamiento en fila, [2][1] desplazamiento en columna
+	 *    Movimiento hacia abajo S [3][0] deplazamiento en fila, [3][1] desplazamiento en columna
 	 */
 
-	public TestMove(String[][] world, int movePX, int animationTime, int minX, int minY, int width, int heigth,
-			Orientation orientation) {
+	public TestMove(String[][] world, int movePX, int animationTime, int width, int heigth, Orientation orientation,
+			int colsX, int counts, int[][] offset) {
 
 		this.map = world;
 		this.movePX = movePX;
 		this.animationTime = animationTime;
+		this.width = width;
+		this.heigth = heigth;
+		this.offset=offset;
+		this.colsX = colsX;
+		this.counts = counts;
 		this.pjImage = new ImageView(Player.getPlayer().getWorldSprite());
-		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
+		pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 		this.orientation = orientation;
 		CheckPlayer();
 		System.out.println("Inicio");
 		CheckArray();
 	}
 
+	/**
+	 * Función  <code>move</code>.
+	  * @implNote Según el evento del teclado que se le pase,
+	  * realizará tareas de movimiento en un sentido concreto(W/D/S/A).
+	  * O si es la E el jugador interactura con los personajes que lo permitan.
+	 */
 	public void move(KeyEvent event) {
 		if (inMove == false) {
 			TranslateTransition transicion = new TranslateTransition();
-			int colsX, counts, offset_x, offset_y, width, height;
+			int offset_x, offset_y;
 			if (pjAni != null && pjAni.getStatus() == Status.RUNNING)
 				pjAni.stop();
 			switch (event.getCode()) {
 
 			case W:
 				orientation = Orientation.NORTH;
-				pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
+				pjImage.setViewport(new Rectangle2D(0, 0, this.width, this.heigth));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
 					inMove = true;
-					colsX = 3;
-					counts = 3;
-					offset_x = 0;
-					offset_y = 0;
-					width = 32;
-					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
-							offset_y, width, height);
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[0][0],
+							offset[0][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
@@ -102,7 +122,7 @@ public class TestMove {
 						pjImage.setTranslateY(0);
 						inMove = false;
 						newPos = true;
-						pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
+						pjImage.setViewport(new Rectangle2D(0, 0, this.width, this.heigth));
 						map[posY - 1][posX] = "P";
 						map[posY][posX] = ".";
 						posY--;
@@ -123,17 +143,12 @@ public class TestMove {
 				break;
 			case D:
 				orientation = Orientation.EAST;
-				pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
+				pjImage.setViewport(new Rectangle2D(0, 36, this.width, this.heigth));
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
 					inMove = true;
-					colsX = 3;
-					counts = 3;
-					offset_x = 0;
-					offset_y = 36;
-					width = 32;
-					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
-							offset_y, width, height);
+
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[1][0],
+							offset[1][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
@@ -149,7 +164,7 @@ public class TestMove {
 						posX++;
 						inMove = false;
 						newPos = true;
-						pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
+						pjImage.setViewport(new Rectangle2D(0, 36, this.width, this.heigth));
 					});
 					transicion.play();
 
@@ -165,17 +180,12 @@ public class TestMove {
 				break;
 			case A:
 				orientation = Orientation.WEST;
-				pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
+				pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 				if ((posX - 1) >= 0 && map[posY][posX - 1] == ".") {
 					inMove = true;
-					colsX = 3;
-					counts = 3;
-					offset_x = 0;
-					offset_y = 108;
-					width = 32;
-					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
-							offset_y, width, height);
+				
+
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[2][0],offset[2][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
@@ -191,7 +201,7 @@ public class TestMove {
 						posX--;
 						inMove = false;
 						newPos = true;
-						pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
+						pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 					});
 					transicion.play();
 
@@ -207,17 +217,11 @@ public class TestMove {
 				break;
 			case S:
 				orientation = Orientation.SOUTH;
-				pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
+				pjImage.setViewport(new Rectangle2D(0, 72, this.width, this.heigth));
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
 					inMove = true;
-					colsX = 3;
-					counts = 3;
-					offset_x = 0;
-					offset_y = 72;
-					width = 32;
-					height = 39;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset_x,
-							offset_y, width, height);
+
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[3][0],offset[3][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
 					transicion = new TranslateTransition();
@@ -233,7 +237,7 @@ public class TestMove {
 						posY++;
 						inMove = false;
 						newPos = true;
-						pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
+						pjImage.setViewport(new Rectangle2D(0, 72, this.width, this.heigth));
 					});
 					transicion.play();
 				}
@@ -259,6 +263,13 @@ public class TestMove {
 
 	}
 
+	/**
+	 * Función <code>interaction</code>.
+	 * 
+	 * @implNote Encargada de disparar los dialogos cuando el jugador este a una
+	 *           casilla de una entidad y este la este mirando hacia el objetivo
+	 *
+	 */
 	private void interaction() {
 
 		String interaction = "N/A";
@@ -350,7 +361,10 @@ public class TestMove {
 		}
 
 	}
-
+	/**
+	 * Función  <code>CheckArray</code> para developers.
+	  * @implNote Simplemente muestra el mapa actual por terminal.
+	 */
 	private void CheckArray() {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {
@@ -360,6 +374,13 @@ public class TestMove {
 		}
 	}
 
+
+	/**
+	 * Función  <code>CheckPlayer</code>.
+	  * @implNote Localiza la ubicación para que la clase TestMove 
+	  * sepa donde empieza el jugador. 
+	  * Permitiendo que se pueda matipular de forma correcta el movimiento
+	 */
 	private void CheckPlayer() {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {

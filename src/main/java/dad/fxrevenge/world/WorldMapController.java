@@ -100,8 +100,13 @@ public class WorldMapController implements GameScene {
 			cellY = cellY + model.getCell();
 			cellX = 0;
 		}
-
-		pj = new TestMove(world, model.getCell(), 900, 0, 0, 32, 39, Orientation.EAST);
+		int[][] diferenceImage={
+				{0,0},
+				{0,36},
+				{0,108},
+				{0,72}
+				};
+		pj = new TestMove(world, model.getCell(), 900, 32, 38, Orientation.EAST,3,3,diferenceImage);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
