@@ -120,6 +120,13 @@ public class Avatar extends Attributes {
 
 	}
 
+	/**
+	 * Constructor de prueba para los informes
+	 * 
+	 * @param work   Clase del personaje
+	 * @param skills Lista de habilidades que podra aprender el personaje
+	 * @param name   Nombre que tendra el personaje
+	 */
 	public Avatar(ClassType work, List<Skill> generateClassSkills, String name) {
 		this.setLevel(1);
 		this.setWork(work);
@@ -159,9 +166,6 @@ public class Avatar extends Attributes {
 			this.setMana(20);
 			this.setMagicDamage(9);
 			this.setMagicDef(7);
-			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
-					new Item().generatePotion(Effect.MiniManaRestore),
-					new Item().generatePotion(Effect.MiniHealRestore));
 
 		} else if (work.equals(ClassType.Hunter)) {
 
@@ -172,10 +176,6 @@ public class Avatar extends Attributes {
 			this.setMagicDamage(0);
 			this.setMagicDef(3);
 
-			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
-					new Item().generatePotion(Effect.MiniHealRestore),
-					new Item().generatePotion(Effect.MiniHealRestore));
-
 		} else if (work.equals(ClassType.Warlord)) {
 
 			this.setHealth(930);
@@ -184,12 +184,7 @@ public class Avatar extends Attributes {
 			this.setMana(10);
 			this.setMagicDamage(0);
 			this.setMagicDef(10);
-			this.inventory.addAll(new Item().generatePotion(Effect.MiniHealRestore),
-					new Item().generatePotion(Effect.MiniHealRestore),
-					new Item().generatePotion(Effect.MiniHealRestore));
 		}
-
-		this.ordenarInventario();
 
 		this.setCurrentLife(this.getHealth());
 		this.setCurrentMana(this.getMana());
