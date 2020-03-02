@@ -18,6 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * Clase <code>WorldMapController</code>.
+  * @implNote Esta clase se instancias todas las entidades del juego 
+  * y se dibujan los mapas de formato de Sttrings.
+ */
 public class WorldMapController implements GameScene {
 
 	// MODEL
@@ -41,11 +46,23 @@ public class WorldMapController implements GameScene {
 
 	private String[][] world;
 
+	/**
+	 *Cosntructor <code>WorldMapController</code> para developer.
+	 *@param map  de coliciones y entidades del nivel actual.
+	 *@param backgorund  Imagen de fondo a establecer en el mapa.
+	 */
 	public WorldMapController(String[][] map, Image background) {
 		this.world = map;
 		this.background = background;
 	}
 
+	
+	/**
+	 * Función <code>start</code> para developer.
+	  * @implNote Pinta todas las celdas y  
+	  * indica el número de columnas que hay para poder identificar de forma fácil las celdas.
+	  * Si tiene imagen de fondo esta sobrescribe las celddas;
+	 */
 	@Override
 	public void start() {
 
@@ -89,7 +106,11 @@ public class WorldMapController implements GameScene {
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
 	}
-
+	/**
+	 * Función <code>update</code>.
+	  * @implNote se llama cuando el escuchador lee entradas por teclado.
+	  * LLamando a pj.move y  enemy random si se ha movido el personaje.
+	 */
 	private void update(KeyEvent event) {
 
 		pj.move(event);
@@ -97,6 +118,15 @@ public class WorldMapController implements GameScene {
 			enemyRandom();
 	}
 
+	/**
+	 * Función <code>enemyRandom</code>.
+	 * @param min nivel minimo que se superarán los enemigos una vez sumado el el nivel del personaje
+	 * @param max nivel maximo que se no superarán los enemigos una vez sumado el el nivel del personaje
+	  * @implNote Encargada de crear enemigos aleatorios 
+	  * entre todas las razas disponibles 
+	  * y  partiendo de un nivel aleatorios 
+	  * entre los paramnetros enviados y el nivel del personaje.
+	 */
 	private void enemyRandom() {
 		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
 			int minLevel = model.getAvatar().getLevel() + 1;
@@ -119,6 +149,12 @@ public class WorldMapController implements GameScene {
 
 	}
 
+	/**
+	 * Función <code>paintWorld</code>.
+	* @implNote Recorre el mapa y  instancia  
+	* los objetos que pueden ser animimados.
+	* En casos de que sea un entidad no sea animada Pintará respectivamente las imagenes.
+	 */
 	public void paintWorld() {
 		Image image;
 		int posX = 0, posY = 0;
@@ -213,6 +249,10 @@ public class WorldMapController implements GameScene {
 		}
 	}
 
+	/**
+	 * Función <code>auxWorld</code>.
+	* @implNote Función para obetener el mundo/nivel actual para poder traspasarlo a otra clase.
+	 */
 	public WorldMapController auxWorld() {
 		return new WorldMapController(this.world, this.background);
 	}
