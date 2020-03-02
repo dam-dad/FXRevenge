@@ -1,6 +1,5 @@
 package dad.fxrevenge.world;
 
-import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.scene.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;

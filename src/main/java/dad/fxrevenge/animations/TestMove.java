@@ -1,12 +1,21 @@
 package dad.fxrevenge.animations;
 
+import java.io.IOException;
 
-import dad.fxrevenge.boss.dialog.*;
-import dad.fxrevenge.boss.map.*;
-import dad.fxrevenge.models.Avatar;
+import dad.fxrevenge.boss.dialog.CDialog;
+import dad.fxrevenge.boss.dialog.FXDialog;
+import dad.fxrevenge.boss.dialog.MDialog;
+import dad.fxrevenge.boss.dialog.VDialog;
+import dad.fxrevenge.boss.map.CMap;
+import dad.fxrevenge.boss.map.FXMap;
+import dad.fxrevenge.boss.map.MMap;
+import dad.fxrevenge.boss.map.Overworld;
+import dad.fxrevenge.boss.map.VMap;
+import dad.fxrevenge.models.Vendor;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.shop.ShopController;
 import dad.fxrevenge.world.Orientation;
-import dad.fxrevenge.world.WorldMapController;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
@@ -18,11 +27,10 @@ import javafx.util.Duration;
 
 public class TestMove {
 
-	private Avatar avatar;
 	private ImageView pjImage;
 	private Animation pjAni = null;
 	private boolean inMove = false;
-	private boolean newPos=false;
+	private boolean newPos = false;
 	private String[][] map;
 	private int posX;
 	private int posY;
@@ -47,14 +55,13 @@ public class TestMove {
 	 * @param orientation   character visual orientation point
 	 */
 
-	public TestMove(String[][] world, int movePX, int animationTime, Avatar avatar, int minX, int minY, int width,
-			int heigth, Orientation orientation) {
+	public TestMove(String[][] world, int movePX, int animationTime, int minX, int minY, int width, int heigth,
+			Orientation orientation) {
 
 		this.map = world;
 		this.movePX = movePX;
 		this.animationTime = animationTime;
-		this.avatar=avatar;
-		this.pjImage = new ImageView(this.avatar.getWorldSprite());
+		this.pjImage = new ImageView(Player.getPlayer().getWorldSprite());
 		pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 		this.orientation = orientation;
 		CheckPlayer();
@@ -94,7 +101,7 @@ public class TestMove {
 						pjImage.setY(nextPos);
 						pjImage.setTranslateY(0);
 						inMove = false;
-						newPos=true;
+						newPos = true;
 						pjImage.setViewport(new Rectangle2D(0, 0, 32, 39));
 						map[posY - 1][posX] = "P";
 						map[posY][posX] = ".";
@@ -141,7 +148,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posX++;
 						inMove = false;
-						newPos=true;
+						newPos = true;
 						pjImage.setViewport(new Rectangle2D(0, 36, 32, 39));
 					});
 					transicion.play();
@@ -183,7 +190,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posX--;
 						inMove = false;
-						newPos=true;
+						newPos = true;
 						pjImage.setViewport(new Rectangle2D(0, 108, 32, 39));
 					});
 					transicion.play();
@@ -225,7 +232,7 @@ public class TestMove {
 						map[posY][posX] = ".";
 						posY++;
 						inMove = false;
-						newPos=true;
+						newPos = true;
 						pjImage.setViewport(new Rectangle2D(0, 72, 32, 39));
 					});
 					transicion.play();
@@ -242,10 +249,10 @@ public class TestMove {
 				inMove = true;
 				interaction();
 				inMove = false;
-				newPos=false;
+				newPos = false;
 				break;
 			default:
-				newPos=false;
+				newPos = false;
 				break;
 			}
 		}
@@ -268,6 +275,8 @@ public class TestMove {
 				interaction = "FX";
 			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "L")
 				interaction = "L";
+			else if ((posY - 1) >= 0 && map[posY - 1][posX] == "S")
+				interaction = "S";
 			break;
 		case EAST:
 			if ((posX + 1) < map[0].length && map[posY][posX + 1] == "M")
@@ -280,6 +289,8 @@ public class TestMove {
 				interaction = "FX";
 			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "L")
 				interaction = "L";
+			else if ((posX + 1) < map[0].length && map[posY][posX + 1] == "S")
+				interaction = "S";
 			break;
 		case WEST:
 			if ((posX - 1) >= 0 && map[posY][posX - 1] == "M")
@@ -292,6 +303,8 @@ public class TestMove {
 				interaction = "FX";
 			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "L")
 				interaction = "L";
+			else if ((posX - 1) >= 0 && map[posY][posX - 1] == "S")
+				interaction = "S";
 			break;
 		case SOUTH:
 			if ((posY + 1) < map.length && map[posY + 1][posX] == "M")
@@ -304,6 +317,8 @@ public class TestMove {
 				interaction = "FX";
 			else if ((posY + 1) < map.length && map[posY + 1][posX] == "L")
 				interaction = "L";
+			else if ((posY + 1) < map.length && map[posY + 1][posX] == "S")
+				interaction = "S";
 			break;
 		}
 
@@ -325,6 +340,12 @@ public class TestMove {
 		case "L":
 			SceneManager.changeScene(new FXMap());
 			break;
+		case "S":
+			try {
+				SceneManager.changeScene(new ShopController(Player.getPlayer(), new Vendor()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 		}
 

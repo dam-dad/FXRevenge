@@ -1,13 +1,15 @@
 package dad.fxrevenge.shop;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
+import dad.fxrevenge.boss.map.Overworld;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Vendor;
+import dad.fxrevenge.parameters.Parameters;
+import dad.fxrevenge.scene.GameScene;
+import dad.fxrevenge.scene.SceneManager;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -15,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,7 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class ShopController extends GridPane implements Initializable {
+public class ShopController extends GridPane implements GameScene {
 
 	// model
 
@@ -54,10 +55,10 @@ public class ShopController extends GridPane implements Initializable {
 
 	@FXML
 	private Label leftLabel;
-	
+
 	@FXML
 	private TextField dineroTextField;
-	
+
 	@FXML
 	private ListView<Item> leftList;
 
@@ -95,7 +96,7 @@ public class ShopController extends GridPane implements Initializable {
 
 			objeto = rightList.getSelectionModel().getSelectedItems().get(i);
 			Item aux = new Item().generatePotion(objeto.getEffect());
-			
+
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Compra");
@@ -121,8 +122,8 @@ public class ShopController extends GridPane implements Initializable {
 
 			cantidadText.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (!newValue.trim().isEmpty()) {
-					aceptButton.setDisable(!newValue.matches("[0-9]*")
-							|| Integer.valueOf(newValue) * aux.getPrice() > pj.getMoney());
+					aceptButton.setDisable(
+							!newValue.matches("[0-9]*") || Integer.valueOf(newValue) * aux.getPrice() > pj.getMoney());
 				}
 			});
 
@@ -142,11 +143,11 @@ public class ShopController extends GridPane implements Initializable {
 
 				pj.comprar(aux, cantidad);
 				objeto = null;
-				
+
 				vendedorArea.setText("Gracias por comprar.");
-				
+
 			});
-			
+
 		}
 
 	}
@@ -158,7 +159,7 @@ public class ShopController extends GridPane implements Initializable {
 
 			objeto = leftList.getSelectionModel().getSelectedItems().get(i);
 			Item aux = new Item().generatePotion(objeto.getEffect());
-			
+
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Venta");
@@ -186,8 +187,8 @@ public class ShopController extends GridPane implements Initializable {
 			// Do some validation (using the Java 8 lambda syntax).
 			cantidadText.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (!newValue.trim().isEmpty()) {
-					aceptButton.setDisable(
-							!newValue.matches("[0-9]*") || Integer.valueOf(newValue) > aux.getQuantity());
+					aceptButton
+							.setDisable(!newValue.matches("[0-9]*") || Integer.valueOf(newValue) > aux.getQuantity());
 				}
 			});
 
@@ -215,11 +216,14 @@ public class ShopController extends GridPane implements Initializable {
 
 	@FXML
 	void onSalirAction(ActionEvent event) {
-
+		SceneManager.changeScene(new Overworld());
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void start() {
+
+		scene = new Scene(view, Parameters.getResolutionWidth(), Parameters.getResolutionHeight());
+
 		vendedorImage.imageProperty().bind(vendedor.shopSpriteProperty());
 
 		leftList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -232,7 +236,7 @@ public class ShopController extends GridPane implements Initializable {
 		moveLeftButton.disableProperty().bind(rightList.getSelectionModel().selectedItemProperty().isNull());
 
 		dineroTextField.textProperty().bind(pj.moneyProperty().asString());
-		
+
 		vendedorArea.setText("Te doy la bienvenida a mi tienda");
 	}
 
@@ -274,6 +278,11 @@ public class ShopController extends GridPane implements Initializable {
 
 	public final void setRightItems(final ObservableList<Item> rightItems) {
 		this.rightItemsProperty().set(rightItems);
+	}
+
+	@Override
+	public void stop() {
+
 	}
 
 }

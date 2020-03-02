@@ -84,7 +84,7 @@ public class WorldMapController implements GameScene {
 			cellX = 0;
 		}
 
-		pj = new TestMove(world, model.getCell(), 900, model.getAvatar(), 0, 0, 32, 39, Orientation.EAST);
+		pj = new TestMove(world, model.getCell(), 900, 0, 0, 32, 39, Orientation.EAST);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
@@ -174,6 +174,14 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "FX":
+					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					view.getChildren().add(skeleton.getImageMob());
+					skeleton.getImageMob().setX(posX);
+					skeleton.getImageMob().setY(posY - 50);
+
+					break;
+
+				case "S":
 					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);

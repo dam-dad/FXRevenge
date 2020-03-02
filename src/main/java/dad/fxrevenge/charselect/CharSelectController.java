@@ -143,6 +143,7 @@ public class CharSelectController extends VBox implements GameScene {
 
 		Player.setName(nombreLabel.getText());
 		Player.setPortrait(playerImage.getImage());
+				
 		// Implementar selección de clase
 		// Player.setRole(ClassType.valueOf(this.job.getSelectedToggle().toString()));
 
