@@ -3,6 +3,7 @@ package dad.fxrevenge.charselect;
 import java.io.IOException;
 
 import dad.fxrevenge.dialog.IntroductionDialog;
+import dad.fxrevenge.models.ClassType;
 import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.GameScene;
@@ -26,6 +27,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CharSelectController extends VBox implements GameScene {
+	
+	private Image worldImage;
+	private ClassType vocacion;
+	
 	private ToggleGroup sexo = new ToggleGroup();
 	private ToggleGroup job = new ToggleGroup();
 
@@ -131,7 +136,7 @@ public class CharSelectController extends VBox implements GameScene {
 														.when(HunterRB.selectedProperty()
 																.isEqualTo(new SimpleBooleanProperty(true)))
 														.then("range").otherwise("warrior"))
-												.getValue().concat(".png"))));
+												.getValue())));
 	}
 
 	@FXML
@@ -143,17 +148,33 @@ public class CharSelectController extends VBox implements GameScene {
 
 		Player.setName(nombreLabel.getText());
 		Player.setPortrait(playerImage.getImage());
-				
+		
 		// Implementar selección de clase
-		// Player.setRole(ClassType.valueOf(this.job.getSelectedToggle().toString()));
+		Player.setRole(vocacion);
 
 		new Player();
 
+		Player.getPlayer().setWorldSprite(worldImage);
+		
 		SceneManager.changeScene(new IntroductionDialog());
 	}
 
 	private ObjectProperty<Image> getImage(String path) {
-		Image image = new Image(getClass().getResource(path).toExternalForm());
+		
+		if(path.contains("mage")) {
+			vocacion = ClassType.Archmage;
+		}else if(path.contains("warrior")) {
+			vocacion = ClassType.Warlord;
+		}else {
+			vocacion = ClassType.Hunter;
+		}
+			
+		
+		String rutaW = path.concat("W.png");
+		
+		worldImage = new Image(getClass().getResource(rutaW).toExternalForm());
+		
+		Image image = new Image(getClass().getResource(path.concat(".png")).toExternalForm());
 
 		ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>(image);
 

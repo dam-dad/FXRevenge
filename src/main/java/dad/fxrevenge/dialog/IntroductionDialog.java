@@ -65,7 +65,6 @@ public class IntroductionDialog extends DialogScene {
 			
 		default:
 			// Cambio de escena
-			Player.getPlayer().setWorldSprite(new Image("/Image/characters/warrior_m.png"));
 			SceneManager.changeScene(new Overworld());
 			break;
 		}
