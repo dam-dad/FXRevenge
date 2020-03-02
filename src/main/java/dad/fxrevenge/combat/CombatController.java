@@ -415,7 +415,7 @@ public class CombatController extends BorderPane implements GameScene {
 			alert.setTitle("Nueva habilidad");
 			alert.setHeaderText("Has aprendido Unbind");
 			alert.setContentText("Será tu arma secreta contra el desafío final.");
-			alert.showAndWait();
+			alert.show();
 
 			player.getLearnedSkills().add(new Skill("Unbind", 0, 0, 0, false, 0.0, 0,
 					"Te permitirá resistir el mayor ataque de FX: \"Bind\""));
