@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import dad.fxrevenge.parameters.Player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -117,6 +118,81 @@ public class Avatar extends Attributes {
 		this.setCurrentLife(this.getHealth());
 		this.setCurrentMana(this.getMana());
 
+	}
+
+	public Avatar(ClassType work, List<Skill> generateClassSkills, String name) {
+		this.setLevel(1);
+		this.setWork(work);
+		this.setCurrentExp(0);
+		this.setMoney(0);
+		this.setName(name);
+		this.setLevel(1);
+		this.setLuck(0);
+		this.setTotalLevelExp(150);
+		this.setCombatSprite(null);
+		this.setCritChance(0);
+		this.setSkills(FXCollections.observableArrayList(Skill.generateClassSkills(work)));
+		skillchecker();
+
+		Gear helm = new Gear("Casco de practicas");
+		helm.setPos(GearPosition.Helmet);
+		Gear chest = new Gear("Peto de practicas");
+		chest.setPos(GearPosition.Chest);
+		Gear gloves = new Gear("Guanteletes de practicas");
+		gloves.setPos(GearPosition.Gloves);
+		Gear leggings = new Gear("Pantalones de practicas");
+		leggings.setPos(GearPosition.Leggings);
+		Gear boots = new Gear("Botas de practicas");
+		boots.setPos(GearPosition.Boots);
+		Gear rightHand = new Gear("Arma de Practica");
+		rightHand.setPos(GearPosition.RightHand);
+		Gear leftHand = new Gear("Complemento de practica");
+		leftHand.setPos(GearPosition.LeftHand);
+
+		this.equipped.addAll(helm, chest, gloves, leggings, boots, rightHand, leftHand);
+
+		if (work.equals(ClassType.Archmage)) {
+
+			this.setHealth(920);
+			this.setPhysDamage(72);
+			this.setPhysDef(5);
+			this.setMana(20);
+			this.setMagicDamage(9);
+			this.setMagicDef(7);
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
+
+		} else if (work.equals(ClassType.Hunter)) {
+
+			this.setHealth(925);
+			this.setPhysDamage(78);
+			this.setPhysDef(5);
+			this.setMana(15);
+			this.setMagicDamage(0);
+			this.setMagicDef(3);
+
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniManaRestore),
+					new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
+
+		} else if (work.equals(ClassType.Warlord)) {
+
+			this.setHealth(930);
+			this.setPhysDamage(75);
+			this.setPhysDef(10);
+			this.setMana(10);
+			this.setMagicDamage(0);
+			this.setMagicDef(10);
+			this.inventory.addAll(new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore),
+					new Item().generatePotion(Effect.MiniHealRestore));
+		}
+
+		this.ordenarInventario();
+
+		this.setCurrentLife(this.getHealth());
+		this.setCurrentMana(this.getMana());
 	}
 
 	/**
@@ -593,6 +669,12 @@ public class Avatar extends Attributes {
 
 	public final void setWorldSprite(final Image worldSprite) {
 		this.worldSpriteProperty().set(worldSprite);
+	}
+	
+	public static List<Avatar> getAvatarList(){
+		List<Avatar> avatar = new ArrayList<Avatar>();
+		avatar.add(Player.getNewPlayer());
+		return avatar;
 	}
 
 }

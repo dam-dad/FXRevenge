@@ -3,6 +3,7 @@ package dad.fxrevenge.combat;
 import java.io.IOException;
 
 import dad.fxrevenge.models.Enemy;
+import dad.fxrevenge.music.Musica;
 import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.SceneManager;
 import dad.fxrevenge.world.WorldMapController;
@@ -19,6 +20,9 @@ public class SimpleCombat extends CombatController {
 	private Enemy enemy;
 	WorldMapController world;
 
+	// music
+	private Musica musica = new Musica("/music/combat.mp3");
+
 	/**
 	 * Constructor <code>SimpleCombat</code>.
 	 * 
@@ -28,6 +32,7 @@ public class SimpleCombat extends CombatController {
 	 */
 	public SimpleCombat(Enemy enemy, WorldMapController world) throws IOException {
 		super(Player.getPlayer(), enemy, world.getBackground());
+		musica.playInfiniteSound().play();
 		this.enemy = enemy;
 		this.world = world;
 	}
@@ -54,6 +59,7 @@ public class SimpleCombat extends CombatController {
 
 		Player.getPlayer().ordenarInventario();
 
+		musica.getMediaPlayer().stop();
 		SceneManager.changeScene(world);
 	}
 
@@ -64,6 +70,7 @@ public class SimpleCombat extends CombatController {
 	 */
 	@Override
 	protected void onExitAction(ActionEvent event) {
+		musica.getMediaPlayer().stop();
 		SceneManager.changeScene(world);
 	}
 

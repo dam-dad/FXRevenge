@@ -1,9 +1,7 @@
 package dad.fxrevenge.music;
 
-import javafx.application.Application;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.MalformedURLException;
