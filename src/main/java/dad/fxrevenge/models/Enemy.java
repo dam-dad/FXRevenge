@@ -251,7 +251,7 @@ public class Enemy extends Attributes {
 	 * @return El daño que recibira despues de evaluar los parametros defensivos y
 	 *         aplicarlos
 	 */
-	public int recibeDaño(int danyo, boolean fisico) {
+	public int recibeDanyo(int danyo, boolean fisico) {
 
 		if (this.race.equals(Race.FX) || !this.race.equals(Race.C) || !this.race.equals(Race.V)
 				|| !this.race.equals(Race.M))

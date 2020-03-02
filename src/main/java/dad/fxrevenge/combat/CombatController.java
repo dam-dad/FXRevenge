@@ -92,12 +92,12 @@ public class CombatController extends BorderPane implements GameScene {
 
 		if (egoista) {
 			eventArea.setText(
-					eventArea.getText() + "\nHas infligido " + enemy.recibeDaño(damage, true) + " puntos de daño.");
+					eventArea.getText() + "\nHas infligido " + enemy.recibeDanyo(damage, true) + " puntos de daño.");
 			enemyAttack();
 		} else {
 			enemyAttack();
 			eventArea.setText(
-					eventArea.getText() + "\nHas infligido " + enemy.recibeDaño(damage, true) + " puntos de daño.");
+					eventArea.getText() + "\nHas infligido " + enemy.recibeDanyo(damage, true) + " puntos de daño.");
 		}
 //DROPEO	
 		if (enemy.getCurrentLife() <= 0) {
@@ -329,7 +329,7 @@ public class CombatController extends BorderPane implements GameScene {
 
 							if (egoista) {
 								eventArea.setText(eventArea.getText() + "\nHas infligido "
-										+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+										+ enemy.recibeDanyo(damage, hability.getDamageType()) + " puntos de daño con "
 										+ hability.getName() + ".");
 								if (enemy.getCurrentLife() <= 0) {
 									victory();
@@ -338,7 +338,7 @@ public class CombatController extends BorderPane implements GameScene {
 							} else {
 								enemyAttack();
 								eventArea.setText(eventArea.getText() + "\nHas infligido "
-										+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+										+ enemy.recibeDanyo(damage, hability.getDamageType()) + " puntos de daño con "
 										+ hability.getName() + ".");
 								if (enemy.getCurrentLife() <= 0) {
 									victory();
@@ -356,7 +356,7 @@ public class CombatController extends BorderPane implements GameScene {
 							player.setMagicDef(magIn);
 
 							eventArea.setText(eventArea.getText() + "\nHas infligido "
-									+ enemy.recibeDaño((int) (enemy.getHealth() * 0.15), hability.getDamageType())
+									+ enemy.recibeDanyo((int) (enemy.getHealth() * 0.15), hability.getDamageType())
 									+ " puntos de daño con " + hability.getName() + ".");
 							if (enemy.getCurrentLife() <= 0) {
 								victory();
