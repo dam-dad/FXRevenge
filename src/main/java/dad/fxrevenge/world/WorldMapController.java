@@ -125,7 +125,7 @@ public class WorldMapController implements GameScene {
 	 *           pj.move y enemy random si se ha movido el personaje.
 	 */
 	private void update(KeyEvent event) {
-		
+
 		System.out.println(safeZone);
 
 		pj.move(event);
@@ -187,20 +187,31 @@ public class WorldMapController implements GameScene {
 
 				switch (world[j][i]) {
 				case "T1":
-					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree1.png"));
+					image = new Image(getClass().getResourceAsStream("/image/assets/tree_1.png"));
 					gc.drawImage(image, posX, posY);
 
 					break;
 				case "T2":
-					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree2.png"));
+					image = new Image(getClass().getResourceAsStream("/image/assets/tree_2.png"));
 					gc.drawImage(image, posX, posY);
 
 					break;
 				case "T3":
-					image = new Image(getClass().getResourceAsStream("/Image/vegetation/Tree3.png"));
+					image = new Image(getClass().getResourceAsStream("/image/assets/tree_3.png"));
 					gc.drawImage(image, posX, posY);
 
 					break;
+
+				case "R1":
+					image = new Image(getClass().getResourceAsStream("/image/assets/rock_1.png"));
+					gc.drawImage(image, posX, posY);
+					break;
+					
+				case "R2":
+					image = new Image(getClass().getResourceAsStream("/image/assets/rock_2.png"));
+					gc.drawImage(image, posX, posY);
+					break;
+
 				case "M":
 					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
@@ -278,7 +289,7 @@ public class WorldMapController implements GameScene {
 	public void stop() {
 
 	}
-	
+
 	public Image getBackground() {
 		return background;
 	}

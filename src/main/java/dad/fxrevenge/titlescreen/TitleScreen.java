@@ -2,10 +2,18 @@ package dad.fxrevenge.titlescreen;
 
 import java.io.IOException;
 
+import dad.fxrevenge.boss.map.CMap;
+import dad.fxrevenge.boss.map.FXMap;
+import dad.fxrevenge.boss.map.MMap;
+import dad.fxrevenge.boss.map.Overworld;
+import dad.fxrevenge.boss.map.VMap;
 import dad.fxrevenge.charselect.CharSelectController;
+import dad.fxrevenge.models.ClassType;
 import dad.fxrevenge.parameters.Backgrounds;
+import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -51,6 +59,65 @@ public class TitleScreen extends DialogScene {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		// DEBUG
+		
+		if (currentlyActiveKeys.contains("O")) {
+			currentlyActiveKeys.clear();
+			
+			testPlayer();
+			
+			SceneManager.changeScene(new Overworld());
+		}
+		
+		if (currentlyActiveKeys.contains("M")) {
+			currentlyActiveKeys.clear();
+
+			testPlayer();
+			
+			SceneManager.changeScene(new MMap());
+		}
+		
+		if (currentlyActiveKeys.contains("V")) {
+			currentlyActiveKeys.clear();
+
+			testPlayer();
+			
+			SceneManager.changeScene(new VMap());
+		}
+			
+		if (currentlyActiveKeys.contains("C")) {
+			currentlyActiveKeys.clear();
+
+			testPlayer();
+			
+			SceneManager.changeScene(new CMap());
+		}
+		
+		if (currentlyActiveKeys.contains("FX")) {
+			currentlyActiveKeys.clear();
+			
+			testPlayer();
+
+			SceneManager.changeScene(new FXMap());
+		}
+		
+		
+		
+		
+		// DEBUG
+		
+	}
+	
+	private void testPlayer() {
+		Player.setName("Player");
+		Player.setPortrait(new Image("/image/dialog/character/player.png"));
+		Player.setRole(ClassType.Warlord);
+		
+		new Player();
+
+		//Player.getPlayer().setWorldSprite(worldImage);
 	}
 
 	// Función que dibuja el texto aplicándole estilos
