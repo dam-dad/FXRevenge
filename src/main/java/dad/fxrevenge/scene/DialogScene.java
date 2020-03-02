@@ -140,7 +140,7 @@ public class DialogScene implements GameScene {
 		if (character.getIsLeft()) {
 			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 6, scene.getHeight() / 7);
 		} else {
-			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 2, scene.getHeight() / 7);
+			graphicsContext.drawImage(character.getPortrait(), 0, 0);
 		}
 
 		// Dibujar diálogo del personaje
