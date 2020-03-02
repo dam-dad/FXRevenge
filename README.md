@@ -19,3 +19,7 @@ Colaboradores:
 * [Roberto González Linares](https://github.com/RobertoG-C)
 * [Luis Adán Pérez Nazco](https://github.com/ADPLuis)
 * [Adán Jiménez Sacramento](https://github.com/Aquaelix)
+
+Documentación:
+
+- [Guia de usuario](FXRevenge_GuiaUsuario)
