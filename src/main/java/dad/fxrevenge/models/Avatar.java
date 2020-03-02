@@ -296,7 +296,7 @@ public class Avatar extends Attributes {
 	 * @return El daño que recibira el personaje una vez aplicados los parametros
 	 *         defensivos del personaje
 	 */
-	public int recibeDaño(int danyo, boolean fisico) {
+	public int recibeDanyo(int danyo, boolean fisico) {
 		if (fisico) {
 			danyo = (int) ((danyo * (1 - (this.getPhysDef() / (100.0 + this.getPhysDef())))));
 
@@ -348,7 +348,6 @@ public class Avatar extends Attributes {
 	 * personaje
 	 * 
 	 * @param exp La cantidad de experiencia a sumar
-	 * @return Booleano que indica si ha subido de nivel o no
 	 */
 	public void sumarexp(int exp) {
 		this.setCurrentExp(this.getCurrentExp() + exp);

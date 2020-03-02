@@ -25,7 +25,7 @@ public class Item {
 
 	/**
 	 * Constructor sobrecargado con una serie de parametros
-	 * 
+	 * @param icon 		Imagen que aparecera en los items
 	 * @param name     Nombre que tendra el objeto
 	 * @param quantity Cantidad de usos del objeto
 	 * @param price    Precio en tienda del objeto

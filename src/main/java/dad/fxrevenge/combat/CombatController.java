@@ -149,10 +149,10 @@ public class CombatController extends BorderPane implements GameScene {
 		int damage = enemy.atacar();
 		if (turno % 3 == 0 && enemy.getRace().equals(Race.FX)) {
 			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " usa Bind con "
-					+ player.recibeDaño((int) (damage * 2), true) + " puntos de daño.");
+					+ player.recibeDanyo((int) (damage * 2), true) + " puntos de daño.");
 		} else {
 			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " ataca con "
-					+ player.recibeDaño(damage, true) + " puntos de daño.");
+					+ player.recibeDanyo(damage, true) + " puntos de daño.");
 		}
 		if (turno % 3 == 2) {
 			bind = true;

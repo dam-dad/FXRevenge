@@ -8,7 +8,7 @@ public class PlayerMain {
 	
 	/**
 	 * Llamada a la clase que lanzará el PlayerController
-	 * @param args
+	 * @param args  main
 	 */
 	public static void main(String[] args) {
 		PlayerApp.main(args);
