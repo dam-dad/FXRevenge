@@ -5,6 +5,7 @@ import java.io.IOException;
 import dad.fxrevenge.boss.fight.FXFight;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
+import dad.fxrevenge.music.Musica;
 import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
@@ -16,16 +17,20 @@ public class FXDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
 
+	//music
+	private Musica musica = new Musica("/music/FX.mp3");
+	
 	@Override
 	public void start() {
 		setGraphics(player, fx, Backgrounds.getFX());
+		musica.playInfiniteSound().play();
 		super.start();
 	}
 
 	@Override
 	public void update() {
 		super.update();
-
+		
 		if (!FXFight.isDefeated()) {
 
 			switch (dialogNumber) {
@@ -62,6 +67,7 @@ public class FXDialog extends DialogScene {
 
 			default:
 				try {
+					musica.getMediaPlayer().stop();
 					SceneManager.changeScene(new FXFight());
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -79,6 +85,8 @@ public class FXDialog extends DialogScene {
 				break;
 
 			default:
+
+				musica.getMediaPlayer().stop();
 				SceneManager.changeScene(new TitleScreen());
 				break;
 

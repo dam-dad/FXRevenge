@@ -44,9 +44,9 @@ public class ShopController extends GridPane implements GameScene {
 	private Avatar pj;
 	private int cantidad;
 	private Item objeto;
-	
-	//music
-	private Musica musicaPantera = new Musica("/music/pink-panther.mp3");
+
+	// music
+	private Musica musica = new Musica("/music/shop.mp3");
 
 	@SuppressWarnings("unused")
 	private Scene scene;
@@ -164,7 +164,7 @@ public class ShopController extends GridPane implements GameScene {
 			objeto = leftList.getSelectionModel().getSelectedItems().get(i);
 			Item aux = new Item().generatePotion(objeto.getEffect());
 			aux.setQuantity(objeto.getQuantity());
-			
+
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Venta");
@@ -222,14 +222,14 @@ public class ShopController extends GridPane implements GameScene {
 	@FXML
 	void onSalirAction(ActionEvent event) {
 		SceneManager.changeScene(new Overworld());
-		musicaPantera.getMediaPlayer().stop();
+		musica.getMediaPlayer().stop();
 	}
 
 	@Override
 	public void start() {
 
-		musicaPantera.playInfiniteSound().play();
-		
+		musica.playInfiniteSound().play();
+
 		scene = new Scene(view, Parameters.getResolutionWidth(), Parameters.getResolutionHeight());
 
 		vendedorImage.imageProperty().bind(vendedor.shopSpriteProperty());

@@ -29,6 +29,20 @@ public class Player {
 		return player;
 	}
 
+	/**
+	 * Funcion de testeo para el informe
+	 * 
+	 * @return
+	 */
+	public static Avatar getNewPlayer() {
+
+		Avatar.class.getClassLoader();
+//		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+
+		Avatar x = new Avatar(ClassType.Warlord, Skill.generateClassSkills(ClassType.Warlord), "Chuk Norris");
+		return x;
+	}
+
 	public static void setName(String name) {
 		Player.name = name;
 	}
