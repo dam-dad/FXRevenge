@@ -2,10 +2,8 @@ package dad.fxrevenge.dialog;
 
 import dad.fxrevenge.boss.map.Overworld;
 import dad.fxrevenge.parameters.Backgrounds;
-import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import javafx.scene.image.Image;
 
 public class IntroductionDialog extends DialogScene {
 	

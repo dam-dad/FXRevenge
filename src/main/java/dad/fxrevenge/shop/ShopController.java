@@ -159,7 +159,8 @@ public class ShopController extends GridPane implements GameScene {
 
 			objeto = leftList.getSelectionModel().getSelectedItems().get(i);
 			Item aux = new Item().generatePotion(objeto.getEffect());
-
+			aux.setQuantity(objeto.getQuantity());
+			
 			// Create the custom dialog.
 			Dialog<String> dialog = new Dialog<>();
 			dialog.setTitle("Venta");
