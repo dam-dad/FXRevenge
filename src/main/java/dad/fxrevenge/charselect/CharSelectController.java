@@ -27,10 +27,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CharSelectController extends VBox implements GameScene {
-	
+
 	private Image worldImage;
 	private ClassType vocacion;
-	
+
 	private ToggleGroup sexo = new ToggleGroup();
 	private ToggleGroup job = new ToggleGroup();
 
@@ -120,23 +120,15 @@ public class CharSelectController extends VBox implements GameScene {
 	}
 
 	private void onChangeSelection() {
-		playerImage
-				.imageProperty().bind(
-						getImage(
-								new String("/image/characters/select/")
-										.concat(Bindings
-												.when(FemeninoRB.selectedProperty()
-														.isEqualTo(new SimpleBooleanProperty(true)))
-												.then("f").otherwise("m").getValue().concat("/"))
-										.concat(Bindings
-												.when(ArchmageRB
-														.selectedProperty().isEqualTo(new SimpleBooleanProperty(true)))
-												.then("mage")
-												.otherwise(Bindings
-														.when(HunterRB.selectedProperty()
-																.isEqualTo(new SimpleBooleanProperty(true)))
-														.then("range").otherwise("warrior"))
-												.getValue())));
+		String ruta = new String("/image/characters/select/")
+				.concat(Bindings.when(FemeninoRB.selectedProperty().isEqualTo(new SimpleBooleanProperty(true)))
+						.then("f").otherwise("m").getValue().concat("/"))
+				.concat(Bindings.when(ArchmageRB.selectedProperty().isEqualTo(new SimpleBooleanProperty(true)))
+						.then("mage")
+						.otherwise(Bindings.when(HunterRB.selectedProperty().isEqualTo(new SimpleBooleanProperty(true)))
+								.then("range").otherwise("warrior"))
+						.getValue());
+		playerImage.imageProperty().bind(getImage(ruta));
 	}
 
 	@FXML
@@ -148,32 +140,30 @@ public class CharSelectController extends VBox implements GameScene {
 
 		Player.setName(nombreLabel.getText());
 		Player.setPortrait(playerImage.getImage());
-		
-		// Implementar selección de clase
-		Player.setRole(vocacion);
 
+		// Implementar selección de clase
+		if (ArchmageRB.isSelected()) {
+			vocacion = ClassType.Archmage;
+		} else if (WarlordRB.isSelected()) {
+			vocacion = ClassType.Warlord;
+		} else {
+			vocacion = ClassType.Hunter;
+		}
+		Player.setRole(vocacion);
+		
 		new Player();
 
 		Player.getPlayer().setWorldSprite(worldImage);
-		
+
 		SceneManager.changeScene(new IntroductionDialog());
 	}
 
 	private ObjectProperty<Image> getImage(String path) {
-		
-		if(path.contains("mage")) {
-			vocacion = ClassType.Archmage;
-		}else if(path.contains("warrior")) {
-			vocacion = ClassType.Warlord;
-		}else {
-			vocacion = ClassType.Hunter;
-		}
-			
-		
+
 		String rutaW = path.concat("W.png");
-		
+
 		worldImage = new Image(getClass().getResource(rutaW).toExternalForm());
-		
+
 		Image image = new Image(getClass().getResource(path.concat(".png")).toExternalForm());
 
 		ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>(image);

@@ -7,6 +7,7 @@ import java.util.Optional;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Item;
+import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.scene.GameScene;
@@ -53,6 +54,9 @@ public class CombatController extends BorderPane implements GameScene {
 	private Avatar player;
 	private Enemy enemy;
 	private Image background; // Imagen de fondo
+
+	private int turno=0; // variable unica para el combate final
+	private boolean bind = false; // variable unica para el combate final
 
 	@FXML
 	private BorderPane view;
@@ -103,7 +107,8 @@ public class CombatController extends BorderPane implements GameScene {
 	}
 
 	protected void victory() {
-		// Enemigo derrotado. Hacer override al heredar. Cualquier cosa que deba pasar al derrotar a un enemigo se pone en el victory de SimpleCombat
+		// Enemigo derrotado. Hacer override al heredar. Cualquier cosa que deba pasar
+		// al derrotar a un enemigo se pone en el victory de SimpleCombat
 	}
 
 	/**
@@ -139,11 +144,21 @@ public class CombatController extends BorderPane implements GameScene {
 	 */
 	private void enemyAttack() {
 
+		turno++;
+		System.out.println("Turno "+turno);
 		int damage = enemy.atacar();
-
-		eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " ataca con " + player.recibeDaño(damage, true)
-				+ " puntos de daño.");
-
+		if (turno % 3 == 0 && enemy.getRace().equals(Race.FX)) {
+			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " usa Bind con "
+					+ player.recibeDaño((int) (damage * 2), true) + " puntos de daño.");
+		} else {
+			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " ataca con "
+					+ player.recibeDaño(damage, true) + " puntos de daño.");
+		}
+		if (turno % 3 == 2) {
+			bind = true;
+		} else {
+			bind = false;
+		}
 		if (player.getCurrentLife() == 0) {
 
 			Alert alert = new Alert(AlertType.ERROR);
@@ -299,40 +314,62 @@ public class CombatController extends BorderPane implements GameScene {
 				if (result.get() == elijoButton) {
 					Skill hability = list.getSelectionModel().getSelectedItem();
 
-					int nuevoMana = player.getCurrentMana() - hability.getCost();
-					if (nuevoMana < 0) {
+					eventArea.setText("");
 
-						Alert alert2 = new Alert(AlertType.INFORMATION);
-						alert2.setTitle("Vaya...");
-						alert2.setHeaderText("Sin maná");
-						alert2.setContentText("Parece que no tienes suficiente maná, un objeto podría ayudarte ;D");
-						alert2.showAndWait();
+					if (!hability.getName().equals("Unbind")) {
+						int nuevoMana = player.getCurrentMana() - hability.getCost();
+						if (nuevoMana < 0) {
 
-						popup.show(view.getScene().getWindow());
-					} else {
-						player.setCurrentMana(nuevoMana);
+							Alert alert2 = new Alert(AlertType.INFORMATION);
+							alert2.setTitle("Vaya...");
+							alert2.setHeaderText("Sin maná");
+							alert2.setContentText("Parece que no tienes suficiente maná, un objeto podría ayudarte ;D");
+							alert2.showAndWait();
 
-						int damage = player.atacar(hability);
-						boolean egoista = (Math.random() < 0.5) ? true : false;
-
-						eventArea.setText("");
-
-						if (egoista) {
-							eventArea.setText(eventArea.getText() + "\nHas infligido "
-									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
-									+ hability.getName() + ".");
-							if (enemy.getCurrentLife() <= 0) {
-								victory();
-							}
-							enemyAttack();
+							popup.show(view.getScene().getWindow());
 						} else {
+							player.setCurrentMana(nuevoMana);
+
+							int damage = player.atacar(hability);
+							boolean egoista = (Math.random() < 0.5) ? true : false;
+
+							if (egoista) {
+								eventArea.setText(eventArea.getText() + "\nHas infligido "
+										+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+										+ hability.getName() + ".");
+								if (enemy.getCurrentLife() <= 0) {
+									victory();
+								}
+								enemyAttack();
+							} else {
+								enemyAttack();
+								eventArea.setText(eventArea.getText() + "\nHas infligido "
+										+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
+										+ hability.getName() + ".");
+								if (enemy.getCurrentLife() <= 0) {
+									victory();
+								}
+							}
+						}
+					} else {
+						if (bind) {
+							int defIn = player.getPhysDef(), magIn = player.getMagicDef();
+
+							player.setPhysDef((int) (defIn * 1.50));
+							player.setMagicDef((int) (magIn * 1.50));
 							enemyAttack();
+							player.setPhysDef(defIn);
+							player.setMagicDef(magIn);
+
 							eventArea.setText(eventArea.getText() + "\nHas infligido "
-									+ enemy.recibeDaño(damage, hability.getDamageType()) + " puntos de daño con "
-									+ hability.getName() + ".");
+									+ enemy.recibeDaño((int) (enemy.getHealth() * 0.15), hability.getDamageType())
+									+ " puntos de daño con " + hability.getName() + ".");
 							if (enemy.getCurrentLife() <= 0) {
 								victory();
 							}
+						} else {
+							eventArea.setText(eventArea.getText() + "\nIntenas usar Unbind, pero no ha hecho efecto.");
+							enemyAttack();
 						}
 					}
 				} else {
@@ -340,7 +377,6 @@ public class CombatController extends BorderPane implements GameScene {
 				}
 			}
 		};
-		
 
 		list.setItems(player.getLearnedSkills());
 		list.setOnMouseClicked(evento);
@@ -374,8 +410,20 @@ public class CombatController extends BorderPane implements GameScene {
 
 		setBackground();
 
+		if (enemy.getRace().equals(Race.FX)) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Nueva habilidad");
+			alert.setHeaderText("Has aprendido Unbind");
+			alert.setContentText("Será tu arma secreta contra el desafío final.");
+			alert.showAndWait();
+
+			player.getLearnedSkills().add(new Skill("Unbind", 0, 0, 0, false, 0.0, 0,
+					"Te permitirá resistir el mayor ataque de FX: \"Bind\""));
+
+		}
 		// bindeos jugador
-		playerLabel.textProperty().bind(player.nameProperty().concat(" Lv. ").concat(player.levelProperty().asString()));
+		playerLabel.textProperty()
+				.bind(player.nameProperty().concat(" Lv. ").concat(player.levelProperty().asString()));
 		playerImage.imageProperty().bind(player.combatSpriteProperty());
 		playerHealthLabel.textProperty()
 				.bind(player.currentLifeProperty().asString().concat("/").concat(player.HealthProperty()));

@@ -29,7 +29,7 @@ public class CombatApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Enemy bichito = new Enemy(Race.Jelly, 1);
+		Enemy bichito = new Enemy(Race.FX, 1);
 		controller = new CombatController(pj, bichito, backgroundImage);
 
 		SceneManager.setMainStage(primaryStage);
