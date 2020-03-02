@@ -22,8 +22,8 @@ import javafx.scene.paint.Color;
 /**
  * Clase <code>WorldMapController</code>.
  * 
- * @implNote Esta clase se instancias todas las entidades del juego y se dibujan
- *           los mapas de formato de Sttrings.
+ * Esta clase se instancias todas las entidades del juego y se dibujan los mapas
+ * de formato de Sttrings.
  */
 public class WorldMapController implements GameScene {
 
@@ -54,7 +54,8 @@ public class WorldMapController implements GameScene {
 	 * Cosntructor <code>WorldMapController</code> para developer.
 	 * 
 	 * @param map        de coliciones y entidades del nivel actual.
-	 * @param backgorund Imagen de fondo a establecer en el mapa.
+	 * @param background Imagen de fondo a establecer en el mapa.
+	 * @param safeZone   indica si en la zona pueden aparecer enemigos
 	 */
 	public WorldMapController(String[][] map, Image background, Boolean safeZone) {
 		this.world = map;
@@ -65,9 +66,9 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>start</code> para developer.
 	 * 
-	 * @implNote Pinta todas las celdas y indica el número de columnas que hay para
-	 *           poder identificar de forma fácil las celdas. Si tiene imagen de
-	 *           fondo esta sobrescribe las celddas;
+	 * Pinta todas las celdas y indica el número de columnas que hay para poder
+	 * identificar de forma fácil las celdas. Si tiene imagen de fondo esta
+	 * sobrescribe las celddas;
 	 */
 	@Override
 	public void start() {
@@ -121,8 +122,8 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>update</code>.
 	 * 
-	 * @implNote se llama cuando el escuchador lee entradas por teclado. LLamando a
-	 *           pj.move y enemy random si se ha movido el personaje.
+	 * se llama cuando el escuchador lee entradas por teclado. LLamando a pj.move y
+	 * enemy random si se ha movido el personaje.
 	 */
 	private void update(KeyEvent event) {
 
@@ -134,15 +135,15 @@ public class WorldMapController implements GameScene {
 	}
 
 	/**
-	 * Función <code>enemyRandom</code>.
+	 * Función <code>enemyRandom</code>. Encargada de crear enemigos aleatorios
+	 * entre todas las razas disponibles y partiendo de un nivel aleatorios entre
+	 * los paramnetros enviados y el nivel del personaje.
 	 * 
 	 * @param min nivel minimo que se superarán los enemigos una vez sumado el el
 	 *            nivel del personaje
 	 * @param max nivel maximo que se no superarán los enemigos una vez sumado el el
 	 *            nivel del personaje
-	 * @implNote Encargada de crear enemigos aleatorios entre todas las razas
-	 *           disponibles y partiendo de un nivel aleatorios entre los
-	 *           paramnetros enviados y el nivel del personaje.
+	 * 
 	 */
 	private void enemyRandom() {
 		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
@@ -168,9 +169,8 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>paintWorld</code>.
 	 * 
-	 * @implNote Recorre el mapa y instancia los objetos que pueden ser animimados.
-	 *           En casos de que sea un entidad no sea animada Pintará
-	 *           respectivamente las imagenes.
+	 * Recorre el mapa y instancia los objetos que pueden ser animimados. En casos
+	 * de que sea un entidad no sea animada Pintará respectivamente las imagenes.
 	 */
 	public void paintWorld() {
 		Image image;
@@ -206,7 +206,7 @@ public class WorldMapController implements GameScene {
 					image = new Image(getClass().getResourceAsStream("/image/assets/rock_1.png"));
 					gc.drawImage(image, posX, posY);
 					break;
-					
+
 				case "R2":
 					image = new Image(getClass().getResourceAsStream("/image/assets/rock_2.png"));
 					gc.drawImage(image, posX, posY);
@@ -277,8 +277,8 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>auxWorld</code>.
 	 * 
-	 * @implNote Función para obetener el mundo/nivel actual para poder traspasarlo
-	 *           a otra clase.
+	 * Función para obetener el mundo/nivel actual para poder traspasarlo a otra
+	 * clase.
 	 */
 	public WorldMapController auxWorld() {
 		return new WorldMapController(this.world, this.background, this.safeZone);
