@@ -87,6 +87,7 @@ public class PlayerMove {
 		this.pjImage = new ImageView(Player.getPlayer().getWorldSprite());
 		pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 		this.orientation = orientation;
+		CheckPlayer();
 	}
 
 	/**
