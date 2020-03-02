@@ -45,6 +45,9 @@
 						<goals>
 							<goal>package</goal>
 						</goals>
+						<configuration>
+							<bundleJre>true</bundleJre>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
