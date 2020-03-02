@@ -112,7 +112,7 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(15);
 			break;
 		case M: 
-			this.setName(race.toString());
+			this.setName("Meridio");
 			this.setHealth(230 * nivel);
 			this.setPhysDamage(12 * nivel);
 			this.setPhysDef(10 * nivel);
@@ -127,21 +127,21 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(90);
 			break;
 		case V:
-			this.setName(race.toString()); 
+			this.setName("Valery"); 
 			this.setHealth(250 * nivel);
 			this.setPhysDamage(10 * nivel);
 			this.setPhysDef(13 * nivel);
 			this.setMagicDamage(10 * nivel);
 			this.setMagicDef(13 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/v.png").toString()));
+			this.setCombatSprite(new Image("/image/characters/boss/combat/v.png"));
 			this.setDescription("");
 
 			this.setExp(700);
 			this.setMoneyDrop(100);
 			break;
 		case C:
-			this.setName(race.toString()); 
+			this.setName("Calipso"); 
 			this.setHealth(270 * nivel);
 			this.setPhysDamage(13 * nivel);
 			this.setPhysDef(13 * nivel);
@@ -154,7 +154,7 @@ public class Enemy extends Attributes {
 			this.setMoneyDrop(110);
 			break;
 		case FX:
-			this.setName(race.toString()); 
+			this.setName("Mr FX"); 
 			this.setHealth(300 * nivel);
 			this.setPhysDamage(15 * nivel);
 			this.setPhysDef(15 * nivel);
