@@ -2,15 +2,15 @@
 
 ### Indice
 
-[Introduccion](#Introducción al juego)
+[Introduccion](#Introducción)
 
 [Controles](#Controles)
 
-[Guia In-Game](#Guía In-Game)
+[Guia In-Game](#Guía)
 
 [Bibliografía](#Bibliografía)
 
-### Introducción al juego
+### Introducción
 
 FXRevenge es un juego tipo RPG (Roguelike) en el cual nos adentraremos en un mundo de fantasía situado nada mas y nada menos que en los sueños del protagonista. Deberás encarnar una de las tres poderosas clases disponibles y adentrarte en las profundidades del mundo con el objetivo de descubrir qué está pasando y como despertar de este curioso sueño. 
 
@@ -31,7 +31,7 @@ El sistema de controles de esta aplicación es mixto, es decir, se utilizan tant
 - Ratón: Se utiliza en diversos menús(combate, tienda...) para interactuar de forma rápida y sencilla.
 - 
 
-### Guía In-Game
+### Guía
 
 En este apartado podremos encontrar las directrices básicas así como breves descripciones de cómo jugar e interactuar en el juego:
 
