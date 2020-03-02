@@ -6,9 +6,9 @@ import dad.fxrevenge.models.Race;
 public class Bosses {
 
 	private static Enemy M = new Enemy(Race.M, 1);
-	private static Enemy V = new Enemy(Race.V, 1);
-	private static Enemy C = new Enemy(Race.C, 1);
-	private static Enemy FX = new Enemy(Race.FX, 1);
+	private static Enemy V = new Enemy(Race.V, 3);
+	private static Enemy C = new Enemy(Race.C, 5);
+	private static Enemy FX = new Enemy(Race.FX, 9);
 
 	public static Enemy getM() {
 		return M;
