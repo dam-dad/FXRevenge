@@ -28,8 +28,8 @@ import javafx.util.Duration;
 /**
  * Clase <code>TestMove</code>.
  * 
- * @implNote Encargada de establecer el movimiento y el traspaso de mapas al
- *           igual que la interactuación con los personajes.
+ * Encargada de establecer el movimiento y el traspaso de mapas al igual que la
+ * interactuación con los personajes.
  */
 public class PlayerMove {
 
@@ -51,16 +51,14 @@ public class PlayerMove {
 	/**
 	 * Constructs an <code>TestMove</code> with the specified detail message.
 	 *
-	 * @param habitability  Mapa de coliciones Matriz Strings. "." = Caminable; "M"
+	 * @param world         Mapa de coliciones Matriz Strings. "." = Caminable; "M"
 	 *                      = Enemigo; "I" = Entidad interactuable;
 	 * @param movePX        Deplacamiento en pixeles;
 	 * @param animationTime duración de las tranciciones;
-	 * @param avatar        Objeto que contiene todos los datos del pj, asi como su
-	 *                      imagen SPRITE;
 	 * @param width         ancho del fragmento de imagen a dibujar
-	 * @param height        alto del fragmento de imagen a dibujar
+	 * @param heigth        alto del fragmento de imagen a dibujar
 	 * @param orientation   puntero virtual para saber donde apunta la imagen.
-	 * @param cols          Número de columnas del personaje en el sprite.
+	 * @param colsX         Número de columnas del personaje en el sprite.
 	 * @param counts        Número de filas o contador
 	 * @param offset        Una matrix de valores enteros que especifican en el
 	 *                      cambio del pixeles entre animación Movimiento hacia
@@ -93,9 +91,9 @@ public class PlayerMove {
 	/**
 	 * Función <code>move</code>.
 	 * 
-	 * @implNote Según el evento del teclado que se le pase, realizará tareas de
-	 *           movimiento en un sentido concreto(W/D/S/A). O si es la E el jugador
-	 *           interactura con los personajes que lo permitan.
+	 * Según el evento del teclado que se le pase, realizará tareas de movimiento en
+	 * un sentido concreto(W/D/S/A). O si es la E el jugador interactura con los
+	 * personajes que lo permitan.
 	 */
 	public void move(KeyEvent event) {
 		if (inMove == false) {
@@ -111,7 +109,7 @@ public class PlayerMove {
 				pjImage.setViewport(new Rectangle2D(0, 0, this.width, this.heigth));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
 					inMove = true;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[0][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), counts, colsX, offset[0][0],
 							offset[0][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -151,7 +149,7 @@ public class PlayerMove {
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
 					inMove = true;
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[1][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), counts, colsX, offset[1][0],
 							offset[1][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -190,7 +188,7 @@ public class PlayerMove {
 					inMove = true;
 
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[2][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), counts, colsX, offset[2][0],
 							offset[2][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -228,7 +226,7 @@ public class PlayerMove {
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
 					inMove = true;
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[3][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), counts, colsX, offset[3][0],
 							offset[3][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -275,8 +273,8 @@ public class PlayerMove {
 	/**
 	 * Función <code>interaction</code>.
 	 * 
-	 * @implNote Encargada de disparar,Eventos,... Cuando el jugador este a una
-	 *           casilla de una entidad y este la este mirando hacia el objetivo
+	 * Encargada de disparar,Eventos,... Cuando el jugador este a una casilla de una
+	 * entidad y este la este mirando hacia el objetivo
 	 *
 	 */
 	private void interaction() {
@@ -374,7 +372,7 @@ public class PlayerMove {
 	/**
 	 * Función <code>CheckArray</code> para developers.
 	 * 
-	 * @implNote Simplemente muestra el mapa actual por terminal.
+	 * Simplemente muestra el mapa actual por terminal.
 	 */
 	private void CheckArray() {
 		for (int i = 0; i < map.length; i++) {
@@ -388,9 +386,8 @@ public class PlayerMove {
 	/**
 	 * Función <code>CheckPlayer</code>.
 	 * 
-	 * @implNote Localiza la ubicación para que la clase TestMove sepa donde empieza
-	 *           el jugador. Permitiendo que se pueda matipular de forma correcta el
-	 *           movimiento
+	 * Localiza la ubicación para que la clase TestMove sepa donde empieza el
+	 * jugador. Permitiendo que se pueda matipular de forma correcta el movimiento
 	 */
 	private void CheckPlayer() {
 		for (int i = 0; i < map.length; i++) {
