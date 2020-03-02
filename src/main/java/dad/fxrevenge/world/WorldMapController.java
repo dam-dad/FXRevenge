@@ -246,9 +246,7 @@ public class WorldMapController implements GameScene {
 
 				case "P":
 					pj.getPjImage().setX(i * model.getCell());
-					pj.getPjImage().setY(j * model.getCell());
-					System.out.println(pj.getPjImage().getX());
-					System.out.println(pj.getPjImage().getY());
+					pj.getPjImage().setY(j * model.getCell());				
 
 					break;
 				}
