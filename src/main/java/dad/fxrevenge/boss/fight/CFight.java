@@ -11,12 +11,11 @@ import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.SceneManager;
 
 public class CFight extends CombatController {
-	//music
-		private Musica musica = new Musica("/music/C.mp3");
-		
+	// music
+	private Musica musica = Musica.c;
+
 	public CFight() throws IOException {
 		super(Player.getPlayer(), Bosses.getC(), Backgrounds.getC());
-		musica.playInfiniteSound().play();
 	}
 
 	@Override

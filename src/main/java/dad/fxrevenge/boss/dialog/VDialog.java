@@ -17,7 +17,7 @@ public class VDialog extends DialogScene {
 	private Character v = CharacterList.getV();
 
 	// music
-	private Musica musica = new Musica("/music/V.mp3");
+	private Musica musica = Musica.v;
 
 	@Override
 	public void start() {
@@ -54,8 +54,6 @@ public class VDialog extends DialogScene {
 			break;
 
 		default:
-
-			musica.getMediaPlayer().stop();
 			try {
 				SceneManager.changeScene(new VFight());
 			} catch (IOException e) {

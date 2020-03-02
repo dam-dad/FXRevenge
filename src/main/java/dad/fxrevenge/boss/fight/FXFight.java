@@ -14,11 +14,10 @@ public class FXFight extends CombatController {
 
 	private static boolean defeated = false;
 	// music
-	private Musica musica = new Musica("/music/FX.mp3");
+	private Musica musica = Musica.fx;
 
 	public FXFight() throws IOException {
 		super(Player.getPlayer(), Bosses.getFX(), Backgrounds.getFX());
-		musica.playInfiniteSound().play();
 	}
 
 	@Override

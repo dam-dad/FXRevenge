@@ -16,9 +16,9 @@ public class CDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character c = CharacterList.getC();
 
-	//music
-	private Musica musica = new Musica("/music/C.mp3");
-	
+	// music
+	private Musica musica = Musica.c;
+
 	@Override
 	public void start() {
 		setGraphics(player, c, Backgrounds.getC());
@@ -59,7 +59,6 @@ public class CDialog extends DialogScene {
 			break;
 
 		default:
-			musica.getMediaPlayer().stop();
 			try {
 				SceneManager.changeScene(new CFight());
 			} catch (IOException e) {

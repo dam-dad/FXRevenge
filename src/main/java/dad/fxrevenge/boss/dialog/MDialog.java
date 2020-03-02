@@ -17,7 +17,7 @@ public class MDialog extends DialogScene {
 	private Character m = CharacterList.getM();
 
 	// music
-	private Musica musica = new Musica("/music/M.mp3");
+	private Musica musica = Musica.m;
 
 	@Override
 	public void start() {
@@ -59,7 +59,6 @@ public class MDialog extends DialogScene {
 			break;
 
 		default:
-			musica.getMediaPlayer().stop();
 			try {
 				SceneManager.changeScene(new MFight());
 			} catch (IOException e) {

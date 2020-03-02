@@ -17,9 +17,10 @@ public class FXDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
 
-	//music
-	private Musica musica = new Musica("/music/FX.mp3");
-	
+	// music
+	private Musica musica = Musica.fx;
+	private Musica fin = Musica.end;
+
 	@Override
 	public void start() {
 		setGraphics(player, fx, Backgrounds.getFX());
@@ -30,7 +31,7 @@ public class FXDialog extends DialogScene {
 	@Override
 	public void update() {
 		super.update();
-		
+
 		if (!FXFight.isDefeated()) {
 
 			switch (dialogNumber) {
@@ -67,7 +68,6 @@ public class FXDialog extends DialogScene {
 
 			default:
 				try {
-					musica.getMediaPlayer().stop();
 					SceneManager.changeScene(new FXFight());
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -78,6 +78,7 @@ public class FXDialog extends DialogScene {
 			}
 		} else {
 
+			fin.playSound().play();
 			switch (dialogNumber) {
 
 			case 0:
@@ -85,8 +86,6 @@ public class FXDialog extends DialogScene {
 				break;
 
 			default:
-
-				musica.getMediaPlayer().stop();
 				SceneManager.changeScene(new TitleScreen());
 				break;
 

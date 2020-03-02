@@ -9,6 +9,7 @@ import dad.fxrevenge.boss.map.Overworld;
 import dad.fxrevenge.boss.map.VMap;
 import dad.fxrevenge.charselect.CharSelectController;
 import dad.fxrevenge.models.ClassType;
+import dad.fxrevenge.music.Musica;
 import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.parameters.Player;
 import dad.fxrevenge.scene.DialogScene;
@@ -21,9 +22,14 @@ import javafx.scene.text.TextAlignment;
 
 public class TitleScreen extends DialogScene {
 
+	// music
+	private Musica musica = Musica.end;
+
 	// Función que se ejecuta dentro del bucle principal
 	@Override
 	public void update() {
+		musica.playInfiniteSound().play();
+		
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());
 		canvas.setHeight(scene.getHeight());

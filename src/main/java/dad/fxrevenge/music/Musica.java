@@ -9,6 +9,12 @@ import java.net.URISyntaxException;
 
 public class Musica {
 
+	public static Musica end = new Musica("/music/end.mp3");
+	public static Musica m = new Musica("/music/M.mp3");
+	public static Musica c = new Musica("/music/C.mp3");
+	public static Musica v = new Musica("/music/V.mp3");
+	public static Musica fx = new Musica("/music/FX.mp3");
+	
 	private Media sound;
 	private MediaPlayer mediaPlayer;
 
