@@ -99,7 +99,7 @@ public class MenuController extends BorderPane implements GameScene {
 
 	/**
 	 * Constructor que genera la lista de enemigos para visualizarlos
-	 * 
+	 * @param pj se le pasa el objeto avatar(Hace referencia al jugador)
 	 * @throws IOException Si ocurre algún error durante la carga del archivo
 	 */
 	public MenuController(Avatar pj) throws IOException {

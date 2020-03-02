@@ -10,7 +10,7 @@ import javafx.util.Duration;
 /**
  * Clase <code>SprinteAnimation</code>.
  * 
- * @implNote Es una clase de tipo transition,
+ *  Es una clase de tipo transition,
  *  la cual empleamos para poder 
  *  animar imagenes recoriendo recuadros de pixeles
  */
@@ -31,7 +31,7 @@ public class SprinteAnimation extends Transition {
 	 * Clase <code>SprinteAnimation</code>.
 	 * @param imageView  contiene el objeto Imagen de fx;
 	 * @param duration duración de las tranciciones;
-	 * @param counts  Número de filas o contador
+	 * @param count  Número de filas o contador
 	 * @param columns Número de columnas del personaje en el sprite.
 	 * @param offsetX desplasamiento en columnas,
 	 * @param offsetY desplasamiento por fila.

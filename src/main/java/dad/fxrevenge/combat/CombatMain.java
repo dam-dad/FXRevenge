@@ -6,10 +6,6 @@ package dad.fxrevenge.combat;
  */
 public class CombatMain {
 
-	/**
-	 * Llamada a la clase que lanzará el CombatController
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		CombatApp.main(args);
 	}
