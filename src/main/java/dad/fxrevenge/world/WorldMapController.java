@@ -182,10 +182,10 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "S":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png");
+					skeleton = new AnimationMobs("/image/characters/vendor.png");
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
-					skeleton.getImageMob().setY(posY - 50);
+					skeleton.getImageMob().setY(posY - 25);
 
 					break;
 
