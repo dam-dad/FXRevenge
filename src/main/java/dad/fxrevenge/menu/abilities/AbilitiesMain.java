@@ -8,7 +8,7 @@ public class AbilitiesMain {
 	
 	/**
 	 * Llamada a la clase que lanzará el AbilitiesController
-	 * @param args
+	 * @param args main
 	 */
 	public static void main(String[] args) {
 		AbilitiesApp.main(args);

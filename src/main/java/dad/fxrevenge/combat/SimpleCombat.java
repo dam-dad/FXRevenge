@@ -11,8 +11,8 @@ import javafx.event.ActionEvent;
 /**
  * Clase <code>SimpleCombat</code>.
  * 
- * @implNote Esta clase simple hereda de CombatController y permite la
- *           generación de combates, con enemigos de básicos.
+ * Esta clase simple hereda de CombatController y permite la generación de
+ * combates, con enemigos de básicos.
  */
 public class SimpleCombat extends CombatController {
 
@@ -34,8 +34,9 @@ public class SimpleCombat extends CombatController {
 
 	/**
 	 * Función <code>victory</code>.
-	 * @implNote En caso de victoria, se generá un número aleatorio, 
-	 * del cual obtendremos un objeto si es menor de 25
+	 * 
+	 * En caso de victoria, se generá un número aleatorio, del cual obtendremos un
+	 * objeto si es menor de 25
 	 */
 	@Override
 	protected void victory() {
@@ -47,18 +48,19 @@ public class SimpleCombat extends CombatController {
 		}
 
 		// pendiente de comprobar si suma exp y dinero
-		
+
 		Player.getPlayer().sumarexp(enemy.getExpDrop());
 		Player.getPlayer().setMoney(Player.getPlayer().getMoney() + enemy.getMoneyDrop());
-
 
 		Player.getPlayer().ordenarInventario();
 
 		SceneManager.changeScene(world);
 	}
+
 	/**
 	 * Función <code>onExitAction(</code>.
-	 * @implNote Vuelve al mapa que lo mando al combate.
+	 * 
+	 * Vuelve al mapa que lo mando al combate.
 	 */
 	@Override
 	protected void onExitAction(ActionEvent event) {
