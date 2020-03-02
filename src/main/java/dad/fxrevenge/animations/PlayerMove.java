@@ -31,7 +31,7 @@ import javafx.util.Duration;
  * @implNote Encargada de establecer el movimiento y el traspaso de mapas al
  *           igual que la interactuación con los personajes.
  */
-public class TestMove {
+public class PlayerMove {
 
 	private ImageView pjImage;
 	private Animation pjAni = null;
@@ -73,7 +73,7 @@ public class TestMove {
 	 *                      columna, [3][1] desplazamiento en fila
 	 */
 
-	public TestMove(String[][] world, int movePX, int animationTime, int width, int heigth, Orientation orientation,
+	public PlayerMove(String[][] world, int movePX, int animationTime, int width, int heigth, Orientation orientation,
 			int colsX, int counts, int[][] offset) {
 
 		this.map = world;
@@ -87,9 +87,6 @@ public class TestMove {
 		this.pjImage = new ImageView(Player.getPlayer().getWorldSprite());
 		pjImage.setViewport(new Rectangle2D(0, 108, this.width, this.heigth));
 		this.orientation = orientation;
-		CheckPlayer();
-		System.out.println("Inicio");
-		CheckArray();
 	}
 
 	/**
@@ -113,7 +110,7 @@ public class TestMove {
 				pjImage.setViewport(new Rectangle2D(0, 0, this.width, this.heigth));
 				if ((posY - 1) >= 0 && map[posY - 1][posX] == ".") {
 					inMove = true;
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[0][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[0][0],
 							offset[0][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -153,7 +150,7 @@ public class TestMove {
 				if ((posX + 1) < map[0].length && map[posY][posX + 1] == ".") {
 					inMove = true;
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[1][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[1][0],
 							offset[1][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -192,7 +189,7 @@ public class TestMove {
 					inMove = true;
 
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[2][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[2][0],
 							offset[2][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();
@@ -230,7 +227,7 @@ public class TestMove {
 				if ((posY + 1) < map.length && map[posY + 1][posX] == ".") {
 					inMove = true;
 					// Animación
-					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime), colsX, counts, offset[3][0],
+					pjAni = new SprinteAnimation(pjImage, Duration.millis(animationTime),counts ,colsX, offset[3][0],
 							offset[3][1], this.width, this.heigth);
 					pjAni.setCycleCount(0);
 					pjAni.play();

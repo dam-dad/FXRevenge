@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import dad.fxrevenge.animations.AnimationMobs;
-import dad.fxrevenge.animations.TestMove;
+import dad.fxrevenge.animations.PlayerMove;
 import dad.fxrevenge.combat.SimpleCombat;
 import dad.fxrevenge.models.Enemy;
 import dad.fxrevenge.models.Race;
@@ -44,7 +44,7 @@ public class WorldMapController implements GameScene {
 	private Image background;
 
 	private AnimationMobs skeleton;
-	TestMove pj;
+	PlayerMove pj;
 
 	private String[][] world;
 
@@ -113,7 +113,7 @@ public class WorldMapController implements GameScene {
 				{0,108},
 				{0,72}
 				};
-		pj = new TestMove(world, model.getCell(), 900, 32, 38, Orientation.EAST,3,3,diferenceImage);
+		pj = new PlayerMove(world, model.getCell(), 900, 32, 38, Orientation.EAST,3,3,diferenceImage);
 		view.getChildren().add(pj.getPjImage());
 		paintWorld();
 		scene.setOnKeyPressed((KeyEvent event) -> update(event));
@@ -143,7 +143,6 @@ public class WorldMapController implements GameScene {
 		if ((int) (Math.floor(Math.random() * 10)) <= 0.1) {
 			int minLevel = model.getAvatar().getLevel() + 1;
 			int maxLevel = model.getAvatar().getLevel() + 1;
-			System.out.println(maxLevel);
 			int randomRace = (int) (Math.floor(Math.random() * model.getRaces().size()));
 			int randomLevel = (int) (Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel));
 			try {

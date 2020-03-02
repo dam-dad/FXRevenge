@@ -47,16 +47,10 @@ public class SimpleCombat extends CombatController {
 		}
 
 		// pendiente de comprobar si suma exp y dinero
-		System.out.println("Exp actual: " + Player.getPlayer().getCurrentExp() + " /Total: "
-				+ Player.getPlayer().getTotalLevelExp());
+		
 		Player.getPlayer().sumarexp(enemy.getExpDrop());
-		System.out.println("Enemy exp: " + enemy.getExp());
-		System.out.println("After Exp actual: " + Player.getPlayer().getCurrentExp() + " /Total: "
-				+ Player.getPlayer().getTotalLevelExp());
-		System.out.println("Player money: " + Player.getPlayer().getMoney());
-		System.out.println("Enemy money: " + enemy.getMoneyDrop());
 		Player.getPlayer().setMoney(Player.getPlayer().getMoney() + enemy.getMoneyDrop());
-		System.out.println("Player money after: " + Player.getPlayer().getMoney());
+
 
 		Player.getPlayer().ordenarInventario();
 
@@ -64,7 +58,7 @@ public class SimpleCombat extends CombatController {
 	}
 	/**
 	 * Función <code>onExitAction(</code>.
-	 * @implNote Vuelve al mapa.
+	 * @implNote Vuelve al mapa que lo mando al combate.
 	 */
 	@Override
 	protected void onExitAction(ActionEvent event) {
