@@ -15,7 +15,7 @@ Características del juego:
 
 
 Colaboradores:
-* Andrés Galván García
-* Roberto González Linares
-* Luis Adán Pérez Nazco
-* Adán Jiménez Sacramento
+* [Andrés Galván García](https://github.com/Adexuz7)
+* [Roberto González Linares](https://github.com/RobertoG-C)
+* [Luis Adán Pérez Nazco](https://github.com/ADPLuis)
+* [Adán Jiménez Sacramento](https://github.com/Aquaelix)
