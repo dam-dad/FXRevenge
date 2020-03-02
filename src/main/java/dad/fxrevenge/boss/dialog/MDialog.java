@@ -38,7 +38,7 @@ public class MDialog extends DialogScene {
 			break;
 
 		case 2:
-			CharacterTalking(m, "Aunque eso no significa que no haya que prestarles atención. Veamos un ejemplo.");
+			CharacterTalking(m, "Aunque eso no significa que no haya que prestarles atención.");
 			break;
 
 		case 3:
@@ -46,11 +46,7 @@ public class MDialog extends DialogScene {
 			break;
 
 		case 4:
-			CharacterTalking(player, "No termino de pillarlo, ¿puedes repetir eso último?");
-			break;
-
-		case 5:
-			CharacterTalking(m, "Hagamos una prueba, ya verás que lo entiendes enseguida.");
+			CharacterTalking(m, "Veamos un ejemplo.");
 			break;
 
 		default:

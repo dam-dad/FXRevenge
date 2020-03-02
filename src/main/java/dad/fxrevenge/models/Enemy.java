@@ -119,7 +119,7 @@ public class Enemy extends Attributes {
 			this.setMagicDamage(12 * nivel);
 			this.setMagicDef(10 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/m.png").toString()));
+			this.setCombatSprite(new Image("/image/characters/boss/combat/m.png"));
 																												
 			this.setDescription("");
 

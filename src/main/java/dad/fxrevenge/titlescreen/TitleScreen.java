@@ -117,7 +117,7 @@ public class TitleScreen extends DialogScene {
 		
 		new Player();
 
-		//Player.getPlayer().setWorldSprite(worldImage);
+		Player.getPlayer().setWorldSprite(new Image("/image/characters/select/m/warriorW.png"));
 	}
 
 	// Función que dibuja el texto aplicándole estilos
