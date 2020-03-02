@@ -7,6 +7,7 @@ import dad.fxrevenge.boss.map.Overworld;
 import dad.fxrevenge.models.Avatar;
 import dad.fxrevenge.models.Item;
 import dad.fxrevenge.models.Vendor;
+import dad.fxrevenge.music.Musica;
 import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.scene.GameScene;
 import dad.fxrevenge.scene.SceneManager;
@@ -43,6 +44,9 @@ public class ShopController extends GridPane implements GameScene {
 	private Avatar pj;
 	private int cantidad;
 	private Item objeto;
+	
+	//music
+	private Musica musicaPantera = new Musica("/music/pink-panther.mp3");
 
 	@SuppressWarnings("unused")
 	private Scene scene;
@@ -218,11 +222,14 @@ public class ShopController extends GridPane implements GameScene {
 	@FXML
 	void onSalirAction(ActionEvent event) {
 		SceneManager.changeScene(new Overworld());
+		musicaPantera.getMediaPlayer().stop();
 	}
 
 	@Override
 	public void start() {
 
+		musicaPantera.playInfiniteSound().play();
+		
 		scene = new Scene(view, Parameters.getResolutionWidth(), Parameters.getResolutionHeight());
 
 		vendedorImage.imageProperty().bind(vendedor.shopSpriteProperty());
