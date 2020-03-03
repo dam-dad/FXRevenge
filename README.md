@@ -11,7 +11,7 @@ Características del juego:
 * Mapas:
   * Mundo.
   * Combates.
-  * Desafío oculto.
+  * Desafío final.
 
 
 Colaboradores:
