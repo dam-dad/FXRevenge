@@ -126,9 +126,6 @@ public class WorldMapController implements GameScene {
 	 * enemy random si se ha movido el personaje.
 	 */
 	private void update(KeyEvent event) {
-
-		System.out.println(safeZone);
-
 		pj.move(event);
 		if (pj.isNewPos() == true)
 			enemyRandom();
@@ -159,7 +156,6 @@ public class WorldMapController implements GameScene {
 				}
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -277,8 +273,7 @@ public class WorldMapController implements GameScene {
 	/**
 	 * Función <code>auxWorld</code>.
 	 * 
-	 * @return el mundo/nivel actual para poder traspasarlo a otra
-	 * clase.
+	 * @return el mundo/nivel actual para poder traspasarlo a otra clase.
 	 */
 	public WorldMapController auxWorld() {
 		return new WorldMapController(this.world, this.background, this.safeZone);

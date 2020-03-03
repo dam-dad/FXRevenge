@@ -351,7 +351,7 @@ public class CombatController extends BorderPane implements GameScene {
 							player.setMagicDef(magIn);
 
 							eventArea.setText(eventArea.getText() + "\nHas infligido "
-									+ enemy.recibeDanyo((int) (enemy.getHealth() * 0.15), hability.getDamageType())
+									+ enemy.recibeDanyo((int) (enemy.getHealth() * enemy.getLevel() * 0.25), hability.getDamageType())
 									+ " puntos de daño con " + hability.getName() + ".");
 							if (enemy.getCurrentLife() <= 0) {
 								victory();

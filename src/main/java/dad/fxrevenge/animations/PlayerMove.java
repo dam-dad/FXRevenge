@@ -6,6 +6,9 @@ import dad.fxrevenge.boss.dialog.CDialog;
 import dad.fxrevenge.boss.dialog.FXDialog;
 import dad.fxrevenge.boss.dialog.MDialog;
 import dad.fxrevenge.boss.dialog.VDialog;
+import dad.fxrevenge.boss.fight.CFight;
+import dad.fxrevenge.boss.fight.MFight;
+import dad.fxrevenge.boss.fight.VFight;
 import dad.fxrevenge.boss.map.CMap;
 import dad.fxrevenge.boss.map.FXMap;
 import dad.fxrevenge.boss.map.MMap;
@@ -21,6 +24,8 @@ import javafx.animation.Animation.Status;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -356,7 +361,17 @@ public class PlayerMove {
 			SceneManager.changeScene(new FXDialog());
 			break;
 		case "L":
-			SceneManager.changeScene(new FXMap());
+			
+			if (MFight.isDefeated() && VFight.isDefeated() && CFight.isDefeated()) {
+				SceneManager.changeScene(new FXMap());
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Vaya...");
+				alert.setHeaderText("Houston, tenemos un problema");
+				alert.setContentText("Aún hay jefes que debes derrotar");
+				alert.showAndWait();
+			}
+			
 			break;
 		case "S":
 			try {

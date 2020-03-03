@@ -8,7 +8,7 @@ public class Bosses {
 	private static Enemy M = new Enemy(Race.M, 1);
 	private static Enemy V = new Enemy(Race.V, 2);
 	private static Enemy C = new Enemy(Race.C, 3);
-	private static Enemy FX = new Enemy(Race.FX, 5);
+	private static Enemy FX = new Enemy(Race.FX, 4);
 
 	public static Enemy getM() {
 		return M;

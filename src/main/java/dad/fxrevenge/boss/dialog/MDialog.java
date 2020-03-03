@@ -3,6 +3,7 @@ package dad.fxrevenge.boss.dialog;
 import java.io.IOException;
 
 import dad.fxrevenge.boss.fight.MFight;
+import dad.fxrevenge.boss.map.MMap;
 import dad.fxrevenge.dialog.Character;
 import dad.fxrevenge.dialog.CharacterList;
 import dad.fxrevenge.music.Musica;
@@ -30,34 +31,49 @@ public class MDialog extends DialogScene {
 	public void update() {
 		super.update();
 
-		// Diálogos
-		switch (dialogNumber) {
+		if (!MFight.isDefeated()) {
 
-		case 0:
-			CharacterTalking(player, "(Bostezas mientras maldices haber tenido que madrugar)");
-			break;
+			// Diálogos
+			switch (dialogNumber) {
 
-		case 1:
-			CharacterTalking(m,
-					"Hoy voy a explicar los hechizos sincronizados, son increíblemente prácticos.");
-			break;
+			case 0:
+				CharacterTalking(player, "(Bostezas mientras maldices haber tenido que madrugar)");
+				break;
 
-		case 2:
-			CharacterTalking(player, "(Observas con cara de no entender qué está pasando)");
-			break;
+			case 1:
+				CharacterTalking(m, "Hoy voy a explicar los hechizos sincronizados, son increíblemente prácticos.");
+				break;
 
-		case 3:
-			CharacterTalking(m, "Veamos un ejemplo.");
-			break;
+			case 2:
+				CharacterTalking(player, "(Observas con cara de no entender qué está pasando)");
+				break;
 
-		default:
-			try {
-				SceneManager.changeScene(new MFight());
-			} catch (IOException e) {
-				e.printStackTrace();
+			case 3:
+				CharacterTalking(m, "Veamos un ejemplo.");
+				break;
+
+			default:
+				try {
+					SceneManager.changeScene(new MFight());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				dialogNumber = 0;
+				break;
+
 			}
-			break;
+		} else {
+			switch (dialogNumber) {
 
+			case 0:
+				CharacterTalking(m, "Has logrado superar esta prueba. ¡Enhorabuena!");
+				break;
+
+			default:
+				SceneManager.changeScene(new MMap());
+				dialogNumber = 0;
+				break;
+			}
 		}
 
 	}

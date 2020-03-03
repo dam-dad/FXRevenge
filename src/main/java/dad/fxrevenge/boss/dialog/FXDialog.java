@@ -82,11 +82,12 @@ public class FXDialog extends DialogScene {
 			switch (dialogNumber) {
 
 			case 0:
-				CharacterTalking(fx, "Has logrado cambiar tu destino y escapar del temible cholazo. ¡Enhorabuena!");
+				CharacterTalking(CharacterList.getJavaGoddess(), "Has logrado cambiar tu destino y escapar del temible cholazo. ¡Enhorabuena!");
 				break;
 
 			default:
 				SceneManager.changeScene(new TitleScreen());
+				dialogNumber = 0;
 				break;
 
 			}

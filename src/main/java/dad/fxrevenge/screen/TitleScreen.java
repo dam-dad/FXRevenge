@@ -118,7 +118,7 @@ public class TitleScreen extends DialogScene {
 	
 	private void testPlayer() {
 		Player.setName("Player");
-		Player.setPortrait(new Image("/image/dialog/character/player.png"));
+		Player.setPortrait(new Image("/image/characters/select/m/warrior.png"));
 		Player.setRole(ClassType.Warlord);
 		
 		new Player();
