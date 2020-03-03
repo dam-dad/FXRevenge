@@ -136,7 +136,7 @@ public class CombatController extends BorderPane implements GameScene {
 	 */
 	@FXML
 	void onExitAction(ActionEvent event) {
-		Platform.exit();
+		
 	}
 
 	/**
