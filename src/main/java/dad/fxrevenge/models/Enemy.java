@@ -111,50 +111,54 @@ public class Enemy extends Attributes {
 			this.setExp(5);
 			this.setMoneyDrop(15);
 			break;
-		case M: 
+
+		case M:
 			this.setName("Meridio");
+			this.setCombatSprite(new Image("/image/characters/boss/combat/m.png"));
+
 			this.setHealth(230 * nivel);
 			this.setPhysDamage(12 * nivel);
 			this.setPhysDef(10 * nivel);
 			this.setMagicDamage(12 * nivel);
 			this.setMagicDef(10 * nivel);
 
-			this.setCombatSprite(new Image("/image/characters/boss/combat/m.png"));
-																												
-			this.setDescription("");
-
 			this.setExp(500);
 			this.setMoneyDrop(90);
+
 			break;
+
 		case V:
-			this.setName("Valery"); 
+			this.setName("Valery");
+			this.setCombatSprite(new Image("/image/characters/boss/combat/v.png"));
+
 			this.setHealth(250 * nivel);
 			this.setPhysDamage(10 * nivel);
 			this.setPhysDef(13 * nivel);
 			this.setMagicDamage(10 * nivel);
 			this.setMagicDef(13 * nivel);
 
-			this.setCombatSprite(new Image("/image/characters/boss/combat/v.png"));
-			this.setDescription("");
-
 			this.setExp(700);
 			this.setMoneyDrop(100);
+
 			break;
+
 		case C:
-			this.setName("Calipso"); 
+			this.setName("Calipso");
+			this.setCombatSprite(new Image("/image/characters/boss/combat/c.png"));
+
 			this.setHealth(270 * nivel);
 			this.setPhysDamage(13 * nivel);
 			this.setPhysDef(13 * nivel);
 			this.setMagicDamage(13 * nivel);
 			this.setMagicDef(13 * nivel);
 
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/c.png").toString())); 
-																												
 			this.setExp(900);
 			this.setMoneyDrop(110);
+
 			break;
+
 		case FX:
-			this.setName("Mr FX"); 
+			this.setName("Mr FX");
 			this.setHealth(300 * nivel);
 			this.setPhysDamage(15 * nivel);
 			this.setPhysDef(15 * nivel);
@@ -162,39 +166,26 @@ public class Enemy extends Attributes {
 			this.setMagicDef(15 * nivel);
 
 			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/fx.png").toString()));
-																												
-			this.setDescription("");
 
 			this.setExp(3000);
 			this.setMoneyDrop(900);
-			break;
-		default: // nunca se deberia de meter aqui
 
-//			this.setName("Estoy mamadísimo");
-//			this.setName(race.toString());
-			this.setHealth(170 * nivel);
-			this.setPhysDamage(8 * nivel);
-			this.setPhysDef(8 * nivel);
-			this.setMagicDamage(8 * nivel);
-			this.setMagicDef(8 * nivel);
-
-			this.setExp(150);
-			this.setMoneyDrop(40 * nivel);
 			break;
 		}
 
 		this.setCurrentLife(this.getHealth()); // Setea la vida del enemigo
-		this.setExpDrop((int)(this.getExp()+(0.15*this.getExp()*this.getLevel())));
-		
-		//Generar geardrop
+		this.setExpDrop((int) (this.getExp() + (0.15 * this.getExp() * this.getLevel())));
+
+		// Generar geardrop
 		ArrayList<GearPosition> gpaux = new ArrayList<GearPosition>();
-		gpaux.addAll(Arrays.asList(GearPosition.Boots,GearPosition.Chest,GearPosition.Gloves,GearPosition.Helmet,GearPosition.LeftHand,GearPosition.Leggings,GearPosition.RightHand));
+		gpaux.addAll(Arrays.asList(GearPosition.Boots, GearPosition.Chest, GearPosition.Gloves, GearPosition.Helmet,
+				GearPosition.LeftHand, GearPosition.Leggings, GearPosition.RightHand));
 		ArrayList<ClassType> ctaux = new ArrayList<ClassType>();
-		ctaux.addAll(Arrays.asList(ClassType.Archmage,ClassType.Warlord,ClassType.Hunter));
-		
-		int RandGearPosIndex = (int) (Math.random()*gpaux.size());
-		int RandJobIndex = (int) (Math.random()*ctaux.size());
-		
+		ctaux.addAll(Arrays.asList(ClassType.Archmage, ClassType.Warlord, ClassType.Hunter));
+
+		int RandGearPosIndex = (int) (Math.random() * gpaux.size());
+		int RandJobIndex = (int) (Math.random() * ctaux.size());
+
 		Gear g = new Gear(this.getLevel(), gpaux.get(RandGearPosIndex), ctaux.get(RandJobIndex));
 		this.setGearDrop(g);
 	}

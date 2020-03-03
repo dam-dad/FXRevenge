@@ -213,10 +213,10 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "M":
-					skeleton = new AnimationMobs("/image/characters/boss/sprite/m.png", 0, 0, 106, 84);
+					skeleton = new AnimationMobs("/image/characters/boss/sprite/m.png", 0, 0, 81, 64);
 					view.getChildren().add(skeleton.getImageMob());
-					skeleton.getImageMob().setX(posX - 23);
-					skeleton.getImageMob().setY(posY - 36);
+					skeleton.getImageMob().setX(posX - 9);
+					skeleton.getImageMob().setY(posY - 16);
 
 					break;
 
@@ -229,10 +229,10 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "C":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
+					skeleton = new AnimationMobs("/image/characters/boss/sprite/c.png", 0, 0, 54, 74);
 					view.getChildren().add(skeleton.getImageMob());
-					skeleton.getImageMob().setX(posX);
-					skeleton.getImageMob().setY(posY - 50);
+					skeleton.getImageMob().setX(posX + 3);
+					skeleton.getImageMob().setY(posY - 26);
 
 					break;
 

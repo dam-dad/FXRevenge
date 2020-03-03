@@ -17,7 +17,7 @@ public class CharacterList {
 	// Villanos
 	private static Character M = new Character("Meridio", new Image("/image/characters/boss/portrait/m.png"), false);
 	private static Character V = new Character("Valery", new Image("/image/characters/boss/portrait/v.png"), false);
-	private static Character C = new Character("Calipso", new Image("/image/dialog/character/c.png"), false);
+	private static Character C = new Character("Calipso", new Image("/image/characters/boss/portrait/c.png"), false);
 	private static Character FX = new Character("Mr. FX", new Image("/image/dialog/character/fx.png"), false);
 	
 	// Getters
