@@ -11,7 +11,8 @@ import dad.fxrevenge.models.Race;
 import dad.fxrevenge.models.Skill;
 import dad.fxrevenge.parameters.Parameters;
 import dad.fxrevenge.scene.GameScene;
-import javafx.application.Platform;
+import dad.fxrevenge.scene.SceneManager;
+import dad.fxrevenge.screen.GameOverScreen;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class CombatController extends BorderPane implements GameScene {
 	private Enemy enemy;
 	private Image background; // Imagen de fondo
 
-	private int turno=0; // variable unica para el combate final
+	private int turno = 0; // variable unica para el combate final
 	private boolean bind = false; // variable unica para el combate final
 
 	@FXML
@@ -136,7 +137,7 @@ public class CombatController extends BorderPane implements GameScene {
 	 */
 	@FXML
 	void onExitAction(ActionEvent event) {
-		
+
 	}
 
 	/**
@@ -145,7 +146,7 @@ public class CombatController extends BorderPane implements GameScene {
 	private void enemyAttack() {
 
 		turno++;
-		System.out.println("Turno "+turno);
+		System.out.println("Turno " + turno);
 		int damage = enemy.atacar();
 		if (turno % 3 == 0 && enemy.getRace().equals(Race.FX)) {
 			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " usa Bind con "
@@ -159,15 +160,9 @@ public class CombatController extends BorderPane implements GameScene {
 		} else {
 			bind = false;
 		}
+
 		if (player.getCurrentLife() == 0) {
-
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Vaya vaya...");
-			alert.setHeaderText("Pues parece que");
-			alert.setContentText("Te has llevado el cholazo...");
-			alert.showAndWait();
-
-			Platform.exit();
+			SceneManager.changeScene(new GameOverScreen());
 		}
 
 	}
@@ -261,7 +256,7 @@ public class CombatController extends BorderPane implements GameScene {
 									"Parece que te has quedado sin " + item.getName() + ", compra cuanto antes.");
 							alert3.show();
 						}
-					} 
+					}
 
 				} else {
 					popup.show(view.getScene().getWindow());

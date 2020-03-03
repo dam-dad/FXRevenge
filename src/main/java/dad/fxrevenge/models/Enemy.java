@@ -159,13 +159,13 @@ public class Enemy extends Attributes {
 
 		case FX:
 			this.setName("Mr FX");
+			this.setCombatSprite(new Image("/image/characters/boss/combat/fx.png"));
+			
 			this.setHealth(300 * nivel);
 			this.setPhysDamage(15 * nivel);
 			this.setPhysDef(15 * nivel);
 			this.setMagicDamage(15 * nivel);
 			this.setMagicDef(15 * nivel);
-
-			this.setCombatSprite(new Image(getClass().getResource("/image/dialog/character/fx.png").toString()));
 
 			this.setExp(3000);
 			this.setMoneyDrop(900);

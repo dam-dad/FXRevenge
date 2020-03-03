@@ -135,13 +135,8 @@ public class DialogScene implements GameScene {
 	// Función que controla los diálogos de los personajes
 	protected void CharacterTalking(Character character, String dialogText) {
 
-		// Determinar el lado de la pantalla en el que debe mostrarse el retrato del
-		// personaje y dibujarlo
-		if (character.getIsLeft()) {
-			graphicsContext.drawImage(character.getPortrait(), scene.getWidth() / 6, scene.getHeight() / 7);
-		} else {
-			graphicsContext.drawImage(character.getPortrait(), 0, 0);
-		}
+		// Dibujar el retrato del personaje
+		graphicsContext.drawImage(character.getPortrait(), 0, 0);
 
 		// Dibujar diálogo del personaje
 		dialog.showDialog(character.getName(), dialogText);

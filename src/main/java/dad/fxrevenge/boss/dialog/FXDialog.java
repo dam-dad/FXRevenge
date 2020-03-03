@@ -9,7 +9,7 @@ import dad.fxrevenge.music.Musica;
 import dad.fxrevenge.parameters.Backgrounds;
 import dad.fxrevenge.scene.DialogScene;
 import dad.fxrevenge.scene.SceneManager;
-import dad.fxrevenge.titlescreen.TitleScreen;
+import dad.fxrevenge.screen.TitleScreen;
 
 public class FXDialog extends DialogScene {
 

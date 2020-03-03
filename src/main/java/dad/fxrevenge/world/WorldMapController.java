@@ -237,10 +237,10 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "FX":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
+					skeleton = new AnimationMobs("/image/characters/boss/sprite/fx.png", 0, 0, 77, 75);
 					view.getChildren().add(skeleton.getImageMob());
-					skeleton.getImageMob().setX(posX);
-					skeleton.getImageMob().setY(posY - 50);
+					skeleton.getImageMob().setX(posX - 19);
+					skeleton.getImageMob().setY(posY - 26);
 
 					break;
 

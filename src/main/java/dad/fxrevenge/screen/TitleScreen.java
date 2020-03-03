@@ -1,4 +1,4 @@
-package dad.fxrevenge.titlescreen;
+package dad.fxrevenge.screen;
 
 import java.io.IOException;
 
@@ -101,7 +101,7 @@ public class TitleScreen extends DialogScene {
 			SceneManager.changeScene(new CMap());
 		}
 		
-		if (currentlyActiveKeys.contains("FX")) {
+		if (currentlyActiveKeys.contains("F")) {
 			currentlyActiveKeys.clear();
 			
 			testPlayer();

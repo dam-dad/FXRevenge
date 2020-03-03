@@ -11,6 +11,7 @@ public class Backgrounds {
 	private static Image c = new Image("/image/background/c.png");
 	private static Image fx = new Image("/image/background/fx.png");
 	private static Image overworld = new Image("/image/background/overworld.png");
+	private static Image gameover = new Image("/image/background/gameover.png");
 
 	public static Image getTitleScreen() {
 		return titleScreen;
@@ -39,4 +40,9 @@ public class Backgrounds {
 	public static Image getOverworld() {
 		return overworld;
 	}
+
+	public static Image getGameover() {
+		return gameover;
+	}
+
 }
