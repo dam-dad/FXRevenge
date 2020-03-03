@@ -249,7 +249,7 @@ public class WorldMapController implements GameScene {
 					break;
 
 				case "L":
-					skeleton = new AnimationMobs("./Image/npc/maga_Evil.png", 0, 0, 56, 84);
+					skeleton = new AnimationMobs("/image/npc/maga_Evil.png", 0, 0, 56, 84);
 					view.getChildren().add(skeleton.getImageMob());
 					skeleton.getImageMob().setX(posX);
 					skeleton.getImageMob().setY(posY - 50);
