@@ -43,7 +43,7 @@ public class CDialog extends DialogScene {
 
 		case 2:
 			CharacterTalking(c,
-					"Pasado ese tiempo tendrán que hacerme una demostración de lo que han conseguido hacer con él.");
+					"Pasado ese tiempo tendrán que hacerme una demostración de lo que han conseguido.");
 			break;
 
 		case 3:

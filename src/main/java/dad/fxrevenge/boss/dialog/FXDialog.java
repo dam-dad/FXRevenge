@@ -46,12 +46,12 @@ public class FXDialog extends DialogScene {
 
 			case 2:
 				CharacterTalking(fx,
-						"¡Es broma! Hoy les voy a explicar la técnica secreta de Chuck Norris para derrotar a sus enemigos.");
+						"¡Es broma! Hoy les voy a explicar la técnica secreta de Chuck Norris para derrotar"  + "\n" + "a sus enemigos.");
 				break;
 
 			case 3:
 				CharacterTalking(fx,
-						"¡Bindeos! Gracias a ellos es capaz de predecir los movimientos de sus atacantes y responder eficazmente.");
+						"¡Bindeos! Gracias a ellos es capaz de predecir los movimientos de sus atacantes " + "\n" + "y responder eficazmente.");
 				break;
 
 			case 4:

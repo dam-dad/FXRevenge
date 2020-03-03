@@ -31,7 +31,7 @@ public class Dialog {
     	
     	graphicsContext.setFill(Color.WHITE);
     	graphicsContext.fillText(charName, dialogMargin + 5, sceneHeight - (dialogHeight - 5));
-    	graphicsContext.fillText(dialogText, dialogMargin + 5, sceneHeight - (dialogHeight - 25));
+    	graphicsContext.fillText(dialogText, dialogMargin + 5, sceneHeight - (dialogHeight - 27));
     	
     }
 	

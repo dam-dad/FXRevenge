@@ -39,18 +39,14 @@ public class MDialog extends DialogScene {
 
 		case 1:
 			CharacterTalking(m,
-					"Hoy voy a explicar los hechizos sincronizados, son muy prácticos pero no los más poderosos.");
+					"Hoy voy a explicar los hechizos sincronizados, son increíblemente prácticos.");
 			break;
 
 		case 2:
-			CharacterTalking(m, "Aunque eso no significa que no haya que prestarles atención.");
-			break;
-
-		case 3:
 			CharacterTalking(player, "(Observas con cara de no entender qué está pasando)");
 			break;
 
-		case 4:
+		case 3:
 			CharacterTalking(m, "Veamos un ejemplo.");
 			break;
 

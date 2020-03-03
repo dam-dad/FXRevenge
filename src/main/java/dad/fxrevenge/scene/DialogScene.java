@@ -13,6 +13,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Clase (padre) que controla la pantalla de diálogos entre personajes
@@ -116,6 +118,10 @@ public class DialogScene implements GameScene {
 
 		// Dibujar fondo
 		graphicsContext.drawImage(background, 0, 0, canvas.getWidth(), canvas.getHeight());
+
+		// Fuente del texto
+		Font font = Font.font("Arial", FontWeight.NORMAL, 19);
+		graphicsContext.setFont(font);
 
 		// Vuelve al diálogo anterior
 		if (currentlyActiveKeys.contains("Q")) {

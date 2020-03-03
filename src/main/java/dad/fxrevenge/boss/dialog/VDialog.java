@@ -34,7 +34,7 @@ public class VDialog extends DialogScene {
 		switch (dialogNumber) {
 
 		case 0:
-			CharacterTalking(v, "¡Hola querido alumno! He preparado 9.999.999 ejercicios para que practique.");
+			CharacterTalking(v, "¡Hola! Para hoy he preparado 9.999.999 ejercicios para que practiquen.");
 			break;
 
 		case 1:
@@ -42,7 +42,7 @@ public class VDialog extends DialogScene {
 			break;
 
 		case 2:
-			CharacterTalking(v, "Venga, no ponga esa cara que son sencillitos.");
+			CharacterTalking(v, "Venga, no pongan esa cara que son sencillitos.");
 			break;
 
 		case 3:
