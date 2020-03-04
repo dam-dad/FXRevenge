@@ -22,13 +22,10 @@ import javafx.scene.text.TextAlignment;
 
 public class TitleScreen extends DialogScene {
 
-	// music
-	private Musica musica = Musica.end;
-
 	// Función que se ejecuta dentro del bucle principal
 	@Override
 	public void update() {
-		musica.playInfiniteSound().play();
+		Musica.getEnd().playInfiniteSound().play();
 		
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());

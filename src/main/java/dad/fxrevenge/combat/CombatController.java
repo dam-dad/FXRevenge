@@ -146,7 +146,6 @@ public class CombatController extends BorderPane implements GameScene {
 	private void enemyAttack() {
 
 		turno++;
-		System.out.println("Turno " + turno);
 		int damage = enemy.atacar();
 		if (turno % 3 == 0 && enemy.getRace().equals(Race.FX)) {
 			eventArea.setText(eventArea.getText() + "\n" + enemy.getName() + " usa Bind con "

@@ -17,13 +17,10 @@ public class CDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character c = CharacterList.getC();
 
-	// music
-	private Musica musica = Musica.c;
-
 	@Override
 	public void start() {
 		setGraphics(player, c, Backgrounds.getC());
-		musica.playInfiniteSound().play();
+		Musica.getC().playInfiniteSound().play();
 		super.start();
 	}
 
@@ -81,6 +78,7 @@ public class CDialog extends DialogScene {
 				break;
 
 			default:
+				Musica.getC().getMediaPlayer().stop();
 				SceneManager.changeScene(new CMap());
 				dialogNumber = 0;
 				break;

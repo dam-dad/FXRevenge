@@ -11,13 +11,10 @@ import javafx.scene.text.TextAlignment;
 
 public class GameOverScreen extends DialogScene {
 
-	// music
-	private Musica musica = Musica.end;
-
 	// Función que se ejecuta dentro del bucle principal
 	@Override
 	public void update() {
-		musica.playInfiniteSound().play();
+		Musica.getEnd().playSound().play();
 
 		// Redimensionar canvas
 		canvas.setWidth(scene.getWidth());

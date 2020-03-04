@@ -16,15 +16,11 @@ public class FXDialog extends DialogScene {
 	// Personajes
 	private Character player = CharacterList.getPlayer();
 	private Character fx = CharacterList.getFX();
-
-	// music
-	private Musica musica = Musica.fx;
-	private Musica fin = Musica.end;
-
+	
 	@Override
 	public void start() {
 		setGraphics(player, fx, Backgrounds.getFX());
-		musica.playInfiniteSound().play();
+		Musica.getFx().playInfiniteSound().play();
 		super.start();
 	}
 
@@ -78,7 +74,7 @@ public class FXDialog extends DialogScene {
 			}
 		} else {
 
-			fin.playSound().play();
+			Musica.getFx().getMediaPlayer().stop();
 			switch (dialogNumber) {
 
 			case 0:

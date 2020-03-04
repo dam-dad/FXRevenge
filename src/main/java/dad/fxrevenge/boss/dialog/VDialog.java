@@ -17,13 +17,10 @@ public class VDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character v = CharacterList.getV();
 
-	// music
-	private Musica musica = Musica.v;
-
 	@Override
 	public void start() {
 		setGraphics(player, v, Backgrounds.getV());
-		musica.playInfiniteSound().play();
+		Musica.getV().playInfiniteSound().play();
 		super.start();
 	}
 
@@ -74,6 +71,7 @@ public class VDialog extends DialogScene {
 				break;
 
 			default:
+				Musica.getV().getMediaPlayer().stop();
 				SceneManager.changeScene(new VMap());
 				dialogNumber = 0;
 				break;

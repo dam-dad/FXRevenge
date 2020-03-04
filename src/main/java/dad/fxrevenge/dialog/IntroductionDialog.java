@@ -8,9 +8,6 @@ import dad.fxrevenge.scene.SceneManager;
 
 public class IntroductionDialog extends DialogScene {
 
-	// music
-	private Musica musica = Musica.end;
-
 	// Personajes
 	private Character nullCharacter = CharacterList.getNullChar();
 	private Character mainCharacter = CharacterList.getPlayer();
@@ -67,7 +64,7 @@ public class IntroductionDialog extends DialogScene {
 			break;
 
 		default:
-			musica.getMediaPlayer().stop();
+			Musica.getEnd().getMediaPlayer().stop();
 
 			// Cambio de escena
 			SceneManager.changeScene(new Overworld());

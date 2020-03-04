@@ -17,13 +17,10 @@ public class MDialog extends DialogScene {
 	private Character player = CharacterList.getPlayer();
 	private Character m = CharacterList.getM();
 
-	// music
-	private Musica musica = Musica.m;
-
 	@Override
 	public void start() {
 		setGraphics(player, m, Backgrounds.getM());
-		musica.playInfiniteSound().play();
+		Musica.getM().playInfiniteSound().play();
 		super.start();
 	}
 
@@ -70,6 +67,7 @@ public class MDialog extends DialogScene {
 				break;
 
 			default:
+				Musica.getM().getMediaPlayer().stop();
 				SceneManager.changeScene(new MMap());
 				dialogNumber = 0;
 				break;
