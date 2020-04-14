@@ -67,7 +67,8 @@
 }
 
 #tituloLabel{
-    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 40% , #FF5252, #eccd6a);
+    -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 50% , #eccd0a, #663300);
+    -fx-text-fill:#FFFFFF;
     -fx-text-fill:#663300;
     -fx-font-size: 30.0px;
     -fx-font-family: "Comic Sans MS";
